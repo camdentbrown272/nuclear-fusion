@@ -1,0 +1,76 @@
+A. RANGES AND ESCAPE DEPTHS (CSDA, straight-line; M5 branch was not available, computed here)
+  cross-check pycatima direct range, p 3.02 MeV in Pd: 31.29 um
+  p 3.02 MeV   : R(Pd) = 31.20 um, R(PdD0.8) = 33.36 um, R(Au) = 28.62 um, R(PdO) = 39.60 um, R(Ni) = 32.61 um
+  t 1.01 MeV   : R(Pd) = 4.54 um, R(PdD0.8) = 4.69 um, R(Au) = 5.18 um, R(PdO) = 5.45 um, R(Ni) = 4.99 um
+  3He 0.82 MeV : R(Pd) = 1.31 um, R(PdD0.8) = 1.35 um, R(Au) = 1.58 um, R(PdO) = 1.58 um, R(Ni) = 1.47 um
+  Escape into a 2 pi detector hemisphere from depth z (isotropic, straight tracks) with E > E_thr:
+  P(z) = 0.5 (1 - z/R_thr); escape-equivalent thickness = integral P dz = R_thr/4.
+  p 3.02 MeV    in PdD0.8, E_thr = 0.5 MeV: R_thr = 30.91 um -> escape-equivalent thickness 7.73 um
+  p 3.02 MeV    in PdD0.8, E_thr = 1.0 MeV: R_thr = 27.08 um -> escape-equivalent thickness 6.77 um
+  p 3.02 MeV    in PdD0.8, E_thr = 2.0 MeV: R_thr = 15.81 um -> escape-equivalent thickness 3.95 um
+  t 1.01 MeV    in PdD0.8, E_thr = 0.2 MeV: R_thr = 3.73 um -> escape-equivalent thickness 0.93 um
+  t 1.01 MeV    in PdD0.8, E_thr = 0.5 MeV: R_thr = 2.47 um -> escape-equivalent thickness 0.62 um
+  3He 0.82 MeV  in PdD0.8, E_thr = 0.2 MeV: R_thr = 0.90 um -> escape-equivalent thickness 0.22 um
+
+B. SKINS: ENERGY LOSS OF 3.02 MeV p AND 1.01 MeV t (normal exit and 60 deg), INTERFACES
+  skin                                                            dE_p(0) dE_p(60)  dE_t(0) dE_t(60) dE_3He(0)   (keV)
+  (a) bare Pd, annealed+etched (1.5 nm C/O contamination)            0.03     0.06     0.14     0.27      0.54
+  (b) PdO 10 nm (thermal)                                            0.48     0.96     1.63     3.26      6.20
+  (b') PdO 30 nm (thermal)                                           1.44     2.87     4.89     9.78     18.61
+  (c) Au/Pd/PdO: exit face = PdO 10 nm (Au 20 nm on entry face)      0.48     0.96     1.63     3.26      6.20
+  (d) Pd 40 / [CaO 2 / Pd 18]x5 (140 nm)                             8.31    16.64    26.81    53.88    101.27
+  (e) 6x[Cu 2 / Ni 14] (96 nm), Ni on top                            5.61    11.22    17.65    35.40     66.14
+  (f) Au 20 nm                                                       1.44     2.88     3.90     7.80     14.54
+  (f') Au 50 nm                                                      3.60     7.20     9.75    19.54     36.33
+  Si-detector FWHM for p/t is ~15-25 keV (R5/M5): every skin <= 140 nm shifts the p peak by less than one FWHM;
+  t and 3He shifts from the 140 nm Pd/CaO stack are ~1-2 FWHM and must be included in the line-shape fit.
+
+  Interface densities (one monolayer of interface sites per interface, Pd(111)-like 1.5e15 cm^-2):
+   (d) Pd/CaO x5: 10 buried interfaces -> 1.5e+16 interface sites/cm^2
+   (e) Cu/Ni x6: 11 buried interfaces -> 1.7e+16 interface sites/cm^2
+   D atoms within the p escape-equivalent thickness (R_thr/4 at E_thr=1 MeV, PdD0.8): 3.3e+19 /cm^2
+   => 10 interfaces hold 4.6e-04 of the D sites that can send a detectable proton;
+      an interface stack wins only if an interface site is >1e4-1e5 times more active than a bulk site.
+
+C. EXIT-FACE LOADING SET BY THE SKIN (detailed balance, 300 K)
+  D2 impingement rate at 1 bar, 300 K: Z1 = 7.58e+23 cm^-2 s^-1; desorption flux J = 2 s Z1 f(x) D cm^-2 s^-1
+  Effective s by skin [BK]: clean Pd 0.01-0.5 (Conrad/Ertl/Latta, Surf. Sci. 41, 435 (1974)); Ni 1e-3-0.1;
+  Au(111) dissociation barrier ~1 eV -> s(bulk Au) < 1e-15, thin (<=20 nm) Au on Pd is leaky (pinholes,
+  intermixing): 1e-10-1e-5; intact PdO: no dissociative channel until reduced (1e-9-1e-4).
+  x_out (central s) with [range over the s range]; a = alpha phase, 2ph = two-phase plateau, b = beta phase
+  skin                             x_out @J=1e+14 x_out @J=1e+15 x_out @J=1e+16 x_out @J=1e+17
+  (a) clean Pd                     1.9e-06a[9e-07-6.1e-06] 6.1e-06a[3e-06-1.9e-05] 1.9e-05a[9e-06-6.1e-05] 6.1e-05a[3e-05-0.00019]
+  (a) Pd, contaminated (C/S/CO)    1.9e-05a[6e-06-6.1e-05] 6.1e-05a[2e-05-0.00019] 0.00019a[6e-05-0.00061] 0.00061a[0.0002-0.0019]
+  (e) Ni top (Ni/Cu)               6.1e-06a[2e-06-1.9e-05] 1.9e-05a[6e-06-6.1e-05] 6.1e-05a[2e-05-0.00019] 0.00019a[6e-05-0.00061]
+  (d) Pd top (Pd/CaO)              1.9e-06a[9e-07-6.1e-06] 6.1e-06a[3e-06-1.9e-05] 1.9e-05a[9e-06-6.1e-05] 6.1e-05a[3e-05-0.00019]
+  (f) Au 20 nm on Pd               0.0019a[0.0002-0.64] 0.0061a[0.0006-0.69] 0.61b[0.002-0.76] 0.64b[0.006-0.82]
+  (b) PdO intact                   0.00061a[6e-05-0.61] 0.0019a[0.0002-0.64] 0.0061a[0.0006-0.69] 0.61b[0.002-0.76]
+  s required to hold the exit face at x_out:
+   x_out = 0.6: f = 4.5e-02 bar; s <= 1.5e-09 (J=1e+14), 1.5e-08 (J=1e+15), 1.5e-07 (J=1e+16), 1.5e-06 (J=1e+17)
+   x_out = 0.8: f = 3.0e+02 bar; s <= 2.2e-13 (J=1e+14), 2.2e-12 (J=1e+15), 2.2e-11 (J=1e+16), 2.2e-10 (J=1e+17)
+   x_out = 0.9: f = 1.0e+04 bar; s <= 6.6e-15 (J=1e+14), 6.6e-14 (J=1e+15), 6.6e-13 (J=1e+16), 6.6e-12 (J=1e+17)
+   x_out = 0.95: f = 1.0e+05 bar; s <= 6.6e-16 (J=1e+14), 6.6e-15 (J=1e+15), 6.6e-14 (J=1e+16), 6.6e-13 (J=1e+17)
+  Diffusion-limited flux for x_in = 0.9, x_out = 0, h = 25 um: 1.2e+19 D cm^-2 s^-1 = 1.96 A/cm^2 equivalent
+  Diffusion-limited flux for x_in = 0.9, x_out = 0, h = 50 um: 6.1e+18 D cm^-2 s^-1 = 0.98 A/cm^2 equivalent
+  Diffusion-limited flux for x_in = 0.9, x_out = 0, h = 100 um: 3.1e+18 D cm^-2 s^-1 = 0.49 A/cm^2 equivalent
+  => with any bare-Pd (s >~ 1e-4) exit face the vacuum face sits at x_out < 0.02 (alpha phase) for every
+     achievable flux, and the membrane drains unless the entry current exceeds ~1 A/cm^2 of *absorbed* D.
+     The exit skin is therefore the loading valve: beta phase at the exit (x >= 0.6) needs s <~ 1e-7 at
+     J = 1e16, and x >= 0.8 needs s <~ 2e-11 -- achievable at best by a thick, pinhole-free Au or oxide cap.
+  Loading drop across the escape-equivalent depth (7 um) at J = 1e16: dx = J*7e-4/(D n_Pd) = 2.1e-04 -> the escape volume sits at x_out.
+
+  PdO reduction by outgoing D (PdO + 2D -> Pd + D2O), lifetime tau = 2 n_O t / (eps_red J):
+   t = 10 nm (4.1e+16 O/cm^2): J=1e+15,eps=0.0001: 2.3e+02 h; J=1e+15,eps=0.01: 2.3 h; J=1e+15,eps=1: 0.023 h; J=1e+16,eps=0.0001: 23 h; J=1e+16,eps=0.01: 0.23 h; J=1e+16,eps=1: 0.0023 h; J=1e+17,eps=0.0001: 2.3 h; J=1e+17,eps=0.01: 0.023 h; J=1e+17,eps=1: 0.00023 h
+   t = 30 nm (1.2e+17 O/cm^2): J=1e+15,eps=0.0001: 6.8e+02 h; J=1e+15,eps=0.01: 6.8 h; J=1e+15,eps=1: 0.068 h; J=1e+16,eps=0.0001: 68 h; J=1e+16,eps=0.01: 0.68 h; J=1e+16,eps=1: 0.0068 h; J=1e+17,eps=0.0001: 6.8 h; J=1e+17,eps=0.01: 0.068 h; J=1e+17,eps=1: 0.00068 h
+  PdO is reduced by H/D at room temperature [BK]; eps_red is unknown for D arriving from the bulk. Measure
+  it: RGA mass 20 (D2O) from the PdO sector's vacuum volume and before/after XPS. Plan on hours-days.
+
+D. ALTERNATIVE LOADING VALVE: D2 GAS BACKFILL ON THE DETECTOR SIDE
+  Equilibrium exit loading with D2 at pressure p (flux-free limit): x_out = x(f = p). Energy loss of products
+  over a 2 cm gas path (pycatima, D element, rho = p m_D2 / kT):
+   p(D2) =  0.01 bar: x_out(eq) = 0.01; losses over 2 cm: p: 0.5 keV, t: 2.5 keV, 3He: 10.2 keV
+   p(D2) =  0.10 bar: x_out(eq) = 0.61; losses over 2 cm: p: 4.6 keV, t: 25.2 keV, 3He: 104.9 keV
+   p(D2) =  1.00 bar: x_out(eq) = 0.65; losses over 2 cm: p: 46.0 keV, t: 277.2 keV, 3He: 820.0 keV
+  Si detectors at <=100 V bias sit below the Paschen minimum of H2/D2 (~270 V), so 10-1000 mbar is usable.
+  => a D2 backfill of ~0.1-1 bar holds the exit face at the plateau/beta boundary (x ~ 0.6-0.65) regardless
+     of the skin chemistry, at the cost of ~0.1-1 MeV of the triton/3He energy over 2 cm. Hand-off to M3/M5.
