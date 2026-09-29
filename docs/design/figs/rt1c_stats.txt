@@ -1,0 +1,135 @@
+== 1. Trials factor implied by iteration-1 (enumeration of analyses the text invites)
+     150  T1 per skin (5) x phase (P2,P3a,P3b,P4,P5) x window (peak, PID) x contrast (vs T-H, vs off, lock-in)
+     160  T1 per membrane-quadrant (16) x phase (5) x window (2)  [claim rule needs per-membrane results]
+     160  secondary lines: t 1.01, 3He 0.82 per quadrant (16) x phase (5)
+      60  T2 511-511: rail position (6 cells) x phase (5) x window (511-511, 3-25 MeV)
+      80  T3 He: channel (front, headspace) x A-cell (4) x static window (~10 per run)
+      20  T3 melts: 16 quadrants + 4 headspace/entry-side
+      20  T4 C3-G: candidate product masses (~10) x 2 labs
+      15  secondary: neutron, heat, AE-correlation x 5 phases
+     320  flux lock-in: period grid (~5) x lag grid (~4) x 16 quadrants
+   naive total N = 985
+   Correlations (shared data between windows/contrasts/phases) reduce this; an effective
+   N_eff of 1/10 to 1/3 of the naive count is typical for overlapping counting analyses.
+   N_eff   global sigma of a local 5.0 sigma   local sigma needed for global 5 sigma (Sidak)
+       1    5.00                                5.00
+       4    4.73                                5.26
+      20    4.39                                5.55
+      50    4.18                                5.71
+     100    4.02                                5.82
+     300    3.76                                6.01
+    1000    3.44                                6.20
+
+== 2. T1 reach in the DFM geometry (median 5 sigma, fusions/s per quadrant of a given skin)
+   Inputs: branch 0.5 to p; eps per emitted p per quadrant = 0.15 (iteration-1 risk 4) or 0.08
+   (entry-face source, 2.05 MeV p, lower PID acceptance, from m5_si.txt U(0-20um) scaling);
+   background per quadrant = cell B/4 with cell B = 0.01-0.03/day (M5), x3 uncertainty;
+   live fraction 0.8 (EMI edge vetoes, keep-alive gaps, DAQ); P2 = 21 d nominal, 30 d = M5's number.
+   eps   Bcell/d  n_q  days | known-B(10x)  | ctrl=T-H(1 quad/skin) | local 6.0 sigma known-B
+   0.15    0.01    1    21 | 5.32e-05 ( 5.8c) | 1.69e-04 ( 18.4c)  | 5.17e-05 ( 5.6c)
+   0.15    0.01    1    30 | 3.84e-05 ( 6.0c) | 1.19e-04 ( 18.5c)  | 3.61e-05 ( 5.6c)
+   0.15    0.01    3    21 | 1.98e-05 ( 6.5c) | 1.36e-04 ( 44.3c)  | 2.00e-05 ( 6.5c)
+   0.15    0.01    3    30 | 1.46e-05 ( 6.8c) | 9.55e-05 ( 44.6c)  | 1.61e-05 ( 7.5c)
+   0.15    0.01    4    21 | 1.55e-05 ( 6.7c) | 1.31e-04 ( 57.1c)  | 1.49e-05 ( 6.5c)
+   0.15    0.01    4    30 | 1.15e-05 ( 7.2c) | 9.24e-05 ( 57.5c)  | 1.19e-05 ( 7.4c)
+   0.15    0.03    1    21 | 5.95e-05 ( 6.5c) | 1.73e-04 ( 18.9c)  | 6.01e-05 ( 6.5c)
+   0.15    0.03    3    21 | 2.39e-05 ( 7.8c) | 1.39e-04 ( 45.5c)  | 2.54e-05 ( 8.3c)
+   0.15    0.03    4    21 | 1.90e-05 ( 8.3c) | 1.35e-04 ( 58.6c)  | 2.10e-05 ( 9.2c)
+   0.15    0.09    1    21 | 7.16e-05 ( 7.8c) | 1.84e-04 ( 20.0c)  | 7.62e-05 ( 8.3c)
+   0.15    0.09    3    21 | 3.12e-05 (10.2c) | 1.48e-04 ( 48.2c)  | 3.53e-05 (11.5c)
+   0.15    0.09    4    21 | 2.54e-05 (11.1c) | 1.43e-04 ( 62.2c)  | 2.79e-05 (12.2c)
+   0.08    0.01    1    21 | 9.98e-05 ( 5.8c) | 3.17e-04 ( 18.4c)  | 9.69e-05 ( 5.6c)
+   0.08    0.01    3    21 | 3.72e-05 ( 6.5c) | 2.54e-04 ( 44.3c)  | 3.76e-05 ( 6.5c)
+   0.08    0.01    4    21 | 2.91e-05 ( 6.7c) | 2.46e-04 ( 57.1c)  | 2.80e-05 ( 6.5c)
+   0.08    0.03    1    21 | 1.12e-04 ( 6.5c) | 3.25e-04 ( 18.9c)  | 1.13e-04 ( 6.5c)
+   0.08    0.03    3    21 | 4.48e-05 ( 7.8c) | 2.61e-04 ( 45.5c)  | 4.76e-05 ( 8.3c)
+   0.08    0.03    4    21 | 3.57e-05 ( 8.3c) | 2.53e-04 ( 58.6c)  | 3.95e-05 ( 9.2c)
+   0.08    0.09    1    21 | 1.34e-04 ( 7.8c) | 3.45e-04 ( 20.0c)  | 1.43e-04 ( 8.3c)
+   0.08    0.09    3    21 | 5.84e-05 (10.2c) | 2.77e-04 ( 48.2c)  | 6.62e-05 (11.5c)
+   0.08    0.09    4    21 | 4.76e-05 (11.1c) | 2.68e-04 ( 62.2c)  | 5.23e-05 (12.2c)
+   M5 headline for comparison: 3.3e-5 (10x bkg) / 7.6e-5 (equal-time) fusions/s for the WHOLE
+   Oe20 membrane in vacuum, eps=0.22, 30 d, 100 % live, surface source.
+
+== 3. Fragility of low-count 5 sigma: true significance if the background is mis-modelled
+   b_assumed  n_crit(5s)  true sigma if b_true = x2 / x3 / x10 of assumed
+       0.05       4        4.47   4.12   2.92
+       0.10       5        4.59   4.16   2.68
+       0.30       7        4.51   3.92   1.83
+       1.00      10        3.91   3.06  -0.11
+       3.00      16        3.29   2.01  -2.89
+   Profiled over a +-x3 (log-uniform) background prior, the 5 sigma n_crit rises to:
+     b_nom=0.10: n_crit(b)=5, n_crit(3b)=7
+     b_nom=0.30: n_crit(b)=7, n_crit(3b)=10
+     b_nom=1.00: n_crit(b)=10, n_crit(3b)=16
+   Burst artifacts: one unvetoed microdischarge/pile-up cluster that deposits k>=n_crit PID-
+   window events is a '5 sigma' on its own. Required: burst test separate from rate test;
+   rate test counts clusters (events within 10 s in one detector) as ONE event.
+
+== 4. D-specific cosmic-neutron backgrounds absent from the H2O twin (order of magnitude)
+   D atoms within product range of the telescope: membrane 2.9e+20, electrolyte film (100 um) 2.1e+21, front gas 3.4e+19; total 2.4e+21
+   d(n,np) breakup [low]: 0.017 breakups/day/cell; x acceptance*PID-window fraction 0.03 -> 0.0005 protons/day/cell in the T1 window
+   d(n,np) breakup [high]: 0.167 breakups/day/cell; x acceptance*PID-window fraction 0.08 -> 0.0133 protons/day/cell in the T1 window
+   n-d elastic recoil d [low]: 1.04/day/cell; reaching telescope with E>1.4 MeV x0.05 = 0.052/day; p/d PID leakage 0.001 -> 0.00005/day in T1 window
+   n-d elastic recoil d [high]: 7.82/day/cell; reaching telescope with E>1.4 MeV x0.15 = 1.173/day; p/d PID leakage 0.01 -> 0.01173/day in T1 window
+   H2O twin: n-p recoil protons 0.006/day (M5) -> the D-H difference is NOT signed-conservative:
+   D-specific terms of 1e-3 to 3e-2/day are comparable to the whole modelled background.
+   They are flux-independent: a within-cell D flux-on vs D flux-off (static-loaded) contrast
+   cancels them; the D-vs-H contrast does not.
+
+== 5. 'Absence in the matched control': how much does a T-H null say?
+   A-cells observe s signal counts summed over n_q quadrants of one skin; if the effect is
+   NOT D-specific (artifact common to D and H cells), T-H (1 quadrant) expects s/n_q.
+   s   n_q  expected T-H  P(T-H = 0 | common artifact)  likelihood ratio for 'D-specific'
+     5    3     1.67         0.189                            5.3
+     5    4     1.25         0.287                            3.5
+    10    3     3.33         0.036                           28.0
+    10    4     2.50         0.082                           12.2
+    20    3     6.67         0.001                          785.8
+    20    4     5.00         0.007                          148.4
+   With all 4 T-H quadrants pooled against all 16 A quadrants (tau=1/4), s=10 gives LR ~12.
+
+== 6. Sample count. P(>=1) is what iteration-1 quotes; the claim rule needs >=2 membranes
+   p     N   P(>=1)  P(>=2)   | lot-correlated rho=0.3: P(>=1) P(>=2) | rho=0.7: P(>=1) P(>=2)
+   0.05   4   0.185  0.014   |            0.127  0.049  |         0.078  0.055
+   0.05   6   0.265  0.033   |            0.157  0.075  |         0.086  0.065
+   0.05   8   0.337  0.057   |            0.179  0.096  |         0.092  0.071
+   0.05  12   0.460  0.118   |            0.212  0.128  |         0.100  0.080
+   0.10   4   0.344  0.052   |            0.243  0.104  |         0.153  0.110
+   0.10   6   0.469  0.114   |            0.294  0.155  |         0.168  0.128
+   0.10   8   0.570  0.187   |            0.331  0.193  |         0.178  0.140
+   0.10  12   0.718  0.341   |            0.382  0.250  |         0.193  0.156
+   0.20   4   0.590  0.181   |            0.440  0.225  |         0.293  0.220
+   0.20   6   0.738  0.345   |            0.514  0.316  |         0.317  0.252
+   0.20   8   0.832  0.497   |            0.564  0.381  |         0.334  0.272
+   0.20  12   0.931  0.725   |            0.630  0.468  |         0.357  0.299
+   Two lots x N/2 membranes (lot-level effect, within-lot p=0.2, lot 'good' w.p. 0.5 -> mean 0.1):
+     N=4: two lots P(>=1)=0.328 P(>=2)=0.065 | one lot P(>=1)=0.295 P(>=2)=0.090
+     N=8: two lots P(>=1)=0.503 P(>=2)=0.215 | one lot P(>=1)=0.416 P(>=2)=0.248
+
+   Allocation of 16 quadrant slots (quadrant-level activity, p=0.2 per slot, independent):
+     5 skins (4,3,3,3,3) [iter-1]     sum_s P(>=1)=2.54  sum_s P(>=2)=0.60
+     4 skins (4,4,4,4)                sum_s P(>=1)=2.36  sum_s P(>=2)=0.72
+     3 skins (6,5,5)                  sum_s P(>=1)=2.08  sum_s P(>=2)=0.87
+     2 skins (8,8)                    sum_s P(>=1)=1.66  sum_s P(>=2)=0.99
+   Membrane-level activity (entry face / bulk): skins do not matter; only N membranes does.
+
+== 7. Bayesian decision analysis (H = effect real at >=1 % of a claimed magnitude in this regime)
+   P(pos|H) = P(cond) x P(>=k active) x P(det); P(pos|not H) = artifact/fluke rate per campaign.
+   P(cond)=0.5, P(det)=0.9, p=0.2, N=4 -> single-membrane P(pos|H)=0.5*0.59*0.9=0.27;
+   claim-rule (>=2 membranes) P(pos|H)=0.5*0.18*0.9=0.08.
+   prior   post|all-null   post|1-membrane +ve (art=0.05/0.01)   post|claim-rule +ve (art=1e-3/1e-4)
+    1e-04   7.34e-05        5.31e-04 / 2.65e-03                   8.07e-03 / 7.52e-02
+    1e-03   7.35e-04        5.29e-03 / 2.59e-02                   7.53e-02 / 4.49e-01
+    1e-02   7.36e-03        5.09e-02 / 2.12e-01                   4.51e-01 / 8.92e-01
+    3e-02   2.22e-02        1.41e-01 / 4.51e-01                   7.16e-01 / 9.62e-01
+    1e-01   7.54e-02        3.71e-01 / 7.47e-01                   9.00e-01 / 9.89e-01
+   Bayes factor of an all-null against H: 1.36 (N=4); N=8: 1.60; with P(cond)=0.9, N=8: 3.07
+
+== 8. Sec. 10 audit: reach / claimed magnitude (design says <= 1e-2 everywhere)
+   Si vs Lipson (1e-2..1 /s charged particles)                3e-5..8e-5 (M5, whole foil)        ratio 3.0e-05..8.0e-03  OK
+   Si vs Lipson, DFM per skin, sum over quads (sec. 2)        6e-5..1e-3 per skin                ratio 6.0e-05..1.0e-01  BORDERLINE
+   Si vs Tohoku-static 130/day                                2.2 events/day                     ratio 1.7e-02..1.7e-02  FAILS
+   Heat vs SRI 0.1..1 W (as quoted)                           4..20 mW                           ratio 4.0e-03..2.0e-01  BORDERLINE
+   Heat vs SRI scaled to DFM volume (4.7e-3 vs 2.4e-2 cm3)    4..20 mW                           ratio 2.0e-02..1.0e+00  FAILS
+   He front vs SRI-scale (volume-scaled)                      0.16..0.39 nW (x10 if stock-He 10x) ratio 8.0e-10..2.0e-07  OK
+   C3-G products vs 1e12..1e14 cm-2                           1e10 cm-2 (not demonstrated)       ratio 1.0e-04..1.0e-02  OK
