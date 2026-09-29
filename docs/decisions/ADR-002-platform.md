@@ -1,6 +1,35 @@
 # ADR-002 — Platform: electrochemically loaded, detector-facing permeation membrane with a segmented active skin
 
-**Status:** accepted (dimensions pending M2–M7) · **Date:** 2026-09-29 · **Basis:** R1–R7, M0, ADR-001
+**Status:** accepted, **revision 2** (dimensions pending M3/M5/M6/M8) · **Date:** 2026-09-29 · **Basis:** R1–R7, M0, ADR-003, red-team-0
+
+> **Revision 2 (after red-team-0 findings F1, F2, F6, F7, F10, F11).** The original text is kept below for the audit trail; these changes override it.
+>
+> 1. **Exit-face physics (F1).** A clean exit face in vacuum drains the membrane: detailed balance pins it at x ~ 10⁻⁵–10⁻². High loading, high flux and a clean face cannot coexist. Each exit-face sector therefore sets its *own* (x, J) locally, because lateral coupling reaches only about one membrane thickness. That is a feature, provided each sector's (x, J) is modelled and measured rather than assumed shared. Sectors are now defined by **regime**:
+>    - **L (loading):** 20–50 nm Au cap. The foil reaches entry-face x ≥ 0.9 and J ≈ 0.
+>    - **M (SRI regime):** tuned barrier (thin oxide or a patterned Au grid) giving x ≳ 0.9 *and* J ~ 10¹⁵–10¹⁶ D cm⁻² s⁻¹, i.e. McKubre's (x−x₀)²·flux product.
+>    - **F (flux):** open Pd, PdO or Au/Pd/PdO (Lipson) skin. Maximum J at lower x.
+>
+>    The Au "null" of revision 1 was inverted: Au caps give the *most* highly loaded Pd. The null role now belongs to the H₂O twin and a flux-blocked twin.
+> 2. **Thin membrane (F2).** 8–12 µm Pd, so the Si telescopes see protons from the **electrolyte-facing (entry) face**, which is where SRI/ENEA conditions exist. Protons emerge at 2.3–2.55 MeV from the entry face and 3.0 MeV from the exit face, which gives depth tomography. Consequence: Rn-progeny α from the electrolyte penetrate. Mitigate with Rn-free, sparged, sealed electrolyte and ΔE–E particle ID.
+> 3. **Pressure-balanced front (F6).** The front (detector) chamber holds **~1 atm D₂**, not vacuum:
+>    - Δp ≈ 0, so an unsupported thin membrane survives. Vacuum would give ~250 MPa against a 35–70 MPa annealed yield.
+>    - The open exit sectors are clamped at x ≈ 0.65 (β) instead of ~10⁻⁴.
+>    - The front becomes a static ⁴He accumulator (aliquots through a getter to the MS).
+>    - Charged products lose ≤ 0.3 MeV over ≤ 5 mm of D₂.
+>
+>    Fast Δp interlock and a Si-bias trip are required.
+> 4. **Electrical hygiene (F7):**
+>    - the membrane is the detector-system hard ground and the anode is driven;
+>    - a grounded ≤ 1 µm Al screen or Ni mesh sits between membrane and telescopes;
+>    - a dummy Si detector behind 200 µm Al runs on the same electronics;
+>    - waveform digitisation, linear supplies, and gauges/RGA off during counting windows;
+>    - a **flux-blocked twin** (identical current waveform, no permeation);
+>    - an **orthogonal flux modulation at constant current** (front D₂ pressure steps).
+> 5. **Samples (F10).** An **array of ≥ 4 active membrane cells** plus twins, sharing one shielded detector house (neutron bank, 511 keV pair, muon veto). Each cell has its own sealed front volume, so ⁴He can be attributed per sample.
+> 6. **Entry-side options (F2, F11):**
+>    - an Iwamura-type gas-entry cell (**C3-G**: D₂ 1 atm, 70 °C, Pd/CaO multilayer and a ⁸⁶Sr-tagged target on the *entry* face, detectors facing the entry face through D₂);
+>    - Pd/D co-deposition moves to a separate open-cell arm on a PSD scintillator (Cl₂ from a chloride bath would poison the closed-cell recombiner).
+> 7. **Tags:** an acoustic-emission sensor on each membrane (the H1b confound); ¹⁰B/⁶LiF depth markers (ADR-004).
 
 ## Context: what the literature converges on
 Seven independent research digests were compiled with limited primary-source access; tags in each file mark what was checked. They point to the same physical motif from different directions:
