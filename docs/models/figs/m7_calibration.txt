@@ -1,0 +1,16 @@
+Calibration plan, layout: BGO 4x4 pair
+22Na at foil: 511-511 coincidences per decay = 0.0700
+full-energy-peak efficiency (sum over detectors, source at foil): 60 keV 0.0456, 356 keV 0.2139, 662 keV 0.1837, 1173 keV 0.1489, 1332 keV 0.1427, 1461 keV 0.1406, 2614 keV 0.1145
+
+nuclide | exempt qty | activity used | key rate | time to 1e4 counts | calibrates
+Na-22 | 10.0 uCi | 0.1 uCi = 3700 Bq | 234 coinc/s | 0.7 min | 511-511 coincidence efficiency at the foil position; 1275 keV energy point; timing (CRT)
+Cs-137 | 10.0 uCi | 1 uCi = 37000 Bq | 5786 peak counts/s (662 keV) | 0.0 min | energy scale and resolution at 662 keV; gain-stabilisation reference (removed during runs)
+Co-60 | 1.0 uCi | 1 uCi = 37000 Bq | 5500 peak counts/s (1173 keV) | 0.0 min | energy scale 1.17/1.33 MeV; 2.505 MeV sum peak tests summing/coincidence logic
+Am-241 | 0.01 uCi | 0.01 uCi = 370 Bq | 26.4 alpha/s in Si at 2 cm | 6.3 min | Si telescope: 5.486 MeV alpha energy scale and dE-E thresholds; low-energy gamma threshold
+Ba-133 | 10.0 uCi | 1 uCi = 37000 Bq | 4907 peak counts/s (356 keV) | 0.0 min | low-energy scale / threshold, 80-400 keV
+Ge-68 | 0.1 uCi | 0.1 uCi = 3700 Bq | ~230 coinc/s | 0.7 min | (not in Schedule B -> 0.1 uCi default) harder e+ (1.9 MeV end-point) for e+ transport/annihilation-location check
+Sr-90 | 0.1 uCi | 0.1 uCi = 3700 Bq | 527 e-/s into Si at 2 cm | 0.3 min | beta- to 2.28 MeV (Y-90): electron response of Si telescope and scintillator entrance windows
+
+Natural (no licence): thoriated W welding rods (2 % ThO2, 10 CFR 40.13(c)(1)(iii)) for 2614 keV; KCl (1 kg = 16 kBq 40K) for 1461 keV; cosmic muons (MIP peak ~9 MeV/cm in BGO) and delayed Michel electrons (52.8 MeV end-point) for the 5-60 MeV calorimeter scale.
+1 kg KCl around the chamber: 1461 keV peak ~73.3 /s
+5 thoriated rods at the foil (~850 Bq Th-232 in equilibrium): 2614 keV peak 34.95 /s -> 1e4 counts in 0.1 h
