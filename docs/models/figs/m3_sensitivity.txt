@@ -1,0 +1,12 @@
+case                                   J_max(D/m2/s)  [mA/cm2]  k_r*(m4/s)  tau90   t90(25um)  x(1atm)  f(0.9) atm
+baseline (D, 25 C, blocking)              1.1e+22  [  176.0]   2.28e-39   0.399     4.37 s   0.666       1e+04
+anchor f(0.90) = 1e+03 atm               9.02e+21  [  144.5]   2.28e-38   0.490     5.37 s   0.684       1e+03
+anchor f(0.90) = 1e+05 atm               1.29e+22  [  207.4]   2.28e-40   0.336     3.69 s   0.653       1e+05
+no site blocking (D* = D_alpha)          1.47e+23  [ 2359.6]   2.28e-39   0.090     0.99 s   0.666       1e+04
+T = 20 C                                 9.73e+21  [  155.9]   2.51e-39   0.395     4.97 s   0.673    8.72e+03
+T = 40 C                                 1.54e+22  [  246.8]   1.82e-39   0.409     3.05 s   0.644    1.48e+04
+T = 60 C                                  2.3e+22  [  368.4]   1.46e-39   0.421     1.99 s   0.613    2.41e+04
+H control, 25 C                          7.23e+21  [  115.9]   3.95e-39   0.404     6.73 s   0.698     2.8e+03
+k_r(Pd lit.) at 20 C = 8.4e-36 m4/s ; J_sat lower bound (Ed 0.75 eV) = 3.91e+19 D/m2/s ; ratio k_r*/k_r(lit) = 0.000299
+k_r(Pd lit.) at 40 C = 2.83e-35 m4/s ; J_sat lower bound (Ed 0.75 eV) = 2.6e+20 D/m2/s ; ratio k_r*/k_r(lit) = 6.44e-05
+k_r(Pd lit.) at 60 C = 8.22e-35 m4/s ; J_sat lower bound (Ed 0.75 eV) = 1.38e+21 D/m2/s ; ratio k_r*/k_r(lit) = 1.78e-05

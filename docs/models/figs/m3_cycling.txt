@@ -1,0 +1,57 @@
+DFM L = 25 um, exit law k_r* = 2.28e-39 m^4/s (1e21 D/m2/s at x_exit = 0.90); tau_D = L^2/D_chem(0.9) = 6.05 s
+
+=== Protocol A: steady high loading (crack-avoiding) ===
+  t =     0- 1800 s: i =     5 mA/cm2 (x_c placeholder 0.850): end mean x = 0.164, back 0.583, exit 0.026
+  t =  1800- 3600 s: i =    20 mA/cm2 (x_c placeholder 0.870): end mean x = 0.819, back 0.820, exit 0.819
+  t =  3600- 5400 s: i =    50 mA/cm2 (x_c placeholder 0.897): end mean x = 0.894, back 0.895, exit 0.893
+  t =  5400- 7200 s: i =   100 mA/cm2 (x_c placeholder 0.918): end mean x = 0.913, back 0.916, exit 0.910
+  t =  7200- 9000 s: i =   300 mA/cm2 (x_c placeholder 0.950): end mean x = 0.939, back 0.949, exit 0.930
+  whole membrane beta after 2947 s (single alpha->beta transit at 5 mA/cm2, eta = 0.5)
+  first loading, sigma_y 40 MPa: max elastic mismatch stress 7146 MPa; plastic strain (one transit) max 0.0477, thickness-mean 0.0382
+  first loading, sigma_y 150 MPa: max elastic mismatch stress 7146 MPa; plastic strain (one transit) max 0.0466, thickness-mean 0.0371
+  first loading, sigma_y 250 MPa: max elastic mismatch stress 7146 MPa; plastic strain (one transit) max 0.0456, thickness-mean 0.0361
+  steady state (300 mA/cm2): self-equilibrated stress max 5.6 MPa (free plate) -> elastic for all tempers
+
+=== Protocol B1: beta-phase flux/gradient pumping (no phase change) ===
+  P=20 s, back 0.95<->0.8: exit x 0.887-0.924, mean 0.886-0.932; sy=40: dep_max 0.0002 mean 0.0000; sy=150: dep_max 0.0000 mean 0.0000; sy=250: dep_max 0.0000 mean 0.0000
+  P=60 s, back 0.95<->0.8: exit x 0.816-0.929, mean 0.814-0.938; sy=40: dep_max 0.0002 mean 0.0000; sy=150: dep_max 0.0000 mean 0.0000; sy=250: dep_max 0.0000 mean 0.0000
+  P=240 s, back 0.95<->0.7: exit x 0.700-0.930, mean 0.700-0.939; sy=40: dep_max 0.0001 mean 0.0000; sy=150: dep_max 0.0000 mean 0.0000; sy=250: dep_max 0.0000 mean 0.0000
+
+=== Protocol B2: deliberate alpha/beta cycling ===
+  cathodic 100 mA/cm2 (eta 0.5) for 637 s, anodic 20 mA/cm2 for 1348 s; period 33.1 min
+  cycle 3: mean x 0.010-0.936; exit 0.010-0.928; back 0.010-0.944
+  sigma_y 40 MPa: plastic strain range per cycle max 0.0721, thickness-mean 0.0512
+  sigma_y 150 MPa: plastic strain range per cycle max 0.0709, thickness-mean 0.0500
+  sigma_y 250 MPa: plastic strain range per cycle max 0.0699, thickness-mean 0.0490
+
+=== Damage model for B2 (per full alpha/beta cycle) ===
+  plastic strain range used: 0.0709 (H-cycled temper; misfit 0.0368)
+  Crack initiation, Coffin-Manson dep/2 = ef' (2 N_i)^c, c = -0.6 [generic fcc; Manson 1965]:
+    ef' = 0.1: N_i = 3 cycles
+    ef' = 0.3: N_i = 18 cycles
+    ef' = 1.0: N_i = 131 cycles
+  Short-crack growth (Tomkins 1968, strain-controlled): da/dN = B dep a, B = 1-5; a0 = 1 um.
+    B = 1: cycles from initiation to through-thickness crack (L = 25 um): 45; L = 10 um: 32; L = 50 um: 55
+    B = 2: cycles from initiation to through-thickness crack (L = 25 um): 23; L = 10 um: 16; L = 50 um: 28
+    B = 5: cycles from initiation to through-thickness crack (L = 25 um): 9; L = 10 um: 6; L = 50 um: 11
+  New crack-face area per unit membrane area per cycle = 4/S * da/dN (two faces, two crack families),
+  S = crack spacing ~ grain size (intergranular) or ~5x depth (shear-lag saturation):
+    S =   20 um, depth    1 um: 0.0284 cm2 per cm2 per cycle; cumulative crack face 0.20 cm2/cm2
+    S =   20 um, depth    5 um: 0.142 cm2 per cm2 per cycle; cumulative crack face 1.00 cm2/cm2
+    S =   20 um, depth   20 um: 0.568 cm2 per cm2 per cycle; cumulative crack face 4.00 cm2/cm2
+    S =   50 um, depth    1 um: 0.0114 cm2 per cm2 per cycle; cumulative crack face 0.08 cm2/cm2
+    S =   50 um, depth    5 um: 0.0568 cm2 per cm2 per cycle; cumulative crack face 0.40 cm2/cm2
+    S =   50 um, depth   20 um: 0.227 cm2 per cm2 per cycle; cumulative crack face 1.60 cm2/cm2
+    S =  100 um, depth    1 um: 0.00568 cm2 per cm2 per cycle; cumulative crack face 0.04 cm2/cm2
+    S =  100 um, depth    5 um: 0.0284 cm2 per cm2 per cycle; cumulative crack face 0.20 cm2/cm2
+    S =  100 um, depth   20 um: 0.114 cm2 per cm2 per cycle; cumulative crack face 0.80 cm2/cm2
+  Deformation-induced vacancies: dc_v/deps = chi sigma Omega / E_f^v (Militzer, Sun & Jonas, Acta Metall.
+  Mater. 42 (1994) 133 [mem]; chi = 0.1, sigma = flow stress, Omega = 1.47e-29 m3, E_f^v(Pd) = 1.5 eV [mem]).
+    annealed              : 0.00024 per unit strain (lower bound used: 1e-05); per B2 cycle 7.1e-07 - 1.7e-05; after 30 cycles 2.1e-05 - 5.2e-04
+    as-supplied/H-cycled  : 0.00092 per unit strain (lower bound used: 1e-05); per B2 cycle 7.1e-07 - 6.5e-05; after 30 cycles 2.1e-05 - 2.0e-03
+    cold-worked           : 0.0015 per unit strain (lower bound used: 1e-05); per B2 cycle 7.1e-07 - 1.1e-04; after 30 cycles 2.1e-05 - 3.3e-03
+    vacancy (E_m = 1.0 eV) at 25 C: 10.8 jumps/day, diffusion length/day 0.9 nm
+    vacancy (E_m = 1.2 eV) at 25 C: 0.00449 jumps/day, diffusion length/day 0.018 nm
+    vacancy (E_m = 1.0 eV) at 90 C: 1.14e+04 jumps/day, diffusion length/day 29 nm
+    vacancy (E_m = 1.2 eV) at 90 C: 19.2 jumps/day, diffusion length/day 1.2 nm
+    SAV thermodynamics: E_f(vac + 6 D) = 1.5 - 6 x 0.23 = 0.12 eV -> equilibrium c_v(25 C) ~ exp(-Ef/kT) = 0.0094, but vacancies cannot arrive (kinetics above)
