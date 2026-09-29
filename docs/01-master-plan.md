@@ -5,10 +5,10 @@
 | Phase | Output | Executed by | Status |
 |---|---|---|---|
 | 0. Charter + first-principles budget | `00-charter.md`, `models/M0-rate-budget.md` | lead | done |
-| 1. Literature base | `research/R1…R7` | 7 parallel research agents | running |
-| 2. Quantitative models | `models/M1…M6`, `sim/` | parallel cloud sessions (one per model) | queued |
-| 3. Synthesis | `decisions/ADR-*`, `design/iteration-1.md` | lead | — |
-| 4. Red team | `design/red-team-*.md`, revised iteration-1 | independent adversarial agents | — |
+| 1. Literature base | `research/R1…R7` | 7 parallel research agents | done |
+| 2. Quantitative models | `models/M1…M8`, `sim/` | parallel cloud sessions (one per model) | done except M7 (γ/e±, finishing) |
+| 3. Synthesis | `decisions/ADR-*`, `design/iteration-1.md` | lead | done: iteration 1 = DFM-4 membrane array (C3) + C1/C3-G Tier-2 arms |
+| 4. Red team | `design/red-team-*.md`, revised iteration-1 | independent adversarial agents | red-team-0 (plan) done; red-team-1A–D (design) running as cloud sessions |
 
 ## Research streams (Phase 1)
 
@@ -39,6 +39,8 @@ Working hypothesis from M0, still to be tested by models and research: **a hybri
 
 ## Evaluation matrix (Phase 3)
 
+> **Superseded.** Red-team-0 replaced this matrix with ADR-003's claim-conditioned objective. The weights now used are: claim reproduction 0.30, H2 via ⁴He 0.20, credibility 0.20, H1 sensitivity 0.10, sample count 0.10, safety/cost 0.10. The original matrix is kept below for the record.
+
 Each candidate is scored 0–10 on each criterion. The weights reflect the charter (credible measurability first).
 
 | Criterion | Weight | Measured by |
@@ -62,3 +64,5 @@ Briefs are in `docs/models/briefs/`. Each cloud session writes `docs/models/Mx-*
 | M4 | Calorimetry and thermal design |
 | M5 | Detection: charged-particle transport and escape, Si/CR-39 geometry, neutron efficiency, backgrounds, run-time/power analysis |
 | M6 | Surface micro-geometry: plasmon/roughness PSD, nanostructure field enhancement, mechanical/phonon mode engineering, laser coupling |
+| M7 | γ / e⁺e⁻ detection (511 keV coincidences, IPC), flux-modulation protocol |
+| M8 | ⁴He channel: accumulation, release fractions, blanks, analysis chain |
