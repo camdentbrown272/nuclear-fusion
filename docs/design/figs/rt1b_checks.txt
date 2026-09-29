@@ -1,0 +1,85 @@
+== A. Closed-cell gas balance ==
+headspace D2 inventory: 306 umol
+D absorbed to x=0.9: 422 umol D -> excess O2 105 umol, recombiner burns 211 umol D2 = 69 % of headspace D2
+  -> cell pressure after loading without make-up: 155 mbar (front stays 500): dP = -345 mbar vs interlock -40 / relief foil -20
+H-M 10 mA/cm2 permeating: I_perm=0.031 A, headspace D2 gone in 1878 s (31.3 min), dP/dt=-0.40 mbar/s, then O2 accumulates at 0.08 umol/s; D2O loss 0.28 g/day (12 g over P2 vs 13 g); make-up D2 needed 0.32 L(STP)/day
+FX 50 mA/cm2 permeating: I_perm=0.157 A, headspace D2 gone in 376 s (6.3 min), dP/dt=-2.00 mbar/s, then O2 accumulates at 0.41 umol/s; D2O loss 1.41 g/day (59 g over P2 vs 13 g); make-up D2 needed 1.58 L(STP)/day
+FX 150 mA/cm2 permeating: I_perm=0.471 A, headspace D2 gone in 125 s (2.1 min), dP/dt=-5.99 mbar/s, then O2 accumulates at 1.22 umol/s; D2O loss 4.23 g/day (177 g over P2 vs 13 g); make-up D2 needed 4.73 L(STP)/day
+recombiner heat at 200 mA/cm2: 0.96 W
+recombiner heat at 300 mA/cm2: 1.44 W
+recombiner heat at 500 mA/cm2: 2.40 W
+gas generation at 300 mA/cm2 and 0.5 bar: 21.6 mL/min (headspace 15 mL turned over every 42 s); 1 % recombiner lag -> 0.120 mbar/s
+
+== B. Front pressurisation with the Pd-Ag exhaust stopped ==
+H-M 10: front +0.13 mbar/s -> dP from +30 to -20 (relief foil bursts) in 376 s
+keep-alive 20 (FX): front +0.27 mbar/s -> dP from +30 to -20 (relief foil bursts) in 188 s
+FX 50: front +0.67 mbar/s -> dP from +30 to -20 (relief foil bursts) in 75 s
+FX 150: front +2.00 mbar/s -> dP from +30 to -20 (relief foil bursts) in 25 s
+Pd-Ag (75 um wall, 350 C) flux at 0.5 bar -> vacuum: 0.021 mol/m2/s; area for FX 150: 1.16 cm2
+
+== C. Thermal ==
+electrolyte column 38 mm in a 20 mm bore; wetted liner 24 cm2; G_liner = 0.60 W/K (PTFE k=0.25, 1 mm)
+j=200 mA/cm2 bubbles 50 um: u_g=0.51 mm/s eps=0.42 V_cell=3.23 V Q=2.0 W  dT(liner)=3.4 K  tau=100 s
+j=200 mA/cm2 bubbles 100 um: u_g=0.51 mm/s eps=0.11 V_cell=2.64 V Q=1.7 W  dT(liner)=2.8 K  tau=100 s
+j=300 mA/cm2 bubbles 50 um: u_g=0.76 mm/s eps=0.60 V_cell=5.17 V Q=4.9 W  dT(liner)=8.1 K  tau=100 s
+j=300 mA/cm2 bubbles 100 um: u_g=0.76 mm/s eps=0.16 V_cell=3.05 V Q=2.9 W  dT(liner)=4.8 K  tau=100 s
+j=500 mA/cm2 bubbles 50 um: u_g=1.27 mm/s eps=0.60 V_cell=7.28 V Q=11.4 W  dT(liner)=19.1 K  tau=100 s
+j=500 mA/cm2 bubbles 100 um: u_g=1.27 mm/s eps=0.27 V_cell=4.13 V Q=6.5 W  dT(liner)=10.8 K  tau=100 s
+free convection off an unjacketed 316L body (0.02 m2, h=5): G = 0.10 W/K -> dT = 36-80 K at 3.6-8 W: body must be liquid-jacketed
+house: 229 W (8 cells P2, 8 Pd-Ag heaters 20 W [est.], electronics 40 W) through 20 cm HDPE G=3.6 W/K -> +64 K without internal water cooling
+cell dP sensitivity: gas 500/295=1.69 mbar/K + vapour 1.4 = 3.1 mbar/K; a 500 mA/cm2 step (+~10 K) moves dP by ~31 mbar (interlock band 40)
+
+== D. Mechanics ==
+Mo grid 0.10 mm, normal +30 mbar: sigma = 15 MPa if ribs make 5 mm cells, 62 MPa if the only support is the cross septum (10 mm cells)
+Mo grid 0.10 mm, +50 mbar: sigma = 26 MPa if ribs make 5 mm cells, 103 MPa if the only support is the cross septum (10 mm cells)
+Mo grid 0.10 mm, loss-of-front 0.5 bar: sigma = 258 MPa if ribs make 5 mm cells, 1031 MPa if the only support is the cross septum (10 mm cells)
+Mo grid 0.10 mm, loss-of-front 1.0 bar (P4): sigma = 516 MPa if ribs make 5 mm cells, 2062 MPa if the only support is the cross septum (10 mm cells)
+  Mo sheet yield 550-700 MPa stress-relieved, 350-450 recrystallised; DBTT ~ RT recrystallised [est.]
+lifted 12 um membrane at reverse 20 mbar: 29 MPa (annealed yield 40, UTS 170)
+lifted 12 um membrane at reverse 30 mbar: 38 MPa (annealed yield 40, UTS 170)
+lifted 12 um membrane at reverse 50 mbar: 54 MPa (annealed yield 40, UTS 170)
+lifted 12 um membrane at reverse 500 mbar: 251 MPa (annealed yield 40, UTS 170)
+P3 FX front step to 1.0 bar with cell at 0.5 bar (unbalanced): 251 MPa -> rupture
+25 um Si dE (a=12 mm) under 10 mbar across it: 13 MPa (thin-wafer fracture ~50-150)
+25 um Si dE (a=12 mm) under 100 mbar across it: 61 MPa (thin-wafer fracture ~50-150)
+25 um Si dE (a=12 mm) under 500 mbar across it: 178 MPa (thin-wafer fracture ~50-150)
+Pt corrugation guided-leg strain for 0.45 mm radial travel (t=0.10, leg 3 mm): 0.75 % (annealed Pt yield ~0.03 %): plastic on first load, ratchets on each full load/deload
+corrugation as 3 mm diaphragm strip at 0.5 bar: 22 MPa (annealed Pt yield 35-50)
+corrugation as 3 mm diaphragm strip at 1.0 bar: 45 MPa (annealed Pt yield 35-50)
+transformation plasticity P1 transit, +30 mbar: eps_tp ~ 5/6*0.10*6/40 = 1.2 %
+transformation plasticity P6a/pump-down 0.5 bar, annealed: eps_tp ~ 5/6*0.10*28/40 = 5.8 %
+transformation plasticity P6a 0.5 bar, hardened: eps_tp ~ 5/6*0.10*28/150 = 1.6 %
+transformation plasticity P6a after P4 at 1.0 bar: eps_tp ~ 5/6*0.10*44/150 = 2.4 %
+bond cool-down 850->22 C: (11.8-8.8)e-6*828 = 0.25 % tensile misfit in Pd (yields, flat)
+hydride misfit on bonded rim: ~3.3 % linear at x=0.65-0.9 -> 5704 MPa elastic equivalent vs 40-150 yield: the bond line is plastically cycled once per full load/deload
+
+== E. FX anodic half-cycle ==
+FX foil D inventory at x=0.65: 8.5 C/cm2; anodic half-cycle extracts 12 C/cm2 (1.4x inventory) unless the front resupplies >= 100 mA/cm2
+x at 0.2 bar front, 22 C: 0.629; plateau 39 mbar; at 60 C plateau 201 mbar
+P3 cycles: 14 d / 240 s = 5040 (M3 perforation life if each is an alpha/beta transit: 12-180)
+
+== F. He budget ==
+total std-He leak 1e-10 mbar L/s from air: 12864.2 He/s (floor 43-100 He/s)
+total std-He leak 1e-12 mbar L/s from air: 128.6 He/s (floor 43-100 He/s)
+total std-He leak 1e-13 mbar L/s from air: 12.9 He/s (floor 43-100 He/s)
+max total leak for <=10 % of 43 He/s: 3.3e-14 mbar L/s std-He (below the ~5e-12 limit of a He leak detector; Ar-tracer route only)
+make-up D2 for H-M 10: 0.32 L/day at He fraction 1e-09 -> 9.8e+07 He/s
+make-up D2 for H-M 10: 0.32 L/day at He fraction 1e-15 -> 9.8e+01 He/s
+make-up D2 for FX 50: 1.58 L/day at He fraction 1e-09 -> 4.9e+08 He/s
+make-up D2 for FX 50: 1.58 L/day at He fraction 1e-15 -> 4.9e+02 He/s
+make-up D2 for FX 150: 4.73 L/day at He fraction 1e-09 -> 1.5e+09 He/s
+make-up D2 for FX 150: 4.73 L/day at He fraction 1e-15 -> 1.5e+03 He/s
+closed all-metal valve seat, 1e-10 std-He conductance, manifold He 1e-6 mbar: 2455.0 He/s -> guard-vacuum interspace required on every cell valve
+
+== G. Si telescope ==
+dE quadrant capacitance (150 mm2, 25 um): 624 pF; series ENC ~3-5 e/pF -> 6.8-11.3 keV rms
+leakage 5 nA/quadrant at 22 C [5 nA at 22 C est.]: shot ENC 177 e = 0.6 keV rms
+leakage 17 nA/quadrant at 35 C [5 nA at 22 C est.]: shot ENC 322 e = 1.2 keV rms
+leakage 168 nA/quadrant at 60 C [5 nA at 22 C est.]: shot ENC 1023 e = 3.7 keV rms
+Paschen minimum (H2 constants, applied to D2): pd = 2.5 Torr cm, V_min = 326 V (literature H2 ~270-300 V); 150 V bias -> margin 2.2x, eroded by edge fields and Kr (Penning)
+
+== H. Rim vdP with the Pt annulus bonded under the Pd ==
+rho_Pd/rho0=1.0: R_vdP with Pt annulus 0.6071 mOhm, Pd-only 1.904 mOhm
+rho_Pd/rho0=1.4: R_vdP with Pt annulus 0.6598 mOhm, Pd-only 2.665 mOhm
+rho_Pd/rho0=1.8: R_vdP with Pt annulus 0.6929 mOhm, Pd-only 3.427 mOhm
+R change for rho x1.8 (x 0 -> ~0.9): with annulus 14.1 %, Pd-only 80.0 %; Pt TCR 0.39 %/K -> 1 K drift = 3 % of the full loading signal
