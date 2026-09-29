@@ -91,13 +91,14 @@ def planar_foil(t=0.01, W=1.0, g=0.5, kappa=0.012, framed=False, Wcell=None, Wa=
 
 
 def dfm_disk(Rd=1.0, g=1.0, kappa=0.012, Rc=None, anode="disk", Ran=None, well=0.0,
-             H=None, step=0.0, crevice=0.02, hfac=1.0):
+             H=None, step=0.0, crevice=0.02, hfac=1.0, sag=0.0):
     """Pd disk (radius Rd) at the cell floor z=0, wetted face up, back face in vacuum.
     Rc     : cell (electrolyte) radius; Rc=Rd -> 'tube' cell (insulating wall meets disk at 90 deg)
     anode  : 'disk'  -> thin plate/mesh of radius Ran at z=g (default Ran=Rc)
              'ring'  -> ring of 1 mm square section, centred at radius Ran (default Rc-0.1) and z=g
     well   : depth of an insulating collar of inner radius Rd above the disk (cm);
              the cell widens to Rc above it. (well=0 & Rc>Rd -> flush disk in wide floor)
+    sag    : dished mesh anode, anode surface at z = g - sag (1 - r^2/Rc^2) (cm) (parallelism test)
     step   : seal-step defect for the tube cell (cm). step>0: insulating wall bore is
              Rd-step and the disk continues under it in a crevice of height `crevice`
              (gasket gap). step<0: bore is Rd+|step|, leaving a coplanar insulating annulus.
@@ -130,8 +131,12 @@ def dfm_disk(Rd=1.0, g=1.0, kappa=0.012, Rc=None, anode="disk", Ran=None, well=0
     if anode == "ring":
         zk |= {g - 0.05, g + 0.05}
         zk.discard(g + tA)
+    if sag != 0:
+        zk |= {g - abs(sag) - 0.01}
     zk = sorted(z for z in zk if z <= H + 1e-12)
     zhs = [hmin if z == 0.0 else 0.02 * hfac for z in zk]
+    if sag != 0:
+        zhs = [hmin if (z == 0.0 or g - abs(sag) - 0.011 <= z <= g + tA + 1e-9) else 0.02 * hfac for z in zk]
     ze0 = make_edges(zk, zhs, 0.06 * hfac)
     # prepend one layer of solid below z=0 for the disk / floor
     ze = np.concatenate([[-0.01], ze0])
@@ -147,7 +152,8 @@ def dfm_disk(Rd=1.0, g=1.0, kappa=0.012, Rc=None, anode="disk", Ran=None, well=0
         mat[(Rg > Rbore) & (Zg > crevice)] = INS
         mat[(Rg > Rd) & (Zg > 0) & (Zg < crevice)] = INS
     if anode == "disk":
-        mat[(Zg > g) & (Zg < g + tA) & (Rg < Ran)] = AN
+        zlow = g - sag * (1 - (Rg / Rcell) ** 2)
+        mat[(Zg > zlow) & (Zg < g + tA) & (Rg < Ran)] = AN
         mat[Zg > g + tA] = INS          # nothing above the (porous) anode carries current
     else:
         mat[(np.abs(Zg - g) < 0.05) & (np.abs(Rg - Ran) < 0.05)] = AN

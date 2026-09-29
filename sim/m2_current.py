@@ -162,7 +162,7 @@ def run_case(name, builder, kw, bubbles=None, currents=IAVG, store=None):
         s = stats(c2, r["i"])
         P = c2.dissipation(r["phi"], r["Va"], r["i"])
         fr = {k: (area_frac(c2, r["i"], POL[k], 0.90), area_frac(c2, r["i"], POL[k], 0.95))
-              for k in ["typical", "good"]}
+              for k in ["typical", "good", "exceptional"]}
         rows.append(dict(iav=iav, I=I, Va=r["Va"], P=P, eps=eps, **s, fr=fr,
                          xmin={k: float(POL[k].x_of_i(r['i'].min())) for k in POL},
                          xmax={k: float(POL[k].x_of_i(r['i'].max())) for k in POL}))
@@ -199,6 +199,8 @@ def scenarios():
         ("C6 DFM tube + ring anode, g=10mm", dfm_disk, dict(Rd=1.0, Rc=1.0, g=1.0, anode="ring"), None),
         ("C7 DFM tube + ring anode, g=20mm", dfm_disk, dict(Rd=1.0, Rc=1.0, g=2.0, anode="ring"), None),
         ("C8 DFM tube, small disk anode Ran=Rd/2", dfm_disk, dict(Rd=1.0, Rc=1.0, g=1.0, Ran=0.5), None),
+        ("C11 DFM Rd=5mm tube + ring anode, g=7mm", dfm_disk, dict(Rd=0.5, Rc=0.5, g=0.7, anode="ring", Ran=0.45), None),
+        ("C12 DFM tube + mesh g=4mm, sag 0.2mm", dfm_disk, dict(Rd=1.0, Rc=1.0, g=0.4, sag=0.02), None),
         ("C9 DFM tube, seal overhang 0.5mm (crevice 0.2mm)", dfm_disk, dict(Rd=1.0, g=1.0, step=0.05, crevice=0.02), None),
         ("C10 DFM tube, seal recess 0.5mm (flush annulus)", dfm_disk, dict(Rd=1.0, g=1.0, step=-0.05), None),
     ]
@@ -264,6 +266,19 @@ def dfm_sweeps():
     log("Seal step (Rd=10mm tube, g=10mm; +: wall overhangs disk by s with 0.2mm crevice, -: flush insulating annulus of width s)")
     for st, mx, mn, w5, low in out:
         log(f"   s={10*st:+.1f}mm: max/mean={mx:.3f} min/mean={mn:.3f} area within +-5%={100*w5:.1f}%  area with i<0.5 mean={100*low:.2f}%")
+    # mesh-anode parallelism: dished anode (sag at centre) in tube
+    log("Mesh anode flatness (tube, Rd=10mm): dished anode, centre closer by `sag`; primary and secondary@200 mA/cm2")
+    res["sag"] = []
+    for g in [0.3, 0.4, 0.5]:
+        for sag in [0.01, 0.02, 0.03, 0.05]:
+            c, m = dfm_disk(Rd=1.0, g=g, sag=sag)
+            r = c.run(1.0)
+            s = stats(c, r["i"])
+            r2 = c.run(0.2 * c.area_cath, POL["typical"])
+            s2 = stats(c, r2["i"])
+            res["sag"].append((g, sag, s["max"], s["min"], s2["max"], s2["min"]))
+            log(f"   g={10*g:.0f}mm sag={10*sag:.1f}mm (sag/g={sag/g:.3f}): primary [{s['min']:.3f},{s['max']:.3f}]"
+                f"  secondary [{s2['min']:.3f},{s2['max']:.3f}]  (1/g-estimate max/min={(g)/(g-sag):.3f})")
     # ring anode: required gap for +-5% vs Rd
     log("Ring anode in tube: smallest g (mm) giving +-5% over the whole disk")
     for Rd in [0.5, 0.75, 1.0, 1.25]:

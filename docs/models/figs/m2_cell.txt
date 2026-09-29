@@ -1,0 +1,139 @@
+==============================================================================
+THERMOCHEMISTRY
+==============================================================================
+  E_rev(D2O) = 1.2615 V   (Delta_f G D2O(l) = -243.44 kJ/mol)
+  E_tn (D2O) = 1.5267 V   (Delta_f H D2O(l) = -294.60 kJ/mol)
+  E_rev(H2O) = 1.2288 V ; E_tn(H2O) = 1.4812 V (light-water control)
+  Recombination heat at the recombiner = I * E_tn: 1.527 W/A (D2O), 1.481 W/A (H2O)
+  => D2O vs H2O control differ by 45.4 mW/A in open-cell enthalpy bookkeeping
+  I= 0.1 A: D2   0.76 mL/min + O2   0.38 mL/min (25 C, 1 atm); recombiner heat 0.15 W; D2O consumed if vented 0.04 g/h
+  I= 0.3 A: D2   2.28 mL/min + O2   1.14 mL/min (25 C, 1 atm); recombiner heat 0.46 W; D2O consumed if vented 0.11 g/h
+  I= 1.0 A: D2   7.61 mL/min + O2   3.80 mL/min (25 C, 1 atm); recombiner heat 1.53 W; D2O consumed if vented 0.37 g/h
+  I= 2.0 A: D2  15.21 mL/min + O2   7.61 mL/min (25 C, 1 atm); recombiner heat 3.05 W; D2O consumed if vented 0.75 g/h
+  stoichiometric D2/O2 headspace    5 mL -> stored chemical energy     34 J
+  stoichiometric D2/O2 headspace   20 mL -> stored chemical energy    136 J
+  stoichiometric D2/O2 headspace   50 mL -> stored chemical energy    339 J
+  stoichiometric D2/O2 headspace  200 mL -> stored chemical energy   1357 J
+
+==============================================================================
+C1 COAX (a=0.5 mm, L=30 mm, Ra=10 mm, between PTFE end plates): voltage and heat
+==============================================================================
+  LiOD 0.1 M (kappa=12.1 mS/cm at 25 C)
+    i=  10 mA/cm2 I=0.009 A: eta_c=-0.30 eta_a=0.32 iR= 0.12 V_cell= 2.01 V  P_in=0.02 W  heat(open)=0.00 W  recomb=0.01 W
+    i=  50 mA/cm2 I=0.047 A: eta_c=-0.38 eta_a=0.41 iR= 0.62 V_cell= 2.67 V  P_in=0.13 W  heat(open)=0.05 W  recomb=0.07 W
+    i= 100 mA/cm2 I=0.094 A: eta_c=-0.41 eta_a=0.44 iR= 1.25 V_cell= 3.37 V  P_in=0.32 W  heat(open)=0.17 W  recomb=0.14 W
+    i= 200 mA/cm2 I=0.188 A: eta_c=-0.45 eta_a=0.48 iR= 2.51 V_cell= 4.70 V  P_in=0.89 W  heat(open)=0.60 W  recomb=0.29 W
+    i= 300 mA/cm2 I=0.283 A: eta_c=-0.47 eta_a=0.50 iR= 3.79 V_cell= 6.02 V  P_in=1.70 W  heat(open)=1.27 W  recomb=0.43 W
+    i= 500 mA/cm2 I=0.471 A: eta_c=-0.49 eta_a=0.53 iR= 6.39 V_cell= 8.68 V  P_in=4.09 W  heat(open)=3.37 W  recomb=0.72 W
+  LiOD 0.5 M (kappa=54.7 mS/cm at 25 C)
+    i=  10 mA/cm2 I=0.009 A: eta_c=-0.30 eta_a=0.32 iR= 0.03 V_cell= 1.91 V  P_in=0.02 W  heat(open)=0.00 W  recomb=0.01 W
+    i=  50 mA/cm2 I=0.047 A: eta_c=-0.38 eta_a=0.41 iR= 0.14 V_cell= 2.18 V  P_in=0.10 W  heat(open)=0.03 W  recomb=0.07 W
+    i= 100 mA/cm2 I=0.094 A: eta_c=-0.41 eta_a=0.44 iR= 0.28 V_cell= 2.39 V  P_in=0.23 W  heat(open)=0.08 W  recomb=0.14 W
+    i= 200 mA/cm2 I=0.188 A: eta_c=-0.45 eta_a=0.48 iR= 0.55 V_cell= 2.74 V  P_in=0.52 W  heat(open)=0.23 W  recomb=0.29 W
+    i= 300 mA/cm2 I=0.283 A: eta_c=-0.47 eta_a=0.50 iR= 0.84 V_cell= 3.07 V  P_in=0.87 W  heat(open)=0.44 W  recomb=0.43 W
+    i= 500 mA/cm2 I=0.471 A: eta_c=-0.49 eta_a=0.53 iR= 1.41 V_cell= 3.69 V  P_in=1.74 W  heat(open)=1.02 W  recomb=0.72 W
+  LiOD 1.0 M (kappa=95.5 mS/cm at 25 C)
+    i=  10 mA/cm2 I=0.009 A: eta_c=-0.30 eta_a=0.32 iR= 0.02 V_cell= 1.90 V  P_in=0.02 W  heat(open)=0.00 W  recomb=0.01 W
+    i=  50 mA/cm2 I=0.047 A: eta_c=-0.38 eta_a=0.41 iR= 0.08 V_cell= 2.13 V  P_in=0.10 W  heat(open)=0.03 W  recomb=0.07 W
+    i= 100 mA/cm2 I=0.094 A: eta_c=-0.41 eta_a=0.44 iR= 0.16 V_cell= 2.28 V  P_in=0.21 W  heat(open)=0.07 W  recomb=0.14 W
+    i= 200 mA/cm2 I=0.188 A: eta_c=-0.45 eta_a=0.48 iR= 0.32 V_cell= 2.51 V  P_in=0.47 W  heat(open)=0.18 W  recomb=0.29 W
+    i= 300 mA/cm2 I=0.283 A: eta_c=-0.47 eta_a=0.50 iR= 0.48 V_cell= 2.71 V  P_in=0.77 W  heat(open)=0.33 W  recomb=0.43 W
+    i= 500 mA/cm2 I=0.471 A: eta_c=-0.49 eta_a=0.53 iR= 0.81 V_cell= 3.09 V  P_in=1.46 W  heat(open)=0.74 W  recomb=0.72 W
+  Charge to load 1 cm of wire to x=0.9: 77.0 C/cm -> at 10 mA/cm2 and 100 % efficiency 6.8 h; diffusion time a^2/D = 2.8 h (90 % equilibration ~0.5 a^2/D = 1.4 h)
+    wire diameter 0.25 mm: 0.5 a^2/D =  0.09 h ; I at 300 mA/cm2 over 30 mm = 0.071 A
+    wire diameter 0.50 mm: 0.5 a^2/D =  0.35 h ; I at 300 mA/cm2 over 30 mm = 0.141 A
+    wire diameter 1.00 mm: 0.5 a^2/D =  1.39 h ; I at 300 mA/cm2 over 30 mm = 0.283 A
+    wire diameter 2.00 mm: 0.5 a^2/D =  5.56 h ; I at 300 mA/cm2 over 30 mm = 0.565 A
+
+==============================================================================
+C3 DFM (Rd=10 mm tube, ring anode g=15 mm unless noted): voltage, heat, temperature-rise bound
+==============================================================================
+  LiOD 0.1 M, ring anode g=15 mm
+    i=  10 mA/cm2 I=0.031 A: eps=0.001 iR= 1.37 V_cell= 3.47 V P_in=  0.11 W heat(open)=  0.06 W  dT_cond(bound)=   1.7 K  i_anode=0.04 A/cm2
+    i=  50 mA/cm2 I=0.157 A: eps=0.006 iR= 6.90 V_cell= 9.17 V P_in=  1.44 W heat(open)=  1.20 W  dT_cond(bound)=  41.0 K  i_anode=0.18 A/cm2
+    i= 100 mA/cm2 I=0.314 A: eps=0.013 iR=13.94 V_cell=16.28 V P_in=  5.11 W heat(open)=  4.64 W  dT_cond(bound)= 163.5 K  i_anode=0.35 A/cm2
+    i= 200 mA/cm2 I=0.628 A: eps=0.025 iR=28.41 V_cell=30.82 V P_in= 19.36 W heat(open)= 18.40 W  dT_cond(bound)= 660.2 K  i_anode=0.71 A/cm2
+    i= 300 mA/cm2 I=0.942 A: eps=0.037 iR=43.40 V_cell=45.85 V P_in= 43.22 W heat(open)= 41.78 W  dT_cond(bound)=1507.3 K  i_anode=1.06 A/cm2
+    i= 500 mA/cm2 I=1.571 A: eps=0.060 iR=75.00 V_cell=77.51 V P_in=121.75 W heat(open)=119.35 W  dT_cond(bound)=4326.0 K  i_anode=1.77 A/cm2
+  LiOD 0.1 M, mesh anode g=5 mm
+    i=  10 mA/cm2 I=0.031 A: eps=0.001 iR= 0.42 V_cell= 2.45 V P_in=  0.08 W heat(open)=  0.03 W  dT_cond(bound)=   0.2 K  i_anode=0.01 A/cm2
+    i=  50 mA/cm2 I=0.157 A: eps=0.006 iR= 2.09 V_cell= 4.30 V P_in=  0.67 W heat(open)=  0.44 W  dT_cond(bound)=   4.9 K  i_anode=0.05 A/cm2
+    i= 100 mA/cm2 I=0.314 A: eps=0.013 iR= 4.22 V_cell= 6.50 V P_in=  2.04 W heat(open)=  1.56 W  dT_cond(bound)=  19.0 K  i_anode=0.10 A/cm2
+    i= 200 mA/cm2 I=0.628 A: eps=0.025 iR= 8.61 V_cell=10.95 V P_in=  6.88 W heat(open)=  5.92 W  dT_cond(bound)=  75.4 K  i_anode=0.20 A/cm2
+    i= 300 mA/cm2 I=0.942 A: eps=0.037 iR=13.15 V_cell=15.54 V P_in= 14.64 W heat(open)= 13.21 W  dT_cond(bound)= 170.9 K  i_anode=0.30 A/cm2
+    i= 500 mA/cm2 I=1.571 A: eps=0.060 iR=22.73 V_cell=25.17 V P_in= 39.53 W heat(open)= 37.13 W  dT_cond(bound)= 487.0 K  i_anode=0.50 A/cm2
+  LiOD 0.1 M, mesh anode g=3 mm
+    i=  10 mA/cm2 I=0.031 A: eps=0.001 iR= 0.25 V_cell= 2.29 V P_in=  0.07 W heat(open)=  0.02 W  dT_cond(bound)=   0.1 K  i_anode=0.01 A/cm2
+    i=  50 mA/cm2 I=0.157 A: eps=0.006 iR= 1.26 V_cell= 3.46 V P_in=  0.54 W heat(open)=  0.30 W  dT_cond(bound)=   1.9 K  i_anode=0.05 A/cm2
+    i= 100 mA/cm2 I=0.314 A: eps=0.013 iR= 2.53 V_cell= 4.81 V P_in=  1.51 W heat(open)=  1.03 W  dT_cond(bound)=   7.1 K  i_anode=0.10 A/cm2
+    i= 200 mA/cm2 I=0.628 A: eps=0.025 iR= 5.16 V_cell= 7.51 V P_in=  4.72 W heat(open)=  3.76 W  dT_cond(bound)=  27.9 K  i_anode=0.20 A/cm2
+    i= 300 mA/cm2 I=0.942 A: eps=0.037 iR= 7.89 V_cell=10.28 V P_in=  9.69 W heat(open)=  8.25 W  dT_cond(bound)=  62.7 K  i_anode=0.30 A/cm2
+    i= 500 mA/cm2 I=1.571 A: eps=0.060 iR=13.64 V_cell=16.07 V P_in= 25.25 W heat(open)= 22.85 W  dT_cond(bound)= 177.6 K  i_anode=0.50 A/cm2
+  LiOD 0.5 M, ring anode g=15 mm
+    i=  10 mA/cm2 I=0.031 A: eps=0.001 iR= 0.30 V_cell= 2.41 V P_in=  0.08 W heat(open)=  0.03 W  dT_cond(bound)=   0.4 K  i_anode=0.04 A/cm2
+    i=  50 mA/cm2 I=0.157 A: eps=0.006 iR= 1.52 V_cell= 3.79 V P_in=  0.60 W heat(open)=  0.36 W  dT_cond(bound)=  10.1 K  i_anode=0.18 A/cm2
+    i= 100 mA/cm2 I=0.314 A: eps=0.013 iR= 3.07 V_cell= 5.41 V P_in=  1.70 W heat(open)=  1.22 W  dT_cond(bound)=  38.9 K  i_anode=0.35 A/cm2
+    i= 200 mA/cm2 I=0.628 A: eps=0.025 iR= 6.26 V_cell= 8.67 V P_in=  5.45 W heat(open)=  4.49 W  dT_cond(bound)= 152.7 K  i_anode=0.71 A/cm2
+    i= 300 mA/cm2 I=0.942 A: eps=0.037 iR= 9.57 V_cell=12.02 V P_in= 11.33 W heat(open)=  9.89 W  dT_cond(bound)= 344.1 K  i_anode=1.06 A/cm2
+    i= 500 mA/cm2 I=1.571 A: eps=0.060 iR=16.53 V_cell=19.03 V P_in= 29.90 W heat(open)= 27.50 W  dT_cond(bound)= 975.8 K  i_anode=1.77 A/cm2
+  LiOD 0.5 M, mesh anode g=5 mm
+    i=  10 mA/cm2 I=0.031 A: eps=0.001 iR= 0.09 V_cell= 2.13 V P_in=  0.07 W heat(open)=  0.02 W  dT_cond(bound)=   0.1 K  i_anode=0.01 A/cm2
+    i=  50 mA/cm2 I=0.157 A: eps=0.006 iR= 0.46 V_cell= 2.66 V P_in=  0.42 W heat(open)=  0.18 W  dT_cond(bound)=   1.4 K  i_anode=0.05 A/cm2
+    i= 100 mA/cm2 I=0.314 A: eps=0.013 iR= 0.93 V_cell= 3.21 V P_in=  1.01 W heat(open)=  0.53 W  dT_cond(bound)=   5.2 K  i_anode=0.10 A/cm2
+    i= 200 mA/cm2 I=0.628 A: eps=0.025 iR= 1.90 V_cell= 4.24 V P_in=  2.67 W heat(open)=  1.71 W  dT_cond(bound)=  19.0 K  i_anode=0.20 A/cm2
+    i= 300 mA/cm2 I=0.942 A: eps=0.037 iR= 2.90 V_cell= 5.28 V P_in=  4.98 W heat(open)=  3.54 W  dT_cond(bound)=  41.6 K  i_anode=0.30 A/cm2
+    i= 500 mA/cm2 I=1.571 A: eps=0.060 iR= 5.01 V_cell= 7.45 V P_in= 11.70 W heat(open)=  9.30 W  dT_cond(bound)= 114.8 K  i_anode=0.50 A/cm2
+  LiOD 0.5 M, mesh anode g=3 mm
+    i=  10 mA/cm2 I=0.031 A: eps=0.001 iR= 0.05 V_cell= 2.09 V P_in=  0.07 W heat(open)=  0.02 W  dT_cond(bound)=   0.0 K  i_anode=0.01 A/cm2
+    i=  50 mA/cm2 I=0.157 A: eps=0.006 iR= 0.28 V_cell= 2.48 V P_in=  0.39 W heat(open)=  0.15 W  dT_cond(bound)=   0.6 K  i_anode=0.05 A/cm2
+    i= 100 mA/cm2 I=0.314 A: eps=0.013 iR= 0.56 V_cell= 2.83 V P_in=  0.89 W heat(open)=  0.41 W  dT_cond(bound)=   2.2 K  i_anode=0.10 A/cm2
+    i= 200 mA/cm2 I=0.628 A: eps=0.025 iR= 1.14 V_cell= 3.48 V P_in=  2.19 W heat(open)=  1.23 W  dT_cond(bound)=   7.6 K  i_anode=0.20 A/cm2
+    i= 300 mA/cm2 I=0.942 A: eps=0.037 iR= 1.74 V_cell= 4.13 V P_in=  3.89 W heat(open)=  2.45 W  dT_cond(bound)=  16.2 K  i_anode=0.30 A/cm2
+    i= 500 mA/cm2 I=1.571 A: eps=0.060 iR= 3.01 V_cell= 5.44 V P_in=  8.55 W heat(open)=  6.15 W  dT_cond(bound)=  43.6 K  i_anode=0.50 A/cm2
+  LiOD 1.0 M, ring anode g=15 mm
+    i=  10 mA/cm2 I=0.031 A: eps=0.001 iR= 0.17 V_cell= 2.28 V P_in=  0.07 W heat(open)=  0.02 W  dT_cond(bound)=   0.3 K  i_anode=0.04 A/cm2
+    i=  50 mA/cm2 I=0.157 A: eps=0.006 iR= 0.87 V_cell= 3.14 V P_in=  0.49 W heat(open)=  0.25 W  dT_cond(bound)=   6.4 K  i_anode=0.18 A/cm2
+    i= 100 mA/cm2 I=0.314 A: eps=0.013 iR= 1.76 V_cell= 4.10 V P_in=  1.29 W heat(open)=  0.81 W  dT_cond(bound)=  23.9 K  i_anode=0.35 A/cm2
+    i= 200 mA/cm2 I=0.628 A: eps=0.025 iR= 3.59 V_cell= 6.00 V P_in=  3.77 W heat(open)=  2.81 W  dT_cond(bound)=  91.4 K  i_anode=0.71 A/cm2
+    i= 300 mA/cm2 I=0.942 A: eps=0.037 iR= 5.48 V_cell= 7.93 V P_in=  7.48 W heat(open)=  6.04 W  dT_cond(bound)= 203.7 K  i_anode=1.06 A/cm2
+    i= 500 mA/cm2 I=1.571 A: eps=0.060 iR= 9.47 V_cell=11.98 V P_in= 18.81 W heat(open)= 16.41 W  dT_cond(bound)= 571.4 K  i_anode=1.77 A/cm2
+  LiOD 1.0 M, mesh anode g=5 mm
+    i=  10 mA/cm2 I=0.031 A: eps=0.001 iR= 0.05 V_cell= 2.09 V P_in=  0.07 W heat(open)=  0.02 W  dT_cond(bound)=   0.0 K  i_anode=0.01 A/cm2
+    i=  50 mA/cm2 I=0.157 A: eps=0.006 iR= 0.26 V_cell= 2.47 V P_in=  0.39 W heat(open)=  0.15 W  dT_cond(bound)=   1.0 K  i_anode=0.05 A/cm2
+    i= 100 mA/cm2 I=0.314 A: eps=0.013 iR= 0.53 V_cell= 2.81 V P_in=  0.88 W heat(open)=  0.40 W  dT_cond(bound)=   3.5 K  i_anode=0.10 A/cm2
+    i= 200 mA/cm2 I=0.628 A: eps=0.025 iR= 1.09 V_cell= 3.43 V P_in=  2.16 W heat(open)=  1.20 W  dT_cond(bound)=  12.2 K  i_anode=0.20 A/cm2
+    i= 300 mA/cm2 I=0.942 A: eps=0.037 iR= 1.66 V_cell= 4.05 V P_in=  3.81 W heat(open)=  2.38 W  dT_cond(bound)=  26.0 K  i_anode=0.30 A/cm2
+    i= 500 mA/cm2 I=1.571 A: eps=0.060 iR= 2.87 V_cell= 5.31 V P_in=  8.34 W heat(open)=  5.94 W  dT_cond(bound)=  69.9 K  i_anode=0.50 A/cm2
+  LiOD 1.0 M, mesh anode g=3 mm
+    i=  10 mA/cm2 I=0.031 A: eps=0.001 iR= 0.03 V_cell= 2.07 V P_in=  0.07 W heat(open)=  0.02 W  dT_cond(bound)=   0.0 K  i_anode=0.01 A/cm2
+    i=  50 mA/cm2 I=0.157 A: eps=0.006 iR= 0.16 V_cell= 2.36 V P_in=  0.37 W heat(open)=  0.13 W  dT_cond(bound)=   0.5 K  i_anode=0.05 A/cm2
+    i= 100 mA/cm2 I=0.314 A: eps=0.013 iR= 0.32 V_cell= 2.59 V P_in=  0.82 W heat(open)=  0.34 W  dT_cond(bound)=   1.6 K  i_anode=0.10 A/cm2
+    i= 200 mA/cm2 I=0.628 A: eps=0.025 iR= 0.65 V_cell= 3.00 V P_in=  1.88 W heat(open)=  0.92 W  dT_cond(bound)=   5.1 K  i_anode=0.20 A/cm2
+    i= 300 mA/cm2 I=0.942 A: eps=0.037 iR= 1.00 V_cell= 3.38 V P_in=  3.19 W heat(open)=  1.75 W  dT_cond(bound)=  10.6 K  i_anode=0.30 A/cm2
+    i= 500 mA/cm2 I=1.571 A: eps=0.060 iR= 1.72 V_cell= 4.16 V P_in=  6.53 W heat(open)=  4.14 W  dT_cond(bound)=  27.4 K  i_anode=0.50 A/cm2
+  Charge to load a 50 um membrane to x=0.9: 49.0 C/cm2 -> 41 min at 20 mA/cm2 (100 % eff.); diffusion time L^2/D = 100 s
+
+==============================================================================
+OPERATING WINDOW vs temperature (0.1 M and 1.0 M LiOD)
+==============================================================================
+  T=  5 C: kappa(0.1 M)=  7.1 mS/cm, kappa(1.0 M)= 56.2 mS/cm; C3 ring g=15mm @200 mA/cm2 V_cell(0.1 M)=50.4 V, V_cell(1 M)=8.5 V
+  T= 10 C: kappa(0.1 M)=  8.4 mS/cm, kappa(1.0 M)= 66.0 mS/cm; C3 ring g=15mm @200 mA/cm2 V_cell(0.1 M)=43.3 V, V_cell(1 M)=7.6 V
+  T= 20 C: kappa(0.1 M)= 10.8 mS/cm, kappa(1.0 M)= 85.7 mS/cm; C3 ring g=15mm @200 mA/cm2 V_cell(0.1 M)=34.0 V, V_cell(1 M)=6.4 V
+  T= 25 C: kappa(0.1 M)= 12.1 mS/cm, kappa(1.0 M)= 95.5 mS/cm; C3 ring g=15mm @200 mA/cm2 V_cell(0.1 M)=30.8 V, V_cell(1 M)=6.0 V
+  T= 40 C: kappa(0.1 M)= 15.8 mS/cm, kappa(1.0 M)=125.0 mS/cm; C3 ring g=15mm @200 mA/cm2 V_cell(0.1 M)=24.2 V, V_cell(1 M)=5.2 V
+  T= 60 C: kappa(0.1 M)= 20.7 mS/cm, kappa(1.0 M)=164.4 mS/cm; C3 ring g=15mm @200 mA/cm2 V_cell(0.1 M)=19.0 V, V_cell(1 M)=4.5 V
+
+==============================================================================
+BUBBLES: void fraction in the D2 column (u_b sensitivity) and adherent-bubble coverage
+==============================================================================
+  i=   10 mA/cm2: eps(u_b=0.3/1/3 cm/s) = 0.004/0.001/0.000; kappa factor 0.99/1.00/1.00; coverage Theta=0.09 -> local i on free area x1.10, Delta x (good) = +0.0023
+  i=   50 mA/cm2: eps(u_b=0.3/1/3 cm/s) = 0.021/0.006/0.002; kappa factor 0.97/0.99/1.00; coverage Theta=0.15 -> local i on free area x1.17, Delta x (good) = +0.0035
+  i=  100 mA/cm2: eps(u_b=0.3/1/3 cm/s) = 0.041/0.013/0.004; kappa factor 0.94/0.98/0.99; coverage Theta=0.18 -> local i on free area x1.22, Delta x (good) = +0.0042
+  i=  200 mA/cm2: eps(u_b=0.3/1/3 cm/s) = 0.078/0.025/0.008; kappa factor 0.89/0.96/0.99; coverage Theta=0.22 -> local i on free area x1.29, Delta x (good) = +0.0047
+  i=  300 mA/cm2: eps(u_b=0.3/1/3 cm/s) = 0.113/0.037/0.013; kappa factor 0.84/0.95/0.98; coverage Theta=0.25 -> local i on free area x1.34, Delta x (good) = +0.0049
+  i=  500 mA/cm2: eps(u_b=0.3/1/3 cm/s) = 0.174/0.060/0.021; kappa factor 0.75/0.91/0.97; coverage Theta=0.30 -> local i on free area x1.42, Delta x (good) = +0.0050
+  i= 1000 mA/cm2: eps(u_b=0.3/1/3 cm/s) = 0.297/0.113/0.041; kappa factor 0.59/0.84/0.94; coverage Theta=0.36 -> local i on free area x1.57, Delta x (good) = +0.0046
+  Stokes rise velocity of a 20 um D2 bubble: 0.02 cm/s
+  Stokes rise velocity of a 50 um D2 bubble: 0.14 cm/s
+  Stokes rise velocity of a 100 um D2 bubble: 0.55 cm/s
+  Stokes rise velocity of a 300 um D2 bubble: 4.95 cm/s
