@@ -316,6 +316,10 @@ def build(design, g=G, h=1.0 * mm, k_el=10.0, k_head=0.5, shell="cu", t_shell=6 
         k_mod = tec_K * TEC_T / TEC_A
         kf = MAT["foam"][0]
         m.paint(0, 1, -1, 1, mat="foam", label="corner")
+        # isothermal sink (water-jacketed Cu box) outside the modules
+        m.paint(Rt1, 1, -1, 1, mat="cu", label="sink")
+        m.paint(0, 1, -1, zt_b0, mat="cu", label="sink")
+        m.paint(0, 1, zt_t1, 1, mat="cu", label="sink")
         # TEC layers (anisotropic: modules conduct across, not along)
         m.paint(Rt0, Rt1, zt_b1, zt_t0, kr=f_side * k_mod + (1 - f_side) * kf, kz=0.05,
                 rhoc=1.5e6, label="tec_side")
@@ -431,6 +435,33 @@ def verify_line_source(txt):
     return out
 
 
+def verify_finite_cylinder(txt):
+    """2D analytic check: uniform source q in a finite cylinder (radius a, height L), T=0 on all faces.
+    T(r,z) = sum_{m odd} 4/(m pi) * q L^2/(k m^2 pi^2) * sin(m pi z/L) * [1 - I0(m pi r/L)/I0(m pi a/L)]"""
+    from scipy.special import i0e
+    k = 1.0
+    for h in [2 * mm, 1 * mm, 0.5 * mm]:
+        re = make_edges([0, 30 * mm], h); ze = make_edges([0, 60 * mm], h)
+        m = Axi(re, ze)
+        m.paint(0, 1, -1, 1, k=k, rhoc=1.0)
+        m.dirichlet[-1, :] = True; m.dirichlet[:, 0] = True; m.dirichlet[:, -1] = True
+        m.assemble()
+        q = m.vol * (~m.dirichlet); q = q / q.sum()          # 1 W uniform in the interior
+        qv = 1.0 / m.vol[~m.dirichlet].sum()
+        T = m.solve(q)
+        a = m.rc[-1]; z0, z1 = m.zc[0], m.zc[-1]; L = z1 - z0
+        i, j = 0, m.nz // 2
+        r, z = m.rc[i], m.zc[j] - z0
+        Tan = 0.0
+        for mm_ in range(1, 400, 2):
+            b = mm_ * np.pi / L
+            ratio = i0e(b * r) / i0e(b * a) * np.exp(b * (r - a))
+            Tan += 4 / (mm_ * np.pi) * qv / (k * b * b) * np.sin(b * z) * (1 - ratio)
+        txt.append(f"  finite-cylinder 2D test h={h/mm:.1f} mm: T(axis, mid-height) FV={T[i, j]:.5f} K, "
+                   f"analytic={Tan:.5f} K, rel.err={T[i, j]/Tan-1:+.2e}; energy balance "
+                   f"{m.sink_flux(T, m.dirichlet)-1:+.1e} W")
+
+
 def main():
     import matplotlib
     matplotlib.use("Agg")
@@ -438,6 +469,7 @@ def main():
 
     txt = ["M4 thermal 2D (axisymmetric FV) results", "=" * 60, "", "Verification"]
     verify_line_source(txt)
+    verify_finite_cylinder(txt)
 
     # ---- grid convergence for the headline numbers
     txt.append("")

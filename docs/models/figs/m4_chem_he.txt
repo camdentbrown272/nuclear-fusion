@@ -1,0 +1,83 @@
+M4 electrochemical energy bookkeeping and 4He budget
+============================================================
+Thermoneutral potentials: E_tn(D2O) = 1.5267 V, E_tn(H2O) = 1.4812 V, difference = 45.4 mV
+
+1. Recombination heat released at the recombiner of a closed cell, P_rec = E_tn * I
+   I (A)   D2O (W)   H2O (W)   error if H2O control analysed with D2O E_tn (mW)
+    0.1     0.153     0.148       4.5
+    0.2     0.305     0.296       9.1
+    0.5     0.763     0.741      22.7
+    1.0     1.527     1.481      45.4
+    2.0     3.053     2.962      90.9
+
+2. OPEN cell: P_heat = (V - E_tn) I ; unaccounted recombination fraction phi gives
+   apparent excess = phi * E_tn * I ;  vapour carried by the vent gas removes heat
+   T(C)  phi=0.01 @1A (mW)   vapour loss @1A (mW, D2O, 1 atm)
+     25       15.3                 9.99
+     40       15.3                24.58
+     60       15.3                77.20
+     80       15.3               271.87
+     95       15.3              1307.02
+
+3. CLOSED cell: recombination inefficiency (1-eta) -> heat deficit and pressure rise
+   I=0.2 A, 1-eta=1e-02: heat deficit   3.053 mW, dp/dt =    4.343 kPa/h
+   I=0.2 A, 1-eta=1e-03: heat deficit   0.305 mW, dp/dt =    0.434 kPa/h
+   I=0.2 A, 1-eta=1e-04: heat deficit   0.031 mW, dp/dt =    0.043 kPa/h
+   I=0.5 A, 1-eta=1e-02: heat deficit   7.633 mW, dp/dt =   10.858 kPa/h
+   I=0.5 A, 1-eta=1e-03: heat deficit   0.763 mW, dp/dt =    1.086 kPa/h
+   I=0.5 A, 1-eta=1e-04: heat deficit   0.076 mW, dp/dt =    0.109 kPa/h
+   I=1.0 A, 1-eta=1e-02: heat deficit  15.267 mW, dp/dt =   21.716 kPa/h
+   I=1.0 A, 1-eta=1e-03: heat deficit   1.527 mW, dp/dt =    2.172 kPa/h
+   I=1.0 A, 1-eta=1e-04: heat deficit   0.153 mW, dp/dt =    0.217 kPa/h
+   I=2.0 A, 1-eta=1e-02: heat deficit  30.533 mW, dp/dt =   43.431 kPa/h
+   I=2.0 A, 1-eta=1e-03: heat deficit   3.053 mW, dp/dt =    4.343 kPa/h
+   I=2.0 A, 1-eta=1e-04: heat deficit   0.305 mW, dp/dt =    0.434 kPa/h
+   Pressure bound: sigma_p = 20.0 Pa on a 1 h slope fit -> sigma(dp/dt) ~ 1.92e-02 Pa/s
+     I=0.2 A: sigma(1-eta) = 1.60e-04  ->  heat bound 48.7 uW
+     I=0.5 A: sigma(1-eta) = 6.38e-05  ->  heat bound 48.7 uW
+     I=1.0 A: sigma(1-eta) = 3.19e-05  ->  heat bound 48.7 uW
+     I=2.0 A: sigma(1-eta) = 1.60e-05  ->  heat bound 48.7 uW
+   (temperature drift of the headspace must be corrected: dp/p = dT/T -> 1 mK gives 0.3 Pa)
+
+4. Loading enthalpy: D2O(l) -> D(in Pd) + 1/4 O2 stays unrecombined (no D2 partner)
+   effective 'thermoneutral' for the loading current fraction: 1.3474 V (= [dHf(D2O)/2 + dH_abs(D)]/F)
+   C1 wire 1 mm x 30 mm            : V=  23.56 mm3, D stored at x=0.9 =  2.3952 mmol, chemical energy   311.4 J, excess O2 dp =  46.47 kPa
+        released over  1 h on deloading -> mean   86.49 mW
+        released over 10 h on deloading -> mean    8.65 mW
+   C1 wire 2 mm x 20 mm            : V=  62.83 mm3, D stored at x=0.9 =  6.3871 mmol, chemical energy   830.3 J, excess O2 dp = 123.91 kPa
+        released over  1 h on deloading -> mean  230.65 mW
+        released over 10 h on deloading -> mean   23.06 mW
+   C3 membrane 50 um x 20 mm dia   : V=  15.71 mm3, D stored at x=0.9 =  1.5968 mmol, chemical energy   207.6 J, excess O2 dp =  30.98 kPa
+        released over  1 h on deloading -> mean   57.66 mW
+        released over 10 h on deloading -> mean    5.77 mW
+   C3 membrane 100 um x 25 mm dia  : V=  49.09 mm3, D stored at x=0.9 =  4.9899 mmol, chemical energy   648.7 J, excess O2 dp =  96.81 kPa
+        released over  1 h on deloading -> mean  180.19 mW
+        released over 10 h on deloading -> mean   18.02 mW
+   During loading at current I with loading fraction chi: deficit = chi * I * 1.347 V, e.g. chi=0.3, I=0.5 A -> 202 mW
+
+5. C3 (DFM) permeation: D leaving through the membrane to vacuum carries 
+   dHf(D2O)/2 per D = E_tn(D2O) per electron; O2 partner accumulates in the cell.
+   J=1e-09 mol D/cm2/s over 3.14 cm2: I_perm=  0.303 mA, heat deficit    0.463 mW, O2 build-up   0.219 kPa/h
+   J=1e-08 mol D/cm2/s over 3.14 cm2: I_perm=  3.031 mA, heat deficit    4.628 mW, O2 build-up   2.194 kPa/h
+   J=1e-07 mol D/cm2/s over 3.14 cm2: I_perm= 30.312 mA, heat deficit   46.276 mW, O2 build-up  21.941 kPa/h
+
+6. 4He budget (H2 hypothesis: 23.85 MeV per 4He)
+   2.617e+11 4He per J  = 2.261e+13 atoms per mW-day = 8.415e-07 cm3 STP per mW-day
+   headspace 33 mL at 1 bar: 7.76e+20 molecules; 1 mW-day -> 0.0291 ppm (air = 5.24 ppm)
+   Air-He in-leak sources (atoms/s) and equivalent H2 'excess power'
+     Viton O-ring, seal dia 30 mm                              :  2.03e+08 /s  =    0.7758 mW-equivalent
+     Viton O-ring, seal dia 50 mm                              :  3.38e+08 /s  =    1.2929 mW-equivalent
+     Viton O-ring, seal dia 70 mm                              :  4.74e+08 /s  =    1.8101 mW-equivalent
+     Pyrex wall 150 cm2 x 2 mm at 25 C (steady state)          :  9.63e+06 /s  =    0.0368 mW-equivalent
+     Pyrex wall 150 cm2 x 2 mm at 60 C (steady state)          :  3.00e+07 /s  =    0.1145 mW-equivalent
+     Pyrex wall 150 cm2 x 2 mm at 90 C (steady state)          :  6.66e+07 /s  =    0.2544 mW-equivalent
+     all-metal seals (<=1e-10 mbar L/s He-leak-tight, air side):  1.39e+04 /s  =    0.0001 mW-equivalent
+   He dissolved in 60 mL air-saturated D2O: 7.81e+13 atoms = 298 J-equivalent (= 3.5 mW for a day) -> must degas (sparge with He-free D2) 
+   1 % residual air in headspace: 4.07e+13 atoms = 155 J-equivalent -> evacuate/purge to <1e-4 air fraction
+
+   Headspace volume trade-off at 10 mW excess for 3 days (all He released to gas):
+     V=   10 mL: 4He =   2.884 ppm ; loading O2 dp =  153.3 kPa
+     V=   20 mL: 4He =   1.442 ppm ; loading O2 dp =   76.7 kPa
+     V=   33 mL: 4He =   0.874 ppm ; loading O2 dp =   46.5 kPa
+     V=   60 mL: 4He =   0.481 ppm ; loading O2 dp =   25.6 kPa
+     V=  100 mL: 4He =   0.288 ppm ; loading O2 dp =   15.3 kPa
