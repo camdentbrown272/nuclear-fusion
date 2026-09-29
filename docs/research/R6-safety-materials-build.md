@@ -14,22 +14,23 @@
 - **Oxygen-clean everything.** The SRI forensic analysis (LLNL) found hydrocarbon machining oil inside the metal cell, in an O₂-enriched headspace. Use no organics except fluoropolymers.
 - **Limit the stored-energy inventory.** Pd loaded to D/Pd ≈ 0.9 holds about **12–15 kJ of combustible D per cm³**. Keep cathodes **≤0.3 cm³**, avoid sealed hollow cathodes, and deload before opening a cell.
 - **Keep the electrical system SELV:** ≤60 V DC at maximum current. This limits the electrode gap to roughly ≤5 mm for a plate at 1 A/cm² in 0.1 M LiOD.
-- **Palladium is affordable. Detectors and calorimetry cost the money.** Pd spot is **$1,198–1,265/ozt ($38.5–40.7/g)** (sourced, Sept 2026), so a 1 mm × 10 cm Pd wire contains only about $36 of metal. Research-grade D₂O runs about **$0.3–0.65/g** in bulk (sourced) and $1–3/g at retail (est.).
-- **Neutron monitoring with automatic shutdown is cheap insurance.** A hypothetical 1 W of textbook D–D fusion would give about 9 Sv/h at 1 m. It has never been observed, but an alarm makes the safety case credible, and the same monitor doubles as the signal detector.
-- **Regulatory load is light** as long as the build uses no licensed sources, no accelerator or X-ray generator, and keeps tritium below the exempt quantity (1,000 µCi). In the US, D₂O needs no domestic purchase license; exports fall under 10 CFR 110.
-- **Recommended tier: about $50k, a small lab.** It buys a Seebeck calorimeter (±20–60 mW), a closed-cell safety system, He-3 plus NaI plus CR-39 detection, a vacuum anneal furnace, and outsourced SEM. $5k cannot produce credible calorimetry. Most of the $500k tier goes to staff, parallel cells, and ⁴He mass spectrometry.
+- **Palladium is cheap; detectors and calorimetry are not.** Pd spot is **$1,198–1,265/ozt ($38.5–40.7/g)** (Sept 2026), so a 1 mm × 10 cm wire holds about $36 of metal. D₂O costs about **$0.3–0.65/g** in bulk and $1–3/g at retail (est.).
+- **Add a neutron monitor with automatic shutdown.** A hypothetical 1 W of textbook D–D fusion would give about 9 Sv/h at 1 m. It has never been observed, but the alarm is cheap and the monitor doubles as the signal detector.
+- **Regulatory load is light** with no licensed sources, no accelerator or X-ray generator, and tritium below the 1,000 µCi exempt quantity. D₂O needs no US purchase license; exports fall under 10 CFR 110.
+- **Recommended tier: about $50k.** It buys Seebeck calorimetry (±20–60 mW), a closed-cell safety system, He-3, NaI and CR-39 detection, a vacuum anneal furnace, and outsourced SEM. $5k cannot produce credible calorimetry. Most of the $500k tier goes to staff, parallel cells, and ⁴He mass spectrometry.
 
 ---
 
 ## 2. Incident record and lessons
 
-| Incident | What happened | Cause (established or hypothesised) | Lesson for the geometry |
+| Incident | What happened | Cause | Lesson for the geometry |
 |---|---|---|---|
-| **SRI International, 2 Jan 1992** (Andrew Riley killed; McKubre and two others injured) | Riley removed the acrylic top of the calorimeter, lifted the metal cell out of the water bath, set it on the edge and was waiting for it to drain when it exploded. | Combustion of D₂ + O₂ that had accumulated **despite an internal recombiner**. LLNL forensics found **no explosives or oxidisers, but did find hydrocarbon oil** inside the cell (likely machining lubricant). Oil in an increasingly O₂-enriched headspace of a metal cell can react explosively. | Oxygen-clean the parts. Monitor recombiner function by trending pressure. **Never handle, tilt or open a cell until it is deloaded and purged.** Operators must not stand over a cell at the moment it is disturbed. |
-| **Fleischmann & Pons, Feb 1985** (Univ. of Utah) | A 1 cm Pd cube reportedly melted (Pd m.p. 1554 °C) and partly vaporised. It left a hole about 1 ft across in the bench, a pit about 4 in deep in the concrete, and particulates in the air. | Disputed: claimed nuclear heat versus chemical ignition. F&P themselves offered an ignition interpretation and urged "extreme caution". | Keep Pd mass and volume small. Fit an unattended-operation thermal cutoff. A large loaded Pd mass is a **fuel store**. |
-| **Biberian, 2004** (mass-flow calorimeter, glass tube, hollow Pd cathode) | A strong explosion shattered the glass tube into many small pieces. The electrodes were unaffected. | Reanalysis (Ruer & Biberian, JCMNS 26, 2018): gas-phase explosion, probably initiated by **SWACER** (shock-wave amplification by coherent energy release) from a reaction in the hollow Pd cathode. It was stronger than the small gas inventory would suggest. | **No hollow or sealed-cavity cathodes.** Glass cells need a secondary containment enclosure. |
-| **Mizuno, 24 Jan 2005** (plasma electrolysis, glass cell) | Electrolyte rose from 25 to 70 °C in about 10 s, a glow spread from the cathode, and the cell exploded. Mizuno, about 1 m away, was cut by glass and deafened for a week. | H₂/O₂ in the headspace suspected. Cause not established. | High-voltage plasma electrolysis needs remote operation, a blast enclosure, and ≥1 m standoff. |
-| **SPAWAR co-deposition** | A "catastrophic thermal event" after 3 days of electrolysis. | Not established. | Co-deposition cells also need thermal cutoffs and enclosures. |
+| **SRI International, 2 Jan 1992** (Andrew Riley killed, three injured) | Riley lifted the metal cell out of its water bath and was waiting for it to drain when it exploded. | D₂ + O₂ had accumulated **despite an internal recombiner**. LLNL forensics found **hydrocarbon (machining) oil** inside the cell and no explosives. Oil plus an O₂-enriched headspace can react explosively. | Oxygen-clean all parts. Trend pressure to catch recombiner failure. **Never handle, tilt or open a cell until it is deloaded and purged.** |
+| **Fleischmann & Pons, Feb 1985** | A 1 cm Pd cube reportedly melted and partly vaporised, destroying the bench and pitting the concrete floor about 4 in deep. | Disputed. F&P offered an ignition interpretation and urged "extreme caution". | Keep Pd volume small and fit a thermal cutoff for unattended runs. Loaded Pd is a **fuel store**. |
+| **Biberian, 2004** (glass tube, hollow Pd cathode) | The glass tube was shattered into many small pieces. The electrodes were unaffected. | Gas-phase explosion, probably initiated by **SWACER** from a reaction in the hollow cathode (Ruer & Biberian, JCMNS 26, 2018). | **No hollow cathodes.** Glass cells need secondary containment. |
+| **Mizuno, 2005** (plasma electrolysis, glass cell) | Electrolyte went from 25 to 70 °C in about 10 s, then the cell exploded. Mizuno, about 1 m away, was cut by glass and deafened for a week. | H₂/O₂ in the headspace suspected. Not established. | High-voltage plasma electrolysis needs remote operation and a blast enclosure. |
+
+A SPAWAR co-deposition cell also had a "catastrophic thermal event" after 3 days. Co-deposition cells need the same thermal cutoffs and enclosures.
 
 ---
 
@@ -62,9 +63,9 @@
 
 **Stored chemical energy in loaded Pd:** 1 cm³ of Pd holds 0.113 mol Pd. At D/Pd = 0.9 that is 0.051 mol D₂, or **12.7–15 kJ/cm³** if burned. A 1 mm × 2 cm wire (0.016 cm³) holds about 0.2 kJ. The F&P 1 cm cube held about 13 kJ.
 
-**Hypothetical radiation dose (safety bound, not an expectation).** Suppose 1 W came from textbook D–D fusion (half of reactions giving 2.45 MeV neutrons). That is about 1.7×10¹² reactions/s and 8.5×10¹¹ n/s, or about 6.8×10⁶ n/cm²/s at 1 m, which is about **9 Sv/h**. Neutron emission of this size has never been seen. Reported neutron signals are at or near background. Even so, a real-time neutron monitor wired to a power trip belongs in the safety design.
+**Hypothetical radiation dose (a safety bound, not an expectation):** 1 W of textbook D–D fusion is about 8.5×10¹¹ n/s, or about 6.8×10⁶ n/cm²/s at 1 m, which is about **9 Sv/h**. Emission of this size has never been seen; reported neutron signals sit at or near background. A neutron monitor wired to a power trip still belongs in the design.
 
-**Hydride expansion:** β-PdD expands by about 11% in volume (about 3.5% linear). A 20 mm wire grows about 0.7 mm. Storms and a Pd-alloy patent recommend cathodes that expand ≤12% in volume, because gross expansion and cracking correlate with failure.
+**Hydride expansion:** β-PdD expands by about 11% in volume (about 3.5% linear), so a 20 mm wire grows about 0.7 mm. Storms and a Pd-alloy patent recommend cathodes that expand ≤12% in volume.
 
 ---
 
@@ -84,14 +85,14 @@ Likelihood: **H** = expected at some point over a multi-month campaign without t
 | 8 | Caustic electrolyte; Li metal | 0.1–1 M LiOD (pH about 13); Li + D₂O is exothermic and releases D₂ | Eye or skin burns; fire | M | Goggles plus face shield, nitrile or neoprene gloves, eyewash; add Li in ≤100 mg pieces to chilled D₂O under Ar in a hood (69 mg Li per 100 mL at 0.1 M releases about 120 mL D₂) | Fill ports sized so filling and draining can be done without tipping the cell. |
 | 9 | Aqua regia (etching) | NOCl and NO₂ fumes; gas pressure in a closed container; reacts violently with organics | Inhalation injury; bottle bursts | M | Mix fresh, small volumes, in a hood; never cap; quench into water; dedicated waste stream | Cathode fixtures that can be removed for etching and remounted without touching the surface. |
 | 10 | Pyrophoric Pd black, nanopowder or co-deposit | High-surface Pd loaded with H or D dries out in air | Ignites solvents, ignites itself | M | Keep wet; passivate slowly with dilute air in N₂; handle under inert gas | Co-deposition cells must be drained and flushed under inert gas. |
-| 11 | High-pressure D₂ (Sieverts rigs, gas loading, cell prefill) | Cylinder at 2,000+ psi; regulator failure; embrittled fittings | Jet fire, over-pressure | M | Smallest practical cylinder (lecture bottle); regulator with relief; flow restrictor or excess-flow valve; He leak check; ventilated gas cabinet | Downstream parts rated above the relief set pressure. |
-| 12 | Hydrogen embrittlement | High-strength steels, Ti, Ni alloys, carbon steel under D₂ | Fitting cracks, leaks | L–M | 316/316L (high-Ni austenitic), Cu, Al; metal-gasket (VCR) or compression fittings; derate; inspect | Standardise on 316L plumbing throughout. |
-| 13 | Glass failure | Thermal shock; pressure; fragments thrown by a gas event | Lacerations | M | Polycarbonate enclosure ≥6 mm thick (double wall preferred); prefer PTFE/PFA cell bodies | Secondary containment around every glass part. |
-| 14 | Electrolyte dry-out or boiling | 9 g/(A·day) electrolysis loss plus evaporation near 100 °C (D₂O boils at 101.4 °C) | Electrodes exposed, arcing, ignition, lost data | H over long runs | Level sensor; automatic top-up; 90–95 °C thermal trip | Reservoir or reserve volume for ≥30 days at I_max, or automatic D₂O top-up. |
-| 15 | Ionising radiation (hypothetical n/γ; X-rays from >5 kV discharges) | Nuclear process (unconfirmed); high-voltage glow discharge | Dose | L | Real-time neutron plus gamma monitor with alarm and trip (e.g., 10× background); personal bubble dosimeters; no licensed sources | Room for a moderated He-3 tube or EJ-309 within 10–30 cm, and Pb around the NaI. |
-| 16 | Tritium | Background tritium in D₂O (61–2,500 Bq/L) enriched by electrolysis (up to about 5×) | Negligible dose, but a **false positive** risk | M (for data) | Assay each D₂O lot; vent off-gas; stay well below 1,000 µCi | Sampling port; closed-cell geometry keeps the tritium inventory accounted for. |
-| 17 | Toxic salts | PdCl₂ (sensitiser); hot 6.25 M NaOH CR-39 etch | Dermatitis, burns | M | PPE; hood | None |
-| 18 | Unattended multi-week runs | Power cut, PC crash, sensor failure | Any of the above, undetected | H | UPS; hardware watchdog that fails safe (power off); remote alarms | Every trip wired in hardware, not only in software. |
+| 11 | High-pressure D₂ and hydrogen embrittlement (Sieverts rigs, gas loading, cell prefill) | Cylinder at 2,000+ psi; regulator failure; high-strength steel, Ti or Ni-alloy fittings | Jet fire, over-pressure, cracked fittings | M | Lecture-bottle cylinder in a ventilated cabinet; regulator with relief; flow restrictor; He leak check; 316L with VCR fittings | All downstream parts 316L and rated above the relief set pressure. |
+| 12 | Glass failure | Thermal shock; pressure; fragments thrown by a gas event | Lacerations | M | Polycarbonate enclosure ≥6 mm thick; prefer PTFE/PFA cell bodies | Secondary containment around every glass part. |
+| 13 | Electrolyte dry-out or boiling | 9 g/(A·day) electrolysis loss plus evaporation (D₂O boils at 101.4 °C) | Electrodes exposed, arcing, ignition | H over long runs | Level sensor; automatic top-up; 90–95 °C trip | Reserve for ≥30 days at I_max, or automatic top-up. |
+| 14 | Ionising radiation (hypothetical n/γ; X-rays from >5 kV discharges) | Nuclear process (unconfirmed); high-voltage discharge | Dose | L | Neutron plus gamma monitor with alarm and trip at 10× background; bubble dosimeters; no licensed sources | Room for a moderated He-3 tube or EJ-309 within 10–30 cm, and Pb around the NaI. |
+| 15 | Tritium | Background in D₂O (61–2,500 Bq/L), enriched up to about 5× by electrolysis | Negligible dose; **false-positive** risk | M (for data) | Assay each D₂O lot; vent off-gas | Sampling port; closed cell keeps the tritium inventory accounted for. |
+| 16 | Unattended multi-week runs | Power cut, PC crash, sensor failure | Any of the above, undetected | H | UPS; watchdog that fails safe (power off); remote alarms | Every trip wired in hardware, not only in software. |
+
+Minor: PdCl₂ is a skin sensitiser, and the hot 6.25 M NaOH used to etch CR-39 is caustic. Use PPE and a hood.
 
 ---
 
@@ -116,15 +117,14 @@ Metal spot prices: **Pd $1,198/ozt (Kitco, 2026-09-28); $1,265/ozt (Umicore, 202
 | Pt gauze / mesh | 52 mesh, 25×50 mm | Thermo, Goodfellow | — | $300–700 (est.) | est. |
 | **D₂O 99.9 atom % D** | Low-tritium grade preferred | Sigma 151882, Cambridge Isotope, United Nuclear, Heavy Water Board (India) | — | Bulk ex-factory global average **$646/kg (2024)**; research grade **$300–500/L (2025)**; retail 100 g about $1–3/g (est.); United Nuclear lists small lots at $29–39 | IndexBox; DataM Intelligence; unitednuclear.com |
 | LiOD | 7.5 wt% in D₂O, ≥98 atom % D (Sigma 347450), **or** Li metal dissolved in D₂O | Sigma, SCBT | — | $150–400 per 25–50 g solution (est.); Li metal $2–5/g (est.) | Sigma listing |
-| LiOH (anhydrous) | Adds about 0.1 at% H at 0.1 M; avoid the monohydrate | Sigma | — | <$50 (est.) | est. |
 | Au foil (co-deposition substrate) | 25–50 µm | Goodfellow, Sigma | — | $100–250 per 25×25 mm (est.) | est. |
-| Ni mesh | 100 mesh, 150×150 mm | McMaster, Goodfellow | — | $30–100 (est.) | est. |
-| ZrO₂, CaO | Powders, ≥99% | Sigma, Alfa | — | $30–100 per 100–500 g (est.) | est. |
-| Constantan (Cu55Ni44Mn1) | 0.1–0.2 mm (MFMP/Celani replications) | Goodfellow, Omega, Pelican Wire | — | $30–100 per 100 m (est.) | est. |
-| PTFE/PFA cell body and parts | Machined | Local shop, McMaster stock | — | $100–600 (est.) | est. |
-| Recombiner catalyst | 0.5% Pt or Pd on alumina, hydrophobised | Sigma, Alfa, fuel-cell suppliers | — | $50–200 (est.) | est. |
-| Burst disk, relief valve, 316L VCR/compression fittings | Rated ≥ MAWP | Swagelok, Fike, BS&B | — | $500–2,000 per closed cell (est.) | est. |
-| D₂ gas | 99.8%, lecture bottle | Airgas, Linde, Sigma | — | $300–700 (est.) | est. |
+| Ni mesh; ZrO₂, CaO powders; constantan (Cu55Ni44Mn1) wire 0.1–0.2 mm | Minor or alternative materials | McMaster, Goodfellow, Sigma, Omega | — | $30–100 each (est.) | est. |
+| PTFE/PFA cell body and parts | Machined | Local shop | — | $100–600 (est.) | est. |
+| Recombiner catalyst | 0.5% Pt or Pd on alumina, hydrophobised | Sigma, Alfa | — | $50–200 (est.) | est. |
+| Burst disk, relief valve, 316L VCR fittings | Rated ≥ MAWP | Swagelok, Fike | — | $500–2,000 per closed cell (est.) | est. |
+| D₂ gas | 99.8%, lecture bottle | Airgas, Linde | — | $300–700 (est.) | est. |
+
+Avoid LiOH monohydrate as a LiOD substitute because it brings H into the electrolyte. Anhydrous LiOH adds about 0.1 at% H at 0.1 M.
 
 ---
 
@@ -154,7 +154,20 @@ Metal spot prices: **Pd $1,198/ozt (Kitco, 2026-09-28); $1,265/ozt (Umicore, 202
 | Vacuum tube furnace, 1200 °C, with rotary pump | Pd annealing | $4–10k (est.) | est. |
 | Glovebox / glove bag (Ar) | D₂O and Li handling | $100 (bag) to $40–60k (box) (est.) | est. |
 
-**Outsourced services (est.):** SEM/EDS $100–250/h at a university core (external rate), $150–400/h commercial. EBSD grain and texture maps $200–500 per sample. AFM $100–200/h. XRD pole figures $100–300 per sample. ICP-MS impurity analysis $50–200 per sample; GDMS of bulk Pd $500–1,000. Vacuum heat-treat at a commercial shop $100–300 per batch. Pd sputtering or e-beam films $500–2,000 per run. Tritium by liquid scintillation counting $50–200 per sample ($300+ with electrolytic enrichment). **⁴He in gas by high-resolution mass spectrometry** (must resolve D₂ at 4.0282 u from ⁴He at 4.0026 u) $500–2,000 per sample, available from only a few labs.
+**Outsourced services (est.):**
+
+| Service | Price |
+|---|---|
+| SEM/EDS | $100–400/h |
+| EBSD grain and texture maps | $200–500 per sample |
+| AFM | $100–200/h |
+| XRD texture | $100–300 per sample |
+| ICP-MS impurity analysis | $50–200 per sample |
+| GDMS of bulk Pd | $500–1,000 per sample |
+| Vacuum heat-treat | $100–300 per batch |
+| Pd sputtered films | $500–2,000 per run |
+| Tritium by liquid scintillation counting | $50–300 per sample |
+| **⁴He by high-resolution mass spectrometry** (must resolve D₂ at 4.0282 u from ⁴He at 4.0026 u; few labs offer it) | $500–2,000 per sample |
 
 ---
 
@@ -176,7 +189,7 @@ Metal spot prices: **Pd $1,198/ozt (Kitco, 2026-09-28); $1,265/ozt (Umicore, 202
 | H₂ sensor, polycarbonate enclosure, PPE, eyewash | 600 |
 | **Total** | **about 5,500** |
 
-**What it can do:** SPAWAR/Galileo co-deposition runs with CR-39, a loading demonstration by resistance ratio, and isoperibolic calorimetry at about ±50–150 mW (2–5%). **What it cannot do:** a credible excess-heat claim, neutron counting above background, or a safe closed cell. It also cannot anneal cathodes. **Constraint:** open cells only, with an inert sweep, vented outdoors or to a hood, and nothing left unattended.
+**Can do:** Galileo co-deposition with CR-39, a loading demonstration by resistance ratio, and isoperibolic calorimetry at about ±50–150 mW (2–5%). **Cannot do:** a credible heat claim, neutron counting above background, a safe closed cell, or cathode annealing. Open, swept, vented cells only, never left unattended.
 
 ### (b) About $50k: small lab (recommended)
 
@@ -199,7 +212,7 @@ Metal spot prices: **Pd $1,198/ozt (Kitco, 2026-09-28); $1,265/ozt (Umicore, 202
 | Safety: H₂ detection, enclosure, UPS, watchdog, gas cabinet | 2,000 |
 | **Total** | **about 53,000** |
 
-**What it can do:** Seebeck calorimetry at about ±20–60 mW (about 0.2–0.7%, per Storms), with paired D₂O and H₂O cells. In-house cathode annealing and etching, loading tracked by resistance plus EIS, closed-cell operation with the ΔP interlock, and neutron and gamma monitoring with automatic trip. Tritium assay before and after each run. **Missing:** ⁴He measurement (outsourcing adds $5–15k), parallel statistics, and staff.
+**Can do:** Seebeck calorimetry at about ±20–60 mW (0.2–0.7%, per Storms) with paired D₂O and H₂O cells. Also in-house annealing and etching, loading tracked by resistance plus EIS, closed cells with the ΔP interlock, neutron and gamma trips, and tritium assays. **Missing:** ⁴He measurement (outsourcing adds $5–15k), parallel statistics, and staff.
 
 ### (c) About $500k: professional
 
@@ -260,10 +273,9 @@ Reported excess-heat reproducibility above 60%. Energetics runs using Violante f
 
 ### 8.5 Storms' guidelines ("How to produce the Pons–Fleischmann effect")
 
-- Screen cathodes: reject pieces that crack or expand grossly on a trial load–deload cycle, because large volume expansion is counter-productive.
-- Load at room temperature and low-to-moderate current density, where high loading is easiest. Then raise the temperature step by step toward boiling for maximum excess power.
-- Activation by open-cell pre-electrolysis at high current and temperature can help, but should be limited to a couple of cycles.
-- Surface contamination (Li, Pt from the anode, Si from glass) shapes the outcome. Control what is deposited.
+- Reject cathodes that crack or expand grossly on a trial load–deload cycle.
+- Load near room temperature at moderate current density, then raise the temperature step by step toward boiling. Limit high-current pre-electrolysis "activation" to a couple of cycles.
+- Surface deposits (Li, Pt from the anode, Si from glass) shape the outcome. Control them.
 
 ### 8.6 SPAWAR Pd/D co-deposition (Szpak/Mosier-Boss; Galileo protocol)
 
@@ -272,13 +284,10 @@ Reported excess-heat reproducibility above 60%. Energetics runs using Violante f
 3. CR-39 goes against the cathode. Standard etch is 6.25 M NaOH at 70 °C for about 6 h. Run H₂O and blank (no Pd) controls to separate tracks from chemical or mechanical pitting (see "Interpreting CR-39 Detectors used in Pd/D Co-deposition", JCMNS).
 4. **Safety:** the co-deposit is pyrophoric when dry, and one catastrophic thermal event was reported.
 
-### 8.7 Google/UBC/MIT program
+### 8.7 Other programs
 
-Benck et al. (Chem. Mater. 2019) reached **H/Pd near 1** by electrochemical insertion from aqueous, polymer and ceramic electrolytes. Operando measurement was essential because composition is a dynamic insertion/evolution balance. The Nature 2019 perspective reported no excess heat. The 2025 follow-up (UBC, Berlinguette) found that electrochemical loading **raised plasma-driven D–D fusion rates by about 15%**. Following that route means building a radiation-producing machine, with the registration and shielding burden that brings (§9).
-
-### 8.8 MFMP (open science)
-
-The Martin Fleischmann Memorial Project ran live replications of Celani's surface-structured **constantan (Cu–Ni) wires** in H₂/D₂ gas, reporting 12.5% and then 5.3% apparent excess. Its data and procedures are published at quantumheat.org. Treat it as a template for open data practice, not as confirmation of an effect.
+- **Google/UBC/MIT:** Benck et al. (Chem. Mater. 2019) reached **H/Pd near 1** by electrochemical insertion. Composition is a dynamic insertion/evolution balance, so it has to be measured operando. The Nature 2019 perspective found no excess heat. The 2025 UBC follow-up found that electrochemical loading **raised plasma-driven D–D fusion rates by about 15%**, but that route requires a registered radiation-producing machine (§9).
+- **MFMP:** open, live replications of Celani's constantan wires reported 12.5% and then 5.3% apparent excess (quantumheat.org). Useful as a model for open data, not as confirmation of an effect.
 
 ### Common anneal and etch parameters (synthesis)
 
@@ -323,7 +332,7 @@ The Martin Fleischmann Memorial Project ran live replications of Celani's surfac
 14. **Detector access:** leave room for a moderated neutron detector within 10–30 cm of the cathode, a CR-39 position adjacent to the cathode, and a lead-shielded NaI. Avoid large metal masses between cathode and detectors. Neutron or gamma alarm at 10× background trips the power.
 15. **Loading gas systems** (if gas-loaded or prefilled): 316L with metal-gasket fittings, a regulator with relief, a flow restrictor, and a lecture-bottle-scale cylinder in a ventilated cabinet. Ceiling-level H₂ sensor with a ≤1% alarm.
 16. **Fail-safe control:** every trip (pressure, temperature, level, H₂, radiation, E-stop, watchdog) removes cell power in hardware. UPS on the monitoring system.
-17. **Calorimetric boundary:** open cells must account for the enthalpy carried off by gas (I × 1.527 V). Closed cells put the recombination heat inside the boundary, which is better for accuracy but raises the safety demands above.
+17. **Calorimetric boundary:** open cells must correct for the enthalpy carried off by gas (I × 1.527 V). Closed cells keep the recombination heat inside the boundary, at the price of constraints 3–5.
 
 ---
 
