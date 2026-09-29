@@ -169,7 +169,14 @@ class Material:
         self.alpha, self.beta = gap(T, iso)
 
     def Phi(self, x):
-        return np.interp(x, self.xg, self.Phig)
+        # exact integral of the piecewise-linear D table (consistent with dPhi -> quadratic Newton)
+        x = np.clip(np.asarray(x, dtype=float), 0.0, self.xg[-1])
+        h = self.xg[1] - self.xg[0]
+        i = np.minimum((x / h).astype(int), len(self.xg) - 2)
+        u = x - self.xg[i]
+        D0 = self.Dg[i]
+        s = (self.Dg[i + 1] - D0) / h
+        return self.Phig[i] + n_Pd * (D0 * u + 0.5 * s * u * u)
 
     def dPhi(self, x):
         return n_Pd * np.interp(x, self.xg, self.Dg)
@@ -276,73 +283,79 @@ class FV1D:
         self.V = (faces[1:] ** (k + 1) - faces[:-1] ** (k + 1)) / (k + 1)   # per unit (angle) measure
         self.A = faces ** k
         self.N = len(self.rc)
+        self.chg_lo, self.chg_hi = 0.02, 0.05   # step-size control on max |dx| per step
 
     def mean(self, x):
         return np.sum(x * self.V) / np.sum(self.V)
 
-    def step(self, x_old, dt, left, right, tol=1e-10, maxit=30):
-        """left/right: ('sym',) | ('dir', value) | ('flux', f) with f(x_boundary_cell)-> outward flux."""
+    def _assemble(self, x, x_old, dt, left, right, jac=True):
         mat, N = self.mat, self.N
-        x = x_old.copy()
-        dcen = np.diff(self.rc)                      # centre spacings, N-1
+        dcen = np.diff(self.rc)
         Ai = self.A[1:-1]
+        P = mat.Phi(x)
+        dP = mat.dPhi(x)
+        Fint = -Ai * (P[1:] - P[:-1]) / dcen          # outward (+r) flux through interior faces
+        res = n_Pd * self.V * (x - x_old) / dt
+        res[:-1] += Fint
+        res[1:] -= Fint
+        main = n_Pd * self.V / dt
+        up = np.zeros(N)
+        lo = np.zeros(N)
+        g = Ai / dcen
+        main[:-1] += g * dP[:-1]
+        up[:-1] = -g * dP[1:]
+        main[1:] += g * dP[1:]
+        lo[1:] = -g * dP[:-1]
+        AL, A0, h = self.A[-1], self.A[0], 1e-7
+        if right[0] == "dir":
+            gR = AL / (0.5 * self.dr[-1])
+            res[-1] += -gR * (mat.Phi(right[1]) - P[-1])
+            main[-1] += gR * dP[-1]
+        elif right[0] == "flux":
+            f = right[1]
+            res[-1] += AL * f(x[-1])
+            main[-1] += AL * (f(x[-1] + h) - f(max(x[-1] - h, 0.0))) / (x[-1] + h - max(x[-1] - h, 0.0))
+        if left[0] == "dir":
+            gL = A0 / (0.5 * self.dr[0])
+            res[0] -= -gL * (P[0] - mat.Phi(left[1]))
+            main[0] += gL * dP[0]
+        elif left[0] == "flux":
+            f = left[1]
+            res[0] += A0 * f(x[0])
+            main[0] += A0 * (f(x[0] + h) - f(max(x[0] - h, 0.0))) / (x[0] + h - max(x[0] - h, 0.0))
+        return res, main, up, lo
+
+    def step(self, x_old, dt, left, right, tol=1e-10, maxit=40):
+        """left/right: ('sym',) | ('dir', value) | ('flux', f) with f(x_boundary_cell) -> outward flux.
+        Newton with residual-based backtracking (robust across the kinks of Phi at the gap edges)."""
+        N = self.N
+        x = x_old.copy()
+        scale = n_Pd * self.V / dt
+        res, main, up, lo = self._assemble(x, x_old, dt, left, right)
+        rn = np.max(np.abs(res) / scale)
         for it in range(maxit):
-            P = mat.Phi(x)
-            dP = mat.dPhi(x)
-            # interior fluxes F_{i+1/2} (outward +r direction) = -A (P_{i+1}-P_i)/dcen
-            Fint = -Ai * (P[1:] - P[:-1]) / dcen
-            res = n_Pd * self.V * (x - x_old) / dt
-            res[:-1] += Fint
-            res[1:] -= Fint
-            main = n_Pd * self.V / dt
-            up = np.zeros(N)   # coefficient of x_{i+1} in eq i
-            lo = np.zeros(N)   # coefficient of x_{i-1} in eq i
-            g = Ai / dcen
-            main[:-1] += g * dP[:-1]
-            up[:-1] = -g * dP[1:]
-            main[1:] += g * dP[1:]
-            lo[1:] = -g * dP[:-1]
-            # right boundary
-            AL = self.A[-1]
-            if right[0] == "dir":
-                gR = AL / (0.5 * self.dr[-1])
-                FR = -gR * (mat.Phi(right[1]) - P[-1])
-                res[-1] += FR
-                main[-1] += gR * dP[-1]
-            elif right[0] == "flux":
-                f = right[1]
-                J = f(x[-1])
-                h = 1e-7
-                dJ = (f(x[-1] + h) - f(x[-1] - h)) / (2 * h)
-                res[-1] += AL * J
-                main[-1] += AL * dJ
-            # left boundary (r = 0 face)
-            A0 = self.A[0]
-            if left[0] == "dir":
-                gL = A0 / (0.5 * self.dr[0])
-                FL = -gL * (P[0] - mat.Phi(left[1]))     # flux in +r direction through face 0
-                res[0] -= FL
-                main[0] += gL * dP[0]
-            elif left[0] == "flux":   # outward (-r) flux law
-                f = left[1]
-                J = f(x[0])
-                h = 1e-7
-                dJ = (f(x[0] + h) - f(x[0] - h)) / (2 * h)
-                res[0] += A0 * J
-                main[0] += A0 * dJ
             ab = np.zeros((3, N))
             ab[0, 1:] = up[:-1]
             ab[1] = main
             ab[2, :-1] = lo[1:]
             dx = solve_banded((1, 1), ab, -res)
-            # damping: limit step to 0.05 in x
             m = np.max(np.abs(dx))
-            if m > 0.05:
-                dx *= 0.05 / m
-            x = np.clip(x + dx, 0.0, 0.994)
-            if m < tol:
-                return x, True
-        return x, m < 1e-7
+            if m > 0.2:
+                dx *= 0.2 / m
+            lam = 1.0
+            for _ in range(12):
+                xt = np.clip(x + lam * dx, 0.0, 0.994)
+                rt, mt, ut, lt = self._assemble(xt, x_old, dt, left, right)
+                rnt = np.max(np.abs(rt) / scale)
+                if rnt < rn or rnt < tol:
+                    break
+                lam *= 0.5
+            x, res, main, up, lo, rn = xt, rt, mt, ut, lt, rnt
+            # converged: residual small, or Newton update at round-off level (residual then limited by
+            # cancellation in Phi differences, which grows with dt)
+            if rn < tol or (lam == 1.0 and m < 1e-10) or (lam * m < 1e-12 and rn < 1e-4):
+                return x, rn < 1e-4
+        return x, rn < 1e-7
 
     def run(self, x0, t_end, left, right, dt0=None, dtmax=None, stop=None, record=None, t0=0.0):
         """Adaptive stepping. left/right may be callables of t returning BC tuples.
@@ -367,5 +380,5 @@ class FV1D:
                 record(t, x)
             if stop and stop(t, x):
                 break
-            dt *= 1.5 if chg < 0.02 else (1.0 if chg < 0.05 else 0.6)
+            dt *= 1.5 if chg < self.chg_lo else (1.0 if chg < self.chg_hi else 0.6)
         return t, x
