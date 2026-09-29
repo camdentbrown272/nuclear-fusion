@@ -1,0 +1,94 @@
+=== DFM exit-face kinetics: reference values at 25 C (PdD) ===
+c_eff(x=0.90) = 6.62e+29 m^-3 (activity-form Pick concentration; c_eff = c in alpha phase)
+k_r(Pd, real surface, lit.) = 1.15e-35 m^4/s ; Baskes clean-surface bound (s0=0.5) = 1.76e-28 m^4/s
+Iwamura (D2 1 atm, 70 C, 0.1 mm Pd, 2 sccm over 6.25 cm2): J = 2.87e+21 D/m2/s = 45.9 mA/cm2
+  model: x_in(1 atm, 70 C) = 0.598; diffusion-limited capacity (exit x=0) = 2.11e+22 D/m2/s -> observed/capacity = 0.14
+  => a bare Pd exit face in vacuum passed >= 2.9e+21 D/m2/s at 343 K; with a saturated-surface cap 2 nu N_s exp(-Ed/kT), Ed <= 0.751 eV; extrapolated J_sat(25 C) >= 6.2e+19 D/m2/s (0.99 mA/cm2)
+
+=== Max steady flux compatible with x >= 0.90 everywhere: J_max = [Phi(x_in) - Phi(0.90)] / L ===
+  x_in  | L=    5 um | L=   10 um | L=   25 um | L=   50 um | L=  100 um | L=  200 um   (D/m2/s ; mA/cm2)
+  0.85  |        0;  0.00 |        0;  0.00 |        0;  0.00 |        0;  0.00 |        0;  0.00 |        0;  0.00
+  0.90  |        0;  0.00 |        0;  0.00 |        0;  0.00 |        0;  0.00 |        0;  0.00 |        0;  0.00
+  0.95  |  5.5e+22;879.80 |  2.7e+22;439.90 |  1.1e+22;175.96 |  5.5e+21; 87.98 |  2.7e+21; 43.99 |  1.4e+21; 22.00
+  0.97  |  6.8e+22;1086.11 |  3.4e+22;543.05 |  1.4e+22;217.22 |  6.8e+21;108.61 |  3.4e+21; 54.31 |  1.7e+21; 27.15
+  -> x_in = 0.90 or below leaves no flux budget: the exit face can only be >= 0.90 if x_in > 0.90.
+  (x_in=0.95, L=50 um: J_max for exit >= 0.85 is 1.39e+22 D/m2/s = 223.2 mA/cm2)
+  (x_in=0.95, L=50 um: J_max for exit >= 0.80 is 2.5e+22 D/m2/s = 399.7 mA/cm2)
+
+=== Design chart: exit loading & flux vs L and k_r (Pick, activity form, no cap), 25 C. Target: x_exit >= 0.90 and J >= 1e+21 D/m2/s (16 mA/cm2) ===
+  x_in=0.85: NO (L, k_r) satisfies both x_exit >= 0.90 and J >= target
+  x_in=0.90: NO (L, k_r) satisfies both x_exit >= 0.90 and J >= target
+  x_in=0.95: recommended region exists; k_r in [3.3e-40, 1.1e-37] m^4/s, L <= 200 um
+  x_in=0.97: recommended region exists; k_r in [1.6e-40, 1.1e-37] m^4/s, L <= 200 um
+  Required k_r to deliver J with exit at exactly 0.90: k_r* = J / c_eff(0.90)^2 = 2.28e-39 m^4/s for J = 1e21; scale linearly with J.
+  k_r* / k_r(bare Pd, lit.) = 0.0002; k_r* / k_r(Baskes) = 1.3e-11
+
+=== Exit-face finishes, x_in = 0.95, 25 C (steady state) ===
+  finish                                      L(um)  x_exit   J (D/m2/s)  J (mA/cm2)  min x >= 0.9?
+  bare Pd, lit k_r, no cap                      25   0.787    5.66e+22        907   no
+  bare Pd, lit k_r, no cap                      50   0.772    3.21e+22        514   no
+  bare Pd, lit k_r, no cap                     100   0.757     1.8e+22        289   no
+  bare Pd, lit k_r + J_sat cap (Ed=0.75 eV)     25   0.950     6.2e+19      0.994   yes
+  bare Pd, lit k_r + J_sat cap (Ed=0.75 eV)     50   0.949     6.2e+19      0.994   yes
+  bare Pd, lit k_r + J_sat cap (Ed=0.75 eV)    100   0.948     6.2e+19      0.994   yes
+  bare Pd, lit k_r + J_sat cap x100             25   0.918     6.2e+21       99.4   yes
+  bare Pd, lit k_r + J_sat cap x100             50   0.895     6.2e+21       99.3   no
+  bare Pd, lit k_r + J_sat cap x100            100   0.858    6.16e+21       98.8   no
+  PdO (k_r x1e-3 of bare), no cap               25   0.911    7.97e+21        128   yes
+  PdO (k_r x1e-3 of bare), no cap               50   0.901    5.32e+21       85.2   yes
+  PdO (k_r x1e-3 of bare), no cap              100   0.890    3.45e+21       55.2   no
+  Au 20 nm (perm <= Cu)                         25   0.950    1.36e+16   0.000218   yes
+  Au 20 nm (perm <= Cu)                         50   0.950    1.36e+16   0.000218   yes
+  Au 20 nm (perm <= Cu)                        100   0.950    1.36e+16   0.000218   yes
+  Cu 20 nm                                      25   0.950    1.36e+16   0.000218   yes
+  Cu 20 nm                                      50   0.950    1.36e+16   0.000218   yes
+  Cu 20 nm                                     100   0.950    1.36e+16   0.000218   yes
+  Ni 2 nm                                       25   0.922    5.35e+21       85.6   yes
+  Ni 2 nm                                       50   0.910    4.16e+21       66.7   yes
+  Ni 2 nm                                      100   0.895    3.09e+21       49.6   no
+  Ni 20 nm                                      25   0.945    8.53e+20       13.7   yes
+  Ni 20 nm                                      50   0.941    7.83e+20       12.5   yes
+  Ni 20 nm                                     100   0.934    6.87e+20         11   yes
+  Ni/Cu 5x(10+10 nm)                            25   0.950    5.44e+15   8.72e-05   yes
+  Ni/Cu 5x(10+10 nm)                            50   0.950    5.44e+15   8.72e-05   yes
+  Ni/Cu 5x(10+10 nm)                           100   0.950    5.44e+15   8.72e-05   yes
+  Pd/CaO (Iwamura) >= G_I, cap                  25   0.918     6.2e+21       99.4   yes
+  Pd/CaO (Iwamura) >= G_I, cap                  50   0.895     6.2e+21       99.4   no
+  Pd/CaO (Iwamura) >= G_I, cap                 100   0.858     6.2e+21       99.4   no
+  PdO 1 nm reduced by permeating D (2 D per O, 10% of flux reacting) at J=1e+19: lifetime ~ 20.4 s
+  PdO 1 nm reduced by permeating D (2 D per O, 10% of flux reacting) at J=1e+21: lifetime ~ 0.204 s
+  PdO 5 nm reduced by permeating D (2 D per O, 10% of flux reacting) at J=1e+19: lifetime ~ 102 s
+  PdO 5 nm reduced by permeating D (2 D per O, 10% of flux reacting) at J=1e+21: lifetime ~ 1.02 s
+  Patterned Au mask (open fraction phi) scales the bare-Pd exit law by ~phi (valid when the opening
+  pitch << L so lateral diffusion equalises): phi required for J = 1e21 at exit 0.90:
+    bare law lit k_r no cap: J_bare(0.90) = 5.06e+24 -> phi = 0.0002
+    bare law lit k_r + cap x100: J_bare(0.90) = 6.2e+21 -> phi = 0.16
+
+=== Verification V4: FV transient converges to the Kirchhoff steady state ===
+  L=25 um: steady x_e = 0.9307, FV x(last cell) = 0.9307; J steady 3.489e+21, FV exit flux 3.49e+21
+  L=50 um: steady x_e = 0.9232, FV x(last cell) = 0.9232; J steady 2.559e+21, FV exit flux 2.559e+21
+
+=== Transients (design exit law k_r* for 1e21 at 0.90; x_in = 0.95; 25 C) ===
+  first loading L=  10 um: exit face enters beta at 0.49 s; whole membrane >= 0.90 at 1.33 s
+  first loading L=  25 um: exit face enters beta at 3.06 s; whole membrane >= 0.90 at 8.59 s
+  first loading L=  50 um: exit face enters beta at 12.2 s; whole membrane >= 0.90 at 34 s
+  first loading L= 100 um: exit face enters beta at 49 s; whole membrane >= 0.90 at 143 s
+  Current interruption (back face no-flux; exit desorbs):
+    design k_r*                    L= 25 um: exit < 0.90 after 44.1 s; exit enters two-phase (x<0.586) after 1.01e+07 s
+    design k_r*                    L= 50 um: exit < 0.90 after 86.3 s; exit enters two-phase (x<0.586) after 1.99e+07 s
+    bare Pd lit, cap x100          L= 25 um: exit < 0.90 after 7.58 s; exit enters two-phase (x<0.586) after 2.12e+03 s
+    bare Pd lit, cap x100          L= 50 um: exit < 0.90 after 0.0001 s; exit enters two-phase (x<0.586) after 4.23e+03 s
+    bare Pd lit, cap (lower bound) L= 25 um: exit < 0.90 after 1.47e+03 s; exit enters two-phase (x<0.586) after 1.23e+04 s
+    bare Pd lit, cap (lower bound) L= 50 um: exit < 0.90 after 3.32e+03 s; exit enters two-phase (x<0.586) after 2.45e+04 s
+  Back-face square-wave modulation 0.90 <-> 0.97, L = 50 um, design exit law:
+    diffusion time L^2/D_chem(0.93) = 32.7 s
+    period    0.3 s: exit x swing 0.0000; exit flux swing 2.3e-06 mA/cm2
+    period    1.0 s: exit x swing 0.0000; exit flux swing 0.00804 mA/cm2
+    period    3.0 s: exit x swing 0.0005; exit flux swing 0.501 mA/cm2
+    period   10.0 s: exit x swing 0.0059; exit flux swing 6.36 mA/cm2
+    period   30.0 s: exit x swing 0.0216; exit flux swing 23.7 mA/cm2
+    period  100.0 s: exit x swing 0.0340; exit flux swing 38.4 mA/cm2
+    period  300.0 s: exit x swing 0.0344; exit flux swing 38.9 mA/cm2
+  Lateral diffusion under a masked rim: sqrt(D_chem(0.9) t) = 0.61 mm after 1 h
+  Lateral diffusion under a masked rim: sqrt(D_chem(0.9) t) = 2.99 mm after 24 h
+  Lateral diffusion under a masked rim: sqrt(D_chem(0.9) t) = 7.91 mm after 168 h

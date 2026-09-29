@@ -1,0 +1,78 @@
+=== A. Vegard strain and elastic limits (PdD) ===
+eta = Vbar/(3 Omega) = 0.0652 per unit x; alpha->beta jump dx = 0.565 -> linear misfit 3.68 % (measured lattice-parameter jump 3.89->4.02 A = 3.3-3.5 %)
+0 -> 0.95 loading: linear strain 6.19 % (linear Vegard), volume 19.7 %; cross-check: a = 3.89 A (Pd) -> 4.09 A at x ~ 0.98 [web, jcmns 17 (2015) 35] gives 5.1 % linear, i.e. eta_eff = 0.053; the linear law over-predicts high-x strain by ~20 % (conservative)
+  annealed               sigma_y =    40 MPa: biaxial elastic strain limit 2.0e-4 -> max constrained composition difference dx = 0.0031
+  as-supplied/H-cycled   sigma_y =   150 MPa: biaxial elastic strain limit 7.6e-4 -> max constrained composition difference dx = 0.0116
+  cold-worked            sigma_y =   250 MPa: biaxial elastic strain limit 12.6e-4 -> max constrained composition difference dx = 0.0193
+
+=== B. FvK clamped plate: verification ===
+  nu=0.3: small-P W0/P = 0.17062 vs Kirchhoff 12(1-nu^2)/64 = 0.17062
+  nu=0.39: small-P W0/P = 0.15898 vs Kirchhoff 12(1-nu^2)/64 = 0.15898
+  P=1e+05: W0 = 30.216 vs Hencky 30.727 (-1.7 %); centre stress 953.467 vs Hencky 911.326 (+4.6 %); max/centre = 3.78 (edge bending)
+  P=1e+06: W0 = 65.232 vs Hencky 66.200 (-1.5 %); centre stress 4363.517 vs Hencky 4230.000 (+3.2 %); max/centre = 3.86 (edge bending)
+  P=1e+07: W0 = 140.667 vs Hencky 142.624 (-1.4 %); centre stress 20122.388 vs Hencky 19633.921 (+2.5 %); max/centre = 3.90 (edge bending)
+  Clamped-plate buckling under uniform in-plane misfit: 12(1+nu) eps* a^2/h^2 = j_{1,1}^2 = 14.68 (Timoshenko & Gere, Theory of Elastic Stability, 1961)
+
+=== B. 1 atm across a vacuum-backed membrane (clamped, immovable edge) ===
+  unsupported discs (a = radius):
+    a= 5.0 mm h=  10 um: max von Mises  1129.9 MPa, centre deflection  0.234 mm
+    a= 5.0 mm h=  25 um: max von Mises   592.1 MPa, centre deflection  0.170 mm
+    a= 5.0 mm h=  50 um: max von Mises   342.5 MPa, centre deflection  0.129 mm
+    a= 5.0 mm h= 100 um: max von Mises   157.8 MPa, centre deflection  0.067 mm
+    a=10.0 mm h=  10 um: max von Mises  1809.1 MPa, centre deflection  0.592 mm
+    a=10.0 mm h=  25 um: max von Mises   968.9 MPa, centre deflection  0.434 mm
+    a=10.0 mm h=  50 um: max von Mises   592.1 MPa, centre deflection  0.341 mm
+    a=10.0 mm h= 100 um: max von Mises   342.5 MPa, centre deflection  0.258 mm
+    a=12.5 mm h=  10 um: max von Mises  2102.2 MPa, centre deflection  0.798 mm
+    a=12.5 mm h=  25 um: max von Mises  1129.9 MPa, centre deflection  0.586 mm
+    a=12.5 mm h=  50 um: max von Mises   696.2 MPa, centre deflection  0.461 mm
+    a=12.5 mm h= 100 um: max von Mises   412.9 MPa, centre deflection  0.356 mm
+  largest free-span radius b keeping max von Mises below a stress allowable (1 atm):
+    h =   10 um: 20 MPa: b <= 0.16 mm; 40 MPa: b <= 0.20 mm; 100 MPa: b <= 0.32 mm
+    h =   25 um: 20 MPa: b <= 0.40 mm; 40 MPa: b <= 0.50 mm; 100 MPa: b <= 0.79 mm
+    h =   50 um: 20 MPa: b <= 0.79 mm; 40 MPa: b <= 1.00 mm; 100 MPa: b <= 1.58 mm
+    h =  100 um: 20 MPa: b <= 1.58 mm; 40 MPa: b <= 1.99 mm; 100 MPa: b <= 3.15 mm
+
+=== B. Support grid (vacuum side): hexagonal round holes, diameter d, web width w, pitch d+w ===
+  open fraction f = 0.9069 (d/(d+w))^2 ; hole-wall shadowing for a grid of thickness t: particles
+  with tan(theta) > d/t cannot pass; transmission at angle theta for a round hole:
+  T(q) = (2/pi)(acos q - q sqrt(1-q^2)), q = t tan(theta)/d.
+  h=25 um, hole d=1.0 mm, web 0.15 mm, grid t=0.5 mm: stress 26.6 MPa, dimple 0.5 um, open fraction 0.69, hemisphere transmission (x open) 0.16, within 30 deg cone 0.53
+  h=50 um, hole d=1.5 mm, web 0.20 mm, grid t=0.5 mm: stress 14.9 MPa, dimple 0.3 um, open fraction 0.71, hemisphere transmission (x open) 0.24, within 30 deg cone 0.60
+  h=50 um, hole d=2.0 mm, web 0.20 mm, grid t=0.5 mm: stress 26.6 MPa, dimple 1.1 um, open fraction 0.75, hemisphere transmission (x open) 0.32, within 30 deg cone 0.66
+  grid Mo                             t=0.5 mm, R=12.5 mm: edge bending stress ~404 MPa (sigma_y 550 MPa; Roark clamped plate / ligament efficiency 0.12)
+  grid Mo                             t=1.0 mm, R=12.5 mm: edge bending stress ~101 MPa (sigma_y 550 MPa; Roark clamped plate / ligament efficiency 0.12)
+  grid 316L                           t=0.5 mm, R=12.5 mm: edge bending stress ~404 MPa (sigma_y 200 MPa; Roark clamped plate / ligament efficiency 0.12)
+  grid 316L                           t=1.0 mm, R=12.5 mm: edge bending stress ~101 MPa (sigma_y 200 MPa; Roark clamped plate / ligament efficiency 0.12)
+  grid Ti (NOT recommended: absorbs D) t=0.5 mm, R=12.5 mm: edge bending stress ~404 MPa (sigma_y 275 MPa; Roark clamped plate / ligament efficiency 0.12)
+  grid Ti (NOT recommended: absorbs D) t=1.0 mm, R=12.5 mm: edge bending stress ~101 MPa (sigma_y 275 MPa; Roark clamped plate / ligament efficiency 0.12)
+
+=== C. Hydrogen expansion with an edge clamp (disc radius a, thickness h) ===
+  a= 5.0 mm h= 25 um: buckling misfit eps* = 2.20e-05 -> dx = 3.38e-04;  full loading 0->0.95 misfit 0.062 = 2813 x critical; radial growth at edge 0.310 mm
+  a= 5.0 mm h= 50 um: buckling misfit eps* = 8.80e-05 -> dx = 1.35e-03;  full loading 0->0.95 misfit 0.062 = 703 x critical; radial growth at edge 0.310 mm
+  a=10.0 mm h= 25 um: buckling misfit eps* = 5.50e-06 -> dx = 8.44e-05;  full loading 0->0.95 misfit 0.062 = 11254 x critical; radial growth at edge 0.619 mm
+  a=10.0 mm h= 50 um: buckling misfit eps* = 2.20e-05 -> dx = 3.38e-04;  full loading 0->0.95 misfit 0.062 = 2813 x critical; radial growth at edge 0.619 mm
+  a=12.5 mm h= 25 um: buckling misfit eps* = 3.52e-06 -> dx = 5.40e-05;  full loading 0->0.95 misfit 0.062 = 17584 x critical; radial growth at edge 0.774 mm
+  a=12.5 mm h= 50 um: buckling misfit eps* = 1.41e-05 -> dx = 2.16e-04;  full loading 0->0.95 misfit 0.062 = 4396 x critical; radial growth at edge 0.774 mm
+  Friction-limited stress for a floating membrane pressed on the grid by 1 atm: sigma ~ mu p a / h
+    mu=0.3 a=10.0 mm h=25 um: 12.2 MPa
+    mu=0.3 a=10.0 mm h=50 um: 6.1 MPa
+    mu=0.3 a=12.5 mm h=25 um: 15.2 MPa
+    mu=0.3 a=12.5 mm h=50 um: 7.6 MPa
+
+=== D. Films on rigid substrates (fully constrained in-plane) ===
+  elastic biaxial stress for x = 0.9: 11.6 GPa (compressive) -> always capped by film flow stress; measured hydrogen-loaded Pd film stresses are -1 to -3 GPa [mem] (Pundt & Kirchheim, Annu. Rev. Mater. Res. 36 (2006) 555, https://doi.org/10.1146/annurev.matsci.36.090804.094451)
+  steady-state buckle-delamination: G = (1-nu^2) h sigma^2 / (2E) >= Gamma_i  ->  h_c = 2 E Gamma_i / ((1-nu^2) sigma^2)
+    Gamma_i= 0.5 J/m2: h_c = 571 nm @ 0.5 GPa, 143 nm @ 1.0 GPa, 36 nm @ 2.0 GPa
+    Gamma_i= 2.0 J/m2: h_c = 2283 nm @ 0.5 GPa, 571 nm @ 1.0 GPa, 143 nm @ 2.0 GPa
+    Gamma_i=10.0 J/m2: h_c = 11416 nm @ 0.5 GPa, 2854 nm @ 1.0 GPa, 714 nm @ 2.0 GPa
+  Stoney curvature of a Si substrate (300 um) under a loaded Pd film (1 GPa): kappa = 6 sigma h_f (1-nu_s)/(E_s h_s^2)
+    h_f = 100 nm: kappa = 0.0369 1/m (R = 27.08 m) -> in-situ loading monitor
+    h_f = 1000 nm: kappa = 0.369 1/m (R = 2.71 m) -> in-situ loading monitor
+
+=== E. Deloaded alpha skin (tension) on beta substrate: channel cracking ===
+  sigma_skin = min(E eta dx/(1-nu), sigma_flow); crack when Z sigma^2 d / E >= Gamma_c, Z = 1.976 (Beuth 1992, matched film/substrate)
+  K_c =  1.0 MPa m^1/2 (Gamma = 7.01 J/m2): critical skin depth 19 um @ 150 MPa, 4.8 um @ 300 MPa, 1.2 um @ 600 MPa
+  K_c =  3.0 MPa m^1/2 (Gamma = 63.1 J/m2): critical skin depth 1.7e+02 um @ 150 MPa, 43 um @ 300 MPa, 11 um @ 600 MPa
+  K_c = 10.0 MPa m^1/2 (Gamma = 701 J/m2): critical skin depth 1.9e+03 um @ 150 MPa, 4.8e+02 um @ 300 MPa, 1.2e+02 um @ 600 MPa
+  K_c = 30.0 MPa m^1/2 (Gamma = 6.31e+03 J/m2): critical skin depth 1.7e+04 um @ 150 MPa, 4.3e+03 um @ 300 MPa, 1.1e+03 um @ 600 MPa
