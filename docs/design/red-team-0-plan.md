@@ -439,7 +439,7 @@ The H₂O twin at equal *current* does not have equal x or J: the Pd–H plateau
 - **Tail share (population):** ∫_{U > μ+3.09σ} e^{−√(E_G/U)} φ(U) dU / ∫ e^{−√(E_G/U)} φ(U) dU, evaluated in log space on a fine grid.
 - **Membrane:** σ_max ≈ 0.423 (E p² a²/t²)^{1/3}; w₀ ≈ 0.662 a (p a/(E t))^{1/3}.
 - **Exit face:** J = s · 2Z₁ · P_eq[atm], with Z₁ = P/√(2π m kT) = 7.7×10²³ cm⁻² s⁻¹ at 1 atm D₂; α-phase x = 0.015 √(P_eq/0.04 atm).
-- **Diffusion capacity:** D n_Pd/L per unit Δx.
+- **Diffusion capacity:** D n_Pd/L per unit Δx. **α-phase exit skin:** L_α ≈ x_α,max·D·n_Pd/J, with x_α,max = 0.015 and D = 5×10⁻⁷ cm² s⁻¹. The β bulk follows x_in ≈ 0.6 + J(L − L_α)/(D n_Pd).
 - **Capacitive injection:** Q = ε₀(A/d) ΔV; energy-equivalent = (Q/e) × 3.62 eV.
 - **⁴He:** 1 J = 2.62×10¹¹ ⁴He at 23.85 MeV.
 - **Residual energies** use power-law range fits to R5's ATIMA ranges in Pd: p, R ∝ E^1.75 with R(3.02) = 31 µm; α, R = 1.06 E^1.33 µm.
