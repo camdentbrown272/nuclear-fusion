@@ -1,0 +1,434 @@
+
+==============================================================================
+1. PRODUCTION BUDGET (d+d -> 4He, 23.85 MeV/He)
+==============================================================================
+4He per joule          = 2.6173e+11 /J  (R1: 2.62e11)
+4He per W*day          = 2.2614e+16  = 0.842 uL(STP)  (R5: 2.26e16, 0.84 uL)
+1 mJ of 24 MeV/He heat = 2.617e+08 4He atoms
+
+claim                                           W/cm2 lo  W/cm2 hi |  P on 2 cm2 (W)  P on 5 cm2 (W) | 4He/s (3 cm2, geo-mean)
+SRI Pd wire, ~W from ~0.94 cm2 (typ. best)         0.532     2.447 |  1.064-4.894     2.660-12.234   |               8.96e+11
+China Lake (Miles) rods                            0.020     0.200 |  0.040-0.400     0.100-1.000    |               4.97e+10
+Letts-Cravens laser-triggered foil                 0.200     2.000 |  0.400-4.000     1.000-10.000   |               4.97e+11
+Takahashi (Osaka) plate                            0.080     0.800 |  0.160-1.600     0.400-4.000    |               1.99e+11
+Tohoku/Iwamura Ni-Cu films (gas, R2)               0.080     0.480 |  0.160-0.960     0.400-2.400    |               1.54e+11
+F&P 1993 boil-off (episodic outlier)             170.588   170.588 | 341.176-341.176  852.941-852.941  |               1.34e+14
+
+Planning levels on the membrane (f_release = 1), accumulation in V_E = 0.5 L:
+   P (W)      4He/s    4He/day  dP_He per day in V_E (mbar)
+   1e-09   2.62e+02   2.26e+07                     1.84e-12
+   1e-06   2.62e+05   2.26e+10                     1.84e-09
+   1e-03   2.62e+08   2.26e+13                     1.84e-06
+   1e-02   2.62e+09   2.26e+14                     1.84e-05
+   1e-01   2.62e+10   2.26e+15                     1.84e-04
+   1e+00   2.62e+11   2.26e+16                     1.84e-03
+
+==============================================================================
+2. He STOPPING AND RANGES IN Pd (CATIMA electronic + ZBL nuclear)
+==============================================================================
+pycatima available: True (embedded table used for integration either way)
+
+Validation vs R5 (ATIMA/pycatima) alpha ranges in Pd (um):
+ E (MeV)      R5  table-integ (el.)  catima direct
+    3.70     6.1               6.26           6.13
+    5.49    10.1              10.28          10.15
+    7.69    16.2              16.34          16.20
+
+Low-energy He in Pd (birth energies relevant to H2):
+        E0      Se     Sn  Se_LS   R_path  f_nuc   R_proj  NRT vac
+     5 keV    11.7   2.74    8.1      86nm  0.271      25nm       14
+    20 keV    27.4   2.07   16.1     188nm  0.152      80nm       30
+    76 keV    59.9   1.12   31.5     372nm  0.065     236nm       50
+  23.8 MeV    23.3   0.01  556.6   92607nm  0.001   91746nm      252
+  (stopping in eV/(1e15 at/cm2); Se_LS = Lindhard-Scharff; NRT with E_d = 40 eV)
+4He recoil from 4He+gamma: E_R = E_g^2/(2Mc^2) = 76.3 keV
+Max 4He recoil from e+e- pair (p_pair <= 22.8 MeV/c): 70 keV
+
+==============================================================================
+3. He-IN-Pd TRAPPING PHYSICS -> escape length lambda = 1/sqrt(sum k^2)
+==============================================================================
+microstructure                                        k2 (cm^-2)     lambda
+annealed foil: rho_d=1e8 cm-2 only                      1.00e+08   1000.0nm
+annealed foil: rho_d=1e8 cm-2 + C_v=1e-7                3.52e+09    168.6nm
+annealed foil: rho_d=1e9 cm-2                           1.00e+09    316.2nm
+alpha/beta-cycled PdDx: rho_d=1e10                      1.00e+10    100.0nm
+alpha/beta-cycled PdDx: rho_d=1e11                      1.00e+11     31.6nm
+vacancy traps C_v=1e-6                                  3.42e+10     54.1nm
+vacancy traps C_v=1e-5                                  3.42e+11     17.1nm
+superabundant vacancies C_v=1e-4                        3.42e+12      5.4nm
+superabundant vacancies C_v=1e-3                        3.42e+13      1.7nm
+He bubbles N_b=1e18 cm-3, r_b=0.5 nm                    6.28e+11     12.6nm
+He bubbles N_b=1e19 cm-3, r_b=0.75 nm                   9.42e+12      3.3nm
+=> lambda spans ~1 nm (bubble-filled / vacancy-rich) to ~1 um (pristine annealed);
+   nominal 30 nm (cycled PdDx), bracket 3-300 nm.
+
+Interstitial He diffusivity D = D0 exp(-E_m/kT), D0 = 1e-3 cm2/s, T = 300 K:
+  E_m = 0.1 eV: D = 2.1e-05 cm2/s; time to diffuse 30 nm = 4.3e-07 s
+  E_m = 0.2 eV: D = 4.4e-07 cm2/s; time to diffuse 30 nm = 2.1e-05 s
+  E_m = 0.4 eV: D = 1.9e-10 cm2/s; time to diffuse 30 nm = 4.7e-02 s
+  -> release (if any) is prompt on all experimental time scales; trapping, not
+     diffusion speed, sets the release fraction (lambda is independent of D).
+
+Detrapping time tau = 1/(1e13 s^-1 * exp(-E_diss/kT)) at 300 K:
+  E_diss = 0.8 eV: tau = 2.8e+00 s = 3.2e-05 d
+  E_diss = 1.0 eV: tau = 6.3e+03 s = 7.3e-02 d
+  E_diss = 1.2 eV: tau = 1.4e+07 s = 1.7e+02 d
+  E_diss = 1.5 eV: tau = 1.6e+12 s = 1.8e+07 d
+  E_diss = 2.5 eV: tau = 1.0e+29 s = 1.2e+24 d
+  -> vacancy/bubble traps (>=2 eV) are permanent; dislocation traps are permanent
+     only if E_diss >~ 1.2 eV (weak-trap slow release is a flagged uncertainty).
+
+Self-trapping check (1 W into a 100 nm skin, D=1.9e-10, lambda=30 nm): G=8.7e+15 /cm3/s, interstitial C_He=4.2e+14 /cm3, k2_self=4.2e+08 cm-2 << 1e11 -> negligible
+
+==============================================================================
+4. RELEASE FRACTIONS vs BIRTH DEPTH AND BIRTH ENERGY
+==============================================================================
+Verification: 1-D lattice random walk with trapping vs analytic sinh ratio
+  lambda=30.0 nm, step=1.5 nm, p_trap/step=1.25e-03, slab 300.0 nm
+   u0 (nm)   MC exit  analytic  MC entry  analytic
+       1.5    0.9499    0.9512    0.0000    0.0000
+      15.0    0.6072    0.6065    0.0001    0.0000
+      30.0    0.3718    0.3679    0.0000    0.0001
+      60.0    0.1373    0.1353    0.0003    0.0003
+     150.0    0.0065    0.0067    0.0069    0.0067
+  max |MC-analytic| (exit) = 0.0039 (stat. sigma ~0.0025) -> PASS
+Verification: ballistic planar escape (fixed path R) vs (1-u/R)/2:
+  u/R=0.00: MC 0.5005  analytic 0.5000
+  u/R=0.25: MC 0.3744  analytic 0.3750
+  u/R=0.50: MC 0.2490  analytic 0.2500
+  u/R=0.90: MC 0.0506  analytic 0.0500
+
+Membrane L = 25 um.  Fractions: exit->gas | recoil implanted in walls | entry (electrolyte) | retained in Pd
+ lambda = 3 nm
+   thermal exit surface (0-1 nm)    exit 8.50e-01 | wall 0.00e+00 | entry 0.00e+00 | ret   0.150
+   thermal exit skin 0-10 nm        exit 2.89e-01 | wall 0.00e+00 | entry 0.00e+00 | ret   0.711
+   thermal exit skin 0-100 nm       exit 3.00e-02 | wall 0.00e+00 | entry 0.00e+00 | ret   0.970
+   thermal exit layer 0-1 um        exit 3.00e-03 | wall 0.00e+00 | entry 0.00e+00 | ret   0.997
+   thermal bulk (uniform)           exit 1.23e-04 | wall 0.00e+00 | entry 1.23e-04 | ret   1.000
+   thermal entry skin 0-100 nm      exit 0.00e+00 | wall 0.00e+00 | entry 3.00e-02 | ret   0.970
+   thermal entry surface (0-1 nm)   exit 0.00e+00 | wall 0.00e+00 | entry 8.50e-01 | ret   0.150
+   20 keV  exit surface (0-1 nm)    exit 6.25e-02 | wall 4.44e-01 | entry 0.00e+00 | ret   0.494
+   20 keV  exit skin 0-10 nm        exit 5.93e-02 | wall 4.15e-01 | entry 0.00e+00 | ret   0.526
+   20 keV  exit skin 0-100 nm       exit 2.85e-02 | wall 1.77e-01 | entry 0.00e+00 | ret   0.794
+   20 keV  exit layer 0-1 um        exit 3.03e-03 | wall 1.84e-02 | entry 0.00e+00 | ret   0.979
+   20 keV  bulk (uniform)           exit 9.67e-05 | wall 6.60e-04 | entry 7.35e-04 | ret   0.999
+   20 keV  entry skin 0-100 nm      exit 0.00e+00 | wall 0.00e+00 | entry 2.10e-01 | ret   0.790
+   20 keV  entry surface (0-1 nm)   exit 0.00e+00 | wall 0.00e+00 | entry 5.11e-01 | ret   0.489
+   76 keV  exit surface (0-1 nm)    exit 5.41e-02 | wall 4.48e-01 | entry 0.00e+00 | ret   0.498
+   76 keV  exit skin 0-10 nm        exit 5.32e-02 | wall 4.37e-01 | entry 0.00e+00 | ret   0.510
+   76 keV  exit skin 0-100 nm       exit 4.15e-02 | wall 3.38e-01 | entry 0.00e+00 | ret   0.620
+   76 keV  exit layer 0-1 um        exit 6.74e-03 | wall 5.40e-02 | entry 0.00e+00 | ret   0.939
+   76 keV  bulk (uniform)           exit 2.84e-04 | wall 2.29e-03 | entry 2.30e-03 | ret   0.995
+   76 keV  entry skin 0-100 nm      exit 0.00e+00 | wall 0.00e+00 | entry 3.80e-01 | ret   0.620
+   76 keV  entry surface (0-1 nm)   exit 0.00e+00 | wall 0.00e+00 | entry 5.04e-01 | ret   0.496
+ lambda = 30 nm
+   thermal exit surface (0-1 nm)    exit 9.84e-01 | wall 0.00e+00 | entry 0.00e+00 | ret   0.016
+   thermal exit skin 0-10 nm        exit 8.50e-01 | wall 0.00e+00 | entry 0.00e+00 | ret   0.150
+   thermal exit skin 0-100 nm       exit 2.89e-01 | wall 0.00e+00 | entry 0.00e+00 | ret   0.711
+   thermal exit layer 0-1 um        exit 3.00e-02 | wall 0.00e+00 | entry 0.00e+00 | ret   0.970
+   thermal bulk (uniform)           exit 1.20e-03 | wall 0.00e+00 | entry 1.20e-03 | ret   0.998
+   thermal entry skin 0-100 nm      exit 0.00e+00 | wall 0.00e+00 | entry 2.89e-01 | ret   0.711
+   thermal entry surface (0-1 nm)   exit 0.00e+00 | wall 0.00e+00 | entry 9.84e-01 | ret   0.016
+   20 keV  exit surface (0-1 nm)    exit 6.55e-02 | wall 4.47e-01 | entry 0.00e+00 | ret   0.487
+   20 keV  exit skin 0-10 nm        exit 6.15e-02 | wall 4.17e-01 | entry 0.00e+00 | ret   0.521
+   20 keV  exit skin 0-100 nm       exit 2.99e-02 | wall 1.81e-01 | entry 0.00e+00 | ret   0.790
+   20 keV  exit layer 0-1 um        exit 3.21e-03 | wall 1.84e-02 | entry 0.00e+00 | ret   0.978
+   20 keV  bulk (uniform)           exit 8.47e-05 | wall 6.90e-04 | entry 9.39e-04 | ret   0.998
+   20 keV  entry skin 0-100 nm      exit 0.00e+00 | wall 0.00e+00 | entry 2.08e-01 | ret   0.792
+   20 keV  entry surface (0-1 nm)   exit 0.00e+00 | wall 0.00e+00 | entry 5.10e-01 | ret   0.490
+   76 keV  exit surface (0-1 nm)    exit 5.50e-02 | wall 4.47e-01 | entry 0.00e+00 | ret   0.498
+   76 keV  exit skin 0-10 nm        exit 5.37e-02 | wall 4.38e-01 | entry 0.00e+00 | ret   0.508
+   76 keV  exit skin 0-100 nm       exit 4.25e-02 | wall 3.39e-01 | entry 0.00e+00 | ret   0.618
+   76 keV  exit layer 0-1 um        exit 6.95e-03 | wall 5.35e-02 | entry 0.00e+00 | ret   0.940
+   76 keV  bulk (uniform)           exit 3.19e-04 | wall 2.16e-03 | entry 2.19e-03 | ret   0.995
+   76 keV  entry skin 0-100 nm      exit 0.00e+00 | wall 0.00e+00 | entry 3.82e-01 | ret   0.618
+   76 keV  entry surface (0-1 nm)   exit 0.00e+00 | wall 0.00e+00 | entry 5.05e-01 | ret   0.495
+ lambda = 300 nm
+   thermal exit surface (0-1 nm)    exit 9.98e-01 | wall 0.00e+00 | entry 2.15e-39 | ret   0.002
+   thermal exit skin 0-10 nm        exit 9.84e-01 | wall 0.00e+00 | entry 2.15e-38 | ret   0.016
+   thermal exit skin 0-100 nm       exit 8.50e-01 | wall 0.00e+00 | entry 2.17e-37 | ret   0.150
+   thermal exit layer 0-1 um        exit 2.89e-01 | wall 0.00e+00 | entry 5.04e-36 | ret   0.711
+   thermal bulk (uniform)           exit 1.20e-02 | wall 0.00e+00 | entry 1.20e-02 | ret   0.976
+   thermal entry skin 0-100 nm      exit 2.17e-37 | wall 0.00e+00 | entry 8.50e-01 | ret   0.150
+   thermal entry surface (0-1 nm)   exit 2.15e-39 | wall 0.00e+00 | entry 9.98e-01 | ret   0.002
+   20 keV  exit surface (0-1 nm)    exit 6.59e-02 | wall 4.46e-01 | entry 0.00e+00 | ret   0.488
+   20 keV  exit skin 0-10 nm        exit 6.17e-02 | wall 4.16e-01 | entry 0.00e+00 | ret   0.522
+   20 keV  exit skin 0-100 nm       exit 3.02e-02 | wall 1.78e-01 | entry 0.00e+00 | ret   0.792
+   20 keV  exit layer 0-1 um        exit 3.14e-03 | wall 1.85e-02 | entry 0.00e+00 | ret   0.978
+   20 keV  bulk (uniform)           exit 1.47e-04 | wall 8.70e-04 | entry 1.04e-03 | ret   0.998
+   20 keV  entry skin 0-100 nm      exit 0.00e+00 | wall 0.00e+00 | entry 2.10e-01 | ret   0.790
+   20 keV  entry surface (0-1 nm)   exit 0.00e+00 | wall 0.00e+00 | entry 5.16e-01 | ret   0.484
+   76 keV  exit surface (0-1 nm)    exit 5.54e-02 | wall 4.50e-01 | entry 0.00e+00 | ret   0.494
+   76 keV  exit skin 0-10 nm        exit 5.38e-02 | wall 4.39e-01 | entry 0.00e+00 | ret   0.507
+   76 keV  exit skin 0-100 nm       exit 4.30e-02 | wall 3.42e-01 | entry 0.00e+00 | ret   0.615
+   76 keV  exit layer 0-1 um        exit 6.66e-03 | wall 5.20e-02 | entry 0.00e+00 | ret   0.941
+   76 keV  bulk (uniform)           exit 2.57e-04 | wall 2.12e-03 | entry 2.43e-03 | ret   0.995
+   76 keV  entry skin 0-100 nm      exit 0.00e+00 | wall 0.00e+00 | entry 3.83e-01 | ret   0.617
+   76 keV  entry surface (0-1 nm)   exit 0.00e+00 | wall 0.00e+00 | entry 5.05e-01 | ret   0.495
+ lambda = 1000 nm
+   thermal exit surface (0-1 nm)    exit 1.00e+00 | wall 0.00e+00 | entry 1.39e-14 | ret   0.000
+   thermal exit skin 0-10 nm        exit 9.95e-01 | wall 0.00e+00 | entry 1.39e-13 | ret   0.005
+   thermal exit skin 0-100 nm       exit 9.52e-01 | wall 0.00e+00 | entry 1.39e-12 | ret   0.048
+   thermal exit layer 0-1 um        exit 6.32e-01 | wall 0.00e+00 | entry 1.51e-11 | ret   0.368
+   thermal bulk (uniform)           exit 4.00e-02 | wall 0.00e+00 | entry 4.00e-02 | ret   0.920
+   thermal entry skin 0-100 nm      exit 1.39e-12 | wall 0.00e+00 | entry 9.52e-01 | ret   0.048
+   thermal entry surface (0-1 nm)   exit 1.39e-14 | wall 0.00e+00 | entry 1.00e+00 | ret   0.000
+   20 keV  exit surface (0-1 nm)    exit 6.55e-02 | wall 4.45e-01 | entry 0.00e+00 | ret   0.489
+   20 keV  exit skin 0-10 nm        exit 6.12e-02 | wall 4.14e-01 | entry 0.00e+00 | ret   0.525
+   20 keV  exit skin 0-100 nm       exit 3.01e-02 | wall 1.82e-01 | entry 0.00e+00 | ret   0.788
+   20 keV  exit layer 0-1 um        exit 3.13e-03 | wall 1.81e-02 | entry 0.00e+00 | ret   0.979
+   20 keV  bulk (uniform)           exit 1.16e-04 | wall 9.15e-04 | entry 8.47e-04 | ret   0.998
+   20 keV  entry skin 0-100 nm      exit 0.00e+00 | wall 0.00e+00 | entry 2.12e-01 | ret   0.788
+   20 keV  entry surface (0-1 nm)   exit 0.00e+00 | wall 0.00e+00 | entry 5.13e-01 | ret   0.487
+   76 keV  exit surface (0-1 nm)    exit 5.51e-02 | wall 4.45e-01 | entry 0.00e+00 | ret   0.500
+   76 keV  exit skin 0-10 nm        exit 5.39e-02 | wall 4.35e-01 | entry 0.00e+00 | ret   0.511
+   76 keV  exit skin 0-100 nm       exit 4.27e-02 | wall 3.39e-01 | entry 0.00e+00 | ret   0.618
+   76 keV  exit layer 0-1 um        exit 6.88e-03 | wall 5.31e-02 | entry 0.00e+00 | ret   0.940
+   76 keV  bulk (uniform)           exit 2.67e-04 | wall 2.31e-03 | entry 2.76e-03 | ret   0.995
+   76 keV  entry skin 0-100 nm      exit 0.00e+00 | wall 0.00e+00 | entry 3.85e-01 | ret   0.615
+   76 keV  entry surface (0-1 nm)   exit 0.00e+00 | wall 0.00e+00 | entry 5.04e-01 | ret   0.496
+
+Membrane L = 10 um.  Fractions: exit->gas | recoil implanted in walls | entry (electrolyte) | retained in Pd
+ lambda = 3 nm
+   thermal exit surface (0-1 nm)    exit 8.50e-01 | wall 0.00e+00 | entry 0.00e+00 | ret   0.150
+   thermal exit skin 0-10 nm        exit 2.89e-01 | wall 0.00e+00 | entry 0.00e+00 | ret   0.711
+   thermal exit skin 0-100 nm       exit 3.00e-02 | wall 0.00e+00 | entry 0.00e+00 | ret   0.970
+   thermal exit layer 0-1 um        exit 3.00e-03 | wall 0.00e+00 | entry 0.00e+00 | ret   0.997
+   thermal bulk (uniform)           exit 3.03e-04 | wall 0.00e+00 | entry 3.03e-04 | ret   0.999
+   thermal entry skin 0-100 nm      exit 0.00e+00 | wall 0.00e+00 | entry 3.00e-02 | ret   0.970
+   thermal entry surface (0-1 nm)   exit 0.00e+00 | wall 0.00e+00 | entry 8.50e-01 | ret   0.150
+ lambda = 30 nm
+   thermal exit surface (0-1 nm)    exit 9.84e-01 | wall 0.00e+00 | entry 5.73e-147 | ret   0.016
+   thermal exit skin 0-10 nm        exit 8.50e-01 | wall 0.00e+00 | entry 5.78e-146 | ret   0.150
+   thermal exit skin 0-100 nm       exit 2.89e-01 | wall 0.00e+00 | entry 1.34e-144 | ret   0.711
+   thermal exit layer 0-1 um        exit 3.00e-02 | wall 0.00e+00 | entry 1.54e-132 | ret   0.970
+   thermal bulk (uniform)           exit 3.00e-03 | wall 0.00e+00 | entry 3.00e-03 | ret   0.994
+   thermal entry skin 0-100 nm      exit 1.34e-144 | wall 0.00e+00 | entry 2.89e-01 | ret   0.711
+   thermal entry surface (0-1 nm)   exit 5.73e-147 | wall 0.00e+00 | entry 9.84e-01 | ret   0.016
+ lambda = 300 nm
+   thermal exit surface (0-1 nm)    exit 9.98e-01 | wall 0.00e+00 | entry 1.11e-17 | ret   0.002
+   thermal exit skin 0-10 nm        exit 9.84e-01 | wall 0.00e+00 | entry 1.11e-16 | ret   0.016
+   thermal exit skin 0-100 nm       exit 8.50e-01 | wall 0.00e+00 | entry 1.12e-15 | ret   0.150
+   thermal exit layer 0-1 um        exit 2.89e-01 | wall 0.00e+00 | entry 2.61e-14 | ret   0.711
+   thermal bulk (uniform)           exit 3.00e-02 | wall 0.00e+00 | entry 3.00e-02 | ret   0.940
+   thermal entry skin 0-100 nm      exit 1.12e-15 | wall 0.00e+00 | entry 8.50e-01 | ret   0.150
+   thermal entry surface (0-1 nm)   exit 1.11e-17 | wall 0.00e+00 | entry 9.98e-01 | ret   0.002
+ lambda = 1000 nm
+   thermal exit surface (0-1 nm)    exit 1.00e+00 | wall 0.00e+00 | entry 4.54e-08 | ret   0.000
+   thermal exit skin 0-10 nm        exit 9.95e-01 | wall 0.00e+00 | entry 4.54e-07 | ret   0.005
+   thermal exit skin 0-100 nm       exit 9.52e-01 | wall 0.00e+00 | entry 4.54e-06 | ret   0.048
+   thermal exit layer 0-1 um        exit 6.32e-01 | wall 0.00e+00 | entry 4.93e-05 | ret   0.368
+   thermal bulk (uniform)           exit 1.00e-01 | wall 0.00e+00 | entry 1.00e-01 | ret   0.800
+   thermal entry skin 0-100 nm      exit 4.54e-06 | wall 0.00e+00 | entry 9.52e-01 | ret   0.048
+   thermal entry surface (0-1 nm)   exit 4.54e-08 | wall 0.00e+00 | entry 1.00e+00 | ret   0.000
+
+SRI M4 comparison (thick wire cathode, reaction zone at the electrolyte surface):
+  uniform source 0..delta: f = (lambda/delta)(1-exp(-delta/lambda)) = 0.60 -> delta = 1.13 lambda
+  exponential source (scale delta): f = lambda/(lambda+delta) = 0.60 -> delta = 0.67 lambda
+  lambda =    3 nm -> SRI source confined to delta <= 3 nm of the wetted surface
+  lambda =   30 nm -> SRI source confined to delta <= 34 nm of the wetted surface
+  lambda =  300 nm -> SRI source confined to delta <= 338 nm of the wetted surface
+  bulk production in a 1 mm wire would give f ~ lambda/(r/2) ~ 1e-04 (lambda=30 nm)
+  => if SRI's ~60 % is real, the source is within ~lambda of the WETTED surface; in the
+     DFM that is the ENTRY face, whose He goes to the electrolyte, not the exit chamber.
+  [figure] docs/models/figs/m8_release_vs_depth.png
+  [figure] docs/models/figs/m8_release_scenarios.png
+
+==============================================================================
+5. He ACCUMULATION IN THE REACTION SKIN (if retained)
+==============================================================================
+Time for retained He to reach a given He/Pd in a skin of thickness delta over A = 3.0 cm2:
+  P (W)   delta |  He/Pd=1e-3 (TEM-visible bubbles)   He/Pd=0.3 (accel. release/blister)
+  1e-03    10nm |                       9.02e+00 d                          2.71e+03 d
+  1e-03   100nm |                       9.02e+01 d                          2.71e+04 d
+  1e-03  1000nm |                       9.02e+02 d                          2.71e+05 d
+  1e-02    10nm |                       9.02e-01 d                          2.71e+02 d
+  1e-02   100nm |                       9.02e+00 d                          2.71e+03 d
+  1e-02  1000nm |                       9.02e+01 d                          2.71e+04 d
+  1e-01    10nm |                       9.02e-02 d                          2.71e+01 d
+  1e-01   100nm |                       9.02e-01 d                          2.71e+02 d
+  1e-01  1000nm |                       9.02e+00 d                          2.71e+03 d
+  1e+00    10nm |                       9.02e-03 d                          2.71e+00 d
+  1e+00   100nm |                       9.02e-02 d                          2.71e+01 d
+  1e+00  1000nm |                       9.02e-01 d                          2.71e+02 d
+=> at >=0.1 W from a <=100 nm exit skin, He bubbles are TEM-visible within hours-days
+   and accelerated/burst release (He/M ~0.3) sets in within weeks: post-run TEM/TDS
+   of each skin sector is an independent, spatially resolved He test.
+
+==============================================================================
+6. DETECTION: atoms <-> pressure, D2 gas load, NEG, interferences
+==============================================================================
+1 mbar*L at 295 K = 2.4552e+19 atoms
+ MDPP (mbar)     V=0.15 L      V=0.5 L      V=1.0 L      V=2.0 L
+       1e-14     3.68e+04     1.23e+05     2.46e+05     4.91e+05
+       1e-13     3.68e+05     1.23e+06     2.46e+06     4.91e+06
+       1e-12     3.68e+06     1.23e+07     2.46e+07     4.91e+07
+       1e-11     3.68e+07     1.23e+08     2.46e+08     4.91e+08
+  (atoms at the minimum detectable partial pressure; SEM ~1e-14-1e-13, Faraday ~1e-11)
+Static noble-gas MS (magnetic sector, R~600-700 at m/z 4): floor ~1e5-1e6 atoms,
+  line blank ~1e6-1e7 atoms [BK]; used here: sigma_MS = 3e5, blank 3e6 +- 1e6.
+
+D2 gas load from permeation through A = 3.0 cm2 (current-density equivalent j_perm):
+  NEG capacity limit q_max = 20.0 Torr L/g = 26.7 mbar L/g (H2; D2 taken equal per molecule)
+j (mA/cm2)      D2/s Q (mbar L/s) |    P_D2 S=100    P_D2 S=400   P_D2 S=2000 | NEG g: 1 d      7 d     30 d
+       0.1  9.36e+14     3.81e-05 |      5.37e-07      1.34e-07      2.69e-08 |       0.12    0.865     3.71
+       1.0  9.36e+15     3.81e-04 |      5.37e-06      1.34e-06      2.69e-07 |        1.2     8.65     37.1
+      10.0  9.36e+16     3.81e-03 |      5.37e-05      1.34e-05      2.69e-06 |         12     86.5      371
+     100.0  9.36e+17     3.81e-02 |      5.37e-04      1.34e-04      2.69e-05 |    1.2e+02      865 3.71e+03
+  (S = NEG H2 speed in L/s, D2 speed = 0.71 S; NEG mass at the embrittlement limit, no margin)
+  NEG (St 707 Sieverts fit [BK]) equilibrium H2 pressure at q = 20 Torr L/g, T = 295 K: 6.2e-14 mbar
+  NEG (St 707 Sieverts fit [BK]) equilibrium H2 pressure at q = 20 Torr L/g, T = 473 K: 4.0e-06 mbar
+  -> operate the NEG at room temperature during static windows.
+  Pd-Ag permeator: D2 impingement conductance 31.1 L/s/cm2; with sticking 0.1, downstream fraction 0.5, 15 cm2 hot (300-400 C) tube -> S ~ 23 L/s, no capacity limit, He-tight
+  dynamic mode at j = 100 mA/cm2 with 250 L/s turbo: P_D2 = 1.5e-04 mbar
+  [figure] docs/models/figs/m8_neg_sizing.png
+
+m/z-4 species and resolving power needed vs 4He (4.002603 u):
+  D2+                            m = 4.028204  dm = 0.02560  R =     156
+  HT+                            m = 4.023874  dm = 0.02127  R =     188
+  H2D+ (ion-molecule)            m = 4.029752  dm = 0.02715  R =     147
+  3HeH+ (only with 3He spike)    m = 4.024190  dm = 0.02159  R =     185
+  12C3+                          m = 3.998353  dm = 0.00425  R =     942
+  12C3+ needs >=83.5 eV (sum of C ionisation energies 11.26+24.38+47.89) plus bond energy;
+  O4+ needs >=181 eV -> both energetically closed at the standard 70 eV electron energy.
+  HT: T/D in D2O at 10 dpm/mL = 1.4e-15 -> HT+/D2+ ~ 3e-15, negligible
+  Ion-molecule XY+ + H2 -> XYH+ in the ion source: ratio ~ k n tau (k=2e-9 cm3/s, tau=1 us):
+    P_H2/D2 = 1e-11 mbar: H2D+/HD+ (or H3+/H2+) ~ 4.9e-10
+    P_H2/D2 = 1e-09 mbar: H2D+/HD+ (or H3+/H2+) ~ 4.9e-08
+    P_H2/D2 = 1e-07 mbar: H2D+/HD+ (or H3+/H2+) ~ 4.9e-06
+    P_H2/D2 = 1e-06 mbar: H2D+/HD+ (or H3+/H2+) ~ 4.9e-05
+    P_H2/D2 = 1e-05 mbar: H2D+/HD+ (or H3+/H2+) ~ 4.9e-04
+  -> H2D+ matters only for the H2O control at >=1e-6 mbar H2 (natural HD 3.1e-4 of H2).
+  D2/He sensitivity ratio at m/z 4 used: r_S = 2.5 (He RSF 0.14-0.18, D2 ~0.35-0.45) [BK]
+
+analyzer                                 T(dm=0.0256) | required P_D2 (mbar) so that residual < MDPP/3:
+                                                      |  MDPP=1e-14  MDPP=1e-13
+unit-resolution QMS                          9.99e-01 |     1.3e-15     1.3e-14
+HR-QMS, R = 500 (e.g. fusion-grade)          9.76e-05 |     4.6e-11     4.6e-10
+magnetic-sector static MS, R = 700           4.98e-07 |     8.9e-09     8.9e-08
+Getter-cleaned manifold: P_D2 ~ q A / S = 1e-12*300/7.0 = 4.3e-11 mbar (vacuum-fired 316L: 4.3e-12); cleanup time constant V/S = 0.021 s
+Exit chamber during permeation (1 mA/cm2, 400 L/s NEG): P_D2 = 1.3e-06 mbar
+  -> unit-res QMS directly on the exit chamber sees a D2 'He-equivalent' of 3.4e-06 mbar = 4.1e+13 atoms
+  [figure] docs/models/figs/m8_d2_interference.png
+
+He loss by ion pumping in a static volume, 1-exp(-S t / V):
+device                              S_He (L/s)  V=0.5 L, 1 d      7 d  V=0.15 L, 30 min
+QMS ion source, low estimate             1e-06        15.87%   70.17%             1.19%
+QMS ion source, high estimate            1e-04       100.00%  100.00%            69.88%
+Bayard-Alpert gauge (on)                 3e-03       100.00%  100.00%           100.00%
+cold-cathode gauge (on)                  3e-02       100.00%  100.00%           100.00%
+  -> no ionising device may run on the accumulation volume; the QMS lives on the
+     manifold and sees the gas only for ~30 min per aliquot (loss corrected by spikes).
+
+==============================================================================
+7. BACKGROUND BUDGET (atoms/day entering the accumulation volume)
+==============================================================================
+Radiogenic 4He production: 8.88e+03 /day per g per ppm U; 2.10e+03 /day per g per ppm Th
+Air leak: std-He leak 1e-12 mbar L/s -> He in-leak 128.7/s = 1.11e+07/day
+  Ar tracer: Ar/He in-leak = 564 (molecular) to 1782 (viscous)
+  40Ar at 3x MDPP (1e-14 mbar) in V_E after 1 day -> detects leaks down to 5.9e-17 mbar L/s (std He)
+Glass/sapphire viewport permeation (CF40: A = 10 cm2, d = 3 mm), steady state vs air:
+  fused silica                                 K=  1e-10 ->  3.57e+06 /s =  3.08e+11 /day =  1.4e-05 W-eq
+  borosilicate 7740 (Pyrex)                    K=  1e-11 ->  3.57e+05 /s =  3.08e+10 /day =  1.4e-06 W-eq
+  borosilicate 7056/Kodial (std CF viewport)   K=  3e-12 ->  1.07e+05 /s =  9.24e+09 /day =  4.1e-07 W-eq
+  soda-lime                                    K=  1e-13 ->  3.57e+03 /s =  3.08e+08 /day =  1.4e-08 W-eq
+  aluminosilicate 1720                         K=  3e-14 ->  1.07e+03 /s =  9.24e+07 /day =  4.1e-09 W-eq
+  sapphire (single-crystal Al2O3)              K=  1e-18 ->  3.57e-02 /s =  3.08e+03 /day =  1.4e-13 W-eq
+  check vs R5 (Pyrex 100 cm2, 2 mm): 5.3e+06 /s (R5: ~5e6)
+He solubility-diffusion through the Pd membrane from air-saturated electrolyte:
+  E_sol = 2.0 eV: C_He = 5.6e-22 /cm3 -> 5.8e-19 atoms/day through the lattice (nil)
+  E_sol = 2.9 eV: C_He = 4.3e-37 /cm3 -> 4.4e-34 atoms/day through the lattice (nil)
+  Dissolved He in 100 mL air-saturated electrolyte (Bunsen 0.0087): 1.22e+14 atoms (R5: 1.2e14)
+
+--- recommended build ---
+item                                                       atoms/day      sigma  W-eq (f=1)
+air leaks, CF seals (1e-13 std-He, Ar-traced)               1.11e+06   2.78e+05     4.9e-11
+cell->exit seal leak (1e-12, 0.05 ppm He, Kr-traced)        1.06e+05   3.18e+04     4.7e-12
+sapphire CF40 viewport                                      3.08e+03   3.08e+03     1.4e-13
+ceramic (alumina-brazed) feedthroughs                       1.00e+02   1.00e+02     4.4e-15
+polymers: Kapton wire only, 14 d after vent                 1.00e+02   1.00e+02     4.4e-15
+316L radiogenic (5 kg, 0.5/1 ppb U/Th, rel.<=1e-3)          3.27e+01   3.27e+01     1.4e-15
+NEG radiogenic (50 g, 1 ppm U+Th, RT, rel. 1 %)             5.49e+03   5.49e+03     2.4e-13
+Pd stock 4He (1e9/g annealed, 10 % over 14 d)               6.44e+05   6.44e+05     2.8e-11
+He standards (3-valve pipette, pumped interspace)           1.00e+00   1.00e+00     4.4e-17
+He permeation through Pd lattice                            0.00e+00   0.00e+00     0.0e+00
+TOTAL                                                       1.87e+06   7.02e+05     8.3e-11
+
+--- naive build ---
+item                                                       atoms/day      sigma  W-eq (f=1)
+air leaks, CF seals (1e-12 std-He, no tracer)               1.11e+07   1.11e+07     4.9e-10
+cell->exit seal leak (1e-12, air-level He)                  1.11e+07   1.11e+07     4.9e-10
+borosilicate (7056) CF40 viewport                           9.24e+09   9.24e+08     4.1e-07
+4 glass-sealed SHV/BNC feedthroughs                         7.40e+08   2.22e+08     3.3e-08
+epoxy detector mounts (0.2 cm3, 2 mm), 14 d                 4.92e+09   4.92e+09     2.2e-07
+316L radiogenic                                             3.27e+01   3.27e+01     1.4e-15
+NEG radiogenic, NEG heated (rel. 100 %)                     5.49e+05   5.49e+05     2.4e-11
+Pd stock 4He (1e10/g as received)                           6.44e+06   6.44e+06     2.8e-10
+He standard, 2-valve pipette, unpumped                      4.32e+07   4.32e+07     1.9e-09
+He permeation through Pd lattice                            0.00e+00   0.00e+00     0.0e+00
+TOTAL                                                       1.50e+10   5.01e+09     6.6e-07
+  [figure] docs/models/figs/m8_background_budget.png
+
+==============================================================================
+8. MINIMUM DETECTABLE 4He PRODUCTION (5 sigma) AND EQUIVALENT POWER
+==============================================================================
+Accumulation volume V_E = 0.5 L, manifold V_A = 0.15 L (aliquot fraction 0.231), sample cylinder 0.05 L (fraction 0.071); QMS He MDPP = 1e-13 mbar
+mode                                        sig_inst    sig_D2 |    MD power (W), f_release = 1
+                                             (atoms)   (atoms) |       1 d       7 d      30 d
+U1 unit-res QMS on loaded exit chamber       1.2e+06   4.1e+13 |   9.1e-03   1.3e-03   3.0e-04
+U2 unit-res QMS, getter-cleaned aliquot      1.6e+06   1.7e+09 |   3.8e-07   5.4e-08   1.3e-08
+H1 HR-QMS (R=500), cleaned aliquot           1.6e+06   5.0e+04 |   3.9e-10   1.6e-10   1.6e-10
+S1 external sector MS + 3He ID               1.5e+07   2.8e+02 |   3.2e-09   4.9e-10   1.9e-10
+N1 HR-QMS, naive build                       1.6e+06   5.0e+04 |   1.1e-06   1.1e-06   1.1e-06
+  (MD rate [He/s] = MD power x 2.62e11; background sigma grows linearly with t, so
+   background-limited modes reach a time-independent floor = 5 sigma_B/day / 86400 s)
+  U1 unit-res QMS on loaded exit chamber    : MD rate (7 d) = 3.4e+08 He/s
+  U2 unit-res QMS, getter-cleaned aliquot   : MD rate (7 d) = 1.4e+04 He/s
+  H1 HR-QMS (R=500), cleaned aliquot        : MD rate (7 d) = 4.3e+01 He/s
+  S1 external sector MS + 3He ID            : MD rate (7 d) = 1.3e+02 He/s
+  N1 HR-QMS, naive build                    : MD rate (7 d) = 2.9e+05 He/s
+
+Post-run melt (membrane 90 mg, stock 1e9 He/g after anneal, 50 % coupon scatter, furnace blank 1e8 +- 2e7): sigma = 4.9e+07 atoms
+  run of  7 d: MD retained-He production = 408 He/s = 1.6e-09 W (divided by retained fraction)
+  run of 30 d: MD retained-He production = 95 He/s = 3.6e-10 W (divided by retained fraction)
+
+MD power by reaction-zone scenario (H1 chain, 7 d; thermal birth; exit-chamber channel):
+scenario                   f_exit (l=30)  MD (W) l=30     MD band l=3..300 (W)  retained
+exit surface (0-1 nm)           9.84e-01      1.7e-10     1.6e-10-1.9e-10         0.016
+exit skin 0-10 nm               8.50e-01      1.9e-10     1.7e-10-5.6e-10         0.150
+exit skin 0-100 nm              2.89e-01      5.6e-10     1.9e-10-5.4e-09         0.711
+exit layer 0-1 um               3.00e-02      5.4e-09     5.6e-10-5.4e-08         0.970
+bulk (uniform)                  1.20e-03      1.4e-07     1.4e-08-1.3e-06         0.998
+entry skin 0-100 nm             0.00e+00          inf     7.5e+26-1.6e+290        0.711
+entry surface (0-1 nm)          0.00e+00          inf     7.6e+28-1.6e+290        0.016
+
+Calorimetric floor: 5 mW (R5 target) / 20-60 mW (R6 Seebeck)
+  U1 unit-res QMS on loaded exit chamber    : calorimetry(5 mW)/MD(7 d) = 3.8e+00
+  U2 unit-res QMS, getter-cleaned aliquot   : calorimetry(5 mW)/MD(7 d) = 9.3e+04
+  H1 HR-QMS (R=500), cleaned aliquot        : calorimetry(5 mW)/MD(7 d) = 3.1e+07
+  S1 external sector MS + 3He ID            : calorimetry(5 mW)/MD(7 d) = 1.0e+07
+  N1 HR-QMS, naive build                    : calorimetry(5 mW)/MD(7 d) = 4.5e+03
+
+ADR-002 arithmetic check: ADR says '~1e15 atoms per mJ'. Correct: 1 mJ = 2.62e+08 He; the calorimetric floor 5-60 mW x 1 day = 1.1e+14-1.4e+15 He.
+  [figure] docs/models/figs/m8_mdp_vs_time.png
+
+==============================================================================
+9. GEOMETRY NUMBERS
+==============================================================================
+Instrument floor vs exit-chamber volume (H1 chain; background term unchanged):
+  V_E = 0.3 L: aliquot fraction 0.333, sigma_inst = 1.1e+06 atoms, MD(1 d) = 2.9e-10 W
+  V_E = 0.5 L: aliquot fraction 0.231, sigma_inst = 1.6e+06 atoms, MD(1 d) = 3.9e-10 W
+  V_E = 1.0 L: aliquot fraction 0.130, sigma_inst = 2.8e+06 atoms, MD(1 d) = 6.4e-10 W
+  V_E = 2.0 L: aliquot fraction 0.070, sigma_inst = 5.3e+06 atoms, MD(1 d) = 1.2e-09 W
+  -> volume matters little once background-limited; keep V_E <= 0.5 L for the in-situ floor
+     and so that a 1 cm3 split aliquot (dilution ~1/500) keeps W-level signals in QMS range.
+  0.001 W for 7 d -> 1.6e+14 atoms -> 1.3e-05 mbar in V_E; 1 cm3 split -> 8.6e-08 mbar in manifold
+  1 W for 7 d -> 1.6e+17 atoms -> 1.3e-02 mbar in V_E; 1 cm3 split -> 8.6e-05 mbar in manifold
+
+NEG mass for a static window with 2x margin (A = 3 cm2):
+  j =    0.1 mA/cm2: 1 d    0.247 g | 7 d     1.73 g | 30 d     7.41 g
+  j =    1.0 mA/cm2: 1 d     2.47 g | 7 d     17.3 g | 30 d     74.1 g
+  j =   10.0 mA/cm2: 1 d     24.7 g | 7 d      173 g | 30 d      741 g
+  j =  100.0 mA/cm2: 1 d      247 g | 7 d 1.73e+03 g | 30 d 7.41e+03 g
+Recommended: ~50-100 g St 707/St 172 (CapaciTorr D400-D2000 class) supports 7-day windows
+  at <=1-2 mA/cm2; higher flux needs dynamic pumping, shorter windows or a Pd-Ag permeator.
