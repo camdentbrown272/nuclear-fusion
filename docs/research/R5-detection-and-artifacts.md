@@ -2,33 +2,22 @@
 
 **Scope.** How to measure a claimed LENR (cold fusion) effect so that the result holds up under expert review: calorimetry, neutrons, charged particles, tritium, ⁴He, gammas and X-rays, and transmutation. For each: sensitivity, backgrounds, geometry, cost and known artifacts. Also the statistical design and a recommended integrated detector layout for a single cell.
 
-**Where the numbers come from (read this first).** Only limited web checking was possible in this session: most publisher and preprint domains were blocked, and the search quota ran out after a few queries. Values are tagged as follows:
-- **[C]**: computed here and reproducible. Ion ranges and residual energies come from the ATIMA/`pycatima` stopping-power code (SRIM-type low-energy stopping). Poisson, Currie and Feldman–Cousins numbers were computed with numpy/scipy. Isotope masses, reaction Q-values and simple transport estimates are from first principles.
-- **[V]**: literature or vendor values quoted from domain knowledge. Check each against the cited primary source before relying on it for a design decision.
-- Untagged values are standard textbook constants.
+**Where the numbers come from (read this first).** Web checking was limited in this session (most publisher/preprint domains blocked; search quota exhausted). **[C]** = computed here and reproducible: ion ranges and residual energies from the ATIMA/`pycatima` stopping-power code (SRIM-type low-energy stopping); Poisson/Currie/Feldman–Cousins statistics with numpy/scipy; isotope masses, Q-values and simple transport estimates from first principles. **[V]** = literature or vendor values from domain knowledge; check against the cited primary source before using them for a design decision. Untagged values are textbook constants.
 
 ---
 
 ## 0. Executive summary
 
-1. **Use the per-watt yardstick.** One watt of d+d fusion by the known branches would give about 8.6×10¹¹ n/s, roughly **10 Sv/h at 1 m** [C]. By the claimed d+d→⁴He channel it would give **2.6×10¹¹ ⁴He/s** [C]. Every LENR heat claim therefore implies either a lethal neutron field (never observed) or a helium production rate that has to be measured quantitatively.
-2. **Tritium and neutrons are extremely sensitive but, historically, the wrong scale.** 1 mW·day of the t+p branch in 50 mL of electrolyte gives about 4.8×10³ Bq/mL [C], against a liquid-scintillation (LSC) detection limit of about 0.15 Bq/mL. Neutron upper limits of about 0.01 n/s at 50 mW mean that neutrons are suppressed by ≥10¹³ relative to heat [C]. Use these channels to set upper limits and branching ratios, not as the main evidence for heat.
-3. **Helium-4 is the only claimed product expected at a level comparable to the heat, and it has the worst background: air, at 5.24 ppm.** One W·day of ⁴He equals the helium in **0.16 cm³ of air** [C]. The key geometric lever is a **sealed all-metal cell with a small headspace (≤30 cm³)**. In that volume, 100 mW for 2–4 days pushes the headspace ⁴He **above the ambient 5.24 ppm**, which in-leaking air can never do [C].
-4. **Calorimetry must be position-independent and done in a closed cell.** Use a closed cell with an internal recombiner and a pressure transducer. Use a Seebeck-envelope or mass-flow calorimeter whose calibration changes by less than 0.2% when a heater is moved between the cathode, recombiner and headspace positions. Aim for σ ≈ max(5 mW, 0.3% of P_in). Keep input power low (≤2–5 W), because most errors scale with P_in. This design addresses Shanahan's calibration-constant-shift critique and the recombination (Jones/Hansen) critique directly.
-5. **A heat claim needs a size criterion as well as a significance criterion.** 100 eV per Pd atom in a 1 g cathode is 25 Wh, i.e. about 10 days at 100 mW [C]. That is roughly 600× the enthalpy of loading the Pd with deuterium.
-6. **Neutrons: use a ³He well counter, not single tubes or bubble detectors.** Specifically: a 4π HDPE well counter with 12 or more ³He tubes behind about 4 cm HDPE-equivalent moderator, with a Cd liner, borated-PE shield and plastic-scintillator muon veto, in a basement. Expected efficiency is 15–35% [V]. The detection limit is about 0.01 n/s per day at 0.05 cps background [C]. **Systematic stability of the background, not counting time, sets the floor**: a 2% background systematic at 0.05 cps limits discovery to ≥0.017 n/s regardless of run time [C]. That is why a twin control station and cell swaps are mandatory.
-7. **CR-39 is cheap but has the weakest credibility of the nuclear channels.** Use a **differential Mylar filter stack** on each chip (0/6/25/60/150 µm). The windows separate p, t, ³He and α [C]. The 150 µm window is an internal null: it stops 3 MeV protons, so it should show only background. Note that the 6 µm Mylar used in past SPAWAR-type work stops ³He but passes tritons and all radon alphas [C]. Count every chip blind.
-8. **Gamma spectra: HPGe resolution matters.** In NaI or LaBr₃, the ²¹⁴Bi line at **2204 keV** (radon daughter) cannot be separated from the **2223 keV** n-capture-on-hydrogen line. LaBr₃ also has an internal ²²⁷Ac alpha background at 1.6–2.8 MeV electron-equivalent (MeVee). The window above 3 MeV (up to 25 MeV) is nearly background-free once muons are vetoed. That window is the best place to test the 23.8 MeV and e⁺e⁻/bremsstrahlung channels.
-9. **Transmutation evidence based on elements appearing with natural isotope ratios is contamination until proven otherwise.** SIMS and ICP-MS isotope "anomalies" are dominated by hydride and oxide interferences (e.g. ¹⁰⁴PdD⁺ at mass 106), matrix effects and ordinary chemical fractionation, such as Li isotopes during electrolysis.
-10. **Integrated design, in order of credibility per dollar:**
-    - closed-cell dual-method calorimetry;
-    - sealed-headspace ⁴He sampling with getter purification and high-resolution MS;
-    - distilled-sample LSC tritium with a full inventory;
-    - ³He well counter with muon veto and a "dummy" (neutron-blind) tube;
-    - blind CR-39 filter stacks;
-    - a LaBr₃/CeBr₃ back-to-back pair or an HPGe detector.
-
-    Run everything twice: identical **twin stations** (D₂O/Pd test cell vs. H₂O/Pd or D₂O/Pt control), a pre-registered analysis, blinded data, and at least one cell swap between stations.
+1. **Per-watt yardstick.** 1 W of conventional d+d fusion means ~8.6×10¹¹ n/s (**~10 Sv/h at 1 m**); via the claimed d+d→⁴He channel it means **2.6×10¹¹ ⁴He/s** [C]. Every heat claim therefore implies either a lethal neutron field (never seen) or a helium rate that must be measured quantitatively.
+2. **Tritium and neutrons are hugely sensitive but historically off-scale.** 1 mW·day of t+p in 50 mL gives ~4.8×10³ Bq/mL vs an LSC limit of ~0.15 Bq/mL; 0.01 n/s limits at 50 mW imply ≥10¹³ neutron suppression [C]. Use them for branching-ratio limits, not as primary evidence.
+3. **⁴He is the only product claimed at heat-commensurate levels, and its background (air, 5.24 ppm) is the worst.** 1 W·day of ⁴He = the He in **0.16 cm³ of air** [C]. Key lever: a **sealed all-metal cell with ≤30 cm³ headspace**, where 100 mW for 2–4 days drives ⁴He **above ambient**, something air in-leakage cannot do [C].
+4. **Calorimetry:** closed cell with internal recombiner and pressure transducer; Seebeck-envelope or mass-flow calorimeter whose calibration moves <0.2% when a heater is relocated (cathode/recombiner/headspace); σ ≈ max(5 mW, 0.3% P_in); keep P_in ≤2–5 W. This directly answers Shanahan's calibration-constant-shift and the Jones/Hansen recombination critiques.
+5. **Require magnitude, not just significance:** ≥100 eV per Pd atom (25 Wh for 1 g Pd ≈ 10 days at 100 mW), ~600× the PdD loading enthalpy [C].
+6. **Neutrons:** a 4π HDPE well counter (≥12 ³He tubes, ~4 cm HDPE-equivalent moderator, Cd + borated-PE shield, muon veto, basement) gives ε ≈ 15–35% [V] and a 1-day MDA ≈ 0.01 n/s at 0.05 cps [C]. **Background stability, not counting time, sets the floor**: a 2% systematic at 0.05 cps caps discovery at ≥0.017 n/s [C], hence twin stations and cell swaps.
+7. **CR-39** is cheap and the least credible nuclear channel. Use a **differential Mylar stack** (0/6/25/60/150 µm) that separates p/t/³He/α, with 150 µm as a built-in null [C]. The 6 µm Mylar of past SPAWAR-type work passes tritons and all radon alphas [C]. Count blind.
+8. **Gamma:** NaI/LaBr₃ cannot separate ²¹⁴Bi **2204 keV** from n-H **2223 keV**; LaBr₃'s internal ²²⁷Ac alphas sit at 1.6–2.8 MeVee. The vetoed 3–25 MeV window is nearly empty and is where the 23.8 MeV and e⁺e⁻/bremsstrahlung channels should be tested.
+9. **Transmutation:** new elements with natural isotope ratios are contamination until proven otherwise; SIMS/ICP-MS "anomalies" are dominated by hydride/oxide interferences (e.g. ¹⁰⁴PdD⁺ at 106), matrix effects and chemical (e.g. Li-isotope) fractionation.
+10. **Integrated suite, ranked by credibility per dollar (§11.2):** sealed-headspace ⁴He with getter + high-resolution MS (highest, if heat is present); closed-cell dual-method calorimetry (the indispensable gate); distilled-sample LSC tritium with inventory; ³He well counter with veto and a neutron-blind dummy tube; blind CR-39 stacks; a back-to-back LaBr₃/CeBr₃ pair or HPGe. Run as **twin stations** (D₂O/Pd vs H₂O/Pd or D₂O/Pt), pre-registered, blinded, with at least one cell swap.
 
 ---
 
@@ -102,11 +91,7 @@
 
 ### 3.2 Backgrounds
 - **Cosmic-ray neutrons, sea level, New York City reference (Gordon et al. 2004):** integral flux above 10 MeV = 3.6×10⁻³ cm⁻²s⁻¹. The total over all energies is ~1.3×10⁻² cm⁻²s⁻¹ [V]. The spectrum has a thermal peak, a 1/E region, an evaporation peak at 1–2 MeV that overlaps 2.45 MeV, and a cascade peak near 100 MeV.
-- **Variation:**
-  - barometric coefficient ≈ −0.7%/hPa [V], so typical weather swings of ±20 hPa change the rate by **±14%**;
-  - solar-cycle modulation ~5–15% at mid-latitudes, and Forbush decreases of up to −10–20% within a day [V];
-  - altitude: ×3–4 at 1.6 km and ×10 at 3 km [V];
-  - overburden: the hadronic attenuation length is ~150 g/cm², so **2–3 m of concrete or soil (~500–700 g/cm²) reduces the rate ~×20–100** [C]. A basement is the cheapest background reduction available.
+- **Variation:** barometric coefficient ≈ −0.7%/hPa [V], so ±20 hPa weather swings give **±14%**; solar-cycle modulation ~5–15% at mid-latitudes and Forbush decreases up to −10–20% in a day [V]; altitude ×3–4 at 1.6 km, ×10 at 3 km [V]; overburden: with a hadronic attenuation length ~150 g/cm², **2–3 m of concrete/soil (~500–700 g/cm²) cuts the rate ~×20–100** [C]. A basement is the cheapest background reduction available.
 - **Muons:** ~1 cm⁻²min⁻¹ at sea level (barometric coefficient ≈ −0.15%/hPa) [V]. Muon capture and spallation in lead or steel near the detector produce **multi-neutron bursts**, which is exactly what "neutron burst" claims look like. Keep high-Z material out of the moderator volume, or veto it.
 - **Accidental coincidences:** at B = 0.05 cps with a 100 µs gate, about 8 accidental doublets per year; at B = 1 cps, about 3×10³ per year [C].
 - **Other sources:** people standing nearby (hydrogenous bodies reflect and moderate neutrons, changing the rate by a few %), water level changes in the adjacent flow calorimeter, neutron sources used elsewhere in the building, and radon (via gamma pile-up and PSD leakage in scintillators).
@@ -135,14 +120,14 @@
 | 0.5 (surface, shielded) | 0.11 | 0.037 | 0.014 |
 | 2.0 (surface, unshielded) | 0.22 | 0.075 | 0.028 |
 
-### 3.5 History of LENR neutron claims
-- **Fleischmann & Pons (1989):** claimed ~4×10⁴ n/s based on a 2.2 MeV gamma peak. Petrasso et al. (MIT) showed the peak's width and energy, and the absent Compton edge, were inconsistent with capture gammas. The claim was withdrawn [V].
-- **Jones et al., BYU (Nature 1989):** a capture-gated spectrometer with ~1% efficiency recorded a ~10⁻³ cps excess at 2.5 MeV, a marginal ~3σ result implying order 0.1–1 n/s. It was never reproduced at higher significance [V].
-- **De Ninno/Scaramuzzi, ENEA Frascati (1989):** Ti chips in pressurized D₂ with thermal cycling; BF₃ counters recorded bursts. The effect was intermittent and not confirmed with better detectors [V]. Thermal cycling and pressure changes are exactly the conditions that cause microphonics.
-- **Menlove et al., LANL/BYU (1990):** high-efficiency ³He counters recorded bursts from Ti/D₂. Cosmic spallation multiplets, which a veto or underground site reduces, are a known burst mimic. No reproducible signal was established [V].
-- **Harwell, Caltech, MIT, Utah (Salamon) (1989–90):** null results with upper limits [V].
-- **Berlinguette et al. (Google/UBC/MIT/LBNL, Nature 2019):** found "no evidence" for neutrons or 2.223 MeV gammas above background. *Pull their exact detection limits from the paper's supplementary information before citing them.*
-- **Conventional but anomalous-looking sources of real neutrons:** fracto-emission ("fractofusion") in cracking TiDₓ or PdDₓ, and pyroelectric acceleration (Naranjo et al., Nature 2005). These produce genuine *hot* d–d neutrons. A real neutron signal correlated with cracking or thermal cycling is therefore not evidence of LENR.
+### 3.5 History of LENR neutron claims [V]
+- **Fleischmann & Pons (1989):** ~4×10⁴ n/s inferred from a 2.2 MeV gamma peak; Petrasso et al. (MIT) showed its width, energy and missing Compton edge were inconsistent with capture gammas. Withdrawn.
+- **Jones et al., BYU (1989):** ~1%-efficient capture-gated spectrometer, ~10⁻³ cps excess at 2.5 MeV (~3σ, order 0.1–1 n/s). Never reproduced at higher significance.
+- **De Ninno/Scaramuzzi, ENEA (1989):** Ti chips in pressurized D₂ under thermal cycling; bursts in BF₃ counters; intermittent and not confirmed with better detectors. Thermal and pressure cycling is exactly what excites microphonics.
+- **Menlove et al., LANL/BYU (1990):** bursts in high-efficiency ³He counters from Ti/D₂; cosmic spallation multiplets are a known mimic. No reproducible signal.
+- **Harwell, Caltech, MIT, Utah/Salamon (1989–90):** nulls with upper limits.
+- **Berlinguette et al. (Nature 2019):** no neutrons or 2.223 MeV gammas above background. *Take their exact limits from the SI before citing.*
+- **Real but conventional neutrons:** fracto-emission in cracking TiDₓ/PdDₓ and pyroelectric acceleration (Naranjo et al. 2005) produce genuine *hot* d–d neutrons, so neutrons correlated with cracking or thermal cycling are not evidence of LENR.
 
 ---
 
@@ -160,10 +145,7 @@
 | α 7.69 MeV (²¹⁴Po) | 55.4 | 56.9 | 40.7 | 16.2 | 16.9 | 71.7 | 7.1 |
 | p 14.7 MeV (d+³He) | 1834 | 1895 | 1240 | 412 | 438 | 2383 | 229 |
 
-**Consequences:**
-- Only protons from the outer ~30 µm of a Pd cathode can escape.
-- Tritons escape from the outer ~5 µm, and ³He from the outer ~1.4 µm.
-- **Nothing escapes through electrolyte thicker than 0.15 mm.** CR-39 immersed in electrolyte, or separated from the cathode by a liquid gap, sees only particles born within microns of its surface.
+**Consequences:** only protons from the outer ~30 µm of a Pd cathode escape (tritons ~5 µm, ³He ~1.4 µm), and **nothing crosses more than 0.15 mm of electrolyte**. CR-39 immersed in electrolyte, or behind a liquid gap, sees only particles born within microns of its surface.
 
 ### 4.2 Filter stack: residual energy (MeV) behind Mylar [C]
 
@@ -178,33 +160,20 @@
 
 Equivalents in Al: 25 µm stops ≤5.5 MeV α and leaves a 3 MeV proton at 2.42 MeV; 45 µm Al stops ²¹⁴Po alphas and leaves the proton at 1.84 MeV [C].
 
-**Recommended stack on each chip:** bare / 6 / 25 / 60 / 150 µm Mylar. How each window is read:
-- **60 µm window: the proton window.** It stops all natural alphas up to 8.78 MeV and leaves 3 MeV protons at ~1.9 MeV, near the track-diameter optimum.
-- **150 µm window: the null.** It stops 3.02 MeV protons, so it should show only intrinsic background and neutron recoils.
-- **6–12 µm step:** distinguishes tritons.
-- **Bare window:** the only one that sees ³He, which has a 3.5 µm range.
+**Recommended stack on each chip:** bare / 6 / 25 / 60 / 150 µm Mylar. The **60 µm window is the proton window**: it stops all natural alphas up to 8.78 MeV and leaves 3 MeV protons at ~1.9 MeV, near the track-diameter optimum. The **150 µm window is the null**: it stops 3.02 MeV protons, so it should show only intrinsic background and neutron recoils. The 6→12 µm step tags tritons; only the bare window sees ³He (3.5 µm range).
 
 ### 4.3 CR-39 protocol, sensitivity, background
 - **Etch:** 6–6.5 M NaOH at 70 °C for 6–7 h, the SPAWAR/Lipson-type protocol [V]. The bulk etch rate is ~1.2–1.5 µm/h, so ~8–10 µm is removed per face [V]. Measure it for every batch from chip thickness or the fission-fragment method.
 - **Track diameters (indicative [V]; calibrate in-house):** α 3–8 MeV → 8–15 µm. Protons 1–3 MeV → 3–8 µm, shrinking with energy; a 3 MeV proton barely develops unless degraded or etched longer. A 1 MeV triton behaves roughly like a 0.33 MeV proton. **0.82 MeV ³He has a 3.5 µm range, less than the ~9 µm etched away**, so it survives only as shallow round pits. Detecting ³He needs a short 1–2 h etch or sequential etching.
 - **Calibration:** ²⁴¹Am with Mylar degraders; an accelerator proton or deuteron beam; a DD neutron generator for recoils. The MIT ICF group's calibration method (Séguin et al. 2003) is the reference.
 - **Background:** intrinsic ~10–60 tracks/cm² for fresh sheet [V]. Radon plating on bare surfaces adds about 2–3 tracks/cm² per kBq·h/m³ [V]; 50 Bq/m³ for one week gives **~17–25 tracks/cm²** [C]. Store and expose chips in N₂-purged, radon-tight containers. Include travel blanks and in-room blanks.
-- **Artifacts:**
-  - chemical attack by electrolyte (Cl⁻, Li⁺, PdCl₂ plating bath, oxidizers);
-  - gas bubbles and mechanical contact from wires or pressure;
-  - heating: bulk etch rate and track fading change above ~50–60 °C;
-  - UV or gamma exposure altering etch response;
-  - Pd deposits catalysing local etching;
-  - scanner or observer bias.
+- **Artifacts:** chemical attack by electrolyte (Cl⁻, Li⁺, PdCl₂ plating bath, oxidizers); bubbles and mechanical contact; heating above ~50–60 °C (etch-rate change, track fading); UV/gamma exposure; Pd deposits catalysing local etching; scanner or observer bias.
 - **SPAWAR triple tracks** (Mosier-Boss et al. 2009) were attributed to ¹²C(n,n′)3α, which requires E_n ≥ 9.6 MeV. Rough estimate [C, σ ≈ 0.25 b, sensitive depth 2×10 µm]: cosmic neutrons above 10 MeV (≈4×10³ n/cm² in 2 weeks) give ~0.08 triple tracks/cm². Ten per cm² needs ~6×10⁵ n/cm² of ≥10 MeV neutrons.
   - If those neutrons came from secondary d–t reactions (d–t/d–d ≈ 10⁻³), the primary d–d rate would be ~10³ n/s. A ³He well counter would see that trivially, and the recoil track density would be enormous.
   - **Cross-modality consistency is the test.** Kowalski and others showed that pits resembling tracks form through chemical and mechanical damage [V]. SPAWAR responded with tracks behind 6 µm Mylar and on the back side of chips, but 6 µm Mylar does not stop radon alphas or tritons (table 4.2).
 
 ### 4.4 Silicon detectors (surface-barrier / PIPS)
-- **Advantages:**
-  - resolution ~20 keV for α in vacuum;
-  - background < 0.05 counts/h above 3 MeV for 450 mm² [V: vendor alpha-PIPS spec];
-  - a minimum-ionizing muon deposits only ~0.1 MeV in 300 µm, so a threshold at ≥1 MeV rejects gammas and muons.
+- **Advantages:** ~20 keV α resolution in vacuum; background < 0.05 counts/h above 3 MeV for 450 mm² [V: vendor alpha-PIPS spec]; a minimum-ionizing muon deposits only ~0.1 MeV in 300 µm, so a ≥1 MeV threshold rejects gammas and muons.
 - **Geometry:** a disk detector of radius R = 12 mm at d = 10 mm covers Ω/4π = 0.18; at 5 mm, 0.31 [C].
 - **Use:** only in vacuum or He gas. For electrolysis, make the cathode a **10–25 µm Pd foil window**: 3 MeV protons emerge at 2.4 MeV through 10 µm and 1.0 MeV through 25 µm [C]. D₂ permeating into the detector chamber must be pumped away.
 - **Prior work:** Lipson et al. reported ~3 MeV protons and 11–16 MeV alphas from Pd/PdO:Dₓ under desorption or electrolysis. Kasagi, and the Rolfs/Raiola and Czerski groups, measured enhanced electron screening in d+d on metal targets at 5–20 keV beam energies [V]. That accelerator result is real and credible, but the reaction channels are the conventional ones.
@@ -220,11 +189,7 @@ Equivalents in Al: 25 µm stops ≤5.5 MeV α and leaves a 3 MeV proton at 2.42 
   - low-level counter (8 mL, 500 min, B ≈ 1.5 cpm): ≈ **2 Bq/L**;
   - ³He ingrowth mass spectrometry is more sensitive still (1 Bq yields 3.2×10⁷ ³He atoms per year) but needs resolving power ≥510 to separate ³He from HD (table 6).
 - **Electrolytic enrichment [C].** The T/D separation factor α ≈ 2 (range 1.5–2.5 [V]). In an open cell topped up with fresh D₂O at constant volume, x/x₀ = α − (α−1)·e^(−n/α), where n is the number of cell volumes electrolyzed. For α = 2: 1.39 after 1 volume, 1.78 after 3, 1.99 as n → ∞. Batch electrolysis without top-up follows x/x₀ = (V/V₀)^(1/α−1); reducing the volume 10× gives ×3.2. **Any tritium increase smaller than ~3× the starting level, without a full inventory balance, is not evidence.** A closed cell with a recombiner removes enrichment by gas loss, but tritium still partitions into the Pd.
-- **Contamination:**
-  - D₂O lots vary widely, typically 10¹–10³ dpm/mL [V]; reactor-derived D₂O can be orders of magnitude higher;
-  - some as-received Pd lots have been reported to contain tritium [V: Texas A&M/Wolf];
-  - laboratory tritium sources and luminous items;
-  - the spiking allegations around the 1990 Texas A&M claims.
+- **Contamination:** D₂O lots vary widely (typically 10¹–10³ dpm/mL [V]; reactor-derived D₂O far higher); some as-received Pd lots reportedly contained tritium [V: Texas A&M/Wolf]; laboratory tritium sources and luminous items; the 1990 Texas A&M spiking allegations. Assay every lot and keep chain of custody.
 - **LSC artifacts:** chemiluminescence and photoluminescence from alkaline LiOD samples, and quench from Pd colloids. **Always distill and neutralize before counting**, dark-adapt the vials, and repeat each count.
 - **Scale check:** 1 mW·day of the t+p branch in 50 mL gives 4.8×10³ Bq/mL [C]. Historical LENR tritium claims correspond to ≪10⁻⁶ of the heat and cannot be tied to it energetically.
 
@@ -241,17 +206,8 @@ Equivalents in Al: 25 µm stops ≤5.5 MeV α and leaves a 3 MeV proton at 2.42 
 | ³He vs H₃ (3.023475) | 0.00745 | 405 |
 
 - **Practical note:** separating a trace ⁴He peak on a D₂ peak 10⁶× larger needs R ≈ 500+ together with good abundance sensitivity, or else removing the D₂ first.
-- **Recommended analysis chain:**
-  1. an all-metal sample cylinder (VCR or bellows valves, baked, evacuated);
-  2. Zr-V-Fe or Ti getter to remove D₂, O₂ and other reactive gases (factor ≥10⁶);
-  3. activated charcoal at 77 K to remove Ar;
-  4. static-mode magnetic-sector noble-gas MS or a high-resolution quadrupole, with spike calibration (known ⁴He added to a blank).
-
-  Instrument blanks are ~10⁹ atoms [V], compared with 1 mW·day = 2.3×10¹³ ⁴He [C]. **Sensitivity is not the problem; the air blank is.**
-- **Leak budget [C]:**
-  - keeping in-leakage below 1% of a 1 W signal requires < 2.6×10⁹ He/s, i.e. an air leak < 2×10⁻⁵ atm·cc/s. A helium-leak-checked metal system at ≤10⁻⁹ mbar·L/s meets this easily;
-  - permeation through elastomer O-rings from atmospheric helium is ~10⁶–10⁷ atoms/s [V], also negligible;
-  - **glass sample flasks are the exception.** Pyrex (K ≈ 10⁻¹¹ cm³·mm·s⁻¹·cm⁻²·cmHg⁻¹ [V: Altemose 1961]; 100 cm², 2 mm wall) takes in ~5×10⁶ He/s, or **~10 ppb-equivalent per month in a 50 mL flask** [C]. Early heat–helium samples stored in glass were criticized on exactly this point.
+- **Recommended analysis chain:** all-metal sample cylinder (VCR/bellows valves, baked, evacuated) → Zr-V-Fe or Ti getter (removes D₂, O₂ etc. by ≥10⁶) → charcoal at 77 K (removes Ar) → static magnetic-sector noble-gas MS or high-resolution quadrupole, with spike calibration. Instrument blanks ~10⁹ atoms [V] vs 1 mW·day = 2.3×10¹³ ⁴He [C]: **sensitivity is not the problem; the air blank is.**
+- **Leak budget [C]:** in-leakage below 1% of a 1 W signal requires < 2.6×10⁹ He/s, i.e. an air leak < 2×10⁻⁵ atm·cc/s, easily met by a He-leak-checked metal system (≤10⁻⁹ mbar·L/s). O-ring permeation from atmospheric He is ~10⁶–10⁷ atoms/s [V], negligible. **Glass sample flasks are the exception:** Pyrex (K ≈ 10⁻¹¹ cm³·mm·s⁻¹·cm⁻²·cmHg⁻¹ [V: Altemose 1961]; 100 cm², 2 mm wall) admits ~5×10⁶ He/s, **~10 ppb-equivalent per month in a 50 mL flask** [C], the criticism levelled at early glass-stored heat–helium samples.
 - **Dissolved air helium:** 100 mL of electrolyte in equilibrium with air holds 1.2×10¹⁴ He atoms, equal to 8 minutes of 1 W [C]. Purge the electrolyte with He-free Ar or D₂ first and discard the early samples.
 - **The leak-immunity criterion (key geometric design).** Air in-leakage can only drive the headspace toward 5.24 ppm, never above it. With a 30 cm³ headspace, exceeding ambient needs 1.6×10⁴ J at full release, or 3.2×10⁴ J at 50% release (1.9–3.7 days at 100 mW) [C]. With a 500 cm³ headspace it would take 31–62 days. **Keep the headspace ≤20–30 cm³.** Also: **ban helium use in the laboratory during runs** (no He leak-testing, no He cylinders or balloons nearby) and log room-air helium.
 - **Retention.** ⁴He produced in Pd is partly retained. SRI recovered the missing fraction by deloading, anodic stripping or heating, reporting ~104 ± 10% of the value expected at 23.85 MeV per ⁴He in experiment M4 [V]. Miles (China Lake) reported ~10¹¹ ⁴He per J, of order the theoretical 2.6×10¹¹/J, with helium present in heat-producing cells and absent in controls [V]. Critics note that those concentrations were **below ambient** (ppb in effluent gas), so leaks could not be excluded; the small-headspace design is meant to remove that objection. At end of run, **anneal or dissolve the cathode to release retained helium**.
@@ -267,18 +223,11 @@ Equivalents in Al: 25 µm stops ≤5.5 MeV α and leaves a 3 MeV proton at 2.42 
 | BGO | ~10% | High-Z; efficient for 511 keV and >10 MeV | Poor resolution | $5–10k |
 | HPGe (coaxial, 40%) | ~0.15% (≈2 keV at 1332 keV) | Unambiguous line identification. **Also works as a neutron monitor** via the 2223 keV line, ¹⁰B(n,αγ) at 478 keV, ¹¹³Cd(n,γ) at 558 keV, and the asymmetric ⁷²Ge(n,n′) 691 keV and ⁷⁴Ge 596 keV peaks from fast neutrons | Needs LN₂ or cryocooler, lead shield, radon purge | $50–120k |
 
-**Lines to know:**
-- ²¹⁴Pb: 295, 352 keV. ²¹⁴Bi: 609, 1120, 1764, 2204 keV. These vary with radon.
-- ⁴⁰K 1461 keV; ²⁰⁸Tl 2614 keV (the natural-background endpoint).
-- 511 keV annihilation: always present, from cosmic pair production in lead and from β⁺ emitters.
-- d+d→⁴He+γ at 23.8 MeV (branching ~10⁻⁷, never seen in LENR); p+d→³He+γ at 5.5 MeV (relevant because D₂O contains H); 2223 keV n-H capture.
+**Lines to know:** ²¹⁴Pb 295, 352 keV and ²¹⁴Bi 609, 1120, 1764, 2204 keV (vary with radon); ⁴⁰K 1461; ²⁰⁸Tl 2614 (natural endpoint); 511 annihilation (always present: cosmic pair production in Pb, β⁺ emitters); 2223 n-H capture; p+d→³He+γ 5.5 MeV (D₂O contains H); d+d→⁴He+γ 23.8 MeV (branching ~10⁻⁷, never seen in LENR).
 
 **Czerski e⁺e⁻ channel.** Czerski et al. propose a 0⁺ threshold resonance in ⁴He that decays by internal pair creation, with ≈22.8 MeV shared between e⁺ and e⁻ (EPL 2016 and later work). The signature is **back-to-back 511–511 keV coincidences** (two LaBr₃/CeBr₃ or BGO detectors at 180°, ±5 ns window) plus high-energy e± and their **bremsstrahlung continuum at 3–20 MeV**. Above 2.614 MeV, natural background is almost entirely cosmic muons, which a veto removes, so that window is quiet. Background 511–511 pairs come from β⁺ activation and pair production in nearby lead: keep lead outside the veto and far from the coincidence axis.
 
-**Other artifacts:**
-- tritium bremsstrahlung below 18.6 keV, which fakes "soft X-rays" (Pd K X-rays cannot be excited, since the K-edge is 24.35 keV);
-- high-voltage discharge devices produce genuine keV X-rays;
-- in autoradiography, hydrogen and H₂O₂ fog emulsions chemically (the Russell effect).
+**Other artifacts:** tritium bremsstrahlung below 18.6 keV fakes "soft X-rays" (Pd K X-rays cannot be excited; K-edge 24.35 keV); high-voltage discharge devices emit genuine keV X-rays; hydrogen and H₂O₂ chemically fog autoradiography emulsions (Russell effect).
 
 ---
 
@@ -293,13 +242,7 @@ Equivalents in Al: 25 µm stops ≤5.5 MeV α and leaves a 3 MeV proton at 2.42 
 | Natural chemical fractionation | Electrochemical Li-isotope fractionation (⁶Li is preferentially incorporated), hence a ⁶Li/⁷Li shift without any nuclear process; sputtering mass bias; detector dead time |
 | Surface segregation | Impurities in the bulk Pd diffuse to the surface during loading and appear "new" in surface-sensitive analyses (XPS, SIMS, EDX) |
 
-**Rules:**
-- Analyze every input material (cathode, anode, electrolyte, glass) by ICP-MS beforehand.
-- Run blank cells with an H₂O or Pt swap.
-- Measure the same spot before and after (fiducial marks).
-- Use ≥2 independent techniques, e.g. high-mass-resolution SIMS plus ICP-MS with a collision cell, or neutron activation analysis.
-- Spike a control with the suspected contaminant.
-- **Elements that appear with natural isotope ratios count as contamination.** Only isotopically anomalous products that exceed interference limits, seen with multiple techniques, deserve attention (cf. the Iwamura Cs→Pr permeation experiments, which are still debated).
+**Rules:** pre-assay every input material (cathode, anode, electrolyte, glass) by ICP-MS; run H₂O/Pt blank cells; measure the same fiducial-marked spot before and after; use ≥2 independent techniques (high-mass-resolution SIMS, collision-cell ICP-MS, NAA); spike a control with the suspected contaminant. **Natural isotope ratios mean contamination.** Only isotopically anomalous products above interference limits, confirmed by multiple techniques, deserve attention (cf. the still-debated Iwamura Cs→Pr permeation experiments).
 
 ---
 
@@ -384,19 +327,10 @@ Equivalents in Al: 25 µm stops ≤5.5 MeV α and leaves a 3 MeV proton at 2.42 
 5. **Helium.** 50 mW for 3 days at 50% release gives 1.7×10¹⁵ ⁴He, i.e. 2.1 ppm in a 30 cm³ headspace [C]. A pre-purged blank is ≪0.05 ppm, so this is highly significant statistically. The leak-immune (above-ambient) threshold needs ~3.7 days at 100 mW.
 
 ### 10.3 Design protocol
-- **Pre-register:**
-  - primary endpoint: integrated excess energy > 5σ_sys *and* > 100 eV/Pd atom;
-  - secondary endpoints: ⁴He/energy ratio vs 2.6×10¹¹ /J; upper limits on n/W, t/W and e⁺e⁻/W;
-  - the analysis windows, cuts and stopping rule.
-- **Blind:**
-  - third-party salting of calorimetry data;
-  - coded cells (disguise D₂O vs H₂O by hiding cell masses);
-  - coded CR-39, LSC and helium samples.
-- **Controls:**
-  - H₂O/Pd and D₂O/Pt in an **identical twin station** running at the same time;
-  - swap cells between stations mid-run (crossover design);
-  - dummy calorimeter runs with a resistor only.
-- **Modulation:** use controlled current on/off and loading/deloading steps. Test the lagged cross-correlation against pre-registered lags only.
+- **Pre-register** the primary endpoint (integrated excess energy > 5σ_sys *and* > 100 eV/Pd atom), secondary endpoints (⁴He/energy vs 2.6×10¹¹ /J; limits on n/W, t/W, e⁺e⁻/W), analysis windows, cuts and the stopping rule.
+- **Blind** via third-party salting of calorimetry data, coded cells (hide cell masses so D₂O vs H₂O is not obvious), and coded CR-39, LSC and helium samples.
+- **Controls:** H₂O/Pd or D₂O/Pt in an **identical twin station** run simultaneously; swap cells mid-run (crossover); resistor-only dummy calorimeter runs.
+- **Modulation:** controlled current on/off and loading/deloading steps; test lagged cross-correlation only at pre-registered lags.
 
 ---
 
@@ -426,12 +360,7 @@ Equivalents in Al: 25 µm stops ≤5.5 MeV α and leaves a 3 MeV proton at 2.42 
  twin    Identical Station B with the control cell; swap cells mid-run.
 ```
 
-Expected performance [C/V]:
-- neutron ε ≈ 15–30%, B ≈ 0.05–0.2 cps (basement, vetoed), 1-day MDA ≈ 0.01–0.03 n/s;
-- calorimetry σ ≈ 5–15 mW at 1–5 W input;
-- ⁴He above-ambient threshold after ≈2–4 days at 100 mW;
-- tritium MDA ≈ 0.15 Bq/mL;
-- CR-39 proton window sensitive to a few tracks/cm² above blank.
+Expected performance [C/V]: neutron ε ≈ 15–30%, B ≈ 0.05–0.2 cps (basement, vetoed), 1-day MDA ≈ 0.01–0.03 n/s; calorimetry σ ≈ 5–15 mW at 1–5 W input; ⁴He above ambient after ≈2–4 days at 100 mW; tritium MDA ≈ 0.15 Bq/mL; CR-39 proton window sensitive to a few tracks/cm² above blank.
 
 An HPGe detector can replace one LaBr₃ once the station is mature, for unambiguous 2204/2223 keV and Ge(n,n′) identification.
 
