@@ -1,0 +1,90 @@
+B0. Value of pair kinetic energy: e-folds per eV, and rate multiplier for +dE
+    U_eff (eV) | e-folds/eV at E=0 | x rate for +1 eV | +10 eV | +100 eV | +1 keV
+        11     |    13.61          |  3.43e+05 |  8.23e+35 |  1.21e+89 | 2.81e+116
+        34     |     2.50          |  1.16e+01 |  8.79e+08 |  5.01e+36 |  3.46e+60
+       127     |     0.35          |  1.41e+00 |  2.65e+01 |  4.39e+09 |  2.62e+25
+       250     |     0.13          |  1.13e+00 |  3.39e+00 |  1.67e+04 |  1.19e+15
+    -> 1-2 eV transients matter only in relative terms; the absolute rate stays set by U_eff.
+
+B1. Fracto-emission / crack-tip charge separation
+    Physics limits: in a metal (PdD, TiD2) crack-face charge relaxes in ~eps0/sigma_el ~ 1e-18 s; the only sustained gap voltage is the contact-potential difference (<~1 V) [BK].
+    Oxide-skinned faces (PdO 2-10 nm, TiO2 2-5 nm): V <= E_bd*t_ox ~ 1e9 V/m x 1e-8 m = 10 V [BK, thin-oxide breakdown].
+    Ionic insulator (LiD): surface fields 1e7-1e9 V/m (brief/literature), vacuum gap (no D2 gas), V grows with opening w until field emission/flashover; w_max = 1-10 um [guess].
+    D2 in PdD cracks at x~0.9: fugacity 1e3-1e4 bar -> n ~ 2e22 cm^-3, mean free path 0.5 nm -> collisional; ions gain E*lambda only.
+    Case | E-field V/m | w_max | D+/cm^2 | <E> eV | n per cm^2 crack (U=0) | (U=site U_eff, empirical)
+    PdD metal, contact pot.  |    1e+08 |   0.01 um |  5.5e+11 |      1.0 |   0.0e+00 |   3.5e-33
+    PdO-skinned PdD          |    1e+09 |   0.01 um |  5.5e+12 |      5.5 |  1.8e-189 |   5.3e-19
+    TiO2-skinned TiD2        |    1e+09 |   0.01 um |  5.5e+12 |      3.0 |  2.2e-269 |   2.8e-30
+    LiD, weak                |    1e+07 |  10.00 um |  5.5e+10 |     50.5 |   5.3e-59 |   2.7e-47
+    LiD, typical             |    1e+08 |  10.00 um |  5.5e+11 |    500.5 |   1.6e-15 |   5.5e-15
+    LiD, extreme             |    1e+09 |  10.00 um |  5.5e+12 |   5000.5 |   9.8e-01 |   1.0e+00
+    LiD, extreme, 1 um       |    1e+09 |   1.00 um |  5.5e+12 |    500.5 |   1.6e-14 |   5.5e-14
+    Claims [BK]: Menlove et al. (J. Fusion Energy 9, 495, 1990) - Ti/D2 chips, bursts of up to ~1e2 counts (eff ~30%) during warm-up from 77 K, i.e. ~1e2-1e3 n per burst; not reproduced (R5).
+    Klyuev/Lipson/Derjaguin (Sov. Tech. Phys. Lett. 1986; Nature 341, 492, 1989) - LiD / D2O-ice fracture, reported ~1e-2-1 n/s during vibro-milling; single group.
+    -> a 300-n burst needs 3.1e+02 cm^2 of fresh LiD face at 1e9 V/m & 10 um opening, or 1.8e+17 cm^2 at 1e8 V/m. For TiD2 (metal+oxide): 1.4e+271 cm^2.
+    -> Fracto-fusion is physically possible ONLY in insulating hydrides (LiD) or thick insulating inclusions; in metallic PdD/TiD2 the achievable deuteron energy (<=10 eV) gives zero yield. Menlove-type Ti bursts cannot be conventional fracto-fusion; they match cosmic spallation multiplets (R5 #8).
+    Per alpha/beta cycle of PdD (crack area 10 cm^2 per cm^3 per cycle [guess]): 5.3e-18 n (oxide-skinned, screened), 3.5e-32 n (bare, screened).
+
+B2. Desorption / phase-transition transients (Lipson Pd/PdO:Dx)
+    PdO/Pd Schottky built-in potential                  : <= 0.80 eV -> x1.3 at U_eff=127 eV, x3.1e+04 at U_eff=11 eV (TF)
+    D+D -> D2 recombination energy (brief: 0.5-1 eV)    : <= 1.00 eV -> x1.4 at U_eff=127 eV, x3.4e+05 at U_eff=11 eV (TF)
+    Heyrovsky step at 1 V overpotential                 : <= 1.00 eV -> x1.4 at U_eff=127 eV, x3.4e+05 at U_eff=11 eV (TF)
+    beta->alpha transition strain energy per D          : <= 0.05 eV -> x1 at U_eff=127 eV, x2 at U_eff=11 eV (TF)
+    On Pd the recombinative desorption is endothermic (adsorption heat ~0.9 eV/D2, Christmann 1988 [BK]), so no hot D is produced; the 1 eV entries are upper bounds.
+    Lipson-scale claim 0.1 p/s/cm^2 from the interface layer (7.8e+15 pairs/cm^2) needs lambda = 2.6e-17 /pair/s -> static U_eff >= 286 eV
+    Lipson-scale claim 0.1 p/s/cm^2 from the top 1 um (3.7e+19 pairs/cm^2) needs lambda = 5.5e-21 /pair/s -> static U_eff >= 218 eV
+    Static accelerator-PdO screening mapped to thermal (U_eff 247 eV, m1_sites) predicts 2.6e-03 fusions/s/cm^2 = 1.3e-03 p/s/cm^2 at the interface: 78x below the claim, but inside C3's reach (see Part C). Transients add <x1.5.
+
+B3. Electrochemical double layer
+    field 3.3e+09 V/m, gradient 1.1e+19 V/m^2: pair (d=0.74 A) relative-energy shift 0.030 eV -> x1.079 (U=34), x1.51 (U=11)
+    field 3.3e+09 V/m, gradient 1.1e+19 V/m^2: pair (d=2.85 A) relative-energy shift 0.451 eV -> x3.061 (U=34), x386.66 (U=11)
+    (the 2.85 A row assumes a pair straddling the 3 A layer along the normal; an adsorbed pair lies in the plane, where the gradient gives no relative energy.)
+    A uniform field exerts no relative force on two deuterons (same q/m). Ion energy between collisions in the diffuse layer (1e8 V/m x 0.3 nm) = 0.03 eV. Negligible.
+
+B4. Optical / plasmonic near fields (CW, charter-compliant low power)
+    I=1e+07 W/m^2, |E/E0|=10: E_loc=8.7e+05 V/m, U_p(e)=6.0e-09 eV, U_p(D)=1.6e-12 eV, pair gradient shift 3.5e-06 eV
+    I=1e+09 W/m^2, |E/E0|=100: E_loc=8.7e+07 V/m, U_p(e)=6.0e-05 eV, U_p(D)=1.6e-08 eV, pair gradient shift 3.5e-04 eV
+    I=1e+09 W/m^2, |E/E0|=1000: E_loc=8.7e+08 V/m, U_p(e)=6.0e-03 eV, U_p(D)=1.6e-06 eV, pair gradient shift 3.5e-03 eV
+    -> 1e10-1e11 V/m would be needed for eV-scale effects; that is the damage/field-evaporation regime. Optical fields cannot deliver relative D-D energy in a cold device.
+
+B5. Cosmic-ray 'cold floor' at sea level: 1 cm3 PdD0.9 cathode + 50 mL D2O
+    [PdD] D atoms 6.1e+22
+       knock-on d-d fusions in flight   : 8.9e-09 /s  (half give 2.45 MeV n, half 3.02 MeV p)
+       D(n,2n) breakup neutrons         : 3.5e-05 n/s   <- D-specific, not fusion
+       D(gamma,n) from 208Tl 2.614 MeV  : 1.2e-05 n/s (0.2 MeV n)  <- D-specific, not fusion
+       muon-catalysed fusion            : 7.9e-14 /s  (stopped mu- 7.9e-05/s)
+       mu- capture neutrons             : 1.2e-04 n/s  (same in H control)
+    [D2O] D atoms 3.3e+24
+       knock-on d-d fusions in flight   : 2.4e-06 /s  (half give 2.45 MeV n, half 3.02 MeV p)
+       D(n,2n) breakup neutrons         : 1.9e-03 n/s   <- D-specific, not fusion
+       D(gamma,n) from 208Tl 2.614 MeV  : 6.7e-04 n/s (0.2 MeV n)  <- D-specific, not fusion
+       muon-catalysed fusion            : 1.1e-10 /s  (stopped mu- 3.7e-04/s)
+       mu- capture neutrons             : 6.6e-05 n/s  (same in H control)
+    TOTAL real d-d fusion floor: 2.4e-06 /s  ->  2.1e-01 per day (undetectable)
+    TOTAL D-specific non-fusion neutrons: 2.6e-03 n/s = 226 per day -> this, not fusion, is what the D-vs-H control must cancel;
+       it is ~10-50% of a 5-sigma/30-day neutron threshold (M0: 2e-2/s for 14 d). Keep D2O volume small, shield 2.6 MeV gammas (5 cm Pb/Cu inner shield cuts it ~x10), or use PSD to veto 0.2 MeV photoneutrons.
+    Recoil deuterons from n-d scattering in the top 20 um of a 2 cm2 foil reach a facing Si detector at ~3e-07 cps, spread over 0-8 MeV: negligible vs 2e-5 cps in the p window.
+
+B6. Czerski 0+ threshold resonance: S-factor multiplier K(E)
+    Breit-Wigner with Gamma_d(E) = 2 theta^2 gamma_W^2 (2 pi R/a) e^{4 sqrt(2R/a)} e^{-2 pi eta(E)}:
+    for E << E_R the Gamow factors cancel and K = 1 + C/((E-E_R)^2 + Gamma^2/4) is energy independent.
+    Unitarity-style ceiling (theta^2=1, R=5 fm, Gamma_out=0.44 eV): C_max = 3.33e+07 eV^2
+    Calibration: the resonance must supply the excess at E_cm=2.5 keV between U_e=340 eV and the resonance-fit U_e=105 eV (Szczecin): x2.54.
+    E_R (eV above threshold) | theta^2 needed | K(2.5 keV) | K(thermal 0.04 eV) | equiv. dU_eff at U=127 / 34 eV
+        5000                 |  2.90e-01      |   2.54     |   1.39e+00          | +1 / +0.1 eV
+        3000                 |  1.16e-02      |   2.54     |   1.04e+00          | +0 / +0.0 eV
+        2000                 |  1.16e-02      |   2.54     |   1.10e+00          | +0 / +0.0 eV
+        1000                 |  1.04e-01      |   2.54     |   4.47e+00          | +4 / +0.6 eV
+         300                 |  2.24e-01      |   2.54     |   8.40e+01          | +14 / +1.8 eV
+          30                 |  2.83e-01      |   2.54     |   1.05e+04          | +32 / +4.0 eV
+           0                 |  2.90e-01      |   2.54     |   1.93e+08          | +80 / +9.1 eV
+    -> If E_R sits within ~1 eV of threshold, K(thermal) ~ 2e+08 (= +19 e-folds). If E_R is a few keV above threshold, K(thermal) ~ 1.2-1.4. The data do not fix E_R.
+    Even K=2e8 raises the D2-molecule rate only from 3e-64 to ~6e-56 /s: the resonance changes WHAT to detect, not WHETHER cold D-D is detectable (confirms R3 Table D).
+    Products if real: Gamma_ee/Gamma_tot ~ 10/11 -> per fusion 0.91 e+e- pair (E_e+ + E_e- = 22.8 MeV, continuum), 2 x 511 keV back-to-back after e+ stops, bremsstrahlung up to ~20 MeV; p and n branches each ~4.5%. A neutron-only or p-only detector under-counts by x11; a 511-511 coincidence pair plus a >3 MeV gamma/electron window is needed.
+
+B7. Thermal-spike 'plateau' (UC Davis/LBNL 2026; Szczecin 2024-26) - not available beam-free
+    Plateau yield per incident D taken = thick-target yield at E_d=2.5 keV with U_e=340 eV (ZrD2): 7.9e-17 fusions/D
+    To reach the C3 proton threshold (2.7e-3 /s) a device needs 3.4e+13 keV deuterons/s = 5.5 uA of keV D+ -> an ion beam. Cold sources of keV deuterons:
+      cosmic knock-on recoils in 1 cm3 PdD: 5e-04 /s (B5); LiD fracture at 1e9 V/m: ~5e13 D+ per cm2 once per fresh face (B1). Neither gives a sustained 1e14 /s.
+    A cold drive (current pulse, laser <=1 W) raises local T by <=1e2 K; a thermal spike needs ~keV into ~nm^3 (T ~ 1e4 K). Equivalent spike rate from cold means: 0.
+    Conclusion: the plateau mechanism contributes <= 8e-20 fusions/s in a beam-free device.
