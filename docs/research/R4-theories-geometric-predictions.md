@@ -172,7 +172,7 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 
 ### 2.5 Kim (Purdue): Bose–Einstein condensation nuclear fusion (BECNF)
 
-**Core claim.** Deuterons trapped in micro- or nano-scale metal grains form a BEC in a harmonic trap. Kim treats this with the "equivalent linear two-body" method and optical-theorem formulation (Phys. Rev. C 55, 801, 1997; Naturwissenschaften 96, 803, 2009; JCMNS 4, 188, 2011). Fusion becomes a collective process, energy is shared among the condensate so no γ-ray is emitted, and ⁴He is the main product.
+**Core claim.** Deuterons trapped in micro/nano-scale grains form a BEC in a harmonic trap (equivalent linear two-body method, optical-theorem formulation; PRC 55, 801, 1997; Naturwissenschaften 96, 803, 2009). Fusion is collective, energy is shared by the condensate (no γ), and ⁴He is the main product.
 
 **Predictions**
 
@@ -183,9 +183,9 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 | D density | High | m⁻³ | High loading |
 
 **Strongest critique (our calculations, Section 4.8).**
-- For *free* deuterons at PdD density, T_c ≈ 13 K. At 300 K, nλ³ = 0.024, about 100× short of the 2.61 a BEC needs.
-- Deuterons in Pd are localized on O-sites. Their band mass is ≥10²–10⁴ m_D, so T_c ≈ 0.1–0.001 K.
-- Even a real BEC of charged bosons keeps the Coulomb correlation hole at short range. Fusion depends on the pair density g(r → fm), which condensation does not change. This is the Leggett–Baym argument again.
+- *Free* deuterons at PdD density: T_c ≈ 13 K; at 300 K nλ³ = 0.024 versus the 2.61 needed.
+- D in Pd is localized (band mass ≥10²–10⁴ m_D), so T_c ≈ 0.1–0.001 K.
+- A BEC of charged bosons keeps its short-range Coulomb hole; fusion depends on g(r → fm), which condensation does not change (Leggett–Baym again).
 
 **Credence: <1 %.**
 
@@ -193,18 +193,13 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 
 ### 2.6 Coherence and band theories: Preparata, Chubb & Chubb, Schwinger (plus Swartz's OOP)
 
-**Preparata** (Bressani, Del Giudice & Preparata, Nuovo Cimento A 101, 845, 1989; *QED Coherence in Matter*, 1995). Condensed matter spontaneously forms QED "coherence domains" (CDs) in which electrons or ions oscillate in phase with a trapped EM mode. In PdD, deuterons above a loading threshold (the "γ-phase"; x ≳ 0.7–0.85 †) form a coherent plasma, and the d-electron plasma screens the barrier. A CD is about the wavelength of the coherent mode; for a ~10 eV mode that is ~0.1 µm. Geometry: CDs of ~0.1 µm and a loading threshold. Preparata also emphasized longitudinal currents and electric fields along Pd wires to drive loading †. **Critique:** the CD ground-state instability is not accepted in mainstream QED. Critics, including those reviewed by Chechin et al. (arXiv nucl-th/0303057), note that it makes no quantitative prediction confirmed independently. **Credence: 1 %.**
+**Preparata** (Bressani, Del Giudice & Preparata, Nuovo Cimento A 101, 845, 1989; *QED Coherence in Matter*, 1995). Matter forms QED "coherence domains" (CDs) oscillating in phase with a trapped EM mode. Above a loading threshold (x ≳ 0.7–0.85 †) deuterons form a coherent plasma screened by the d-electron plasma. Geometry: CD size ≈ mode wavelength (~0.1 µm for a ~10 eV mode); a loading threshold; longitudinal currents/fields along Pd wires to drive loading †. **Critique:** the CD ground-state instability is not accepted in mainstream QED, and no quantitative prediction has been independently confirmed (see Chechin et al., nucl-th/0303057). **Credence: 1 %.**
 
-**Chubb & Chubb ion band states** (Fusion Technology 20, 93, 1991). Near stoichiometry, D⁺ (and ⁴He⁺⁺) occupy Bloch-like band states spread over a finite, perfectly periodic crystal. Overlap of the delocalized charge lets deuterons "fuse" with the energy shared by the whole lattice, Mössbauer-like. Predictions:
-- highly ordered, defect-free **finite crystals**, i.e. nanocrystals ("particular nanoscale crystals turn on faster", 2007 †);
-- loading x → 1;
-- a slow "Zener-breakdown-like" onset of ion conduction under a sustained applied field.
+**Chubb & Chubb ion band states** (Fusion Technol. 20, 93, 1991). Near stoichiometry, D⁺ (and ⁴He⁺⁺) occupy Bloch-like states across a finite, perfectly periodic crystal; overlapping delocalized charge "fuses" with energy shared by the lattice (Mössbauer-like). Predictions: ordered, defect-free **finite nanocrystals** ("particular nanoscale crystals turn on faster" †), x → 1, and a slow Zener-like onset of ion conduction under sustained field. **Critique:** H tunnelling bandwidths in Pd are ≲meV and destroyed by phonons at 300 K; delocalizing single-particle densities does not reduce the *two-particle* short-range correlation; contradicts all defect-centred theories. **Credence: <1 %.**
 
-**Critique:** hydrogen tunnelling bandwidths in Pd are ≲meV, and phonon scattering destroys them at 300 K. Delocalizing single-particle densities does not reduce the *two-particle* short-range correlation. The theory also directly contradicts the defect-centred theories. **Credence: <1 %.**
+**Schwinger** (Z. Naturforsch. 45a, 756, 1990): p + d → ³He in HD impurities, 5.5 MeV passed to lattice phonons. Geometry: only lattice periodicity; predicts ³He scaling with H contamination. **Critique:** no MeV→phonon coupling mechanism (the problem Hagelstein later took up). **Credence: <1 %.**
 
-**Schwinger** ("Cold fusion: a hypothesis", Z. Naturforsch. 45a, 756, 1990). He proposed p + d → ³He in HD impurities, with the 5.5 MeV transferred to the lattice by phonons in a periodic crystal. Geometry: none beyond lattice periodicity. Predictions: ³He, with the rate scaling with H contamination. **Critique:** no mechanism for coupling MeV to phonons was given; this is the problem Hagelstein later tried to solve. **Credence: <1 %.**
-
-**Swartz "optimal operating point" (OOP)** (JCMNS 6, 149, 2012). Excess power (or ⁴He production) against electrical input power is peaked, not monotonic. Each device has a narrow optimal input power. The devices are PHUSOR (spiral Pd, high-impedance D₂O, Pt anode) and NANOR (preloaded ZrO₂–PdNiD nanocomposite in a small two-terminal package). It is phenomenology, not a mechanism. A peaked response is also what many artefacts produce: recombination, calorimeter nonlinearity, thermal gradients. **Design implication:** always sweep drive power finely. **Credence that the OOP reflects nuclear physics: 3 %.**
+**Swartz "optimal operating point" (OOP)** (JCMNS 6, 149, 2012): excess power (or ⁴He) versus input power peaks in a narrow window, for PHUSOR (spiral Pd, high-impedance D₂O) and NANOR (preloaded ZrO₂–PdNiD nanocomposite) devices. Phenomenology, not mechanism; peaked responses also arise from artefacts (recombination, calorimeter nonlinearity). **Implication:** sweep drive power finely. **Credence it reflects nuclear physics: 3 %.**
 
 ---
 
@@ -222,13 +217,11 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 | Cu, Ag, Au (noble) | small (Au ≈ 70 eV) | Raiola; Lipson |
 
 **Models.**
-- **Debye plasma model** (Rolfs group): U_e ∝ (n_eff/T)^½, which predicts U_e falls with temperature. This was reported but is physically questionable, because metallic electrons are degenerate and should follow Thomas–Fermi screening.
-- **Czerski:** screening plus a single-particle **0⁺ threshold resonance** in ⁴He near the d + d threshold (EPL 113, 22001, 2016; PRC 106, L011601, 2022). Evidence for **electron emission** from the resonance (PRC 109, L021601, 2024). Determined **e⁺e⁻ pair-emission branching** down to 5 keV (Dubey, Czerski et al., PRX 15, 041004, 2025). Screening increases with **lattice defects**, shown by positron-annihilation studies of deuterated Zr (Materials 16, 6255, 2023). A thermal-fusion "plateau" appears below 2.5 keV, attributed to phonon-heated ion tracks (arXiv 2409.02112; 2605.27438).
-- **Lipson/Miley:** PdO/Pd heterostructures boost screening. Low-level emissions reported during exothermic D desorption.
-- **Ichimaru** (Rev. Mod. Phys. 65, 255, 1993): strongly coupled plasma screening. Important in dense stars; tens of eV at metallic densities.
-- **Frisone:** deuteron fusion probability enhanced at microcracks and dislocations with a temperature optimum †. Qualitative.
-- **"Localized electron clusters"** and non-equilibrium electron distributions have no quantitative barrier model. Hot electrons *reduce* static screening.
-- **Berlinguette et al.** (Nature, 2025, "Thunderbird" reactor): in-situ electrochemical D loading raised the dd fusion rate by **15(2) %** under plasma-immersion D⁺ implantation. This is the first high-profile demonstration that *electrochemistry and loading modulate a real nuclear rate*.
+- **Debye plasma model** (Rolfs group): U_e ∝ (n_eff/T)^½, so U_e falls with temperature (reported); physically questionable, since degenerate metallic electrons should follow Thomas–Fermi screening.
+- **Czerski:** screening plus a **0⁺ threshold resonance** in ⁴He near the d + d threshold (EPL 113, 22001, 2016; PRC 106, L011601, 2022); **electron emission** from it (PRC 109, L021601, 2024); **e⁺e⁻ branching** measured down to 5 keV (PRX 15, 041004, 2025); U_e rises with **lattice defects** (positron-annihilation data on deuterated Zr, Materials 16, 6255, 2023); a thermal "plateau" below 2.5 keV attributed to phonon-heated ion tracks (arXiv 2409.02112).
+- **Lipson/Miley:** PdO/Pd heterostructures boost U_e; low-level emissions during exothermic D desorption.
+- **Ichimaru** (RMP 65, 255, 1993): strongly coupled plasma screening, important in dense stars, only tens of eV at metallic densities. **Frisone:** enhancement at microcracks/dislocations with a temperature optimum † (qualitative). **Electron clusters / non-equilibrium electrons:** no quantitative model; hot electrons *reduce* static screening.
+- **Berlinguette et al.** (Nature 2025, "Thunderbird"): in-situ electrochemical loading raised the dd rate by **15(2) %** under plasma-immersion D⁺ implantation, the first high-profile demonstration that *loading modulates a real nuclear rate*.
 
 **Predictions**
 
@@ -242,7 +235,7 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 | Target thickness | > ion range (~10–100 nm at keV); ≤1 µm to allow fast loading | nm | Sputtered or evaporated films on a cooled substrate |
 | D loading of target | Higher is better (+15 % observed) | — | In-situ electrochemical loading from the back (Thunderbird geometry) |
 
-**Strongest critique.** The measured U_e values are 3–10× theory and are *not understood* (the "screening puzzle"). Surface contamination and stopping-power systematics are serious. Crucially, the enhancement is observed only for keV projectiles. Extrapolating to thermal energies requires a static potential that is incompatible with observed D–D equilibrium spacings (Section 1).
+**Strongest critique.** Measured U_e is 3–10× theory and *unexplained* ("screening puzzle"); surface contamination and stopping-power systematics are serious. The enhancement is seen only with keV projectiles; extrapolating to thermal energies needs a static potential incompatible with observed D–D spacings (Section 1).
 
 **Credence.**
 - That enhanced screening of hundreds of eV is real at keV energies: **85 %**.
@@ -253,13 +246,13 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 
 ### 2.8 Heavy-electron and high-field ideas: nanotips and plasmonic hot spots
 
-The claim is that intense local fields at field-emission tips, cracks or plasmonic hot spots modify the barrier. Quantitatively (Section 4.4):
+Claim: intense fields at tips, cracks or plasmonic hot spots modify the barrier. Quantitatively (Section 4.4):
 
-1. **Comparison with nuclear fields.** The Coulomb field of a deuteron is 5.8×10¹⁹ V/m at 5 fm, 1.4×10¹⁷ V/m at 100 fm, 1.4×10¹⁵ V/m at 1 pm and 5.8×10¹¹ V/m at 0.5 Å. The best tip field (~10¹⁰ V/m, just below field evaporation) is **10⁻¹⁰** of the nuclear-scale field and ~2 % of the field at atomic spacing.
-2. **No relative force.** For two deuterons (identical q/m), a uniform field accelerates only the centre of mass. The relative coordinate, which is what tunnelling depends on, sees only the field *gradient*. At a 10 nm-radius tip that is ~10¹⁸ V/m², i.e. a differential field of 7×10⁷ V/m across 0.74 Å. That shifts energy by ~5 meV, which is negligible.
-3. **Even if the full 0.74 eV potential difference acted on the pair** at an effective screening energy of 47 eV, the rate would change by ×3. A factor of 3 on a rate that is 50–60 orders of magnitude too small is irrelevant.
-4. **Plasmonic hot spots** (enhancement 10–100×) at practical CW laser intensities (10⁴–10⁸ W/m², i.e. incident fields of 3×10³–3×10⁵ V/m) reach only ~10⁴–10⁷ V/m, which is less still.
-5. **What fields do achieve is ion acceleration.** At 10¹⁰ V/m over 1 µm a D⁺ gains 10 keV. Pyroelectric crystal fusion (Naranjo, Gimzewski & Putterman, Nature 434, 1115, 2005) used a tungsten tip to produce ~10² keV D⁺ and detectable neutrons. This is *hot* (beam–target) fusion, out of scope, but it is an excellent **neutron-detector calibration source** built with the same bench hardware.
+1. **Scale.** The deuteron's Coulomb field is 5.8×10¹⁹ V/m at 5 fm and 5.8×10¹¹ V/m at 0.5 Å. The best tip field (~10¹⁰ V/m, near field evaporation) is **10⁻¹⁰** of the nuclear-scale field and ~2 % of the field at atomic spacing.
+2. **No relative force.** For identical q/m, a uniform field moves only the centre of mass; tunnelling sees only the *gradient*. At a 10 nm tip (~10¹⁸ V/m²) that is 7×10⁷ V/m across 0.74 Å, a ~5 meV shift.
+3. Even if the full 0.74 eV acted on the pair (U_eff = 47 eV), the rate changes ×3, on a rate 50–60 orders too small.
+4. **Plasmonic hot spots** (10–100× enhancement) at CW intensities of 10⁴–10⁸ W/m² reach only ~10⁴–10⁷ V/m.
+5. **What fields do achieve is ion acceleration:** 10 keV per µm at 10¹⁰ V/m. Pyroelectric tip fusion (Naranjo, Gimzewski & Putterman, Nature 434, 1115, 2005) is *hot* beam–target fusion, out of scope, but an excellent **neutron-detector calibration source**.
 
 **Credence that high fields modify the barrier in a useful way: <0.5 %.**
 
@@ -267,7 +260,7 @@ The claim is that intense local fields at field-emission tips, cracks or plasmon
 
 ### 2.9 Phonon and lattice resonance: Letts–Cravens and PdD dispersion
 
-**Observation.** Letts and Cravens used two weak (~tens of mW) tunable lasers beating on an Au-coated, electrolytically loaded PdD cathode, with p-polarization (to couple to surface plasmons). Across 170 runs (2007–2008) they reported excess-heat responses at beat frequencies **8.3 THz (width 0.70), 15.3 THz (0.44) and 20.4 THz (0.68)** (other reports: 8.2, 15.1, 20.8 THz). Hagelstein had predicted the edges of the optical band, where compressional modes have zero group velocity. He associates 8.3 THz with the Γ point and 15.3 THz with the L point of the PdD optical branch. The 20.8 THz response was attributed to H contamination or to D in vacancies of the Au coating.
+**Observation.** Two weak (~tens of mW) tunable lasers, p-polarized (surface-plasmon coupling), beat on an Au-coated, electrolytically loaded PdD cathode. Across 170 runs (2007–2008), excess heat responded at beat frequencies **8.3 THz (width 0.70), 15.3 THz (0.44) and 20.4 THz (0.68)** (elsewhere 8.2, 15.1, 20.8 THz). Hagelstein had predicted the optical-band edges, where compressional modes have zero group velocity, and assigns 8.3 THz to Γ and 15.3 THz to L. The 20 THz line was attributed to H contamination or D in Au vacancies.
 
 **PdD phonon facts.**
 - Pd acoustic branches reach ≲6–7 THz (Θ_D ≈ 274 K ⇒ 5.7 THz).
@@ -279,7 +272,7 @@ The claim is that intense local fields at field-emission tips, cracks or plasmon
 
 **Predictions for hardware.** Excite at 8.3 ± 0.35 THz and 15.3 ± 0.22 THz for PdD (and ≈20.4 THz for PdH). Use p-polarized light on a thin Au overlayer (tens of nm) on highly loaded PdD. This can be combined with the Hagelstein vacancy recipe.
 
-**Strongest critique.** The only replication attempt found no excess heat in 231 triggered trials. The reported heat (~100 mW) exceeded the incident laser power. Section 4.7 shows that tens of mW cannot coherently drive a macroscopic THz mode. The frequency assignment at 15.3 THz (63 meV) lies above most PdD optical-band estimates †.
+**Strongest critique.** The only replication found no excess heat (of the ~100 mW scale Letts reported) in 231 triggered trials. Tens of mW cannot coherently drive a macroscopic THz mode (Section 4.7). The 15.3 THz (63 meV) assignment lies above most PdD optical-band estimates †.
 
 **Credence: 2 %.**
 
@@ -287,8 +280,8 @@ The claim is that intense local fields at field-emission tips, cracks or plasmon
 
 ### 2.10 Mainstream critiques that bound all mechanisms
 
-- **Leggett & Baym** (PRL 63, 191, 1989): in a fully interacting many-body system *in equilibrium*, the tunnelling rate to small separations is rigorously bounded by the Born–Oppenheimer potential. For D in metals this bound, related to He and D affinities, is "far too small". **Loophole:** non-equilibrium conditions (flux, phonon pumping, ion tracks). Every serious theory above invokes non-equilibrium.
-- **Koonin & Nauenberg** (Nature 339, 690, 1989): the D₂ molecule rate is ~3×10⁻⁶⁴ s⁻¹. Fleischmann–Pons (FP) rates need an effective electron-mass enhancement of ≳5–10×.
+- **Leggett & Baym** (PRL 63, 191, 1989): *in equilibrium*, tunnelling to small separations is rigorously bounded by the Born–Oppenheimer potential; for D in metals the bound is "far too small". **Loophole:** non-equilibrium (flux, phonon pumping, ion tracks), which every serious theory invokes.
+- **Koonin & Nauenberg** (Nature 339, 690, 1989): D₂ rate ~3×10⁻⁶⁴ s⁻¹; FP rates would need an effective electron-mass enhancement of ≳5–10×.
 - **Huizenga's three "miracles"** (1992):
   1. a barrier-penetration enhancement of ~40–50 orders of magnitude;
   2. a change in dd branching from the ~50:50 n + ³He / p + t to ~100 % ⁴He;
@@ -296,9 +289,9 @@ The claim is that intense local fields at field-emission tips, cracks or plasmon
 
   Our numbers: 1 W from conventional dd would emit **8.6×10¹¹ neutrons/s**, which is lethal and easily detected. 1 W from ⁴He at 23.85 MeV means 2.6×10¹¹ He/s. With normal branching it would also produce ~1.7×10⁵ γ-rays/s at 23.8 MeV.
 - **Energetic-particle constraint** (Hagelstein, Naturwissenschaften 97, 345, 2010): the absence of secondary signals limits any FP-reaction alphas to ≲20 keV. This rules out TSC's 23.8 MeV alphas and requires any mechanism to hand ~24 MeV to the lattice.
-- **Momentum and energy conservation:** a two-body → one-body reaction (d + d → ⁴He) needs a third body or a γ-ray. "Lattice takes the energy" requires a coupling of ~MeV to meV quanta that no established physics provides. Czerski's e⁺e⁻/electron emission is the only mainstream-published *third body* candidate.
-- **Reproducibility record:** DOE reviews (1989, 2004) were not persuaded. Google-funded Berlinguette et al. (Nature 570, 45, 2019) found no anomalous effects and highlighted how hard it is to reach D/Pd > 0.9. The Letts replication failed.
-- **Metzler, Hunt, Hagelstein & Galvanetto** (New J. Phys. 26, 101202, 2024) state it fairly: observable solid-state dd fusion needs >40 orders of enhancement. Known mechanisms give up to ~30 orders each, so it is *not excluded in principle* that cascades could reach 40, but no demonstration exists.
+- **Momentum/energy conservation:** d + d → ⁴He needs a third body or a γ. "The lattice takes it" needs MeV→meV coupling unknown to established physics; Czerski's e⁺e⁻/electron emission is the only mainstream-published third-body candidate.
+- **Reproducibility:** DOE reviews (1989, 2004) unpersuaded; Berlinguette et al. (Nature 570, 45, 2019) found no anomalies and showed how hard D/Pd > 0.9 is; the Letts replication failed.
+- **Metzler, Hunt, Hagelstein & Galvanetto** (New J. Phys. 26, 101202, 2024): observable solid-state dd fusion needs >40 orders of enhancement; known mechanisms give up to ~30 orders each, so cascades are *not excluded in principle*, but none is demonstrated.
 
 **Credence that these bounds correctly exclude LENR at the claimed watt level in near-equilibrium systems: ~97 %.**
 

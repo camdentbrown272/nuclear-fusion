@@ -59,6 +59,18 @@ Abbreviations: RT = room temperature; RC = reaction chamber; sccm = standard cm�
 | 28 | Berlinguette et al. (Google-funded; UBC, MIT, LBNL), 2015–2019 | Electrochemical Pd; Pd in D plasma; metal–H systems at elevated temperature (v) | Various | D₂/H₂ | Up to ~10³ °C (v) | Various | Pd loading hard to push above ~0.9 | 420+ experiments (v) | **No anomalous heat** found | N (for its configurations) | [R42] |
 | 29 | Czerski et al. (Szczecin, CleanHME), 2024–2025 | d+d on ZrD₂ and Zr targets; UHV accelerator (eLBRUS, 10⁻¹⁰ mbar, up to 1 mA) | Beam on target | — | — | Beam | — | — | Screening energy **340 eV** (vs ~100 eV defect-free); signatures of a new near-threshold d+d channel (PRX 2025) | Mainstream-published, single group (beam-driven; mechanism only) | [R43][R44] |
 
+### 2.1 Context notes not in the table
+
+- **Japanese industry–academia status, 2020–2026.**
+  - Tohoku's Condensed Matter Nuclear Reaction Division (CLEAR, founded 2015 with Clean Planet funding) and Clean Planet are the centre of activity. Clean Planet has announced a boiler partnership (Miura Co., 2019) and investors including Mitsubishi Estate (v). **No independent test data from these partners are public.**
+  - Toyota Central R&D contributed the 2013 transmutation replication and NEDO-era materials work. Technova (K. Takahashi) and Kobe (Kitamura) continue the powder work. Nissan has published DSC studies.
+  - ICCF-26 (Morioka, 2025; Clean Planet was a sponsor) reported "confirmed reproducibility" of Cu–Ni/ZrO₂ heat. Every cited confirmation comes from inside the same network.
+  - Iwate (Narita) has run smaller Pd/Ni desorption and permeation heat studies [R51].
+- **Flux hypothesis lineage.**
+  - Preparata (coherence-QED) argued that driving D along Pd with a longitudinal current (the Coehn effect) raises local loading and flux. ENEA and Celani used 50 µm Pd wires with longitudinal current. They reported high loading and small heat claims (C, v).
+  - NASA Glenn (Fralick et al.) noted an unexpected temperature rise during D₂ outgassing of Pd in 1989. They later reported surface "transmutations" in pressure-cycled Pd–Ag (NASA TM 2015; IJHE 2020, v). That work is single-group and EDS-based: D.
+  - Biberian and Armanet (ICCF-8, 2000) reported heat during D diffusion through Pd tubes (C/D, v).
+
 ---
 
 ## 3. Quantitative relationships (with units)
@@ -86,7 +98,7 @@ Abbreviations: RT = room temperature; RC = reaction chamber; sccm = standard cm�
 
 ### 3.4 Permeation flux (Pd membranes)
 - J = (Φ/L)(√p₁ − √p₂). Pd permeability Φ at ~350 K is of order 10⁻⁹–10⁻⁸ mol H₂ m⁻¹ s⁻¹ Pa⁻⁰·⁵ (v). For L = 0.1 mm and p₁ = 1 atm this gives J ~10¹⁷–10¹⁸ H cm⁻² s⁻¹.
-- Iwamura's 2–3 sccm equals 1.5–2.2×10¹⁸ D₂ min⁻¹, or 1.8–2.7×10¹⁸ D s⁻¹. Over an effective area of about 4–6 cm² (v) that is **J_D ≈ 3×10¹⁷–7×10¹⁷ D cm⁻² s⁻¹**. Over one week (6×10⁵ s), the total fluence is ≈2–4×10²³ D cm⁻².
+- Iwamura's 2–3 sccm equals 0.9–1.3×10¹⁸ D₂ s⁻¹ (1 sccm = 4.48×10¹⁷ molecules s⁻¹), or 1.8–2.7×10¹⁸ D s⁻¹. Over an effective area of about 4–6 cm² (v) that is **J_D ≈ 3×10¹⁷–7×10¹⁷ D cm⁻² s⁻¹**. Over one week (6×10⁵ s), the total fluence is ≈2–4×10²³ D cm⁻².
 - **Transmutation yield per permeated D:** MHI ~10¹⁴ Pr cm⁻² / ~3×10²³ D cm⁻² ≈ **3×10⁻¹⁰** (v). Toyota 1.4×10¹² / (similar fluence, v) ≈ **5×10⁻¹²**. Toyota's yield was about 10²× lower.
 - Diffusion time-lag through 0.1 mm Pd at 70 °C: L²/(6D) ≈ 10–20 s (D_H(Pd) ≈ 1×10⁻⁶ cm² s⁻¹ at 343 K). **Permeation is limited by surface kinetics.** Iwamura documented "self-poisoning" that lowered permeation rate over time [R19].
 - For comparison, electrochemical cathodes: 100 mA cm⁻² corresponds to 6.2×10¹⁷ D cm⁻² s⁻¹ arriving at the surface, but most recombines to gas. Net permeation fluxes are typically 10¹⁴–10¹⁶ D cm⁻² s⁻¹ (v).
