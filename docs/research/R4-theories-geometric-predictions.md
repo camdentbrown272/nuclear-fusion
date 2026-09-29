@@ -336,7 +336,19 @@ These conflicts are *discriminating experiments*, not reasons to pick one theory
 
 ## 4. Quantitative sanity checks
 
-Script: `python3` with numpy, kept in the session scratchpad; the outputs below are copied from it. The model is the shifted-energy Gamow/WKB approach: λ = (A/V_conf)·exp(−2πη(U_e)), with A = S(0)/(πμcα), S(0) = 110 keV·b (both dd branches) and V_conf = (4/3)π(0.74 Å)³. The prefactor is uncertain by many orders of magnitude, so we quote the required U_e over a prefactor range of ×10⁻¹⁰ to ×10¹⁰.
+Computed with `python3`/numpy (outputs copied below; core of 4.1–4.2 reproduced here). Model: shifted-energy Gamow/WKB, λ = (A/V_conf)·exp(−2πη(U_e)), A = S(0)/(πμcα), S(0) = 110 keV·b (both dd branches), V_conf = (4/3)π(0.74 Å)³. The prefactor is uncertain by many orders, so required U_e is quoted for prefactors ×10⁻¹⁰ to ×10¹⁰.
+
+```python
+import numpy as np
+hbar,c,e,amu,alpha=1.0546e-34,2.998e8,1.602e-19,1.6605e-27,1/137.036
+mu=2.01410*amu/2; S=110e3*e*1e-28; A=S/(np.pi*mu*c*alpha)       # 1.5e-22 m^3/s
+V=4/3*np.pi*(0.74e-10)**3
+G=lambda E_eV: 2*np.pi*alpha*c/np.sqrt(2*E_eV*e/mu)              # 2*pi*eta
+lam=lambda Ue: A/V*np.exp(-G(Ue))                                 # per pair, s^-1
+Ue_needed=lambda lt,pref=A/V: 0.5*mu*(2*np.pi*alpha*c/np.log(pref/lt))**2/e
+f_beam=lambda E_eV,Ue: np.exp(0.5*G(E_eV)*Ue/E_eV)               # beam enhancement
+print(lam(300), Ue_needed(2/6.8e22), f_beam(1e3,300))           # 1e-17, ~200 eV, ~111
+```
 
 **4.1 Screening needed at thermal energy (1 cm³ PdD, 6.8×10²² D).**
 
@@ -370,71 +382,47 @@ The anomalous signal is therefore largest for 1–3 keV projectiles. This sets t
 
 **4.3 Branch bookkeeping per watt.** Conventional dd gives 1.7×10¹² reactions/s, i.e. **8.6×10¹¹ n/s**. ⁴He gives 2.6×10¹¹ /s. At a branching ratio of 10⁻⁷, that is 1.7×10⁵ γ-rays/s at 23.8 MeV. A heat-only claim of 1 W with <10 n/s implies branching distortion ≥10¹¹.
 
-**4.4 Fields.**
-- Coulomb field: 5.8×10¹⁹ V/m (5 fm), 1.4×10¹⁵ V/m (1 pm), 5.8×10¹¹ V/m (0.5 Å). The atomic unit is 5.1×10¹¹ V/m.
-- A 10¹⁰ V/m tip gives 0.74 eV across 0.74 Å and a 7×10⁷ V/m *differential* field, so the pair energy shift is ~5 meV.
-- If the full 0.74 eV acted on U_eff = 47 eV, the rate would change ×3.1.
-- D⁺ acceleration of 10 keV per µm at 10¹⁰ V/m. This is what matters, and it is hot fusion.
+**4.4–4.10 Other checks** (used in Section 2):
 
-**4.5 Widom–Larsen threshold.**
-- β = 2.531 needs a₀ = 2.33.
-- Required field (and equivalent laser intensity): 3.6×10¹¹ V/m at 60 meV (1.7×10¹⁶ W/cm²); 9.3×10¹² V/m at 1.55 eV (1.2×10¹⁹ W/cm²).
-- Realistically screened lattice field: ~9×10⁵ V/m, giving β − 1 ≈ 10⁻¹¹.
-
-**4.6 TSC electron localization.** Localizing an electron costs K_e ≈ 9.4 MeV at r = 20 fm (37 MeV for four electrons), 37 keV at 1 pm and 0.4 keV at 10 pm.
-
-**4.7 Phonon coherence.**
-- Quanta per 23.85 MeV: 6.95×10⁸ (8.3 THz), 3.8×10⁸ (15.3 THz), 2.6×10¹⁵ (2.21 MHz).
-- Thermal occupation at 300 K: n = 0.36 (8.3 THz), 2.8×10⁶ (2.21 MHz).
-- A coherent 8.3 THz amplitude of 0.01 Å in 1 cm³ stores 0.31 J (5.6×10¹⁹ phonons). Sustaining it costs 1.6×10¹¹ W at Q = 100 and 1.6×10⁹ W at Q = 10⁴.
-- At 0.001 Å: 1.6×10⁹ W (Q = 100).
-- *Conclusion:* THz schemes can work only locally (nm³–µm³ volumes) or self-excited. External THz drive can pump at most nm–µm-scale regions, so detectable effects would need extraordinary per-site rates.
-
-**4.8 BEC.**
-- T_c(m* = m_D) = 13.3 K; T_c(100 m_D) = 0.13 K; T_c(10⁴ m_D) = 1.3 mK.
-- nλ³ = 0.024 (300 K) and 0.19 (77 K), against 2.61 required.
-
-**4.9 Letts frequency ratios.** 20.8/15.1 = 1.377 and 20.4/15.3 = 1.333, against √2 = 1.414. 8.3 THz = 34.3 meV; 15.3 THz = 63.3 meV; 20.4 THz = 84.4 meV.
-
-**4.10 Length scales.**
-- PdD lattice a ≈ 4.03 Å; O–O distance 2.85 Å; O→T distance 1.75 Å.
-- H₂ bond 0.74 Å; H₂ kinetic diameter 2.89 Å. "A few atomic diameters" ≈ 8–11 Å, consistent with Storms' ~1 nm.
-- Surface-plasmon resonance at 1.5–3.5 eV corresponds to 354–827 nm; a Preparata coherence domain for a 10 eV mode is ≈124 nm.
-- A thermal neutron wavelength is 1.8 Å. A µm-scale ULMN would have momentum ~1.2 eV/c.
+| Check | Result |
+|---|---|
+| Coulomb field of d | 5.8×10¹⁹ V/m (5 fm), 1.4×10¹⁵ (1 pm), 5.8×10¹¹ (0.5 Å); atomic unit 5.1×10¹¹ V/m |
+| 10¹⁰ V/m nanotip | 0.74 eV across 0.74 Å; *differential* field 7×10⁷ V/m ⇒ ~5 meV pair shift; ×3.1 rate even if the full 0.74 eV acted at U_eff = 47 eV; D⁺ gains 10 keV/µm (hot fusion) |
+| Widom–Larsen | β = 2.531 ⇒ a₀ = 2.33 ⇒ 3.6×10¹¹ V/m at 60 meV (≈1.7×10¹⁶ W/cm² equiv.), 9.3×10¹² V/m at 1.55 eV (1.2×10¹⁹ W/cm²); screened lattice field ~9×10⁵ V/m ⇒ β − 1 ≈ 10⁻¹¹ |
+| TSC localization | K_e ≈ 9.4 MeV at 20 fm (×4 = 37 MeV); 37 keV at 1 pm; 0.4 keV at 10 pm |
+| Fractionation | quanta per 23.85 MeV: 6.95×10⁸ (8.3 THz), 3.8×10⁸ (15.3 THz), 2.6×10¹⁵ (2.21 MHz); n_thermal(300 K) = 0.36 (8.3 THz) |
+| Coherent THz drive | 0.01 Å at 8.3 THz in 1 cm³ stores 0.31 J (5.6×10¹⁹ phonons) and costs 1.6×10¹¹ W (Q = 100), 1.6×10⁹ W (Q = 10⁴); 0.001 Å costs 1.6×10⁹ W (Q = 100). External drive can pump only nm–µm volumes |
+| BEC | T_c = 13.3 K (m* = m_D), 0.13 K (100 m_D), 1.3 mK (10⁴ m_D); nλ³ = 0.024 (300 K), 0.19 (77 K) versus 2.61 |
+| Letts ratios | 20.8/15.1 = 1.377, 20.4/15.3 = 1.333 versus √2 = 1.414; 8.3/15.3/20.4 THz = 34.3/63.3/84.4 meV |
+| Length scales | PdD a ≈ 4.03 Å, O–O 2.85 Å, O→T 1.75 Å; H₂ bond 0.74 Å, kinetic diameter 2.89 Å; "few atomic diameters" ≈ 8–11 Å (Storms' ~1 nm); surface-plasmon resonance 1.5–3.5 eV = 354–827 nm; 10 eV coherence domain ≈ 124 nm |
 
 ---
 
 ## 5. Design implications, ranked by expected value
 
-Expected value (EV) ≈ P(mechanism real) × P(our geometry choice matters | real) × P(credible detection | real) + information value. "Credible" means a nuclear product such as neutrons, charged particles, 511 keV γ-rays, ⁴He/³He or tritium, measured with blanks and calibrations. Heat alone does not qualify.
+Expected value (EV) ≈ P(real) × P(geometry matters | real) × P(credible detection | real) + information value. "Credible" = a nuclear product (neutrons, charged particles, 511 keV, ⁴He/³He, tritium) measured with blanks and calibrations; heat alone does not qualify.
 
 1. **Low-energy D⁺ implantation (0.3–5 keV) into a D-loaded, defect-engineered thin-film target. Highest EV.**
-   - *Geometry:* 100 nm–1 µm Pd, Zr/ZrD₂ or PdO-capped Pd film on a membrane loaded electrochemically or by gas from the back, as in the Thunderbird geometry. Vacancy density is varied (10⁻⁴ to 10⁻² site fraction via pre-irradiation or codeposition), and so is grain size (nm vs µm). Separate UHV-clean and PdO-capped regions. Temperature-controlled stage from 77 to 400 K.
-   - *Diagnostics:* Si detectors for 3.02 MeV p, 1.01 MeV t and 0.82 MeV ³He; a ³He/BF₃ or EJ-309 neutron detector (2.45 MeV); NaI/HPGe for 511 keV annihilation and high-energy electrons (the Czerski e⁺e⁻ channel).
-   - *Why:* the nuclear signal is guaranteed. The *anomalous* enhancement over U_e ≈ 25–100 eV theory is measured quantitatively against the very geometric variables that Hagelstein, Storms, Takahashi and Czerski point to. P(real anomaly) ≈ 0.85; P(an informative geometry dependence) ≈ 0.3.
-   - *Caveat:* strictly this is "lattice-assisted" beam–target fusion, not thermal cold fusion. The project lead should confirm it is in scope. We recommend it as the calibrated backbone that any LENR claim must be benchmarked against.
+   - *Geometry:* 100 nm–1 µm Pd, Zr/ZrD₂ or PdO-capped Pd film on a membrane loaded from the back (electrochemically or by gas; Thunderbird-style). Vary vacancy density (10⁻⁴–10⁻² site fraction via pre-irradiation or codeposition) and grain size (nm vs µm); UHV-clean and PdO-capped regions side by side; stage at 77–400 K.
+   - *Diagnostics:* Si detectors (3.02 MeV p, 1.01 MeV t, 0.82 MeV ³He); ³He/BF₃ or EJ-309 neutron counter (2.45 MeV); NaI/HPGe for 511 keV and energetic electrons (Czerski e⁺e⁻ channel).
+   - *Why:* the nuclear signal is guaranteed, and the *anomalous* enhancement over 25–100 eV theory is measured against exactly the variables Hagelstein, Storms, Takahashi and Czerski name. P(real anomaly) ≈ 0.85; P(informative geometry dependence) ≈ 0.3.
+   - *Caveat:* this is "lattice-assisted" beam–target fusion, not thermal cold fusion; the project lead should confirm scope. We recommend it as the calibrated backbone against which any LENR claim is benchmarked.
 2. **Vacancy-rich, high-loading Pd surface layer driven far from equilibrium, with nuclear diagnostics.** This is the consensus target of Hag, Sto, TSC and Scr.
-   - *Geometry:* Pd/D codeposited film (≤1–5 µm) on Au or Cu, or a thin-foil cathode loaded to local D/Pd ≥ 0.9 (resistance-verified). Current density swept through 0.05–1 A/cm² (fine steps, since the Swartz OOP points to narrow windows). Loading/deloading cycles to create ~1 nm cracks.
-   - *Diagnostics:* in-situ Si detectors behind thin windows (not CR-39 alone), neutron counters, tritium assay, ⁴He mass spectrometry capable of resolving D₂ from ⁴He.
-   - P(real) ≈ 0.04; low cost.
+   - *Geometry:* Pd/D codeposited film (≤1–5 µm) on Au or Cu, or thin foil loaded to D/Pd ≥ 0.9 (resistance-verified); current density swept 0.05–1 A/cm² in fine steps (Swartz OOP); loading/deloading cycles for ~1 nm cracks.
+   - *Diagnostics:* in-situ Si detectors (not CR-39 alone), neutron counters, tritium assay, ⁴He mass spectrometry that resolves D₂ from ⁴He. P(real) ≈ 0.04; low cost.
 3. **2–10 nm Pd or Pd–Ni in ZrO₂ nanocomposites under D₂ gas at 200–350 °C.** TSC, Kim and Storms (gaps between particles) agree here.
-   - *Geometry:* Pd₁Ni₁₀/ZrO₂ or Cu₁Ni₇/ZrO₂ powders, re-calcined; controlled particle size of 2, 5 and 10 nm as an explicit variable. H₂ vs D₂ as an explicit control (theories disagree).
-   - *Diagnostics:* ⁴He in the gas, neutrons, γ-spectroscopy (Takahashi predicts little); calorimetry only as secondary evidence.
-   - P(real) ≈ 0.02.
+   - *Geometry:* re-calcined Pd₁Ni₁₀/ZrO₂ or Cu₁Ni₇/ZrO₂ with particle size (2, 5, 10 nm) as a variable; H₂ vs D₂ as a control (theories disagree). *Diagnostics:* ⁴He in gas, neutrons, γ; calorimetry only secondary. P(real) ≈ 0.02.
 4. **Phonon–nuclear coupling test with radioactive tracers (Hagelstein–Metzler), independent of fusion.**
-   - *Geometry:* Co-57 source bonded to a steel or Fe plate or thin foil. Piezo drive at 1–3 MHz near mechanical resonance (high Q, acoustic). A matched *undriven* twin plate. Detectors at several angles to test the predicted anisotropy and delocalization of the 14.4 keV line.
-   - A positive, replicated result would be the most credible LENR-relevant nuclear evidence imaginable, because counting statistics are clean. Watch out for piezo heating, microphonic detector artefacts and pile-up.
-   - P(real) ≈ 0.03, but high information value per dollar.
+   - *Geometry:* Co-57 bonded to a steel/Fe plate or foil; piezo drive at 1–3 MHz on a high-Q acoustic resonance; matched *undriven* twin; detectors at several angles for the predicted anisotropy/delocalization of the 14.4 keV line. Clean counting statistics make a replicated positive the most credible LENR-relevant evidence possible; guard against piezo heating, microphonics, pile-up. P(real) ≈ 0.03, high information per dollar.
 5. **THz stimulation of loaded PdD at 8.3 ± 0.35 and 15.3 ± 0.22 THz** (≈20.4 THz as the PdH control).
-   - Add to item 2: Au overlayer ~20–50 nm, p-polarized dual lasers or a difference-frequency THz source, with frequency scans that include off-resonance controls.
-   - It already failed replication once, so P ≈ 0.02. Only worth it as an add-on.
+   - Add-on to item 2: Au overlayer ~20–50 nm, p-polarized dual lasers or a difference-frequency THz source, scanned with off-resonance controls. Failed replication once; P ≈ 0.02.
 6. **Engineered ~0.3–1 nm nanogaps** (Storms): electromigrated break-junction arrays, dealloyed nanoporous Pd, ALD-spaced gaps, with gap width as the swept variable. P ≈ 0.015. The same samples double as high-defect targets for item 1.
-7. **Plasmonic roughness and nanotips** (Widom–Larsen, high-field): P < 0.01 as barrier modifiers. *However*, a field-emission tip or pyroelectric crystal makes a cheap **hot-fusion neutron calibration source** for the detector chain, and that is how it should be used.
+7. **Plasmonic roughness and nanotips** (Widom–Larsen, high-field): P < 0.01 as barrier modifiers; use a tip or pyroelectric crystal only as a cheap **hot-fusion neutron calibration source**.
 
 **Cross-cutting rules implied by the theory review:**
-- Design for dd-branch products (p, t, n) *and* ⁴He/511 keV. Screening-type mechanisms predict normal branching, so neutrons are the easiest credible signal. Hagelstein and TSC-type mechanisms predict ⁴He with no energetic particles, so heat–⁴He correlation is needed.
-- Treat H/D substitution as a built-in control that splits the theories.
-- Record loading (R/R₀), temperature, flux and defect density as *primary* variables, because every theory predicts steep thresholds.
+- Detect dd-branch products (p, t, n) *and* ⁴He/511 keV: screening mechanisms predict normal branching (neutrons are the easiest credible signal); Hagelstein/TSC predict ⁴He without energetic particles (needs heat–⁴He correlation).
+- Use H/D substitution as a built-in control that splits the theories.
+- Log loading (R/R₀), temperature, flux and defect density as *primary* variables; every theory predicts steep thresholds.
 
 ---
 

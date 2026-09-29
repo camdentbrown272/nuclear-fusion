@@ -68,7 +68,7 @@ For a thick-target yield the screening energy U_e is defined through the enhance
 | Zr | 297 ± 8 | same | TU Berlin | 2001 | | [m] |
 | Ta | 322 ± 15 | same | TU Berlin | 2001 | | [m] |
 | Al, Zr, Ta (systematics) | as above | 5–60 keV | Huke, Czerski et al. (PRC 78, 015803) | 2008 | Surface C/O layers and D-profile evolution strongly bias U_e. UHV and in-situ cleaning required | [m] |
-| ZrD₂ (UHV) | 105 ± 15 (fit including the threshold resonance) | down to E_d ≈ 5 keV | Szczecin (Czerski et al.) | 2020–22 | Theory 112 eV. The resonance absorbs the excess | [v] |
+| ZrD₂ (UHV) | 105 ± 15 (fit including the threshold resonance) | down to E_d ≈ 5 keV | Szczecin (Czerski et al.) | 2020–22 | Theory 112 eV. The resonance absorbs the excess | [v] value; [m] which paper and fit |
 | ZrD₂ | ≈ 340 (thick-target fit) | E_cm ≥ 0.675 keV | Szczecin (arXiv:2409.02112) | 2024 | Yield falls 7 orders of magnitude. Plateau below E_d ≈ 2.5 keV | [v] |
 | Zr with O/C contamination | varies; linked to vacancy defects (PAS, XRD) | keV | Szczecin (Kowalska, Targosz-Ślęczka et al., Materials 2023, 2025) | 2023–25 | Defects are claimed to increase U_e | [v] titles and abstracts only |
 | Ti, Pd | measured; values not retrieved | down to ~1 keV | Szczecin (arXiv:2605.27438) | 2026 | "Different thermal characteristics and screening energies" | [v] |
@@ -184,7 +184,7 @@ Note: this is **University of Szczecin** work, not LBNL or ARPA-E. It was funded
 | MIT | Project topic not verified. MIT researchers (Metzler, Hagelstein et al.) published a review of "known mechanisms that increase nuclear fusion rates in the solid state" (New J. Phys. 2024) | [m] |
 | ENG8 | Company-led heat and nuclear test; topic not verified | [m] |
 
-**Results by 2026 (honest status).** I could not verify any peer-reviewed publication from these teams reporting anomalous nuclear products, and none are widely cited as positive. The ARPA-E FY2023 annual report (released August 2025) lists the programme. Pending a direct check of ARPA-E's final programme summary, **treat the programme as a provisional null (N)**.
+**Results by 2026 (honest status).** I could not verify any peer-reviewed publication from these teams reporting anomalous nuclear products, and none are widely cited as positive. The ARPA-E FY2023 annual report (released August 2025) came up in programme searches, but I could not read it. Pending a direct check of ARPA-E's final programme summary, **treat the programme as a provisional null (N)**.
 
 **The closest peer-reviewed results in this space [m]:**
 
@@ -209,7 +209,7 @@ Note: this is **University of Szczecin** work, not LBNL or ARPA-E. It was funded
   - Hydrogenated and unirradiated controls showed no such signals.
 - **What is "cold" and what is not.** Only the bulk lattice temperature and the fuel density are "cold". The fusing deuterons are **keV–MeV projectiles** produced by MeV photons, so this is beam-target fusion with an internal neutron-driven beam.
 - **What screening can do here [calc].** For recoils of 10–300 keV, screening of even 1 keV multiplies σ by only 1.0–2.4. The yield should be close to conventional beam-target estimates; screening matters only in the low-energy tail.
-- **Detection difficulty.** Each photoneutron makes of order 10⁻⁸–10⁻⁷ secondary D–D neutrons, a small fraction sitting on a large photoneutron background. Spectroscopy above about 1 MeV is essential.
+- **Detection difficulty [calc, order of magnitude].** Photoneutrons are ≤0.34 MeV and each makes a few recoils of tens of keV. The thick-target yields in Table C, scaled to ErD₃, give each photoneutron roughly 10⁻¹⁰–10⁻⁸ secondary D–D neutrons. That signal sits on a large photoneutron background, so spectroscopy above about 1 MeV is essential.
 - **Grade C.** No independent replication or peer-reviewed follow-up is known to me. NASA technical memoranda and conference papers from 2021 onward exist but were not verified this session.
 - **Device relevance:** low. The approach needs an MeV driver, which is out of scope. It is useful only as proof that dense deuterides plus energetic internal deuterons give standard D–D signals.
 
