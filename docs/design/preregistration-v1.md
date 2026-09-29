@@ -95,9 +95,9 @@ These are tuned on P0a, blank-telescope and sideband data only.
 
 | Background per cell (d⁻¹) | Single membrane, exit face | Single membrane, entry face | Pooled 8, per membrane (exit / entry) |
 |---|---|---|---|
-| 0.03 | 4.7×10⁻⁵ | 6.3×10⁻⁵ | 1.1 / 1.5 ×10⁻⁵ |
-| 0.09 (3× band) | 5.9×10⁻⁵ | 8.1×10⁻⁵ | 1.7 / 2.3 ×10⁻⁵ |
+| 0.03 | 8.7×10⁻⁵ | 1.2×10⁻⁴ | 2.0 / 2.7 ×10⁻⁵ |
+| 0.09 (3× band) | 1.1×10⁻⁴ | 1.5×10⁻⁴ | 3.1 / 4.2 ×10⁻⁵ |
 
 Units are D+D fusions s⁻¹. The inputs are:
-- ε = 0.22 (exit) or 0.162 (entry), × 0.80 grid transmission × 0.9 septum loss;
+- ε = 0.22 (exit) or 0.162 (entry), × 0.43 grid transmission (0.30 mm Mo, ADR-007) × 0.9 septum loss;
 - a proton branch of 0.5.

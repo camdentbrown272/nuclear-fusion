@@ -1,6 +1,9 @@
-# Iteration 1 (rev B) — Detector-Facing Membrane Array "DFM-8" and claim arms
+# Iteration 1 (rev C) — Detector-Facing Membrane Array "DFM-8" and claim arms
 
-**Status:** revision B, after red-team-1A/1C/1D (decisions in [ADR-005](../decisions/ADR-005-iteration1-revB.md)) and M7 (γ station and modulation protocol, [ADR-006](../decisions/ADR-006-gamma-station-modulation.md)). Red-team-1B (engineering/safety) is being re-run on this revision.
+**Status:** revision C, after all four red-team-1 reviews and M7:
+- [ADR-005](../decisions/ADR-005-iteration1-revB.md): physics, statistics and claim fidelity;
+- [ADR-006](../decisions/ADR-006-gamma-station-modulation.md): γ station and modulation;
+- [ADR-007](../decisions/ADR-007-engineering-revC.md): engineering and safety.
 **Date:** 2026-09-29
 **Frozen analysis plan:** [preregistration-v1.md](preregistration-v1.md)
 **Earlier version:** rev A (git `77887a6`) used quadrant skins on one membrane. The reviews showed that geometry cannot hold the claimed regimes (ADR-005 §1).
@@ -11,8 +14,9 @@
 ## 0. The configuration in one paragraph
 
 - **The membrane.** A **12 µm annealed palladium membrane, 20 mm active diameter**, forms the wall between two chambers.
-  - It is diffusion-bonded to a corrugated **platinum** annulus. Platinum does not absorb hydrogen, so the membrane can swell freely while an all-metal seal holds it.
-  - Both chambers hold D₂ at 0.5 bar, so the membrane carries no significant pressure load.
+  - It is press-bonded to a corrugated **platinum** annulus. Platinum does not absorb hydrogen, so the membrane can swell freely while an all-metal seal holds it.
+  - Both chambers hold D₂ at 0.5 bar, so the membrane carries no significant pressure load. A 0.3 mm molybdenum grid and a relief valve protect it if that balance is lost.
+  - Deuterium that crosses the membrane is **pumped back into the cell** through a closed, helium-tight loop. This keeps the sealed cell's gas and heavy water in balance (ADR-007).
 - **The entry face (top)** is the cathode of a small **sealed, all-metal, PTFE-lined electrolytic cell**: 1.0 M LiOD in low-tritium D₂O, with a Pt mesh anode 4 mm above. The cell loads the membrane to D/Pd ≥ 0.9.
 - **The exit face (bottom)** gets **one of three finishes per membrane**. Each finish sets the loading state of the *whole* foil:
   - **H-L:** 50 nm Au cap. High loading, no through-flux. It behaves like SRI's closed cathode, with deuterium movement driven by current steps.
@@ -61,28 +65,33 @@ Dimensions in mm unless noted; not to scale.
                  anode feedthrough (alumina-brazed, +)      P, T, burst disk (3.5 bar), He-sample valve
                           |                                        |
         +=================|========================================|=============+  316L lid, Au-wire seal
-        |  headspace <=15 mL, D2 0.50 bar abs (+1 % Kr tracer)                   |
+        |  headspace <=15 mL, D2 0.50 bar abs (+1 % Kr); make-up/recycle inlet  |
         |  recombiner (hydrophobic Pt/Al2O3, >=20 above liquid, baffle, arrestor) |
-        |  +-- 316L body, PTFE liner 1.0 (baked 150 C, D2-purged), bore 20.00 --+ |
+        |  +-- 316L body (water jacket), PTFE liner 1.0 spring-loaded, bore 20 -+ |
         |  |  1.0 M LiOD / D2O (low-T, >=99.9 % D), ~12 mL                        | |
         |  |  ======== Pt mesh anode (>=50 % open, pitch <=1) ========  g = 4.0   | |
+        |  |  o aux. Pt ring cathode (current steering, ADR-006)   RTD thermowell | |
         |  |  ~~~~~~~~ ENTRY FACE = cathode (ground), etched annealed Pd ~~~~~~~~ | |
         +--+=====================================================================+-+
-           |  Pd MEMBRANE 12 +/- 1 um, active dia 20.0                           |
-           |  diffusion-bonded (850 C) to corrugated Pt annulus 0.10, OD 34      |<-- Au-wire seals both sides
-           |  EXIT FACE: one finish per membrane (Au 50 nm | Ni 20 nm | F/X)     |    4-pt vdP on Pd rim (dia 21)
+           |  Pd MEMBRANE 12 +/- 1 um, active dia 20.0, Pd-only rim to dia 23   |    4-pt vdP on Pd-only rim (dia 22)
+           |  press-bonded (850 C, 5-10 MPa, Pt interlayer) dia 23-25 to         |<-- Au-wire seals both sides
+           |  Pt annulus 0.15, ID 23 / OD 36, two convolutions                   |
+           |  EXIT FACE: one finish per membrane (Au 50 nm | Ni 20 nm | F/X)     |
         +--o---------------------------------------------------------------------o--+
-        |  Mo catch grid 0.10, 1.0 hex holes, open 0.80 (on 0.5 ribs, 5 pitch)       |
-        |  cross septum 4.0 x 0.3 (grounded)                                         |
+        |  Mo catch grid 0.30 (stress-relieved), 1.0 hex holes, 0.15 webs, proof 1.5 bar |
+        |  cross septum 4.0 x 0.3 (grounded) = deep rib under the grid (10 mm spans)  |
         |  [dE 25 um, 600 mm2, 4 quadrants]  4.0 +/- 1.0 below exit face            |
         |  [E 500 um, >=700 mm2]             1.5 below dE                           |
-        |  FRONT VOLUME ~30 cm3, D2 0.50 bar abs; dp(cell-front) = +30 +/- 20 mbar  |
-        |  vacuum-fired 316L(N); <=10 metal seals; no glass, elastomer, epoxy, ion gauge
-        |  reverse-relief burst foil (20 mbar) front -> cell headspace (failure only) |
+        |  FRONT VOLUME ~30 cm3, D2 0.50 bar abs; dp(cell-front) = +30 +/- 10 mbar  |
+        |  vacuum-fired 316L(N); metal seals with pumped interspaces; no glass/epoxy/ion gauge
+        |  forward relief cell->front at +150 mbar; reverse disk 20 +/- 5 mbar front->cell |
         +-----+-----------------------+----------------+-----------------------------+
               |                       |                |
      Pd-Ag element (350 C)     all-metal valve to   capacitance gauge
      = only D2 in/out path     He manifold/HR-QMS
+        |
+     mass-flow meter (flux regressor) -> bellows pump -> buffer -> Pd-Ag -> cell headspace
+     (closed D2 recycle loop on FX/H-M cells; Pd-Ag-purified make-up supply for P1 and H-L)
 ```
 
 ### 3.2 Dimensions and materials
@@ -91,21 +100,23 @@ Dimensions in mm unless noted; not to scale.
 |---|---|---|
 | Membrane | Pd ≥ 99.95 %, **12 ± 1 µm** unloaded, measured per foil to ± 0.3 µm; Ø20.0 wetted/active | ADR-005 §2.2; M2 rec. 6 |
 | Lots | ≥ 2 lots, screened on sibling coupons before admission: loading ≥ 0.95 in D₂O at ≤ 300 mA cm⁻²; swelling; EBSD texture and grain/thickness ratio; ICP-MS impurities. ENEA/SRI archival material requested | ADR-005 §2.4; 1D-D3 |
-| Heat treatment and bond | Vacuum anneal 850 °C, 1 h, ≤ 10⁻⁵ mbar, **with simultaneous diffusion bond** to the Pt annulus under a light dead-weight; entry face lightly etched afterwards | M3 rec. 5; ADR-005 §2.3 |
-| Annulus | Pt, 0.10 mm, ID 20.5 / OD 34, one convolution, **≥ 1 mm radial travel** (the loaded disk grows ≈ 0.45 mm in radius) | ADR-005 §2.3; M3 |
+| Heat treatment and bond | Vacuum anneal 850 °C, 1 h, ≤ 10⁻⁵ mbar, done together with a **press bond** (ceramic platens, 5–10 MPa, sputtered Pt interlayer) over Ø23–25; entry face lightly etched afterwards. Bond qualified first on ≥ 10 coupons: He leak ≤ 10⁻¹¹ mbar L s⁻¹ before and after 3 load/deload cycles, peel test, cross-section | ADR-007 §2.4 (1B-B7) |
+| Membrane blank and rim | Ø25 blank; Pd-only rim Ø20–23 carries the van der Pauw contacts, so they are not shunted by the Pt | ADR-007 §2.4 (1B-B6) |
+| Annulus | Pt, **0.15 mm, ID 23 / OD 36, two convolutions**, ≥ 1 mm radial travel (the loaded disk grows ≈ 0.45 mm in radius) | ADR-007 §2.4 (1B-B15) |
 | Seals | Au-wire on both sides of the annulus. No elastomer or polymer on any gas boundary | 1A-P1; M8 |
-| Cell body | 316L, PTFE liner 1.0 mm on all wetted surfaces (no path to air), baked 150 °C, D₂-purged; headspace ≤ 15 mL | 1A-P1; R6 |
+| Cell body | 316L with a **water jacket**. PTFE liner 1.0 mm on all wetted surfaces (no path to air), spring-loaded onto the foil by an Au-plated wave spring, baked 150 °C, D₂-purged. Headspace ≤ 15 mL. Liquid-level pins; electrolyte RTD in a PTFE thermowell | 1A-P1; R6; ADR-007 §2.5 |
 | Anode | Planar Pt mesh (≥ 50 % open, pitch ≤ 1 mm), g = 4.0 ± 0.2 mm, parallel within 0.2 mm | M2 rec. 7 |
+| Auxiliary cathode | Pt ring (Ø0.5 mm wire, Ø17 mm) 2 mm above the membrane, outside the active face's shadow. Takes the steered current during lock-in "off" half-periods (ADR-006) | ADR-006 §3 |
 | Electrolyte | 1.0 M LiOD in D₂O, ~12 mL. D₂O ≥ 99.9 % D, certified low-tritium, LSC assay per lot. ²²⁸Th/²²⁶Ra assay of LiOD. Rn-free by sparging with Pd–Ag-purified D₂ | M2; 1A-P8, P9; 1D-D15 |
-| Cell gas | D₂ 0.50 ± 0.05 bar abs (1.0 bar in P4); trip at ΔP ≥ 10 % of fill | R6; 1D-D12 |
+| Cell gas and D balance | D₂ 0.50 ± 0.05 bar abs, held by a pressure controller. **Closed D₂ recycle loop** on FX/H-M cells: front Pd–Ag exhaust → mass-flow meter → metal-bellows pump → buffer → second Pd–Ag → headspace. Pd–Ag-purified make-up for P1 and H-L cells. Two-sided trip at ± 10 % of fill; O₂ inferred from the D balance and measured by QMS sniff every 6 h | ADR-007 §2.1 (1B-B1) |
 | Recombiner | Hydrophobic Pt/Al₂O₃, ≥ 20 mm above the liquid, baffle, flame arrestor, thermocouple | R6 |
 | Exit finishes | H-L: Au 50 nm (pinholes ≤ 3×10⁴ cm⁻², checked per sputter batch by an H-permeation witness and Cu decoration). H-M: Ni 20 nm (final value from P0b). FX: diagonal quadrant pairs F (bare) and X (Pd 40 nm / [CaO 2 nm / Pd 18 nm]×5), separated by a 1 mm bare web | ADR-005 §2.1; 1A-P7 |
-| Grid | Photo-etched Mo 0.10 mm, 1.0 mm hex holes, 0.10 mm webs (open 0.80), 0.5 mm ribs under the septum and at 5 mm pitch; hole edges radiused ≥ 50 µm | M3 rec. 4 |
-| Pressure | P_cell − P_front = +30 ± 20 mbar (membrane on grid, σ ≈ 6 MPa). Front loss at 0.5 bar: 28 MPa. At 1.0 bar (P4): 44 MPa. Interlock at ± 40 mbar; reverse-relief foil at 20 mbar (lifted 12 µm membrane at 50 mbar ≈ 54 MPa) | ADR-005 §2.3; M3 scaling σ ∝ ΔP^(2/3) t^(−2/3) |
-| Telescope | ΔE 25 ± 2 µm, 600 mm², 4 quadrants; E 500 µm; ΔE at 4 ± 1 mm; ceramic, epoxy-free, low-α; bias ≤ 150 V | M5 rec. 1 |
+| Grid | Photo-etched, stress-relieved Mo **0.30 mm**, 1.0 mm hex holes, 0.15 mm webs (open 0.76), carried by the 4 mm cross septum as a deep rib (10 mm spans). ≈ 160 MPa at 1.0 bar against a yield of 550–700 MPa. Proof-tested at 1.5 bar. Proton transmission over the acceptance 0.43 | ADR-007 §2.2 (1B-B3) |
+| Pressure | ΔP = P_cell − P_front: operate +30 ± 10 mbar, alarm ± 15, trip at +5 / +60 mbar, with temperature feed-forward. Trip action: galvanostat to 0 (FX/H-M) or keep-alive (H-L); Pd–Ag heaters stay on. Forward relief cell → front at +150 mbar. Reverse-acting, vacuum-supported disk front → headspace at 20 ± 5 mbar (lifted membrane at 50 mbar ≈ 54 MPa). Burst disks (3.5 bar) on cell and front to a vent volume. The full hierarchy is in ADR-007 §2.2 | ADR-007 §2.1–2.2 (1B-B2, B5, B17) |
+| Telescope | ΔE 25 ± 2 µm, 600 mm², 4 quadrants; E 500 µm; ΔE at 4 ± 1 mm; ceramic, epoxy-free, low-α; bias ≤ 150 V, current-limited to ≤ 1 µA with µs trip, interlocked off between 0.05 and 50 mbar and during ramps > 5 mbar s⁻¹. ΔE–E gap vented. Mounts thermostatted. ≥ 2 spares; one sacrificial telescope soaked in D₂ from P0a. Fallback: vacuum pocket behind a 1–2 µm SiNₓ or Ni window | M5 rec. 1; ADR-007 §2.6 |
 | Septum | Cross, 4.0 × 0.3 mm, grounded. Its (n,xp) contribution (~0.01 d⁻¹) is included in the background; B carries an identical septum and grid on one quadrant | 1A-P11 |
-| Front volume | ~30 cm³, vacuum-fired 316L(N), ≤ 10 metal seals; D₂ only through the hot Pd–23Ag element | M8 |
-| Loading gauge | 4-point van der Pauw on the Pd rim at Ø21, valid because each membrane is single-regime. R(x) calibrated on sibling coupons for D and H, both branches; logged at ≥ 1 Hz | ADR-005 §2.4 |
+| Front volume | ~30 cm³, vacuum-fired 316L(N). Every demountable seal has a pumped or Ar-guarded interspace. D₂ only through the hot Pd–23Ag element. Three-valve pumped-interspace isolation to the manifold | M8; ADR-007 §2.7 |
+| Loading gauge | 4-point van der Pauw on the Pd-only rim at Ø22, valid because each membrane is single-regime. R(x) calibrated on **bonded** sibling assemblies for D and H, both branches. Rim thermostatted to ± 0.05 K. Logged at ≥ 1 Hz | ADR-005 §2.4; ADR-007 §2.4 |
 | Other sensors | ≥ 2 acoustic-emission sensors per cell (to localise events); flange RTD; cell and front pressure; Δp transducer | 1A-P3 |
 | Electrical | Membrane is the hard ground; floating linear galvanostat; dummy Si on the same electronics; waveforms digitised at ≥ 100 MS/s; V·I at ≥ 100 kS/s | red-team-0 §3.4; M4 |
 
@@ -147,7 +158,7 @@ Proton energies at the ΔE, through 12.46 µm (loaded) PdD₀.₉ plus 4 mm of 0
 - **Energy is not a one-to-one depth map.** Depth is recovered by a pre-registered response-matrix unfold ε(z, E), calibrated with ⁶LiF tritons (34 % emerge at 12 µm). One ⁶LiF calibration membrane is made per lot.
 - **Tritons** escape from the top ~4 µm, **³He** from ≤ 1 µm.
 - **Radon progeny.** ²¹⁴Po α leave the foil at ≤ 2.8 MeV and stop in the ΔE, so PID rejects them.
-- **Grid and septum** multiply efficiency by ≈ 0.80 × 0.9.
+- **Grid and septum** multiply efficiency by ≈ 0.43 × 0.9. The 0.30 mm grid's hole walls shadow oblique tracks (transmission over the acceptance: 0.43, against 0.70 for a 0.10 mm grid; ADR-007 §2.2).
 
 ## 4. Array and house
 
@@ -174,8 +185,10 @@ Telescopes are characterised in P0a and P6 (≥ 10× live time each). There is n
  |   |    [T-Pt] [T-H(L)] [T-H(FX)] [B]                             |     |
  |   +------------------------------------------------------------+     |
  |  plastic-scintillator muon veto on top and two sides                 |
+ |  chilled-water loop inside the Cu (removes ~230 W of cell heat)      |
  +----------------------------------------------------------------------+
  Inner cavity ~ 45 x 30 x 30 cm; 3He-bank efficiency ~0.12-0.18 (M5 scaling)
+ D2 supply to the house: excess-flow valve and restrictor outside, H2 sensor inside
 ```
 
 The house has **no γ detectors and no lead** (M5: Pb near the ³He bank fakes neutrons). The Si telescopes record the MIPs from any e⁺e⁻ pairs, and ΔE–E classification keeps them out of the proton window (M7).
@@ -205,15 +218,19 @@ The house has **no γ detectors and no lead** (M5: Pb near the ³He bank fakes n
 
 - **Two channels per cell:**
   - **Front** (exit-face reactions). Release fraction by finish (M8, 1A-P12): F ≈ 0.85; H-M (20 nm Ni) ≈ 0.6; X 0.02–1; H-L ≈ 0 (the Au cap retains He, so melts are needed).
-  - **Headspace** (entry-face reactions). Release into the front is 0.
+  - **Headspace** (entry-face reactions). Release into the front is 0. On FX and H-M cells the D₂ recycle loop feeds this volume, so the headspace channel is **descriptive unless P0a blanks taken with the loop running meet ≤ 3× the target floor** (ADR-007 §2.1).
 - **Manifold** (0.1–0.2 L, 250 °C bakeable):
   - getter;
   - **HR-QMS (R ≥ 500)**;
   - ⁴He and ³He pipettes;
   - capacitance gauge;
-  - ports for external magnetic-sector MS with ³He isotope dilution (primary). The ³He spike is ≥ 100× the tritium ³He ingrowth.
+  - ports for external magnetic-sector MS with ³He isotope dilution. The ³He spike is ≥ 100× the tritium ³He ingrowth. The sector MS is used on a pre-registered subset of ≤ 60 samples; HR-QMS is primary.
+  - three-valve pumped-interspace isolation to each cell.
 - **Windows.** 1 d and 7 d static windows. During P2 the FX membranes permeate 50–150 mA cm⁻² equivalent, so windows rely on the Pd–Ag exhaust, not on getter capacity (1A-P10).
-- **Floors (5σ, full release, M8):** 0.39 nW (1 d) and 0.16 nW (7–30 d), i.e. 43–100 He s⁻¹. These hold only because the cell is now polymer-free (1A-P1). Each cell's floor is measured in P0a, with ≥ 2 blank windows after build.
+- **Floors (5σ, full release, M8):** 0.39 nW (1 d) and 0.16 nW (7–30 d), i.e. 43–100 He s⁻¹. These are **targets to be earned in P0a**. They need a polymer-free cell (1A-P1) and total seal leakage ≤ 3×10⁻¹⁴ mbar L s⁻¹, which is why every seal has a pumped interspace (1B-B9).
+  - Each cell's floor is measured in P0a, with blanks taken **after** filling and a ≥ 30 min sparge.
+  - Acceptance: a floor ≤ 3× target, otherwise that cell's He is descriptive.
+  - The **10× floor is the pre-registered planning case**; its reach is still ~10⁻⁷ of the claims.
 - **T3 statistic.** Each cell's excess over its **own** blank series, with the between-cell variance and D₂-matrix spikes included (pre-registration §2).
 - **Post-run.**
   - Quadrant melts (laser-cut).
@@ -267,13 +284,13 @@ The full inference rules are in [preregistration-v1.md](preregistration-v1.md).
 
 | Phase | Duration | Action | Notes |
 |---|---|---|---|
-| P0a Commissioning | 3–4 wk (stage 1), 2 wk (stage 2) | ²⁴¹Am + pulser, ²²Na, ⁴He/³He spikes; per-cell He blanks (≥ 3 × 1 d, ≥ 2 × 7 d); calorimeter calibration; backgrounds ≥ 10× live time; lot screening in parallel | Freeze DQ cuts and controller targets |
-| P0b Witness | 1 wk | Bare-Pd and H-L witness DFMs **at 0.5 bar D₂**: measure J(i), x, the Au pinhole leak, and the thermal limit at 0.5 A cm⁻². Choose the Ni thickness for H-M, or trigger the H-M → H-L fallback | 1A-P7 |
-| P1 Loading | 1 d | α→β transit at 5 mA cm⁻², then 20 → 50 → 100 → 300 mA cm⁻² | M3 Protocol A |
-| **P2 Hold** | **42 d fixed** | 200–300 mA cm⁻², 22 ± 1 °C, keep-alive ≥ 20 mA cm⁻² on UPS. FX: ≥ 25 % current-off blocks. He windows | Primary T1/T3 data; in-regime hours logged |
-| P3 Modulation | 14 d | Lock-in at P = 12 τ_eff (from P0b), clipped to 1–6 h (default 2 h), randomised blocks, **current steered to an auxiliary Pt cathode** so cell heat and field stay constant (ADR-006). H cells: cathodic 100 ↔ 500 mA cm⁻² (≤ 2 h at 500). FX: steering on/off, plus front-pressure steps 0.2 ↔ 1.0 bar at constant current (x_exit 0.629 ↔ 0.670). Anodic +300/−100 cycles are descriptive only | Regressor: FX exit flux (mass-flow meter on the Pd–Ag exhaust); H cells \|dx/dt\| (vdP) |
-| P4 Warm | 14 d | Fill 1.0 bar (balanced), 60 °C | 1D-D12 |
-| P6a Desorption | 2 d | Current off; front pumped through the HR-QMS line; telescopes on; dynamic He logged | Lipson/NTT-like; 1D-D13 |
+| Development (before stage 1) | 6–10 months | Bond qualification (≥ 10 coupons); grid proof tests; Si D₂-soak telescope started; **P0b on a separate bench**: bare-Pd and H-L witness DFMs at 0.5 bar D₂ measure J(i), x, the Au pinhole leak, τ_eff, V_cell and ΔT at 0.5 A cm⁻². P0b chooses the Ni thickness for H-M or triggers the H-M → H-L fallback | ADR-007 §2.8 (1B-B7, B13); 1A-P7 |
+| P0a Commissioning | 3–4 wk (stage 1), 2 wk (stage 2) | ²⁴¹Am + pulser, ²²Na, ⁴He/³He spikes; per-cell He blanks after fill (≥ 3 × 1 d, ≥ 2 × 7 d, with the recycle loop running on FX/H-M cells); calorimeter calibration; backgrounds ≥ 10× live time | Freeze DQ cuts, controller targets and He acceptance |
+| P1 Loading | 1 d | α→β transit at 5 mA cm⁻², then 20 → 50 → 100 → 300 mA cm⁻². ΔP held ≤ +10 mbar during the transit. Headspace D₂ topped up from the purified make-up supply (loading consumes 69 % of it) | M3 Protocol A; ADR-007 §2.1–2.2 |
+| **P2 Hold** | **42 d fixed** | 200–300 mA cm⁻², electrolyte 22 ± 1 °C (RTD), keep-alive ≥ 20 mA cm⁻² on UPS. FX: ≥ 25 % current-off blocks. D₂ recycle loop on FX/H-M. He windows | Primary T1/T3 data; in-regime hours logged |
+| P3 Modulation | 14 d | Lock-in at P = 12 τ_eff (from P0b), clipped to 1–6 h (default 2 h), randomised blocks, **current steered to an auxiliary Pt cathode** so cell heat and field stay constant (ADR-006). H cells: cathodic 100 ↔ 500 mA cm⁻² (≤ 2 h at 500). FX: steering on/off, plus balanced front-and-cell pressure ramps 0.2 ↔ 0.6 bar at ≤ 1 mbar s⁻¹ and constant current. Anodic excursions are capped at ≤ 10 % of the foil inventory per half-cycle (−10 mA cm⁻², or −100 mA cm⁻² for ≤ 8 s) and are descriptive only | Regressor: FX exit flux (mass-flow meter on the Pd–Ag exhaust); H cells \|dx/dt\| (vdP) |
+| P4 Warm | 14 d | Fill 0.5 bar, electrolyte 55 °C, ramp ≤ 5 K h⁻¹; trip re-zeroed at temperature; Si ≤ 30 °C | 1D-D12; ADR-007 §2.5 |
+| P6a Desorption | 2 d | Current off. Cell lowered to ≤ 50 mbar **before** the front is pumped through the HR-QMS line. Telescopes on (bias interlocked through 0.05–50 mbar). Dynamic He logged | Lipson/NTT-like; 1D-D13; ADR-007 §2.2 |
 | P6 End | 1 wk | Final He windows (before P6a); section and melt; SIMS/ICP-MS; XPS for Pt on the entry face; AFM/EBSD | Ash and covariates |
 
 **Descoped from rev A:** α/β cycling site factory (P5). Misfit cracking is a confound, so it is moved to iteration 2.
@@ -284,10 +301,10 @@ Per claim, normalised as stated; live time 0.8; P2 42 d.
 
 | Channel / claim | Reach | Claimed magnitude | Ratio | Status |
 |---|---|---|---|---|
-| Si T1, pooled 8 membranes (per membrane) | 1.1–2.3×10⁻⁵ fusions s⁻¹ (`design_iter1_reach.py`, background 0.03–0.09 d⁻¹) | Lipson 4×10⁻³ p s⁻¹ (4π, M5) | ~0.5 % | tested |
-| Si, single membrane | 4.7–8.1×10⁻⁵ | same | ~1–2 % | tested (descriptive) |
+| Si T1, pooled 8 membranes (per membrane) | 2.0–4.2×10⁻⁵ fusions s⁻¹ (`design_iter1_reach.py`, background 0.03–0.09 d⁻¹, 0.30 mm grid) | Lipson 4×10⁻³ p s⁻¹ (4π, M5) | ~0.3–0.5 % | tested |
+| Si, single membrane | 0.9–1.5×10⁻⁴ | same | ~1–2 % | tested (descriptive) |
 | Si vs the Tohoku-static prediction (M1) | ~2 events/day threshold | ~130/day | ~1.7 % | partially tested |
-| ⁴He front (F/H-M) | 0.16–0.39 nW | SRI 0.1–1 W, volume-scaled to 3.1 cm² × 12 µm: ~15–150 mW | ~10⁻⁸ | tested |
+| ⁴He front (F/H-M) | 0.16–0.39 nW target; 1.6–3.9 nW planning case | SRI 0.1–1 W, volume-scaled to 3.1 cm² × 12 µm: ~15–150 mW | ~10⁻⁸ | tested |
 | ⁴He headspace + melts | ~0.4–1.6 nW-equivalent | same | ~10⁻⁸ | tested |
 | Heat (H-L, T-H(L); C1) | 4–20 mW; 7–27 mW | volume-scaled SRI | 2–100 % | partially tested |
 | γ station, e⁺e⁻ (T2) | 5×10⁻³ pairs s⁻¹ (sea level); 3×10⁻⁴ (≥ 30 m w.e.) | not quantified by the claimant | — | tested (existence) |
@@ -299,39 +316,44 @@ Per claim, normalised as stated; live time 0.8; P2 42 d.
 | Constraint | Implementation |
 |---|---|
 | Headspace ≤ 50 mL | ≤ 15 mL per DFM cell |
-| O₂ control | D₂ prefill; ΔP ≥ 10 % trip; recombiner thermocouple |
+| O₂ control | A permeating cathode turns pressure **loss** into the hazard signal (1B-B1). D₂ recycle loop and make-up; two-sided trip at ± 10 % of fill; O₂ inferred from the D balance and sniffed by QMS every 6 h; liquid level; recombiner thermocouple |
 | Recombiner placement | ≥ 20 mm above liquid, baffle, flame arrestor |
 | O₂-clean parts | PTFE, Pt, Pd, 316L, Mo, Cu, Au, alumina; no oils |
 | Stored D | membrane 3.8×10⁻³ cm³ (≈ 0.06 kJ) |
-| SELV | ≤ 3.2 V at 200 mA cm⁻²; ≤ ~5 V at 500 mA cm⁻² excursions |
-| Trips | pressure; Δp (± 40 mbar: close valves, Si bias off); temperature; level; room H₂ 1 %; neutron bank at 10× background; front pressure-rise; m/z 20 leak |
-| Mechanical | reverse-relief foil (20 mbar); burst disk (3.5 bar) |
+| SELV | 3.1–5.2 V at 300 mA cm⁻² and 4.1–7.3 V at 500 mA cm⁻², depending on bubble void fraction (1B §3); ≤ 60 V holds |
+| Thermal | Water-jacketed cells; chilled loop in the house; hardware over-temperature trip at +5 K |
+| Trips (hardwired, on UPS) | ΔP trip at +5 / +60 mbar → galvanostat to 0 (FX/H-M) or keep-alive (H-L), Pd–Ag heaters stay on; low/high cell pressure; temperature; level; room H₂ 1 %; neutron bank at 10× background; m/z 20 or rupture signature → isolate and cool the Pd–Ag element, Si bias off (HV current-limited ≤ 1 µA) |
+| Pressure hierarchy | Grid rated to 1.0 bar forward (proof 1.5 bar); forward relief cell → front at +150 mbar; reverse disk 20 ± 5 mbar; burst disks 3.5 bar on cell and front to a vent volume (ADR-007 §2.2) |
+| UPS scope | galvanostats, Pd–Ag heaters, pressure controllers, PLC, gauges, chiller control; remote paging |
 | Radiation | exempt check sources only; licensed neutron sources only at a partner facility |
 
 ## 12. Budget
 
-Estimates; vendor quotes required.
+These are estimates; vendor quotes are required. Rev C re-baselines the budget after red-team-1B (B12) found the rev B figures under-priced by about 2×.
 
-| Block | Tier 1 |
+| Block | Tier 1 (excluding labour) |
 |---|---|
-| Pd (2+ lots, coupons, witnesses, calibration membranes), Pt annuli, bonding, finishes, grids, septa | $30k |
-| Si telescopes, 8 × $6k (reused in stage 2) | $48k |
-| Digitisers, HV | $35k |
-| All-metal lined DFM cells and fronts ×8 | $40k |
-| Gas and He system | $30k |
+| Pd (≥ 2 lots, coupons, witnesses, calibration membranes), Pt annuli, bond development ($15–25k), finishes, grids, septa | $50–70k |
+| Si telescopes: custom epoxy-free quadrant ΔE + E, NRE, 2 spares, soak unit | $110–160k |
+| Digitisers and low-noise preamps (≈ 60 channels), HV | $80–120k |
+| All-metal lined, jacketed DFM cells and fronts ×8 | $50–70k |
+| Gas and He system: ≈ 60 all-metal valves, 24 capacitance/Δp gauges, 9 Pd–Ag elements, NEGs, pumps, pumped interspaces | $170–300k |
+| D₂ recycle and make-up loops (per FX/H-M cell) | $25–50k |
 | HR-QMS | $55k |
-| ³He neutron bank (24 tubes) and moderator | $65k |
-| Muon veto for the Si channel | $15k |
-| Galvanostats ×8, UPS | $14k |
+| External analyses (sector-MS subset ≤ 60 samples, SIMS, EBSD/ICP-MS screening, LSC) | $60–100k |
+| ³He neutron bank (24 tubes) and electronics | $100–200k |
+| Muon veto, chillers, jackets, house cooling | $40–60k |
+| Galvanostats ×8, UPS (extended scope) | $20–30k |
 | Seebeck calorimetry (DFM) | $15k |
-| Consumables (low-T D₂O, LiOD, ⁶LiF, ¹⁰B) | $8k |
-| External analyses (sector-MS melts, SIMS, EBSD/ICP-MS screening, LSC) | $45k |
-| **DFM-8 subtotal** | **≈ $400k** |
-| γ station (NaI well + PMT, ~1 t Pb, veto, 2 mini cells, RGA) | $60k |
+| Consumables | $10k |
+| **DFM-8 subtotal** | **≈ $0.8–1.3M** |
+| γ station (NaI well + PMT, ~1 t Pb, veto, 2 mini cells, RGA) | $60–90k |
 | C3-G ×5 (cells, multilayers, off-site targets, two-lab analyses) | $80k |
-| C1 ×4 + twin (cells, SEEB1\*, 8-tube bank) | $67k |
-| **Tier 1 total (excluding labour)** | **≈ $610k** |
-| **Minimum claim-weighted subset**: C3-G ×5 + C1 ×2 + twin + one DFM stage (2 H-L + T-Pt + T-H(L) + B, external He analysis) | **≈ $0.28M** |
+| C1 ×4 + twin (cells, SEEB1\*, 8-tube bank) | $70k |
+| **Tier 1 total** | **≈ $1.0–1.5M**, plus 3–4 FTE for ≈ 1.5 years |
+| **Minimum claim-weighted subset**: C3-G ×5 + C1 ×2 + twin + one DFM stage (2 H-L + T-Pt + T-H(L) + B, external He analysis) | **≈ $0.45–0.6M** |
+
+**Schedule:** 15–20 months to the end of stage 2. That is 6–10 months of procurement and development (custom Si 16–26 weeks, bond qualification 6–8 weeks, He-system commissioning) followed by two ≈ 16-week stages.
 
 ## 13. Go / no-go for iteration 2
 
@@ -362,12 +384,15 @@ Estimates; vendor quotes required.
 | He | two channels, HR-QMS, melts | M8 |
 | Calorimetry | SEEB1\* | M4 |
 | Positive controls | ⁶LiF calibration membranes, ¹⁰B on B, exempt sources | ADR-004; 1A-P4, P8 |
+| γ station, modulation | NaI well, separate Pb stand; P = 12 τ_eff with current steering | ADR-006 (M7) |
+| D balance, pressure hierarchy, grid, bond, thermal, Si protection, budget | recycle loop; 0.30 mm grid; press bond; jackets | ADR-007 (1B-B1 to B18) |
 
-## 15. Open risks (for red-team-1B re-run)
+## 15. Open risks (for iteration-2 red team)
 
-1. **The H-L loading ceiling.** A "typical" surface gives x ≈ 0.87 at 300 mA cm⁻² (M2). Lot screening and the P0b witness are the gates. A recombination poison is held as a pre-registered iteration-2 variant.
-2. **Diffusion bond and corrugated-annulus fatigue** under P3 cycling; the misfit at the bond line is not yet modelled in 2-D.
-3. **Si in 0.5 bar D₂ for ~16 weeks** (leakage, noise, H effects). Fallback: vacuum front for H-L membranes, where J ≈ 0 makes that feasible.
-4. **Thermal limit of the lined cell at 0.5 A cm⁻²** (~8 W into 12 mL through a 1 mm PTFE liner).
-5. **γ station** background normalisation (hadronic, ×3) is only fixed by its 14-day blank.
-6. **Cost:** ≈ $0.61M for Tier 1.
+1. **The H-L loading ceiling.** A "typical" surface gives x ≈ 0.87 at 300 mA cm⁻² (M2). Lot screening and P0b are the gates. A recombination poison is held as an iteration-2 variant.
+2. **Bond qualification** (1B-B7). If it fails, the fallback is iteration-1 §13.
+3. **Si in 0.5 bar D₂ for ~16 weeks.** The soak telescope decides; the fallback is the SiNₓ/Ni window pocket.
+4. **D₂ recycle loop.** It is a new subsystem in the He-tight envelope: bellows-pump reliability, and He blank with the loop running.
+5. **γ station.** Its background normalisation (hadronic, ×3) is only fixed by its 14-day blank.
+6. **Cost and effort:** ≈ $1.0–1.5M plus 3–4 FTE for Tier 1. The minimum subset (≈ $0.45–0.6M) is the rational first purchase.
+7. **Red-team-1B remaining minor items** (B14–B18) are adopted in ADR-007 but are not yet in the CAD model at full detail.
