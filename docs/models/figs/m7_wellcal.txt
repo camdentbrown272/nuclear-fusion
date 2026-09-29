@@ -1,0 +1,7 @@
+8"x8" NaI well calorimeter, IPC pairs in 100 um foil: eff 12-30 MeV 0.683; 5-30 MeV 0.973; full-energy peak 23.85 MeV +-7 % 0.000; mean deposit 13.45 MeV
+muons through crystal 8.59 /s, in 12-30 MeV window 0.989 /s; hadron interactions 0.266 /s; stopped mu+ 0.155 /s
+
+MDA (pairs/s in foil, 5 sigma median, 30 d on/off), 12-30 MeV window:
+  sea level           : B =   27252.5 /day (6881.5-133359.3); MDA 5.12e-03 (2.58e-03-1.13e-02) pairs/s
+  shallow 30 m w.e.   : B =      85.7 /day (22.4-447.1); MDA 3.01e-04 (1.61e-04-6.69e-04) pairs/s
+  deep >1 km w.e.     : B =       0.0 /day (0.0-0.0); MDA 2.09e-05 (2.06e-05-2.23e-05) pairs/s

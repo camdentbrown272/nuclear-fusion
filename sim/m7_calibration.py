@@ -45,7 +45,7 @@ def peak_eff(g, sens, mat, E, n, rng):
     return float(((Es > E - w) & (Es < E + w)).sum() / n)
 
 
-def main(layout='BGO 3x3 quad (+-x,+-z)'):
+def main(layout='BGO 4x4 pair'):
     rng = np.random.default_rng(55)
     dk, kw, pairs = LAYOUTS[layout]
     mat = m7_geom.DETECTORS[dk][0]
@@ -80,6 +80,7 @@ def main(layout='BGO 3x3 quad (+-x,+-z)'):
             rate = use * 0.89 * eps_na / 0.903 * 0.9
             key = f"~{rate:.0f} coinc/s"
         else:
+            use = min(A, 1.0 * UCI)            # <= 1 uCi keeps BGO singles below ~10 kcps
             E, y = lines_[0]
             e = effs.get(E, np.interp(E, sorted(effs), [effs[k] for k in sorted(effs)]))
             rate = use * y * e
@@ -102,4 +103,4 @@ def main(layout='BGO 3x3 quad (+-x,+-z)'):
 
 
 if __name__ == '__main__':
-    main(sys.argv[1] if len(sys.argv) > 1 else 'BGO 3x3 quad (+-x,+-z)')
+    main(sys.argv[1] if len(sys.argv) > 1 else 'BGO 4x4 pair')

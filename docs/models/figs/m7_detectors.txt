@@ -1,0 +1,24 @@
+BGO 3x3 pair               (2 x BGO3x3,   695 cm3 total): 511-511 coinc eff: point@foil 0.0590 | 22Na@foil 0.0430 | IPC 0.0100 ;  IPC sum-E in 5-30 MeV 0.1337, 12-30 MeV 0.0127; any det >5 MeV 0.1305; window 450-572 keV
+NaI 3x3 pair               (2 x NAI3x3,   695 cm3 total): 511-511 coinc eff: point@foil 0.0153 | 22Na@foil 0.0118 | IPC 0.0033 ;  IPC sum-E in 5-30 MeV 0.1183, 12-30 MeV 0.0067; any det >5 MeV 0.1162; window 470-552 keV
+LaBr3 3x3 pair             (2 x LABR3x3,   695 cm3 total): 511-511 coinc eff: point@foil 0.0189 | 22Na@foil 0.0155 | IPC 0.0025 ;  IPC sum-E in 5-30 MeV 0.1297, 12-30 MeV 0.0097; any det >5 MeV 0.1268; window 494-528 keV
+HPGe 100% pair             (2 x HPGE100,   804 cm3 total): 511-511 coinc eff: point@foil 0.0094 | 22Na@foil 0.0072 | IPC 0.0015 ;  IPC sum-E in 5-30 MeV 0.1095, 12-30 MeV 0.0082; any det >5 MeV 0.1077; window 507-515 keV
+BGO 4x4 pair               (2 x BGO4x4,  1647 cm3 total): 511-511 coinc eff: point@foil 0.1061 | 22Na@foil 0.0706 | IPC 0.0147 ;  IPC sum-E in 5-30 MeV 0.2082, 12-30 MeV 0.0277; any det >5 MeV 0.2005; window 450-572 keV
+NaI 5x5 pair               (2 x NAI5x5,  3218 cm3 total): 511-511 coinc eff: point@foil 0.0636 | 22Na@foil 0.0407 | IPC 0.0085 ;  IPC sum-E in 5-30 MeV 0.2423, 12-30 MeV 0.0277; any det >5 MeV 0.2328; window 470-552 keV
+BGO 3x3 quad (+-x,+-y)     (4 x BGO3x3,  1390 cm3 total): 511-511 coinc eff: point@foil 0.1194 | 22Na@foil 0.0893 | IPC 0.0193 ;  IPC sum-E in 5-30 MeV 0.2902, 12-30 MeV 0.0287; any det >5 MeV 0.2652; window 450-572 keV
+BGO 3x3 z-pair             (2 x BGO3x3,   695 cm3 total): 511-511 coinc eff: point@foil 0.0486 | 22Na@foil 0.0356 | IPC 0.0068 ;  IPC sum-E in 5-30 MeV 0.0810, 12-30 MeV 0.0055; any det >5 MeV 0.0800; window 450-572 keV
+NaI 5x5 z-pair             (2 x NAI5x5,  3218 cm3 total): 511-511 coinc eff: point@foil 0.0549 | 22Na@foil 0.0393 | IPC 0.0093 ;  IPC sum-E in 5-30 MeV 0.1832, 12-30 MeV 0.0165; any det >5 MeV 0.1778; window 470-552 keV
+BGO 3x3 quad (+-x,+-z)     (4 x BGO3x3,  1390 cm3 total): 511-511 coinc eff: point@foil 0.1084 | 22Na@foil 0.0793 | IPC 0.0152 ;  IPC sum-E in 5-30 MeV 0.2297, 12-30 MeV 0.0215; any det >5 MeV 0.2110; window 450-572 keV
+
+BGO 3x3 pair: dependence on detector-axis height zc (foil at z=0, electrolyte below)
+  zc = +1.0 cm: IPC 511-511 0.0073; 12-30 MeV 0.0168
+  zc = -0.5 cm: IPC 511-511 0.0083; 12-30 MeV 0.0122
+  zc = -2.0 cm: IPC 511-511 0.0085; 12-30 MeV 0.0075
+
+BGO 3x3 pair: dependence on foil thickness (uniform source depth)
+  L = 25 um: IPC 511-511 0.0075; 12-30 MeV 0.0145
+  L = 300 um: IPC 511-511 0.0092; 12-30 MeV 0.0095
+
+BGO 3x3 pair with 3 mm Al chamber wall instead of 1.5 mm SS: IPC 511-511 0.0083; 12-30 MeV 0.0168
+
+statistical 1-sigma: point/22Na ~0.0011, IPC ~0.0029 (at eff 0.05)
+run time 1746 s

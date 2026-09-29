@@ -1,0 +1,157 @@
+Background model for layout: BGO 4x4 pair
+muon inputs: J1 = 1.00 /cm2/min, I_v = 106 /m2/s/sr, omni fluence rate 0.0222 /cm2/s
+
+[1] delta rays in 5 cm HDPE + 10 cm Pb slab: 0.135 /cm2/s (unvetoed)
+    inward photon current into cavity: all >0.1 MeV 9.58e-03, >1.022 MeV 4.82e-03, 511 line 4.14e-04 /cm2/s; positrons 3.72e-05 /cm2/s
+
+[2] response to isotropic cavity photons (per unit fluence, cm2):
+    E[MeV]  R_coinc      R_singles511  R_12-30MeV  (raw coinc counts / photons simulated)
+     0.200  0.000e+00   0.000e+00     0.000e+00   0/30000
+     0.300  0.000e+00   0.000e+00     0.000e+00   0/30000
+     0.400  0.000e+00   3.351e+00     0.000e+00   0/30000
+     0.480  0.000e+00   1.716e+02     0.000e+00   0/30000
+     0.511  0.000e+00   1.907e+02     0.000e+00   0/30000
+     0.550  0.000e+00   1.562e+02     0.000e+00   0/30000
+     0.700  0.000e+00   5.523e+00     0.000e+00   0/30000
+     0.900  0.000e+00   6.488e+00     0.000e+00   0/30000
+     1.100  2.413e-02   5.718e+00     0.000e+00   6/200000
+     1.300  1.608e-02   5.127e+00     0.000e+00   4/200000
+     1.460  4.021e-03   4.576e+00     0.000e+00   1/200000
+     1.760  8.042e-03   4.222e+00     0.000e+00   2/200000
+     2.200  8.042e-03   3.253e+00     0.000e+00   2/200000
+     2.610  2.413e-02   3.004e+00     0.000e+00   6/200000
+     3.500  4.423e-02   2.328e+00     0.000e+00   11/200000
+     5.000  4.825e-02   2.280e+00     0.000e+00   12/200000
+     7.000  5.228e-02   2.296e+00     0.000e+00   13/200000
+    10.000  7.640e-02   2.397e+00     0.000e+00   19/200000
+    15.000  4.825e-02   2.682e+00     1.426e+02   12/200000
+    20.000  6.032e-02   2.642e+00     1.708e+02   15/200000
+    30.000  7.640e-02   3.120e+00     1.748e+02   19/200000
+    50.000  1.608e-02   3.539e+00     3.183e+01   1/50000
+    100.000  0.000e+00   4.472e+00     1.308e+01   0/50000
+
+    muon-shower cavity photons (unvetoed, sea level): coinc 6.02e-04 /s, singles-511 8.69e-01 /s, sum 12-30 MeV 2.31e-01 /s, 5-30 MeV 7.64e-01 /s
+    Michel-e+ energy injected in shield / delta-ray energy = 0.026 (delayed, tau = 2.2 us)
+
+[3] terrestrial gamma lines leaking through 10 cm Pb + 5 cm HDPE (room: concrete K/U/Th = 400/40/30 Bq/kg)
+    2.6145 MeV (Th): lab fluence 0.139 /cm2/s, shield transmission 6.59e-03, cavity 1.19e-03 /cm2/s -> coinc 2.89e-05 /s, singles 3.57e-03 /s
+    1.7645 MeV (U): lab fluence 0.064 /cm2/s, shield transmission 5.85e-03, cavity 4.90e-04 /cm2/s -> coinc 3.94e-06 /s, singles 2.06e-03 /s
+    2.2042 MeV (U): lab fluence 0.023 /cm2/s, shield transmission 6.16e-03, cavity 1.86e-04 /cm2/s -> coinc 1.53e-06 /s, singles 6.04e-04 /s
+    1.4608 MeV (K): lab fluence 0.405 /cm2/s, shield transmission 2.82e-03, cavity 1.48e-03 /cm2/s -> coinc 5.99e-06 /s, singles 6.79e-03 /s
+    radon: cavity flushed with LN2 boil-off N2 to <1 Bq/m3 (22 L cavity -> <0.02 Bq 214Bi): <1e-4 /s singles, coincidences negligible
+
+[4] central hardware mass 471 g; stopped mu+ there 3.16e-03 /s; Michel e+ -> coinc eff 0.0027, 12-30 MeV 0.1600
+[5] cosmogenic beta+ in central hardware: 7.1e-05 e+/s x coinc acceptance 0.0409
+[6] cosmic muons through crystals: 4.56 /s (mean deposit 66 MeV); in 12-30 MeV 0.521 /s; 5-30 MeV 0.708 /s
+[7] hadron interactions in crystals (surface): 0.110 /s; visible fraction 12-30 MeV assumed 0.3 (0.15-0.5)
+
+==== BACKGROUND BUDGETS (counts/s) ====
+
+-- sea level, veto (20 us ext.)
+   511-511 coincidence:
+      mu showers (prompt)                    1.81e-06 /s  (0.16 /day)
+      mu+ Michel in shield (delayed)         4.78e-08 /s  (0.00 /day)
+      hadronic (n,p) showers                 3.01e-04 /s  (26.00 /day)
+      Michel e+ in central hardware          2.52e-08 /s  (0.00 /day)
+      terrestrial gamma pair conversion      4.03e-05 /s  (3.48 /day)
+      cosmogenic beta+ (central)             2.89e-06 /s  (0.25 /day)
+      accidentals (2 tau R1 R2)              1.00e-08 /s  (0.00 /day)
+      TOTAL 3.46e-04 /s = 29.90 /day  (range 6.34-164.82 /day)
+   calorimeter sum 12-30 MeV:
+      direct muons in crystals               1.56e-03 /s  (135.1 /day)
+      mu showers (prompt)                    6.92e-04 /s  (59.8 /day)
+      mu+ Michel (shield + crystals + central) 1.15e-04 /s  (9.9 /day)
+      hadrons in crystals                    3.30e-02 /s  (2852.2 /day)
+      hadronic showers in shield             1.15e-01 /s  (9964.4 /day)
+      TOTAL 1.51e-01 /s = 13021.4 /day  (range 3141.5-65632.0 /day)
+
+-- sea level, NO veto
+   511-511 coincidence:
+      mu showers (prompt)                    6.02e-04 /s  (52.00 /day)
+      mu+ Michel in shield (delayed)         1.59e-05 /s  (1.38 /day)
+      hadronic (n,p) showers                 3.01e-04 /s  (26.00 /day)
+      Michel e+ in central hardware          8.38e-06 /s  (0.72 /day)
+      terrestrial gamma pair conversion      4.03e-05 /s  (3.48 /day)
+      cosmogenic beta+ (central)             2.89e-06 /s  (0.25 /day)
+      accidentals (2 tau R1 R2)              1.00e-08 /s  (0.00 /day)
+      TOTAL 9.70e-04 /s = 83.83 /day  (range 24.84-324.06 /day)
+   calorimeter sum 12-30 MeV:
+      direct muons in crystals               5.21e-01 /s  (45049.0 /day)
+      mu showers (prompt)                    2.31e-01 /s  (19928.8 /day)
+      mu+ Michel (shield + crystals + central) 3.82e-02 /s  (3299.0 /day)
+      hadrons in crystals                    3.30e-02 /s  (2852.2 /day)
+      hadronic showers in shield             1.15e-01 /s  (9964.4 /day)
+      TOTAL 9.39e-01 /s = 81093.4 /day  (range 57726.2-173729.2 /day)
+
+-- shallow 30 m w.e., veto (20 us ext.)
+   511-511 coincidence:
+      mu showers (prompt)                    2.71e-07 /s  (0.02 /day)
+      mu+ Michel in shield (delayed)         7.17e-09 /s  (0.00 /day)
+      hadronic (n,p) showers                 3.01e-07 /s  (0.03 /day)
+      Michel e+ in central hardware          3.77e-09 /s  (0.00 /day)
+      terrestrial gamma pair conversion      4.03e-05 /s  (3.48 /day)
+      cosmogenic beta+ (central)             2.18e-07 /s  (0.02 /day)
+      accidentals (2 tau R1 R2)              1.00e-08 /s  (0.00 /day)
+      TOTAL 4.11e-05 /s = 3.55 /day  (range 1.77-7.39 /day)
+   calorimeter sum 12-30 MeV:
+      direct muons in crystals               2.35e-04 /s  (20.3 /day)
+      mu showers (prompt)                    1.04e-04 /s  (9.0 /day)
+      mu+ Michel (shield + crystals + central) 1.72e-05 /s  (1.5 /day)
+      hadrons in crystals                    3.30e-05 /s  (2.9 /day)
+      hadronic showers in shield             1.15e-04 /s  (10.0 /day)
+      TOTAL 5.04e-04 /s = 43.5 /day  (range 11.3-228.3 /day)
+
+-- deep >1 km w.e., veto (20 us ext.)
+   511-511 coincidence:
+      mu showers (prompt)                    1.81e-11 /s  (0.00 /day)
+      mu+ Michel in shield (delayed)         4.78e-13 /s  (0.00 /day)
+      hadronic (n,p) showers                 0.00e+00 /s  (0.00 /day)
+      Michel e+ in central hardware          2.52e-13 /s  (0.00 /day)
+      terrestrial gamma pair conversion      4.03e-05 /s  (3.48 /day)
+      cosmogenic beta+ (central)             1.44e-11 /s  (0.00 /day)
+      accidentals (2 tau R1 R2)              1.00e-08 /s  (0.00 /day)
+      TOTAL 4.03e-05 /s = 3.48 /day  (range 1.74-6.97 /day)
+   calorimeter sum 12-30 MeV:
+      direct muons in crystals               1.56e-08 /s  (0.0 /day)
+      mu showers (prompt)                    6.92e-09 /s  (0.0 /day)
+      mu+ Michel (shield + crystals + central) 1.15e-09 /s  (0.0 /day)
+      hadrons in crystals                    0.00e+00 /s  (0.0 /day)
+      hadronic showers in shield             0.00e+00 /s  (0.0 /day)
+      TOTAL 2.37e-08 /s = 0.0 /day  (range 0.0-0.0 /day)
+
+   sea level with a 1 us veto window instead of 20 us: coinc 31.2 /day, 12-30 MeV 15104 /day
+   veto dead time: ~1.0 % for ~3 m2 of veto at 170 /m2/s
+
+   terrestrial 511-511 term vs shield (per day):
+     Pb  5 cm + Cu 0 cm: 41.60 /day   (Pb mass for a 30 cm cavity + 5 cm HDPE: 692 kg)
+     Pb 10 cm + Cu 0 cm: 3.48 /day   (Pb mass for a 30 cm cavity + 5 cm HDPE: 1725 kg)
+     Pb 15 cm + Cu 0 cm: 0.30 /day   (Pb mass for a 30 cm cavity + 5 cm HDPE: 3167 kg)
+     Pb 10 cm + Cu 5 cm: 0.61 /day   (Pb mass for a 30 cm cavity + 5 cm HDPE: 2474 kg)
+
+[8] IPC signal efficiency (100 um foil, uniform depth, 8000 events): 511-511 coincidence 0.0144, calorimeter 12-30 MeV 0.0280; OR of both 0.0424
+
+==== MDA: e+e- pairs produced per second in the foil, 5 sigma median, 30 d (15 d on / 15 d off) ====
+site / veto | channel | B [/day] (range) | eps | MDA [pairs/s] (range: low-B .. high-B)
+sea level, veto | 511-511 coincidence | 29.9 (6.34-165) | 0.0144 | 8.72e-03 (4.39e-03-1.95e-02)
+sea level, veto | calorimeter 12-30 MeV | 1.3e+04 (3.14e+03-6.56e+04) | 0.0280 | 8.65e-02 (4.26e-02-1.94e-01)
+sea level, no veto | 511-511 coincidence | 83.8 (24.8-324) | 0.0144 | 1.41e-02 (8.01e-03-2.71e-02)
+sea level, no veto | calorimeter 12-30 MeV | 8.11e+04 (5.77e+04-1.74e+05) | 0.0280 | 2.15e-01 (1.82e-01-3.15e-01)
+shallow 30 m w.e., veto | 511-511 coincidence | 3.55 (1.77-7.39) | 0.0144 | 3.47e-03 (2.66e-03-4.68e-03)
+shallow 30 m w.e., veto | calorimeter 12-30 MeV | 43.5 (11.3-228) | 0.0280 | 5.33e-03 (2.89e-03-1.17e-02)
+deep >1 km w.e., veto | 511-511 coincidence | 3.48 (1.74-6.97) | 0.0144 | 3.44e-03 (2.65e-03-4.57e-03)
+deep >1 km w.e., veto | calorimeter 12-30 MeV | 0.00205 (0.000546-0.0109) | 0.0280 | 5.04e-04 (4.99e-04-5.26e-04)
+
+variant: 15 cm Pb (terrestrial term x0.085) and 5 cm Pb:
+   sea level, veto, Pb 15 cm | 511-511 | 26.7 /day | MDA 8.28e-03 pairs/s
+   sea level, veto, Pb 5 cm | 511-511 | 68 /day | MDA 1.28e-02 pairs/s
+   shallow 30 m w.e., veto, Pb 15 cm | 511-511 | 0.367 /day | MDA 1.63e-03 pairs/s
+   shallow 30 m w.e., veto, Pb 5 cm | 511-511 | 41.7 /day | MDA 1.02e-02 pairs/s
+   deep >1 km w.e., veto, Pb 15 cm | 511-511 | 0.298 /day | MDA 1.55e-03 pairs/s
+   deep >1 km w.e., veto, Pb 5 cm | 511-511 | 41.6 /day | MDA 1.02e-02 pairs/s
+
+combined H_Cz test (both channels, same R): MDA where Z_A(511)^2 + Z_A(hi)^2 = 25
+   sea level: 8.67e-03 pairs/s
+   shallow 30 m w.e.: 2.81e-03 pairs/s
+   deep >1 km w.e.: 4.90e-04 pairs/s
+
+run time 540 s

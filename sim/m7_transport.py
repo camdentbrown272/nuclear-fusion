@@ -46,7 +46,7 @@ def group_of(names):
     return [lut.get(n, 'other') for n in names]
 
 
-def run_config(L_um, depth='uniform', n=20000, seed=11, det='BGO3x3', **kw):
+def run_config(L_um, depth='uniform', n=20000, seed=11, det='BGO4x4', **kw):
     rng = np.random.default_rng(seed)
     g, sens = m7_geom.build(L_um=L_um, det=det, **kw)
     mc = MC(g, sens, rng)
@@ -117,7 +117,7 @@ def main():
           f"median E-det dep (hits) = {np.median(ed[ed[:,1]>0.05,1]) if (ed[:,1]>0.05).any() else 0:.3f} MeV; "
           f"P(E-det dep in 2.6-3.1 MeV p window) = {((ed[:,1]>2.6)&(ed[:,1]<3.1)).mean():.2e}")
         bg = ed[:, 2:]
-        P(f"   BGO 3x3 pair at +-x: P(any det > 5 MeV) = {(bg.max(1)>5).mean():.4f}; P(sum > 12 MeV) = {(bg.sum(1)>12).mean():.4f}; "
+        P(f"   BGO 4x4 pair at +-x: P(any det > 5 MeV) = {(bg.max(1)>5).mean():.4f}; P(sum > 12 MeV) = {(bg.sum(1)>12).mean():.4f}; "
           f"<sum dep> = {bg.sum(1).mean():.2f} MeV")
     # ------------------------------------------------ summary table for doc
     P("\nSUMMARY: fraction of IPC events whose positron annihilates in each region (uniform depth)")
@@ -139,7 +139,8 @@ def main():
         fr, infl, _ = table[(L, 'uniform')]
         ax[0].bar(x + (i - 1) * w, [fr[h] for h in hdr], w, label=f'L = {L} um')
     ax[0].set_xticks(x)
-    ax[0].set_xticklabels([h.replace(' (crystal+can)', '').replace(' ', '\n', 1) for h in hdr], fontsize=7)
+    short = ['foil', 'electrolyte', 'PTFE cell', 'SS chamber', 'Si + PCB', 'gamma det.', 'air', 'HDPE encl.', 'escaped']
+    ax[0].set_xticklabels(short, fontsize=8, rotation=35, ha='right')
     ax[0].set_ylabel('fraction of IPC events')
     ax[0].set_title('(a) where the positron annihilates')
     ax[0].legend(fontsize=8)
@@ -195,7 +196,7 @@ def main():
     ax[0].set_title('(c) Si telescope deposits (p window 2.6-3.1 MeV is off-scale right)')
     ax[0].legend(fontsize=8)
     s = ed[:, 2:].sum(1)
-    ax[1].hist(ed[:, 2][ed[:, 2] > 0.01], bins=120, range=(0, 24), histtype='step', label='one BGO 3"x3"')
+    ax[1].hist(ed[:, 2][ed[:, 2] > 0.01], bins=120, range=(0, 24), histtype='step', label='one BGO 4"x4"')
     ax[1].hist(s[s > 0.01], bins=120, range=(0, 24), histtype='step', label='sum of both BGO')
     ax[1].set_yscale('log')
     ax[1].set_xlabel('deposited energy [MeV]')

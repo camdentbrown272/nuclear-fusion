@@ -257,13 +257,13 @@ def asimov_onoff(s, b):
         return 0.0
     t1 = non * np.log(2 * non / (non + noff)) if non > 0 else 0
     t2 = noff * np.log(2 * noff / (non + noff)) if noff > 0 else 0
-    return np.sqrt(2 * (t1 + t2))
+    return np.sqrt(max(2 * (t1 + t2), 0.0))
 
 
 def mda(B, eff, t_on=T_ON, z=5.0):
     """Minimum source rate [pairs/s] for median 5 sigma, on/off with t_on = t_off."""
     b = B * t_on
-    s = brentq(lambda s: asimov_onoff(s, b) - z, 1e-6, 1e9)
+    s = brentq(lambda s: asimov_onoff(s, b) - z, 1e-3, 1e9)
     # also require >= 5 expected signal counts (for b -> 0 the Asimov formula alone
     # would allow a discovery on ~2 counts; we keep the stricter)
     s = max(s, 5.0)
@@ -278,7 +278,7 @@ def main(layout_name=None):
     t0 = time.time()
     lines = []
     P = lines.append
-    layout_name = layout_name or 'BGO 3x3 quad (+-x,+-z)'
+    layout_name = layout_name or 'BGO 4x4 pair'
     lay = LAYOUTS[layout_name]
     dk = lay[0]
     mat = m7_geom.DETECTORS[dk][0]
@@ -410,6 +410,7 @@ def main(layout_name=None):
 
     # terrestrial term vs shield
     P("\n   terrestrial 511-511 term vs shield (per day):")
+    terr_vs_shield = {}
     for pb, cu in ((5, 0), (10, 0), (15, 0), (10, 5)):
         tot = 0.0
         for E, ser, yld in LINES:
@@ -420,6 +421,7 @@ def main(layout_name=None):
             tot += phi_lab * tr * BUILDUP_PAIR * rc
         mass_pb = 11.35e-3 * ((2 * (15 + HDPE_T + pb + cu)) ** 3 - (2 * (15 + HDPE_T + cu)) ** 3)
         P(f"     Pb {pb:2d} cm + Cu {cu} cm: {tot*DAY:.2f} /day   (Pb mass for a 30 cm cavity + 5 cm HDPE: {mass_pb:.0f} kg)")
+        terr_vs_shield[(pb, cu)] = tot
 
     # signal efficiencies for this layout and MDA
     rng = np.random.default_rng(77)
@@ -451,6 +453,13 @@ def main(layout_name=None):
                 mdas[(site, veto, ch)] = (m_c, m_l, m_h, Bc)
                 P(f"{site}, {'veto' if veto else 'no veto'} | {ch} | {Bc*DAY:.3g} ({Bl*DAY:.3g}-{Bh*DAY:.3g}) | {eff[ch]:.4f} | "
                   f"{m_c:.2e} ({m_l:.2e}-{m_h:.2e})")
+    P("\nvariant: 15 cm Pb (terrestrial term x" + f"{terr_vs_shield[(15, 0)]/terr_vs_shield[(10, 0)]:.3f}" + ") and 5 cm Pb:")
+    for site in SITES:
+        for pbv in (15, 5):
+            Bc = table[(site, True, 'central')][0] - Bter['c'] + terr_vs_shield[(pbv, 0)]
+            m_c = mda(Bc, eff['511-511 coincidence'])[0]
+            P(f"   {site}, veto, Pb {pbv} cm | 511-511 | {Bc*DAY:.3g} /day | MDA {m_c:.2e} pairs/s")
+            mdas[(site, 'pb%d' % pbv)] = (m_c, Bc)
     # combined (Stouffer-like: independent channels; approx MDA from summed Fisher information)
     P("\ncombined H_Cz test (both channels, same R): MDA where Z_A(511)^2 + Z_A(hi)^2 = 25")
     for site in SITES:
