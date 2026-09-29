@@ -20,6 +20,21 @@ Branch: `claude/lucid-davinci-gel4vu-m6`. Read `_common.md` first. Read these li
    - Hagelstein-type proposals: which frequencies, and what power density.
 5. **Multilayer interfaces.** Iwamura-type Pd/CaO and Ni/Cu multilayers: layer thickness, number of periods, and interface density per cm². Compatibility with charged-particle escape.
 
+6. **Segmented active face (lead's working concept).** The detector-facing membrane may carry 4–6 angular or strip sectors with different active skins on one membrane. They share the same deuterium flux, temperature and EMI, and each sector is viewed by its own collimated Si detector. Candidate skins:
+   - (a) annealed, etched bare Pd (baseline);
+   - (b) thermally grown PdO of controlled thickness (Kasagi: U_e(PdO) ≈ 2× Pd);
+   - (c) an Au/Pd/PdO heterostructure (Yuki/Kasagi/Lipson 1998; Lipson's charged-particle emission during D desorption);
+   - (d) an Iwamura Pd/CaO multilayer, Pd 40 nm / [CaO 2 nm / Pd 18 nm]×5;
+   - (e) a Ni/Cu multilayer, 6×[Cu 2 nm / Ni 14 nm];
+   - (f) an Au overlayer as the non-hydriding null.
+
+   For each skin, specify:
+   - thickness and fabrication route;
+   - its effect on exit-face recombination (the k_r ordering, to hand off to M3);
+   - its effect on charged-particle escape (energy loss of 3 MeV p and 1 MeV t);
+   - cross-contamination risks between sectors (lateral diffusion, masking);
+   - the minimum sector area and inter-sector gap given Si-detector collimation at 1–3 cm.
+
 ## Outputs
 - An active-surface specification sheet: roughness PSD target, pattern, multilayer stack, optional stimulation (laser wavelengths/powers/angles, or ultrasound frequency/power), each with its expected value justified by the literature and physics.
 - A ranked list of which micro-geometric features are worth including in iteration 1, versus which are unsupported and should be left out.
