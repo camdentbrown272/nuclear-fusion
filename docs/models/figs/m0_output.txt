@@ -1,0 +1,65 @@
+Gamow energy E_G (D+D)              = 985.8 keV
+Bound-pair constant A               = 1.56e-16 cm^3/s
+Mean energy per fusion (std branch) = 3.66 MeV
+D2 calibration: x0=0.106 A, rho0=1.5e+26 cm^-3 -> Ue_eff(D2) = 34.0 eV (reproduces 3e-64 /s)
+
+WKB (Yukawa) vs constant-shift Gamow factor:
+  Ue(eV)  lambda_s(pm)  r_tp(pm)  WKB-Yukawa   exp(-sqrt(EG/Ue))
+      30       48.00     259.3   4.29e-122     1.89e-79
+     100       14.40      92.6    6.64e-68     7.60e-44
+     300        4.80      35.5    1.35e-39     1.27e-25
+    1000        1.44      12.2    6.61e-22     2.31e-14
+
+Yukawa Ue (accelerator-style) -> Ue_eff seen by a thermal pair (same penetration):
+  Ue=  100 eV -> Ue_eff =     41 eV
+  Ue=  300 eV -> Ue_eff =    123 eV
+  Ue=  500 eV -> Ue_eff =    206 eV
+  Ue=  800 eV -> Ue_eff =    331 eV
+  Ue= 1000 eV -> Ue_eff =    414 eV
+  Ue= 2000 eV -> Ue_eff =    841 eV
+
+Reactions/s needed for a 5-sigma detection:
+  neutrons (3He bank, eff 10%, bkg 0.05 cps, 14 d) : 2.03e-02 fusions/s
+  3 MeV protons (Si, 5% x 30% escape, bkg 2e-5 cps): 2.71e-03 fusions/s
+  heat (10 mW, standard D+D branching)             : 1.71e+10 fusions/s
+  -> heat is 8.4e+11x less sensitive than neutrons for standard D+D
+
+1 W of standard D+D -> 8.38e+11 n/s; at 1 m: 6.67e+06 n/cm^2/s -> 9.6 Sv/h  (lethal; so W-level heat claims REQUIRE a non-standard channel)
+
+Required Ue_eff (eV) for the neutron threshold, vs number of active pairs N and rho0:
+  N_pairs   rho0=1e24   rho0=1e25   rho0=1e26
+    1e+09        521        470        426
+    1e+12        388        355        326
+    1e+15        300        277        257
+    1e+18        239        223        208
+    1e+21        195        183        172
+
+Free-gas model rate per deuteron in PdD (upper-bound picture):
+  Ue=  25 eV -> 2.14e-76 /s per D
+  Ue=  50 eV -> 3.89e-51 /s per D
+  Ue= 100 eV -> 2.82e-33 /s per D
+  Ue= 150 eV -> 2.31e-25 /s per D
+  Ue= 200 eV -> 1.20e-20 /s per D
+  Ue= 300 eV -> 4.73e-15 /s per D
+  Ue= 800 eV -> 2.11e-05 /s per D
+  A null limit of 1e-25 /pair/s implies Ue_eff(thermal) < 147 eV in bulk PdD (free-gas picture) -> accelerator Ue~300-800 eV does NOT apply at thermal energies
+
+Exponent budget (penetration = exp(-X)):
+  molecular D2 today        X = 170.2
+  needed, N=1e21 pairs      X =  73.4   gap =  96.7 e-folds
+  needed, N=1e12 pairs      X =  52.7   gap = 117.5 e-folds
+  engineering levers: 1e9x more sites buys 20.7 e-folds; 100x better detection buys 4.6
+  -> geometry/engineering cannot close the gap alone; the design must maximise sensitivity to a
+     real anomalous enhancement (if one exists) at the sites where theories/claims locate it.
+
+Local steepness d ln(rate)/d ln(Ue) = 0.5*sqrt(E_G/Ue):
+  Ue= 50 eV: exponent  70.2  (+10% Ue -> x805 rate)
+  Ue=100 eV: exponent  49.6  (+10% Ue -> x113 rate)
+  Ue=200 eV: exponent  35.1  (+10% Ue -> x28 rate)
+  Ue=300 eV: exponent  28.7  (+10% Ue -> x15 rate)
+
+Tail dominance: Ue ~ Normal(mu, sigma) across sites; share of total rate from top 0.1% of sites
+  mu=100, sigma=5: top 0.1% of sites give  15.7% of all reactions
+  mu=100, sigma=10: top 0.1% of sites give  58.6% of all reactions
+  mu=100, sigma=20: top 0.1% of sites give  89.7% of all reactions
+  mu=200, sigma=20: top 0.1% of sites give  25.4% of all reactions
