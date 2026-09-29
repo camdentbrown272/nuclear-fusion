@@ -1,6 +1,6 @@
 # Iteration 1 (rev B) — Detector-Facing Membrane Array "DFM-8" and claim arms
 
-**Status:** revision B, after red-team-1A/1C/1D (decisions in [ADR-005](../decisions/ADR-005-iteration1-revB.md)). Red-team-1B (engineering/safety) is being re-run on this revision.
+**Status:** revision B, after red-team-1A/1C/1D (decisions in [ADR-005](../decisions/ADR-005-iteration1-revB.md)) and M7 (γ station and modulation protocol, [ADR-006](../decisions/ADR-006-gamma-station-modulation.md)). Red-team-1B (engineering/safety) is being re-run on this revision.
 **Date:** 2026-09-29
 **Frozen analysis plan:** [preregistration-v1.md](preregistration-v1.md)
 **Earlier version:** rev A (git `77887a6`) used quadrant skins on one membrane. The reviews showed that geometry cannot hold the claimed regimes (ADR-005 §1).
@@ -24,7 +24,7 @@
   - a Pt-membrane D₂O twin;
   - two light-water twins;
   - a blank telescope.
-  - The house also contains a ³He neutron bank, a 511 keV coincidence pair and a muon veto.
+  - The house also contains a ³He neutron bank and a muon veto. The 511 keV / e⁺e⁻ channel runs in a separate lead-shielded **γ station** (ADR-006).
 - **Parallel Tier-1 arms.** Two further arms run alongside and test the best-graded claims at their original conditions:
   - Iwamura-type gas-permeation transmutation cells (**C3-G**, Cs→Pr);
   - four SRI-type closed wire cathodes (**C1**).
@@ -44,7 +44,8 @@
 
 | Tier | Arm | What it tests | ADR-003 score (1D §4, revised) |
 |---|---|---|---|
-| **1** | **DFM-8** (§3–§6) | H1a (charged particles at every depth), H2 (⁴He, the most sensitive accounting), H1c (511), SRI loading at a visible location, flux regime, desorption | ≈ 0.53 for SRI plus Lipson/NTT/Czerski terms; the only arm that makes H1 nulls informative |
+| **1** | **DFM-8** (§3–§6) | H1a (charged particles at every depth), H2 (⁴He, the most sensitive accounting), SRI loading at a visible location, flux regime, desorption | ≈ 0.53 for SRI plus Lipson/NTT terms; the only arm that makes H1 nulls informative |
+| **1** | **γ station** (§4.3, ADR-006) | H1c: Czerski e⁺e⁻ channel. 8″×8″ NaI well around a mini permeation cell, D₂O/H₂O factorial | ≈ 0.14–0.2; MDA 5×10⁻³ pairs s⁻¹ at sea level, 3×10⁻⁴ at ≥ 30 m w.e. |
 | **1** | **C3-G ×5** (§7.1) | Iwamura permeation transmutation, primary Cs→Pr | ≈ 1.1 |
 | **1** | **C1 ×4 + H₂O twin** (§7.2) | SRI/ENEA heat + ⁴He in closed wire cathodes | ≈ 0.7 |
 | 2 | Nanocomposite / Ni–Cu furnace (§8.2) | Kitamura / Clean Planet | promoted when claimant-lineage material is secured |
@@ -171,20 +172,34 @@ Telescopes are characterised in P0a and P6 (≥ 10× live time each). There is n
  |   |  5 cm OFHC Cu inner shield (no Pb near the bank)            |     |
  |   |    [A1]   [A2]   [A3]   [A4]         <- 90 mm pitch         |     |
  |   |    [T-Pt] [T-H(L)] [T-H(FX)] [B]                             |     |
- |   |  LaBr3/CeBr3 2"x2" pair, back-to-back, on a rail (511-511)  |     |
  |   +------------------------------------------------------------+     |
  |  plastic-scintillator muon veto on top and two sides                 |
  +----------------------------------------------------------------------+
  Inner cavity ~ 45 x 30 x 30 cm; 3He-bank efficiency ~0.12-0.18 (M5 scaling)
 ```
 
-**γ / e± layout** stays provisional until M7 is merged. It comprises:
-- the LaBr₃ pair (target ε ≥ 2 %, background ≤ 2×10⁻³ cps);
-- a 3–25 MeV sum window;
-- an inner Cu (not Pb) shield;
-- ²²Na calibration.
+The house has **no γ detectors and no lead** (M5: Pb near the ³He bank fakes neutrons). The Si telescopes record the MIPs from any e⁺e⁻ pairs, and ΔE–E classification keeps them out of the proton window (M7).
 
-T2 enters the primary family only if it is frozen before P1.
+### 4.3 γ station (ADR-006)
+
+```
+   +--------------------- 5 cm plastic veto (5 faces, 20 us window) ---------------------+
+   | +------------------------- 10 cm Pb (15 cm if >= 30 m w.e.) ----------------------+ |
+   | | +------------------ 5 cm borated HDPE (5 % B), N2 purge -----------------------+ | |
+   | | |          8" x 8" NaI(Tl) well calorimeter (68 % eff. 12-30 MeV)            | | |
+   | | |              [ mini permeation cell in the well ]                           | | |
+   | | |              12 um Pd FX-type, exit face on UHV + RGA (flux regressor)     | | |
+   | | |              aux. Pt cathode for current steering                           | | |
+   | | +----------------------------------------------------------------------------+ | |
+   | +--------------------------------------------------------------------------------+ |
+   +--------------------------------------------------------------------------------------+
+   >= 2 m from the 3He house. Two identical mini cells (D2O, H2O) alternate in 5-day blocks.
+```
+
+- **Channels:** summed deposit in 12–30 MeV (above all thermal-capture lines); 511 coincidences between well segments; MIP tag.
+- **MDA** in 30 d: 5×10⁻³ pairs s⁻¹ at sea level; 3×10⁻⁴ at ≥ 30 m w.e. (M7).
+- **Blank:** 14 d with an Au foil at the same current before physics (hadronic normalisation, ×3 uncertainty).
+- **Calibration:** exempt ²²Na (0.1 µCi); cosmic muons and Michel electrons.
 
 ## 5. Helium system
 
@@ -256,7 +271,7 @@ The full inference rules are in [preregistration-v1.md](preregistration-v1.md).
 | P0b Witness | 1 wk | Bare-Pd and H-L witness DFMs **at 0.5 bar D₂**: measure J(i), x, the Au pinhole leak, and the thermal limit at 0.5 A cm⁻². Choose the Ni thickness for H-M, or trigger the H-M → H-L fallback | 1A-P7 |
 | P1 Loading | 1 d | α→β transit at 5 mA cm⁻², then 20 → 50 → 100 → 300 mA cm⁻² | M3 Protocol A |
 | **P2 Hold** | **42 d fixed** | 200–300 mA cm⁻², 22 ± 1 °C, keep-alive ≥ 20 mA cm⁻² on UPS. FX: ≥ 25 % current-off blocks. He windows | Primary T1/T3 data; in-regime hours logged |
-| P3 Modulation | 14 d | H cells: cathodic steps 100 ↔ 500 mA cm⁻² (≤ 2 h at 500). FX: square wave +300/−100 mA cm⁻², 240 s, plus constant-current front-pressure steps 0.2 ↔ 1.0 bar (x_exit 0.629 ↔ 0.670) | Frozen period and lag |
+| P3 Modulation | 14 d | Lock-in at P = 12 τ_eff (from P0b), clipped to 1–6 h (default 2 h), randomised blocks, **current steered to an auxiliary Pt cathode** so cell heat and field stay constant (ADR-006). H cells: cathodic 100 ↔ 500 mA cm⁻² (≤ 2 h at 500). FX: steering on/off, plus front-pressure steps 0.2 ↔ 1.0 bar at constant current (x_exit 0.629 ↔ 0.670). Anodic +300/−100 cycles are descriptive only | Regressor: FX exit flux (mass-flow meter on the Pd–Ag exhaust); H cells \|dx/dt\| (vdP) |
 | P4 Warm | 14 d | Fill 1.0 bar (balanced), 60 °C | 1D-D12 |
 | P6a Desorption | 2 d | Current off; front pumped through the HR-QMS line; telescopes on; dynamic He logged | Lipson/NTT-like; 1D-D13 |
 | P6 End | 1 wk | Final He windows (before P6a); section and melt; SIMS/ICP-MS; XPS for Pt on the entry face; AFM/EBSD | Ash and covariates |
@@ -269,13 +284,13 @@ Per claim, normalised as stated; live time 0.8; P2 42 d.
 
 | Channel / claim | Reach | Claimed magnitude | Ratio | Status |
 |---|---|---|---|---|
-| Si T1, pooled 8 membranes (per membrane) | 1.0–2.2×10⁻⁵ fusions s⁻¹ (`design_iter1_reach.py`, background 0.03–0.09 d⁻¹) | Lipson 4×10⁻³ p s⁻¹ (4π, M5) | ~0.5 % | tested |
-| Si, single membrane | 4.7–7.5×10⁻⁵ | same | ~1–2 % | tested (descriptive) |
+| Si T1, pooled 8 membranes (per membrane) | 1.1–2.3×10⁻⁵ fusions s⁻¹ (`design_iter1_reach.py`, background 0.03–0.09 d⁻¹) | Lipson 4×10⁻³ p s⁻¹ (4π, M5) | ~0.5 % | tested |
+| Si, single membrane | 4.7–8.1×10⁻⁵ | same | ~1–2 % | tested (descriptive) |
 | Si vs the Tohoku-static prediction (M1) | ~2 events/day threshold | ~130/day | ~1.7 % | partially tested |
 | ⁴He front (F/H-M) | 0.16–0.39 nW | SRI 0.1–1 W, volume-scaled to 3.1 cm² × 12 µm: ~15–150 mW | ~10⁻⁸ | tested |
 | ⁴He headspace + melts | ~0.4–1.6 nW-equivalent | same | ~10⁻⁸ | tested |
 | Heat (H-L, T-H(L); C1) | 4–20 mW; 7–27 mW | volume-scaled SRI | 2–100 % | partially tested |
-| 511–511 | M7 pending | not stated | — | — |
+| γ station, e⁺e⁻ (T2) | 5×10⁻³ pairs s⁻¹ (sea level); 3×10⁻⁴ (≥ 30 m w.e.) | not quantified by the claimant | — | tested (existence) |
 | Neutrons | ~2×10⁻² fusions s⁻¹ | — | — | descriptive |
 | C3-G Pr (T4) | isotope-ratio precision ~1 % on ~10¹⁰ cm⁻² | Toyota Pr 2×10¹¹ → 1.6×10¹² cm⁻² | ≲ 10⁻¹ | tested |
 
@@ -306,15 +321,16 @@ Estimates; vendor quotes required.
 | Gas and He system | $30k |
 | HR-QMS | $55k |
 | ³He neutron bank (24 tubes) and moderator | $65k |
-| LaBr₃/CeBr₃ pair, Cu shield, veto | $30k |
+| Muon veto for the Si channel | $15k |
 | Galvanostats ×8, UPS | $14k |
 | Seebeck calorimetry (DFM) | $15k |
 | Consumables (low-T D₂O, LiOD, ⁶LiF, ¹⁰B) | $8k |
 | External analyses (sector-MS melts, SIMS, EBSD/ICP-MS screening, LSC) | $45k |
-| **DFM-8 subtotal** | **≈ $415k** |
+| **DFM-8 subtotal** | **≈ $400k** |
+| γ station (NaI well + PMT, ~1 t Pb, veto, 2 mini cells, RGA) | $60k |
 | C3-G ×5 (cells, multilayers, off-site targets, two-lab analyses) | $80k |
 | C1 ×4 + twin (cells, SEEB1\*, 8-tube bank) | $67k |
-| **Tier 1 total (excluding labour)** | **≈ $560k** |
+| **Tier 1 total (excluding labour)** | **≈ $610k** |
 | **Minimum claim-weighted subset**: C3-G ×5 + C1 ×2 + twin + one DFM stage (2 H-L + T-Pt + T-H(L) + B, external He analysis) | **≈ $0.28M** |
 
 ## 13. Go / no-go for iteration 2
@@ -353,5 +369,5 @@ Estimates; vendor quotes required.
 2. **Diffusion bond and corrugated-annulus fatigue** under P3 cycling; the misfit at the bond line is not yet modelled in 2-D.
 3. **Si in 0.5 bar D₂ for ~16 weeks** (leakage, noise, H effects). Fallback: vacuum front for H-L membranes, where J ≈ 0 makes that feasible.
 4. **Thermal limit of the lined cell at 0.5 A cm⁻²** (~8 W into 12 mL through a 1 mm PTFE liner).
-5. **γ/e± layout** pending M7.
-6. **Cost:** ≈ $0.56M for Tier 1.
+5. **γ station** background normalisation (hadronic, ×3) is only fixed by its 14-day blank.
+6. **Cost:** ≈ $0.61M for Tier 1.

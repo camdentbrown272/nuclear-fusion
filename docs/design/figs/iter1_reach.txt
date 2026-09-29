@@ -1,6 +1,6 @@
-bkg 0.03/d exit : single 4.7e-05 (B=1.0, ncrit=12); pooled-8 per membrane 1.0e-05 (B=8.1, ncrit=27) fusions/s
-bkg 0.03/d entry: single 6.3e-05 (B=1.0, ncrit=12); pooled-8 per membrane 1.4e-05 (B=8.1, ncrit=27) fusions/s
+bkg 0.03/d exit : single 4.7e-05 (B=1.0, ncrit=12); pooled-8 per membrane 1.1e-05 (B=8.1, ncrit=28) fusions/s
+bkg 0.03/d entry: single 6.3e-05 (B=1.0, ncrit=12); pooled-8 per membrane 1.5e-05 (B=8.1, ncrit=28) fusions/s
 bkg 0.05/d exit : single 4.8e-05 (B=1.7, ncrit=13); pooled-8 per membrane 1.3e-05 (B=13.4, ncrit=37) fusions/s
 bkg 0.05/d entry: single 6.5e-05 (B=1.7, ncrit=13); pooled-8 per membrane 1.7e-05 (B=13.4, ncrit=37) fusions/s
-bkg 0.09/d exit : single 5.5e-05 (B=3.0, ncrit=16); pooled-8 per membrane 1.6e-05 (B=24.2, ncrit=54) fusions/s
-bkg 0.09/d entry: single 7.5e-05 (B=3.0, ncrit=16); pooled-8 per membrane 2.2e-05 (B=24.2, ncrit=54) fusions/s
+bkg 0.09/d exit : single 5.9e-05 (B=3.0, ncrit=17); pooled-8 per membrane 1.7e-05 (B=24.2, ncrit=55) fusions/s
+bkg 0.09/d entry: single 8.1e-05 (B=3.0, ncrit=17); pooled-8 per membrane 2.3e-05 (B=24.2, ncrit=55) fusions/s

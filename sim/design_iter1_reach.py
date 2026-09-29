@@ -1,14 +1,14 @@
 """T1 reach for iteration-1 rev B (pre-registration v1 §9).
 
 Median-5sigma D+D fusion rate per membrane for the pooled T1 test and for a single membrane.
-alpha = 1.43e-7 (T1 weight 0.5 of global 2.87e-7), >=10 net events floor, P2 = 42 d x 0.8 live.
+alpha = 1.15e-7 (T1 weight 0.4 of global 2.87e-7; ADR-006), >=10 net events floor, P2 = 42 d x 0.8 live.
 eps = PID efficiency (exit 0.22, entry 0.162 at 12 um; ADR-005 §2.2) x grid 0.80 x septum 0.9;
 proton branch 0.5. Background per cell per day includes electrolyte recoils and septum/grid (n,xp).
 """
 import numpy as np
 from scipy.stats import poisson
 
-ALPHA = 1.43e-7
+ALPHA = 1.15e-7
 T_LIVE = 42 * 0.8 * 86400.0
 EPS = {"exit": 0.22 * 0.8 * 0.9, "entry": 0.162 * 0.8 * 0.9}
 

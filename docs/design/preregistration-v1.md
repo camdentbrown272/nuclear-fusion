@@ -17,11 +17,11 @@ Graphical weighted Bonferroni with α-propagation. Global one-sided α_G = 2.87�
 
 | Test | Weight | Data | Statistic | Background model | Threshold |
 |---|---|---|---|---|---|
-| **T1 (H1a)** | 0.5 | P2, current-on, **all active membranes and quadrants pooled** (one test). ΔE–E PID window 1.41–3.10 MeV. Clusters of ≥ 2 events within 10 s in one detector count as one event | Poisson profile-likelihood ratio, s ≥ 0 | Pooled: B telescope, T-Pt (4 quadrants), P0a pre-run, FX current-off blocks (≥ 25 % of FX P2 live time), and pre-/post-run blocks of H membranes. One scale nuisance per component. Global log-normal nuisance with σ = ln 3. Background exposure ≥ 10× signal live time | p ≤ 1.43×10⁻⁷ **and ≥ 10 net events** |
-| **T3 (H2)** | 0.5 | ⁴He from front volume and headspace, over all P2–P4 windows. Summed per cell, then over the active cells. Quadrant melts form a pre-specified second component | Σ_cells (N_obs − N̂_blank,cell) / σ_tot. σ_tot combines each cell's blank-series variance with the between-cell variance measured in P0a. A D₂-matrix spike correction is applied per aliquot class | Each cell's own blank series (≥ 3 × 1 d and ≥ 2 × 7 d, taken both pre and post); sibling coupons for the melts | p ≤ 1.43×10⁻⁷ |
+| **T1 (H1a)** | 0.4 | P2, current-on, **all active membranes and quadrants pooled** (one test). ΔE–E PID window 1.41–3.10 MeV. Clusters of ≥ 2 events within 10 s in one detector count as one event | Poisson profile-likelihood ratio, s ≥ 0 | Pooled: B telescope, T-Pt (4 quadrants), P0a pre-run, FX current-off blocks (≥ 25 % of FX P2 live time), and pre-/post-run blocks of H membranes. One scale nuisance per component. Global log-normal nuisance with σ = ln 3. Background exposure ≥ 10× signal live time | p ≤ 1.15×10⁻⁷ (5.18σ) **and ≥ 10 net events** |
+| **T3 (H2)** | 0.4 | ⁴He from front volume and headspace, over all P2–P4 windows. Summed per cell, then over the active cells. Quadrant melts form a pre-specified second component | Σ_cells (N_obs − N̂_blank,cell) / σ_tot. σ_tot combines each cell's blank-series variance with the between-cell variance measured in P0a. A D₂-matrix spike correction is applied per aliquot class | Each cell's own blank series (≥ 3 × 1 d and ≥ 2 × 7 d, taken both pre and post); sibling coupons for the melts | p ≤ 1.15×10⁻⁷ (5.18σ) |
+| **T2 (H1c)** | 0.2 | γ station (ADR-006): 12–30 MeV summed-deposit and 511-coincidence rates, steering-on vs steering-off, D₂O blocks vs H₂O blocks (5-day alternation) | Joint on/off likelihood of both channels, with the MC-fixed ratio between them (M7 §5.8) | 14-day Au-foil blank; H₂O blocks; off half-periods | p ≤ 5.7×10⁻⁸ (5.30σ) |
 
-- **α-propagation:** if T1 rejects, its α passes to T3, and vice versa.
-- **T2 (511–511 coincidence, H1c):** enters only if M7 is merged and its analysis is frozen before P1. It would take weight 0.1 from each of T1 and T3.
+- **α-propagation:** if any primary test rejects, its α is split equally between the others.
 - **T4 (C3-G transmutation):** a separately registered study with its own α. Its primary endpoint is ¹⁴¹Pr from ¹³³Cs, measured by blinded two-lab ICP-MS and ToF-SIMS on coded samples. The reach is stated as isotope-ratio precision.
 
 ## 3. Conditions for a discovery claim
@@ -30,7 +30,7 @@ All of the following are required. Each is one-sided and fixed now.
 
 1. **Primary test.** A primary test rejects at its threshold.
 2. **Flux or loading dependence, on independent data.**
-   - FX membranes: P3 lock-in at the frozen period (240 s) with the frozen lag model (τ from the P0b permeation transient) gives ≥ 3σ in the same channel.
+   - FX membranes: P3 lock-in at the frozen period (P = 12 τ_eff from P0b, clipped to 1–6 h), with current steered to the auxiliary cathode and the exhaust mass-flow exit flux as the single regressor, gives ≥ 3σ in the same channel.
    - H membranes: P3 cathodic step response, with the same frozen parameters.
    - In both cases, the current-off blocks must be consistent with background: 95 % upper limit < 25 % of the P2 rate.
 3. **Replication.**
@@ -50,7 +50,7 @@ All of the following are required. Each is one-sided and fixed now.
 
 - **Evidence:** a primary test at global ≥ 3σ.
 - **Claim:** all conditions in §3 are met.
-- **Descriptive only:** per-skin, per-quadrant, per-lot and per-variant results (Al additive, SuperWave), plus neutron, heat, AE, triton/³He lines, and 511 if T2 was not frozen. These are reported with Feldman–Cousins intervals and no significance language.
+- **Descriptive only:** per-skin, per-quadrant, per-lot and per-variant results (Al additive, SuperWave), plus neutron, heat, AE, triton/³He lines, and γ-station results other than T2. These are reported with Feldman–Cousins intervals and no significance language.
 
 ## 5. Null reporting (committed)
 
@@ -91,12 +91,12 @@ These are tuned on P0a, blank-telescope and sideband data only.
 
 ## 9. Pre-computed reach
 
-`sim/design_iter1_reach.py` (output `figs/iter1_reach.txt`) gives the following for T1, P2 of 42 d at 0.8 live fraction, α = 1.43×10⁻⁷, with the ≥ 10-net-event floor:
+`sim/design_iter1_reach.py` (output `figs/iter1_reach.txt`) gives the following for T1, P2 of 42 d at 0.8 live fraction, α = 1.15×10⁻⁷, with the ≥ 10-net-event floor:
 
 | Background per cell (d⁻¹) | Single membrane, exit face | Single membrane, entry face | Pooled 8, per membrane (exit / entry) |
 |---|---|---|---|
-| 0.03 | 4.7×10⁻⁵ | 6.3×10⁻⁵ | 1.0 / 1.4 ×10⁻⁵ |
-| 0.09 (3× band) | 5.5×10⁻⁵ | 7.5×10⁻⁵ | 1.6 / 2.2 ×10⁻⁵ |
+| 0.03 | 4.7×10⁻⁵ | 6.3×10⁻⁵ | 1.1 / 1.5 ×10⁻⁵ |
+| 0.09 (3× band) | 5.9×10⁻⁵ | 8.1×10⁻⁵ | 1.7 / 2.3 ×10⁻⁵ |
 
 Units are D+D fusions s⁻¹. The inputs are:
 - ε = 0.22 (exit) or 0.162 (entry), × 0.80 grid transmission × 0.9 septum loss;
