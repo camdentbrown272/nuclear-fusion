@@ -1,0 +1,364 @@
+<title>DFM-8 3D Model</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: instrument bench — 3D stage fills the left, a narrow parts ledger on the right; stacks on phones. */
+:root {
+  --bg: #eceef0;
+  --stage: #e2e5e8;
+  --panel: #f7f8f9;
+  --ink: #1a1f23;
+  --muted: #5b646b;
+  --line: #d2d7db;
+  --accent: #b5541a;
+  --accent-soft: rgba(181, 84, 26, 0.12);
+  --display: "Archivo", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --body: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111416; --stage: #171b1e; --panel: #1a1e21; --ink: #e2e6e9; --muted: #98a2a9;
+    --line: #2b3236; --accent: #e28a4f; --accent-soft: rgba(226, 138, 79, 0.16); color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111416; --stage: #171b1e; --panel: #1a1e21; --ink: #e2e6e9; --muted: #98a2a9;
+  --line: #2b3236; --accent: #e28a4f; --accent-soft: rgba(226, 138, 79, 0.16); color-scheme: dark;
+}
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 14px; line-height: 1.45; }
+.app { height: 100%; display: grid; grid-template-columns: minmax(0, 1fr) 340px; }
+.stage { position: relative; background: var(--stage); min-height: 0; }
+#view { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+.stage-head { position: absolute; left: 16px; top: 14px; right: 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; pointer-events: none; }
+.stage-head h1 { margin: 0; font-family: var(--display); font-stretch: 72%; font-weight: 750; font-size: 26px; letter-spacing: 0.01em; text-wrap: balance; }
+.stage-head .rev { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.status { position: absolute; left: 16px; bottom: 14px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
+.toolbar { position: absolute; right: 16px; bottom: 14px; display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
+button, .seg label { font: 500 13px var(--body); color: var(--ink); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; cursor: pointer; }
+button:hover, .seg label:hover { border-color: var(--accent); }
+button:focus-visible, input:focus-visible + span, .seg input:focus-visible + label { outline: 2px solid var(--accent); outline-offset: 2px; }
+aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y: auto; min-height: 0; padding-block: 16px; padding-inline: 16px; display: flex; flex-direction: column; gap: 18px; }
+.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 6px; }
+.seg { display: flex; gap: 0; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg label { border-radius: 0; flex: 1; text-align: center; }
+.seg label:first-of-type { border-radius: 6px 0 0 6px; }
+.seg label:last-of-type { border-radius: 0 6px 6px 0; border-left: 0; }
+.seg input:checked + label { background: var(--accent); border-color: var(--accent); color: var(--panel); }
+.controls { display: flex; flex-direction: column; gap: 10px; }
+.row { display: flex; align-items: center; gap: 10px; }
+.row input[type="range"] { flex: 1; min-width: 0; accent-color: var(--accent); }
+.check { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+.check input { accent-color: var(--accent); width: 15px; height: 15px; margin: 0; }
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13px; margin: 0; }
+.facts dt { font-family: var(--mono); color: var(--accent); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.facts dd { margin: 0; color: var(--ink); min-width: 0; }
+.parts { display: flex; flex-direction: column; gap: 12px; }
+.group h3 { font-family: var(--display); font-stretch: 80%; font-weight: 650; font-size: 15px; margin: 0 0 4px; }
+.part { display: grid; grid-template-columns: 18px 12px minmax(0, 1fr); align-items: center; gap: 8px; padding: 4px 6px; border-radius: 5px; cursor: pointer; }
+.part:hover { background: var(--accent-soft); }
+.part.sel { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); }
+.part input { accent-color: var(--accent); margin: 0; }
+.sw { width: 12px; height: 12px; border-radius: 2px; border: 1px solid var(--line); }
+.part span.n { overflow-wrap: anywhere; }
+.detail { border-top: 1px solid var(--line); padding-top: 14px; min-height: 96px; }
+.detail h2 { font-family: var(--display); font-stretch: 78%; font-weight: 700; font-size: 18px; margin: 0 0 4px; text-wrap: balance; }
+.detail p { margin: 0; color: var(--ink); max-width: 60ch; }
+.detail .src { margin-top: 6px; font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+.files { font-size: 13px; color: var(--muted); }
+.files a { color: var(--accent); }
+@media (max-width: 760px) {
+  .app { grid-template-columns: 1fr; grid-template-rows: 62vh auto; height: auto; }
+  .stage { height: 62vh; }
+  aside { border-left: 0; border-top: 1px solid var(--line); overflow: visible; }
+  .stage-head h1 { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="app">
+  <section class="stage" aria-label="3D model">
+    <canvas id="view"></canvas>
+    <div class="stage-head">
+      <h1 id="title">DFM cell, half section</h1>
+      <span class="rev">iteration 1 rev B · dimensions in mm</span>
+    </div>
+    <div class="status" id="status">Loading model…</div>
+    <div class="toolbar">
+      <button id="reset" type="button">Reset view</button>
+      <button id="spin" type="button" aria-pressed="false">Rotate</button>
+    </div>
+  </section>
+
+  <aside>
+    <div>
+      <p class="eyebrow">Model</p>
+      <div class="seg" role="radiogroup" aria-label="Model">
+        <input type="radio" name="model" id="m-cell" value="cell" checked><label for="m-cell">Single cell</label>
+        <input type="radio" name="model" id="m-house" value="house"><label for="m-house">8-cell array</label>
+      </div>
+    </div>
+
+    <div class="controls">
+      <p class="eyebrow" style="margin:0">View</p>
+      <label class="check"><input type="checkbox" id="cut" checked><span>Section cut</span></label>
+      <div class="row"><input type="range" id="cutpos" min="0" max="1" step="0.001" value="0.5" aria-label="Section plane position"></div>
+      <label class="check"><input type="checkbox" id="thin"><span>Thicken thin layers ×40 (membrane, Au, ΔE)</span></label>
+    </div>
+
+    <div>
+      <p class="eyebrow">Key numbers</p>
+      <dl class="facts" id="facts"></dl>
+    </div>
+
+    <div class="detail" id="detail" aria-live="polite">
+      <h2>Select a part</h2>
+      <p>Click a part in the view or in the list to see what it is and why it is there.</p>
+    </div>
+
+    <div>
+      <p class="eyebrow">Parts</p>
+      <div class="parts" id="parts"></div>
+    </div>
+
+    <p class="files">CAD files (STEP for editing, STL for printing, GLB for viewing) are generated by <code>sim/cad_dfm.py</code> in the
+      <a href="https://github.com/camdentbrown272/nuclear-fusion/tree/claude/lucid-davinci-gel4vu/docs/design/cad" target="_blank" rel="noopener">repository</a>.</p>
+  </aside>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
+<script>
+(() => {
+  const INFO = {
+    cell_body_316L: ["Cell body", "cell", "316L stainless body and flange. All-metal so atmospheric helium cannot permeate into the helium-4 channel (polymer bodies leak 10⁸–10⁹ He/s).", "rev B §3.2 · red-team-1A P1"],
+    PTFE_liner: ["PTFE liner", "cell", "1 mm liner on every wetted surface, with no path to air. Baked at 150 °C and D₂-purged before filling.", "rev B §3.2"],
+    lid_316L: ["Lid and ports", "cell", "316L lid, Au-wire sealed. Ports: anode feedthrough, pressure/temperature, 3.5 bar burst disk and the helium sample valve.", "rev B §3.1"],
+    electrolyte_LiOD_D2O: ["Electrolyte", "cell", "About 12 mL of 1.0 M LiOD in heavy water (≥99.9 % D, certified low-tritium). Kept ≤20 mL to limit cosmic photoneutron background.", "M2 · M1 rec. 7"],
+    Pt_mesh_anode: ["Pt mesh anode", "cell", "Planar platinum mesh, ≥50 % open, 4.0 ± 0.2 mm above the membrane. Gives ±2.2 % uniform current over the 20 mm face.", "M2 rec. 7"],
+    anode_feedthrough: ["Anode feedthrough", "cell", "Positive lead through an alumina-brazed feedthrough. The membrane is the grounded cathode.", "rev B §3.2"],
+    recombiner: ["Recombiner", "cell", "Hydrophobic Pt/Al₂O₃ that turns D₂ + O₂ back into D₂O. Sits ≥20 mm above the liquid behind a baffle and flame arrestor.", "R6 safety"],
+    Pd_membrane_12um: ["Palladium membrane", "mem", "12 µm annealed Pd, 20 mm active. Loaded to D/Pd ≥ 0.9 from the electrolyte side. Thin enough that a 3 MeV fusion proton born anywhere in it reaches the detector.", "ADR-005 §2.2"],
+    exit_finish_Au50nm: ["Exit finish (H-L shown)", "mem", "One finish per membrane sets the loading state of the whole foil: Au 50 nm (high loading, no flux), Ni 20 nm (high loading, small flux) or bare/CaO (maximum flux).", "ADR-005 §2.1"],
+    Pt_corrugated_annulus: ["Corrugated Pt annulus", "mem", "Diffusion-bonded to the membrane rim at 850 °C. Platinum does not absorb hydrogen, and the fold gives ≥1 mm radial travel so the swelling membrane is never clamped.", "ADR-005 §2.3"],
+    Au_wire_seal_upper: ["Au-wire seal (cell side)", "mem", "Metal seal. No elastomer on any gas boundary.", "red-team-1A P1"],
+    Au_wire_seal_lower: ["Au-wire seal (front side)", "mem", "Metal seal between the annulus and the front-volume flange.", "red-team-1A P1"],
+    Mo_catch_grid: ["Mo catch grid", "det", "0.10 mm photo-etched molybdenum, 1.0 mm hex holes, 80 % open. The membrane rests on it at +30 mbar; it only carries load if the front pressure is lost.", "M3 rec. 4"],
+    cross_septum: ["Cross septum", "det", "4.0 × 0.3 mm grounded cross that gives each quadrant of the membrane its own detector, for localisation and burst checks.", "rev B §3.2"],
+    Si_dE_25um_quadrants: ["ΔE silicon, 25 µm", "det", "Four-quadrant 600 mm² transmission detector, 4 mm below the exit face. With the E detector it identifies protons (3.02 MeV) by energy loss.", "M5 rec. 1"],
+    dE_alumina_board: ["ΔE mount", "det", "Epoxy-free alumina board, low-alpha materials.", "M5 · M8"],
+    Si_E_500um: ["E silicon, 500 µm", "det", "Stopping detector 1.5 mm below ΔE. Together they give 0.22 detection efficiency for exit-face protons.", "M5"],
+    E_alumina_board: ["E mount", "det", "Epoxy-free alumina board.", "M5"],
+    front_volume_316L: ["Front volume", "he", "About 30 cm³ of vacuum-fired 316L holding D₂ at 0.5 bar. Helium-4 from exit-face reactions accumulates here. Ten or fewer metal seals; no glass, elastomer, epoxy or ion gauge.", "M8"],
+    front_ports: ["Front ports", "he", "Three all-metal lines: Pd–Ag element, helium manifold valve, capacitance gauge.", "M8"],
+    PdAg_element_350C: ["Pd–Ag element", "he", "Heated to 350 °C. The only way D₂ enters or leaves the front volume; helium cannot pass, so it stays for counting.", "M8 rec. 4"],
+    all_metal_valve_He_manifold: ["He manifold valve", "he", "Aliquots go to the getter and a high-resolution mass spectrometer that separates ⁴He from D₂. 5σ floor 0.16–0.39 nW equivalent.", "M8"],
+    capacitance_gauge: ["Capacitance gauge", "he", "Front pressure for the ±40 mbar interlock. Ion gauges are banned because they pump and emit helium.", "M8"],
+    reverse_relief_line: ["Reverse-relief line", "he", "20 mbar burst foil to the cell headspace. Protects the membrane if the cell loses pressure (unsupported, 50 mbar would exceed yield).", "ADR-005 §2.3"],
+    Cu_inner_shield_5cm: ["Copper inner shield", "house", "5 cm OFHC copper. Copper, not lead, so muon-induced neutrons do not fake signals in the neutron bank.", "M5"],
+    HDPE_moderator_3He_bank: ["Moderator and ³He bank", "house", "Polyethylene slows fusion neutrons (2.45 MeV) for the 24 helium-3 counters. Bank efficiency about 0.12–0.18.", "M5"],
+    borated_HDPE_20cm_plus_Cd: ["Borated shield", "house", "20 cm borated polyethylene plus 1 mm cadmium against room neutrons.", "M5"],
+    He3_tubes_24x: ["24 ³He counters", "house", "1 inch × 40 cm, 4 atm. Detect neutrons from every cell at once.", "M5"],
+    muon_veto_top: ["Muon veto (top)", "house", "Plastic scintillator. Cosmic-muon coincidences are vetoed in the silicon data.", "rev B §4.2"],
+    muon_veto_side_N: ["Muon veto (side)", "house", "Plastic scintillator panel.", "rev B §4.2"],
+    muon_veto_side_S: ["Muon veto (side)", "house", "Plastic scintillator panel.", "rev B §4.2"],
+    LaBr3_E: ["LaBr₃ detector", "house", "One of a back-to-back pair looking for 511–511 keV coincidences (the electron–positron channel claimed by Czerski).", "M7 (pending)"],
+    LaBr3_W: ["LaBr₃ detector", "house", "One of a back-to-back pair for 511–511 keV coincidences.", "M7 (pending)"],
+    LaBr3_rail: ["LaBr₃ rail", "house", "Lets the pair be moved to any cell.", "rev B §4.2"],
+  };
+  const CELLROLE = {
+    cell_A1: "Active cell A1 (stage 1: H-L, lot a)", cell_A2: "Active cell A2 (stage 1: H-L, lot b)",
+    cell_A3: "Active cell A3 (stage 1: H-M, lot a)", cell_A4: "Active cell A4 (stage 1: FX, lot b)",
+    "cell_T-Pt": "T-Pt control: platinum membrane in heavy water. Carries every background except deuterium in the metal.",
+    "cell_T-H(L)": "T-H(L) control: light water, H-L membrane. Checks that any signal needs deuterium.",
+    "cell_T-H(FX)": "T-H(FX) control: light water, FX membrane.",
+    cell_B: "B: blank telescope under 100 µm Al. Internal, cosmic and electronic background.",
+  };
+  const GROUPS = { cell: "Electrolytic cell", mem: "Membrane and mount", det: "Detector stack", he: "Front volume and helium", house: "House and shielding", cells: "Cells" };
+  const FACTS = {
+    cell: [["12 µm", "Pd membrane, 20 mm active diameter"], ["D/Pd ≥ 0.9", "target loading, electrolytic"], ["4.0 mm", "anode gap and membrane-to-ΔE distance"], ["0.5 bar", "D₂ on both sides (Δp +30 mbar)"], ["30 cm³", "sealed front volume for ⁴He"], ["3.02 MeV", "D+D proton the telescope looks for"]],
+    house: [["8", "positions: 4 active, 3 controls, 1 blank"], ["90 mm", "cell pitch"], ["5 cm", "copper inner shield"], ["24", "³He neutron counters"], ["20 cm", "borated polyethylene + 1 mm Cd"], ["2 stages", "of 4 membranes, 2 Pd lots"]],
+  };
+  const THIN = ["Pd_membrane_12um", "exit_finish_Au50nm", "Si_dE_25um_quadrants"];
+
+  const canvas = document.getElementById("view");
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.localClippingEnabled = true;
+  renderer.outputEncoding = THREE.sRGBEncoding;
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 20000);
+  const controls = new THREE.OrbitControls(camera, canvas);
+  controls.enableDamping = true;
+  scene.add(new THREE.HemisphereLight(0xffffff, 0x445566, 0.85));
+  const key = new THREE.DirectionalLight(0xffffff, 0.9); key.position.set(1, 2, 1.5); scene.add(key);
+  const fill = new THREE.DirectionalLight(0xffffff, 0.35); fill.position.set(-1.5, 0.5, -1); scene.add(fill);
+  const plane = new THREE.Plane(new THREE.Vector3(-1, 0, 0), 0);
+
+  const loader = new THREE.GLTFLoader();
+  const models = {}; let current = null; let root = null; let selected = null; let spin = false;
+  const status = document.getElementById("status");
+
+  function resize() {
+    const r = canvas.parentElement.getBoundingClientRect();
+    renderer.setSize(r.width, r.height, false);
+    camera.aspect = r.width / Math.max(r.height, 1); camera.updateProjectionMatrix();
+  }
+  new ResizeObserver(resize).observe(canvas.parentElement);
+
+  function prepare(gltf, which) {
+    const g = gltf.scene;
+    g.updateMatrixWorld(true);
+    // detect up axis from the membrane's thinnest dimension (the exporter normally converts Z-up to Y-up)
+    let mem = null; g.traverse(o => { if (!mem && o.isMesh && nameOf(o) === "Pd_membrane_12um") mem = o; });
+    if (mem) {
+      const s = new THREE.Box3().setFromObject(mem).getSize(new THREE.Vector3());
+      if (s.z < s.y && s.z < s.x) { g.rotation.x = -Math.PI / 2; g.updateMatrixWorld(true); }
+    }
+    g.updateMatrixWorld(true);
+    const meshes = [];
+    g.traverse(o => {
+      if (!o.isMesh) return;
+      const mats = Array.isArray(o.material) ? o.material : [o.material];
+      mats.forEach(m => { m.side = THREE.DoubleSide; if (m.transparent) m.depthWrite = false; m.userData.emissive0 = m.emissive ? m.emissive.clone() : null; });
+      o.userData.part = nameOf(o); o.userData.cell = cellOf(o);
+      if (THIN.includes(o.userData.part)) {
+        o.geometry.computeBoundingBox();
+        const c = o.geometry.boundingBox.getCenter(new THREE.Vector3());
+        o.geometry.translate(-c.x, -c.y, -c.z); o.position.add(c); o.userData.thin = true;
+      }
+      meshes.push(o);
+    });
+    const box = new THREE.Box3().setFromObject(g);
+    models[which] = { group: g, meshes, box };
+  }
+
+  function nameOf(o) { let p = o; while (p) { if (INFO[p.name]) return p.name; p = p.parent; } return o.name || "part"; }
+  function cellOf(o) { let p = o; while (p) { if (CELLROLE[p.name]) return p.name; p = p.parent; } return null; }
+
+  function frame(which) {
+    const box = models[which].box; const c = box.getCenter(new THREE.Vector3()); const s = box.getSize(new THREE.Vector3());
+    const r = s.length() * (which === "cell" ? 0.62 : 0.72);
+    controls.target.copy(c);
+    camera.position.set(c.x + r * 0.95, c.y + r * 0.45, c.z + r * 0.75);
+    camera.near = r / 200; camera.far = r * 20; camera.updateProjectionMatrix(); controls.update();
+  }
+
+  function applyCut() {
+    const m = models[current]; if (!m) return;
+    const on = document.getElementById("cut").checked;
+    const t = +document.getElementById("cutpos").value;
+    plane.constant = m.box.min.x + t * (m.box.max.x - m.box.min.x);
+    m.meshes.forEach(o => { const mats = Array.isArray(o.material) ? o.material : [o.material]; mats.forEach(mt => { mt.clippingPlanes = on ? [plane] : []; mt.needsUpdate = true; }); });
+  }
+
+  function applyThin() {
+    const k = document.getElementById("thin").checked ? 40 : 1;
+    Object.values(models).forEach(m => m.meshes.forEach(o => { if (o.userData.thin) o.scale.set(1, 1, 1).setComponent(upAxisLocal(o), k); }));
+  }
+  function upAxisLocal(o) {
+    const b = o.geometry.boundingBox || (o.geometry.computeBoundingBox(), o.geometry.boundingBox);
+    const s = b.getSize(new THREE.Vector3()); return s.x < s.y ? (s.x < s.z ? 0 : 2) : (s.y < s.z ? 1 : 2);
+  }
+
+  function swatch(part) {
+    const m = models[current]; if (!m) return "transparent";
+    const o = m.meshes.find(x => x.userData.part === part); if (!o) return "transparent";
+    const mt = Array.isArray(o.material) ? o.material[0] : o.material; return "#" + mt.color.getHexString();
+  }
+
+  function buildList() {
+    const m = models[current]; const el = document.getElementById("parts"); el.innerHTML = "";
+    const byGroup = {};
+    if (current === "house") {
+      byGroup.cells = Object.keys(CELLROLE);
+      Object.keys(INFO).forEach(k => { if (INFO[k][1] === "house" && m.meshes.some(o => o.userData.part === k)) (byGroup.house = byGroup.house || []).push(k); });
+    } else {
+      Object.keys(INFO).forEach(k => { if (m.meshes.some(o => o.userData.part === k)) (byGroup[INFO[k][1]] = byGroup[INFO[k][1]] || []).push(k); });
+    }
+    ["cells", "cell", "mem", "det", "he", "house"].forEach(gk => {
+      if (!byGroup[gk]) return;
+      const g = document.createElement("div"); g.className = "group";
+      g.innerHTML = `<h3>${GROUPS[gk]}</h3>`;
+      byGroup[gk].forEach(k => {
+        const id = "p-" + current + "-" + k.replace(/[^A-Za-z0-9]/g, "_");
+        const row = document.createElement("div"); row.className = "part"; row.dataset.key = k;
+        const label = gk === "cells" ? k.replace("cell_", "Cell ") : INFO[k][0];
+        const col = gk === "cells" ? "var(--line)" : swatch(k);
+        row.innerHTML = `<input type="checkbox" id="${id}" checked aria-label="Show ${label}"><span class="sw" style="background:${col}"></span><span class="n">${label}</span>`;
+        row.querySelector("input").addEventListener("change", e => setVisible(k, e.target.checked, gk === "cells"));
+        row.addEventListener("click", e => { if (e.target.tagName !== "INPUT") select(k, gk === "cells"); });
+        g.appendChild(row);
+      });
+      el.appendChild(g);
+    });
+  }
+
+  function setVisible(k, v, isCell) { models[current].meshes.forEach(o => { if ((isCell ? o.userData.cell : o.userData.part) === k) o.visible = v; }); }
+
+  function select(k, isCell) {
+    const m = models[current];
+    m.meshes.forEach(o => { const mats = Array.isArray(o.material) ? o.material : [o.material];
+      const hit = k && (isCell ? o.userData.cell === k : o.userData.part === k);
+      mats.forEach(mt => { if (mt.emissive) mt.emissive.copy(hit ? new THREE.Color(0xb5541a).multiplyScalar(0.45) : mt.userData.emissive0 || new THREE.Color(0)); }); });
+    selected = k;
+    document.querySelectorAll(".part").forEach(r => r.classList.toggle("sel", r.dataset.key === k));
+    const d = document.getElementById("detail");
+    if (!k) { d.innerHTML = "<h2>Select a part</h2><p>Click a part in the view or in the list to see what it is and why it is there.</p>"; return; }
+    if (isCell) { d.innerHTML = `<h2>${k.replace("cell_", "Cell ")}</h2><p>${CELLROLE[k]}</p><p class="src">rev B §4.1</p>`; return; }
+    const [t, , txt, src] = INFO[k]; d.innerHTML = `<h2>${t}</h2><p>${txt}</p><p class="src">${src}</p>`;
+  }
+
+  function show(which) {
+    if (root) scene.remove(root);
+    current = which; root = models[which].group; scene.add(root);
+    document.getElementById("title").textContent = which === "cell" ? "DFM cell, half section" : "DFM-8 array in its shielded house";
+    const cut = document.getElementById("cut");
+    cut.checked = true; document.getElementById("cutpos").value = which === "cell" ? 0.5 : 0.68;
+    document.getElementById("facts").innerHTML = FACTS[which].map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join("");
+    buildList(); applyCut(); applyThin(); frame(which); select(null);
+  }
+
+  function load(which, url) {
+    return new Promise((res, rej) => loader.load(url, g => { prepare(g, which); res(); }, undefined, rej));
+  }
+
+  const ray = new THREE.Raycaster(); const ptr = new THREE.Vector2(); let down = null;
+  canvas.addEventListener("pointerdown", e => { down = [e.clientX, e.clientY]; });
+  canvas.addEventListener("pointerup", e => {
+    if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 4 || !current) return;
+    const r = canvas.getBoundingClientRect();
+    ptr.set(((e.clientX - r.left) / r.width) * 2 - 1, -((e.clientY - r.top) / r.height) * 2 + 1);
+    ray.setFromCamera(ptr, camera);
+    const on = document.getElementById("cut").checked;
+    const hits = ray.intersectObjects(models[current].meshes.filter(o => o.visible), false)
+      .filter(h => !on || plane.distanceToPoint(h.point) >= 0)
+      .filter(h => { const mt = Array.isArray(h.object.material) ? h.object.material[0] : h.object.material; return !(mt.transparent && mt.opacity < 0.3); });
+    if (!hits.length) { select(null); return; }
+    const o = hits[0].object;
+    if (current === "house" && o.userData.cell) select(o.userData.cell, true); else select(o.userData.part, false);
+  });
+
+  document.querySelectorAll('input[name="model"]').forEach(r => r.addEventListener("change", async e => {
+    const w = e.target.value;
+    if (!models[w]) { status.textContent = "Loading model…"; try { await load(w, w === "cell" ? "dfm_cell.gltf.json" : "dfm_house.gltf.json"); } catch (err) { status.textContent = "Could not load the model file. Reload the page to try again."; return; } }
+    status.textContent = w === "cell" ? "Drag to rotate · scroll or pinch to zoom · right-drag to pan" : "Top covers and the near wall are cut away so the cells are visible";
+    show(w);
+  }));
+  document.getElementById("cut").addEventListener("change", applyCut);
+  document.getElementById("cutpos").addEventListener("input", applyCut);
+  document.getElementById("thin").addEventListener("change", applyThin);
+  document.getElementById("reset").addEventListener("click", () => current && frame(current));
+  const spinBtn = document.getElementById("spin");
+  spinBtn.addEventListener("click", () => { spin = !spin; controls.autoRotate = spin; controls.autoRotateSpeed = 1.2; spinBtn.setAttribute("aria-pressed", String(spin)); spinBtn.textContent = spin ? "Stop" : "Rotate"; });
+
+  resize();
+  load("cell", "dfm_cell.gltf.json").then(() => { status.textContent = "Drag to rotate · scroll or pinch to zoom · right-drag to pan"; show("cell"); })
+    .catch(() => { status.textContent = "Could not load the model file. Reload the page to try again."; });
+  (function loop() { controls.update(); renderer.render(scene, camera); requestAnimationFrame(loop); })();
+})();
+</script>
