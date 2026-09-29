@@ -200,13 +200,51 @@ HOSTS = {
 }
 
 
+I_EXC = {1: 19.0, 3: 40.0, 8: 95.0, 22: 233.0, 40: 393.0, 46: 470.0}   # mean excitation, eV [BK, ICRU 49]
+
+
+def _Se_bethe(E_keV, Z1, M1, Z2):
+    """Bethe electronic stopping (no shell/Barkas corrections), eV cm^2/atom."""
+    E = np.asarray(E_keV, float)
+    Mc2 = M1 * 931494.0                      # keV
+    gam = 1 + E / Mc2
+    b2 = 1 - 1 / gam ** 2
+    arg = 2 * 511e3 * b2 * gam ** 2 / I_EXC[Z2]      # eV / eV
+    return 5.099e-19 * Z1 ** 2 * Z2 / b2 * np.log(1 + arg)     # ln(1+x): positive at all E
+
+
+def _Se(E_keV, Z1, M1, Z2, corr):
+    """
+    Electronic stopping: LS (x corr) joined to Bethe harmonically (Andersen-Ziegler style).
+    Checks [calc vs BK]: 3.02 MeV p range in water 148 um (NIST PSTAR 146 um); in PdD 30 um,
+    1.01 MeV t 6 um, 0.82 MeV 3He 1.8 um (R3: 33/7/2 um); R3 Table C reproduced within +20%.
+    """
+    lo = corr * _Se_LS(E_keV, Z1, M1, Z2)
+    hi = _Se_bethe(E_keV, Z1, M1, Z2)
+    return lo * hi / (lo + hi)
+
+
+def stopping_ion(E_lab_keV, host, Z1=1, M1=2.014):
+    """Stopping cross-section of ion (Z1, M1) per host formula unit, eV cm^2."""
+    Z2, M2, corr, _, x = HOSTS[host]
+    S = _Se(E_lab_keV, Z1, M1, Z2, corr) + _Sn_ZBL(E_lab_keV, Z1, M1, Z2, M2)
+    # D atoms in the host (Bragg additivity); H stopping ~ LS x 1.2 at low E
+    S += x * (_Se(E_lab_keV, Z1, M1, 1, 1.2) + _Sn_ZBL(E_lab_keV, Z1, M1, 1, 2.014))
+    if host == "D2O":                         # the O atom is the "host", 2 D per O
+        pass
+    return S
+
+
 def stopping_per_host(E_lab_keV, host):
     """Stopping cross-section of a deuteron per host formula unit, eV cm^2."""
-    Z2, M2, corr, _, x = HOSTS[host]
-    S = corr * _Se_LS(E_lab_keV, 1, 2.014, Z2) + _Sn_ZBL(E_lab_keV, 1, 2.014, Z2, M2)
-    # D atoms in the host (Bragg additivity); gas-phase H stopping ~ LS x 1.2
-    S += x * (1.2 * _Se_LS(E_lab_keV, 1, 2.014, 1) + _Sn_ZBL(E_lab_keV, 1, 2.014, 1, 2.014))
-    return S
+    return stopping_ion(E_lab_keV, host)
+
+
+def ion_range_um(E0_keV, host, Z1=1, M1=2.014, E_end_keV=1e-3):
+    """CSDA range (um) of an ion from E0 down to E_end in host."""
+    n = HOSTS[host][3]
+    E = np.geomspace(E_end_keV, E0_keV, 400)
+    return np.trapezoid(1 / (n * stopping_ion(E, host, Z1, M1)), E * 1e3) * 1e4
 
 
 def thick_target_yield(E0_lab_eV, host, Ue=0.0, branch="tot", K=1.0, npts=400):
