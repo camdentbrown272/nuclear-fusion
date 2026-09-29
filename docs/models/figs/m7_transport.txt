@@ -1,0 +1,104 @@
+M7 Q1 transport of E0 IPC pairs (T+ + T- = 22.825 MeV) in reference geometry
+Per IPC event. 'annihilations' include positrons from secondary pair production (so sums can exceed 1).
+L =  25 um Pd = 0.030 g/cm2 = 0.0033 X0; CSDA range of 1 MeV e+ in Pd = 579 um, of 11.4 MeV = 5755 um
+L =  50 um Pd = 0.060 g/cm2 = 0.0065 X0; CSDA range of 1 MeV e+ in Pd = 579 um, of 11.4 MeV = 5755 um
+L = 100 um Pd = 0.120 g/cm2 = 0.0131 X0; CSDA range of 1 MeV e+ in Pd = 579 um, of 11.4 MeV = 5755 um
+L = 300 um Pd = 0.361 g/cm2 = 0.0392 X0; CSDA range of 1 MeV e+ in Pd = 579 um, of 11.4 MeV = 5755 um
+CSDA range of 11.4 MeV e- in D2O   : 5.58 cm ; X0 = 36.30 cm
+CSDA range of 11.4 MeV e- in PTFE  : 2.97 cm ; X0 = 15.84 cm
+CSDA range of 11.4 MeV e- in SS316 : 0.84 cm ; X0 = 1.71 cm
+CSDA range of 11.4 MeV e- in SI    : 2.72 cm ; X0 = 9.37 cm
+CSDA range of 11.4 MeV e- in BGO   : 0.92 cm ; X0 = 1.12 cm
+
+-- L = 25 um, source depth = uniform: annihilations/event = 1.020, in flight = 0.1387
+   foil                              0.0023
+   electrolyte                       0.0798
+   PTFE cell                         0.1445
+   SS flange/chamber                 0.2966
+   Si telescope + PCB                0.0062
+   gamma detectors (crystal+can)     0.1328
+   air / outside                     0.0013
+   enclosure (HDPE liner/moderator)  0.3567
+   escaped world (>25 cm)            0.0174
+   bremsstrahlung photons (k>20 keV) created per event: total 3.72, in foil 0.147; energy radiated: total 2.722 MeV, in foil 0.1571 MeV
+   Si telescope: P(E-det dep > 50 keV) = 0.1264; P(dE-det > 5 keV) = 0.1434; median E-det dep (hits) = 0.418 MeV; P(E-det dep in 2.6-3.1 MeV p window) = 0.00e+00
+   BGO 3x3 pair at +-x: P(any det > 5 MeV) = 0.1326; P(sum > 12 MeV) = 0.0119; <sum dep> = 1.63 MeV
+
+-- L = 50 um, source depth = uniform: annihilations/event = 1.026, in flight = 0.1361
+   foil                              0.0041
+   electrolyte                       0.0799
+   PTFE cell                         0.1426
+   SS flange/chamber                 0.2948
+   Si telescope + PCB                0.0071
+   gamma detectors (crystal+can)     0.1347
+   air / outside                     0.0012
+   enclosure (HDPE liner/moderator)  0.3612
+   escaped world (>25 cm)            0.0153
+   bremsstrahlung photons (k>20 keV) created per event: total 3.81, in foil 0.249; energy radiated: total 2.811 MeV, in foil 0.2619 MeV
+   Si telescope: P(E-det dep > 50 keV) = 0.1246; P(dE-det > 5 keV) = 0.1418; median E-det dep (hits) = 0.419 MeV; P(E-det dep in 2.6-3.1 MeV p window) = 0.00e+00
+   BGO 3x3 pair at +-x: P(any det > 5 MeV) = 0.1343; P(sum > 12 MeV) = 0.0127; <sum dep> = 1.67 MeV
+
+-- L = 100 um, source depth = uniform: annihilations/event = 1.024, in flight = 0.1359
+   foil                              0.0089
+   electrolyte                       0.0854
+   PTFE cell                         0.1454
+   SS flange/chamber                 0.2877
+   Si telescope + PCB                0.0066
+   gamma detectors (crystal+can)     0.1297
+   air / outside                     0.0006
+   enclosure (HDPE liner/moderator)  0.3601
+   escaped world (>25 cm)            0.0162
+   bremsstrahlung photons (k>20 keV) created per event: total 3.83, in foil 0.435; energy radiated: total 2.894 MeV, in foil 0.4756 MeV
+   Si telescope: P(E-det dep > 50 keV) = 0.1298; P(dE-det > 5 keV) = 0.1461; median E-det dep (hits) = 0.418 MeV; P(E-det dep in 2.6-3.1 MeV p window) = 0.00e+00
+   BGO 3x3 pair at +-x: P(any det > 5 MeV) = 0.1293; P(sum > 12 MeV) = 0.0138; <sum dep> = 1.63 MeV
+
+-- L = 300 um, source depth = uniform: annihilations/event = 1.035, in flight = 0.1382
+   foil                              0.0344
+   electrolyte                       0.1023
+   PTFE cell                         0.1505
+   SS flange/chamber                 0.2823
+   Si telescope + PCB                0.0095
+   gamma detectors (crystal+can)     0.1244
+   air / outside                     0.0011
+   enclosure (HDPE liner/moderator)  0.3301
+   escaped world (>25 cm)            0.0120
+   bremsstrahlung photons (k>20 keV) created per event: total 4.16, in foil 1.053; energy radiated: total 3.273 MeV, in foil 1.1059 MeV
+   Si telescope: P(E-det dep > 50 keV) = 0.1430; P(dE-det > 5 keV) = 0.1617; median E-det dep (hits) = 0.417 MeV; P(E-det dep in 2.6-3.1 MeV p window) = 0.00e+00
+   BGO 3x3 pair at +-x: P(any det > 5 MeV) = 0.1155; P(sum > 12 MeV) = 0.0109; <sum dep> = 1.52 MeV
+
+-- L = 100 um, source depth = front: annihilations/event = 1.033, in flight = 0.1356
+   foil                              0.0096
+   electrolyte                       0.0880
+   PTFE cell                         0.1445
+   SS flange/chamber                 0.3237
+   Si telescope + PCB                0.0080
+   gamma detectors (crystal+can)     0.1266
+   air / outside                     0.0012
+   enclosure (HDPE liner/moderator)  0.3314
+   escaped world (>25 cm)            0.0134
+   bremsstrahlung photons (k>20 keV) created per event: total 4.02, in foil 0.366; energy radiated: total 3.027 MeV, in foil 0.4078 MeV
+   Si telescope: P(E-det dep > 50 keV) = 0.1353; P(dE-det > 5 keV) = 0.1544; median E-det dep (hits) = 0.419 MeV; P(E-det dep in 2.6-3.1 MeV p window) = 1.00e-04
+   BGO 3x3 pair at +-x: P(any det > 5 MeV) = 0.1295; P(sum > 12 MeV) = 0.0130; <sum dep> = 1.64 MeV
+
+-- L = 100 um, source depth = back: annihilations/event = 1.026, in flight = 0.1355
+   foil                              0.0095
+   electrolyte                       0.0892
+   PTFE cell                         0.1581
+   SS flange/chamber                 0.2766
+   Si telescope + PCB                0.0060
+   gamma detectors (crystal+can)     0.1332
+   air / outside                     0.0016
+   enclosure (HDPE liner/moderator)  0.3519
+   escaped world (>25 cm)            0.0140
+   bremsstrahlung photons (k>20 keV) created per event: total 3.72, in foil 0.376; energy radiated: total 2.790 MeV, in foil 0.4214 MeV
+   Si telescope: P(E-det dep > 50 keV) = 0.1260; P(dE-det > 5 keV) = 0.1445; median E-det dep (hits) = 0.418 MeV; P(E-det dep in 2.6-3.1 MeV p window) = 0.00e+00
+   BGO 3x3 pair at +-x: P(any det > 5 MeV) = 0.1345; P(sum > 12 MeV) = 0.0109; <sum dep> = 1.65 MeV
+
+SUMMARY: fraction of IPC events whose positron annihilates in each region (uniform depth)
+L_um | foil | electrolyte | PTFE cell | SS flange/chamber | Si telescope + PCB | gamma detectors (crystal+can) | air / outside | enclosure (HDPE liner/moderator) | escaped world (>25 cm) | in-flight
+25 | 0.002 | 0.080 | 0.144 | 0.297 | 0.006 | 0.133 | 0.001 | 0.357 | 0.017 | 0.139
+50 | 0.004 | 0.080 | 0.143 | 0.295 | 0.007 | 0.135 | 0.001 | 0.361 | 0.015 | 0.136
+100 | 0.009 | 0.085 | 0.145 | 0.288 | 0.007 | 0.130 | 0.001 | 0.360 | 0.016 | 0.136
+300 | 0.034 | 0.102 | 0.150 | 0.282 | 0.009 | 0.124 | 0.001 | 0.330 | 0.012 | 0.138
+
+run time 281 s
