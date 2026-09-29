@@ -1,0 +1,58 @@
+M4 gas-phase reactor calorimetry (C4/C5)
+============================================================
+Baseline operating points (captured fraction, wall temperature)
+  G1 P= 10 W: captured 0.5755, T_wall =  161.5 C
+  G1 P= 50 W: captured 0.8698, T_wall =  237.0 C
+  G1 P=100 W: captured 0.9066, T_wall =  331.3 C
+  G2 P= 10 W: captured 0.9163, T_wall =  103.7 C
+  G2 P= 50 W: captured 0.9557, T_wall =  241.3 C
+  G2 P=100 W: captured 0.9688, T_wall =  331.5 C
+  G3 P= 10 W: captured 0.9956, T_wall =  108.4 C
+  G3 P= 50 W: captured 0.9977, T_wall =  246.2 C
+  G3 P=100 W: captured 0.9984, T_wall =  335.8 C
+
+Apparent excess (W and % of heater power) after a single perturbation, calibration held fixed
+  emissivity +10 % (surface oxidation/deposition)         G2 P= 10 W:     +51.9 mW (+0.519 %)  T_w 103.7->99.0 C
+  emissivity +10 % (surface oxidation/deposition)         G2 P= 50 W:    +108.0 mW (+0.216 %)  T_w 241.3->231.0 C
+  emissivity +10 % (surface oxidation/deposition)         G2 P=100 W:    +135.0 mW (+0.135 %)  T_w 331.5->318.4 C
+  emissivity +10 % (surface oxidation/deposition)         G3 P= 10 W:      +2.6 mW (+0.026 %)  T_w 108.4->103.1 C
+  emissivity +10 % (surface oxidation/deposition)         G3 P= 50 W:      +5.4 mW (+0.011 %)  T_w 246.2->235.5 C
+  emissivity +10 % (surface oxidation/deposition)         G3 P=100 W:      +6.7 mW (+0.007 %)  T_w 335.8->322.4 C
+  emissivity -25 % (reduction/cleaning)                   G2 P= 10 W:    -171.5 mW (-1.715 %)  T_w 103.7->119.4 C
+  emissivity -25 % (reduction/cleaning)                   G2 P= 50 W:    -346.4 mW (-0.693 %)  T_w 241.3->274.4 C
+  emissivity -25 % (reduction/cleaning)                   G2 P=100 W:    -430.5 mW (-0.430 %)  T_w 331.5->373.2 C
+  emissivity -25 % (reduction/cleaning)                   G3 P= 10 W:      -8.8 mW (-0.088 %)  T_w 108.4->125.9 C
+  emissivity -25 % (reduction/cleaning)                   G3 P= 50 W:     -17.2 mW (-0.034 %)  T_w 246.2->280.6 C
+  emissivity -25 % (reduction/cleaning)                   G3 P=100 W:     -21.4 mW (-0.021 %)  T_w 335.8->378.5 C
+  insulation/port conductance +10 %                       G1 P= 10 W:    -692.0 mW (-6.920 %)  T_w 161.5->160.7 C
+  insulation/port conductance +10 %                       G1 P= 50 W:    -702.0 mW (-1.404 %)  T_w 237.0->235.8 C
+  insulation/port conductance +10 %                       G1 P=100 W:    -966.4 mW (-0.966 %)  T_w 331.3->329.6 C
+  insulation/port conductance +10 %                       G2 P= 10 W:     -85.7 mW (-0.857 %)  T_w 103.7->103.2 C
+  insulation/port conductance +10 %                       G2 P= 50 W:    -225.6 mW (-0.451 %)  T_w 241.3->240.8 C
+  insulation/port conductance +10 %                       G2 P=100 W:    -316.4 mW (-0.316 %)  T_w 331.5->331.1 C
+  insulation/port conductance +10 %                       G3 P= 10 W:      -4.4 mW (-0.044 %)  T_w 108.4->108.4 C
+  insulation/port conductance +10 %                       G3 P= 50 W:     -11.3 mW (-0.023 %)  T_w 246.2->246.2 C
+  insulation/port conductance +10 %                       G3 P=100 W:     -15.8 mW (-0.016 %)  T_w 335.8->335.8 C
+  oil inlet temperature +2 K (G1)                         G1 P= 10 W:     -98.4 mW (-0.984 %)  T_w 161.5->163.4 C
+  oil inlet temperature +2 K (G1)                         G1 P= 50 W:     -65.1 mW (-0.130 %)  T_w 237.0->238.9 C
+  oil inlet temperature +2 K (G1)                         G1 P=100 W:     -62.4 mW (-0.062 %)  T_w 331.3->333.2 C
+  coil-to-wall conductance -5 % (G1, oil viscosity/fouling) G1 P= 10 W:     -29.7 mW (-0.297 %)  T_w 161.5->162.1 C
+  coil-to-wall conductance -5 % (G1, oil viscosity/fouling) G1 P= 50 W:    -148.5 mW (-0.297 %)  T_w 237.0->241.3 C
+  coil-to-wall conductance -5 % (G1, oil viscosity/fouling) G1 P=100 W:    -297.0 mW (-0.297 %)  T_w 331.3->340.3 C
+
+Source location: heater on wall vs excess in bed changes nothing in the lumped network
+(both leave through the wall), but the bed-to-wall gas conductance sets the powder temperature:
+  G2 50 W heater in bed, D2 (k=0.14 W/mK)  : T_bed - T_wall =  100.0 K
+  G2 50 W heater in bed, H2 (k=0.18 W/mK)  : T_bed - T_wall =   75.4 K
+  G2 50 W heater in bed, vacuum            : T_bed - T_wall = 1000.0 K
+  -> the D2 run and the H2 control run have different bed temperatures at equal heater power;
+     a thermally-activated artefact (e.g. desorption/absorption enthalpy) is NOT cancelled by the control.
+
+  absorption heat, 10 g PNZ-type (1 g Pd), x=0.5: 81 J -> 23 mW for 1 h
+  absorption heat, 10 g PNZ-type (1 g Pd), x=0.8: 130 J -> 36 mW for 1 h
+  (hydrogen isotope absorption/desorption and H/D exchange heats must be integrated and subtracted)
+
+Realistic systematic accuracy (quadrature of listed perturbations at 50 W):
+  G1: +-721 mW = +-1.44 % of input
+  G2: +-427 mW = +-0.85 % of input
+  G3: +-21 mW = +-0.04 % of input

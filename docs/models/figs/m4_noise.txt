@@ -1,0 +1,44 @@
+M4 noise floor / environmental drift (72 h simulations, 1 s sampling, P = 5 W)
+============================================================
+ISO   : C1=308 J/K  C2=200 J/K  G12=0.481 W/K  K=0.127 W/K
+FLOW  : C1=308 J/K  C2=217 J/K  G12=1.790 W/K  K=77.741 W/K
+SEEB1 : C1=528 J/K  C2=515 J/K  G12=2.866 W/K  K=8.062 W/K
+TWIN  : C1=528 J/K  C2=515 J/K  G12=2.866 W/K  K=8.062 W/K
+
+rms error of window-averaged power (mW); sink OU fluctuation sigma_b, tau_b = 600 s
+design  corr  sigma_b(mK)  W=   60s  W=  300s  W=  900s  W= 3600s  W=14400s
+ISO     False         1         0.097      0.090      0.076      0.043      0.015
+ISO     False        10         0.966      0.901      0.755      0.431      0.151
+ISO     False       100         9.658      9.012      7.549      4.307      1.513
+ISO     True          1         0.846      0.168      0.057      0.015      0.004
+ISO     True         10         0.987      0.434      0.256      0.080      0.019
+ISO     True        100         5.140      4.086      2.540      0.810      0.199
+FLOW    False         1         5.499      2.632      1.527      0.710      0.383
+FLOW    False        10        22.522     12.661      7.165      2.002      0.394
+FLOW    False       100       220.723    124.872     68.970     19.155      3.570
+FLOW    True          1         5.485      2.443      1.276      0.698      0.394
+FLOW    True         10        18.046      6.364      2.259      0.855      0.361
+FLOW    True        100       171.995     58.414     19.279      4.923      0.987
+SEEB1   False         1         2.474      1.830      1.103      0.335      0.065
+SEEB1   False        10        24.739     18.304     11.029      3.350      0.654
+SEEB1   False       100       247.389    183.043    110.288     33.497      6.536
+SEEB1   True          1         2.388      0.881      0.302      0.073      0.017
+SEEB1   True         10        15.705      7.902      2.889      0.662      0.147
+SEEB1   True        100       155.684     78.777     28.958      6.620      1.463
+TWIN    False         1         0.804      0.602      0.397      0.110      0.032
+TWIN    False        10         8.037      6.017      3.974      1.097      0.317
+TWIN    False       100        80.373     60.174     39.741     10.972      3.165
+TWIN    True          1         2.563      0.561      0.189      0.044      0.011
+TWIN    True         10         5.594      2.528      1.045      0.219      0.036
+TWIN    True        100        50.185     24.725     10.302      2.149      0.328
+
+Required sink stability (rms, tau_b = 600 s) for sigma_P <= 1 mW at 1 h averaging, with correction:
+  ISO   : floor 0.000 mW, slope 0.008 mW/mK -> sigma_b <= 123.2 mK
+  FLOW  : floor 0.403 mW, slope 0.045 mW/mK -> sigma_b <= 13.2 mK
+  SEEB1 : floor 0.000 mW, slope 0.066 mW/mK -> sigma_b <= 15.1 mK
+  TWIN  : floor 0.004 mW, slope 0.021 mW/mK -> sigma_b <= 46.4 mK
+
+Sensitivity drift with bath set-point (systematic, per K of long-term bath drift):
+  SEEB1: Bi2Te3 module S(T) ~ +0.2 %/K  -> 10 W x 0.2 %/K = 20 mW/K -> bath set-point +-0.02 K gives +-0.4 mW
+  ISO  : radiative K ~ T^3 -> 1.0 %/K of K; plus electrolyte-level/emissivity drifts (not modelled)
+  FLOW : c_p(T) and density known to <0.01 %; flow-meter calibration drift 0.1-0.2 %/yr (Coriolis spec)
