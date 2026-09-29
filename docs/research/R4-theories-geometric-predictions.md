@@ -33,10 +33,7 @@ Our calculation (Section 4.1) uses the shifted-energy WKB model with the dd reac
 
 The measured beam-regime screening energies (300–800 eV) sit *uncomfortably close* to these numbers, the most interesting fact in this review. The catch: a static U_e of 200 eV means the D–D potential stays flat down to a 7 pm turning point, which would collapse the observed equilibrium D–D spacing (0.74 Å in D₂, 2.85 Å between PdD O-sites). That is the physical content of Leggett–Baym.
 
-Any viable mechanism therefore needs one of three things:
-- (a) a genuinely non-equilibrium, localized kinetic energy of ~0.2–1 keV per pair, delivered without keV beams; or
-- (b) a new coupling that bypasses tunneling (Hagelstein); or
-- (c) a different nuclear process altogether (Widom–Larsen weak interaction; Czerski resonance or e⁺e⁻ channel).
+A viable mechanism therefore needs (a) non-equilibrium, localized ~0.2–1 keV per pair without keV beams; (b) a new coupling that bypasses tunnelling (Hagelstein); or (c) a different nuclear process (Widom–Larsen weak interaction; Czerski resonance/e⁺e⁻ channel).
 
 ---
 
@@ -59,20 +56,16 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 
 | Parameter | Predicted optimum or range | Units | How to realize in hardware |
 |---|---|---|---|
-| Bulk D/Pd loading x | ≥ 0.90; ~0.95 for spontaneous superabundant vacancies | atom ratio | Thin films (≤1 µm), codeposition, surface-poisoned electrolytes; monitor with 4-wire resistance ratio R/R₀ |
+| Bulk D/Pd loading x | ≥ 0.90; ~0.95 for spontaneous superabundant vacancies | atom ratio | Thin films (≤1 µm), codeposition; monitor R/R₀ (4-wire) |
 | Pd vacancy fraction | Up to ~25 % (δ-phase, Pd₃VacD₄-like) at x ≳ 0.95; monovacancies host molecular D₂ | site fraction | Pd/D **codeposition** (Szpak-type), high-pressure H anneal (Fukai superabundant vacancies), irradiation |
-| Phonon mode (FP heat) | Compressional **optical** mode, zero group velocity: Γ ≈ 8.3 THz, L ≈ 15.3 THz (PdD); ≈ 20 THz attributed to PdH or D in Au | THz | Dual-laser beat on Au-coated PdD; direct THz sources (difference-frequency generation, free-electron laser); ion-implantation or current-pulse phonon generation |
-| Phonon mode (Karabut X-ray, host-nucleus transitions) | Acoustic modes, MHz–GHz ("frequency as high as possible") | Hz | Piezo transducers at 1–3 MHz (the Metzler/Tanzella experiments used ≈2.21 MHz); pulsed-discharge cathode excitation; heavy cathode holder acting as an acoustic resonator |
+| Phonon mode (FP heat) | Compressional **optical** mode, zero group velocity: Γ ≈ 8.3 THz, L ≈ 15.3 THz (PdD); ≈ 20 THz attributed to PdH or D in Au | THz | Dual-laser beat on Au-coated PdD; THz difference-frequency or FEL sources; ion/current-pulse phonon injection |
+| Phonon mode (Karabut X-ray, host-nucleus transitions) | Acoustic modes, MHz–GHz ("frequency as high as possible") | Hz | Piezo at 1–3 MHz (Metzler/Tanzella used ≈2.21 MHz); pulsed-discharge excitation; heavy holder as acoustic resonator |
 | Mode Q / coherence | A single, highly excited, coherent mode shared by all active sites; zero group velocity to keep energy local. No numeric Q is given. **Our estimate:** PdD optical-phonon Q ≈ 10–50 (ps lifetimes), which works against the model | — | Choose Γ/L-point modes; minimize inhomogeneous broadening (uniform loading) |
 | Dicke number N | As large as possible within one coherent mode volume | — | Maximize the density of vacancy–D₂ sites inside one phonon coherence volume |
 | Electrochemical current density | Threshold behaviour (McKubre: P_xs ∝ (x − x₀)²(i − i₀)·\|i_D\|, x₀ ≈ 0.875, i₀ ~ 0.1–0.25 A cm⁻² †) | A cm⁻² | Galvanostatic drive above threshold, together with deuterium flux across the surface |
 | X-ray beam geometry (Karabut) | Emission collimated **normal to the cathode surface**; divergence ~λ/D (0.83 nm/1 mm ≈ 10⁻⁶ rad) | rad | Flat, polished cathodes; X-ray detectors on the surface normal; trace Hg (²⁰¹Hg) impurity |
 
-**Testable predictions.**
-- Heat correlates with ⁴He at about 24 MeV/atom, with no energetic particles. Hagelstein's own bound puts alphas below ~20 keV (Naturwissenschaften 2010).
-- Excess heat responds to THz stimulation at the Γ and L optical-phonon frequencies.
-- Vibration (MHz) changes the decay-emission pattern of Fe-57 from a Co-57 source: excitation transfer, spatial delocalization, angular anisotropy of the 14.4 keV line.
-- Collimated keV X-rays appear from vibrated surfaces that carry suitable low-lying nuclear transitions.
+**Testable predictions.** Heat–⁴He correlation near 24 MeV/atom with no energetic particles (alphas ≲20 keV); heat responds to THz stimulation at Γ/L frequencies; MHz vibration alters Co-57→Fe-57 emission (excitation transfer, delocalization, 14.4 keV anisotropy); collimated keV X-rays from vibrated surfaces with low-lying nuclear levels.
 
 **Strongest critique.**
 - The a·cP coupling has never been shown to be large enough; Hagelstein's matrix-element calculations (JCMNS 2013–2025) are unfinished.
@@ -95,9 +88,8 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 | Local site | T-site with 4 filled neighbouring O-sites (local D/M ≈ 1); D–D spacing before collapse 2.85 Å (PdD), O→T distance 1.75 Å | Å | High local loading at the surface and subsurface |
 | Particle size | ~2–10 nm Pd, Ni or Pd–Ni "nano-cores" in an oxide matrix; "sub-nano-holes" (SNH, ~0.3–1 nm surface defects) and a "global mesoscopic potential well" on the particle | nm | Melt-spun, oxidized Pd₁Ni₁₀/ZrO₂ (PNZ) and Cu₁Ni₇/ZrO₂ (CNZ) composites (Kitamura/Takahashi; NEDO-MHE project) |
 | Temperature | ~200–350 °C for gas loading | °C | Heated D₂/H₂ gas cells |
-| Symmetry | Tetrahedral (TSC) or octahedral (OSC, 8D) | — | fcc hosts (Pd, Ni) |
+| Symmetry | Tetrahedral (4D) or octahedral (8D) | — | fcc hosts (Pd, Ni) |
 | Drive | Phonon excitation or D desorption bursts (non-equilibrium) | — | Temperature/pressure cycling, net desorption mode |
-| Condensation time, final size | ≈1.4 fs, ~10–20 fm | s, m | Not engineerable |
 | Reported heat | 80–400 W/kg sustained for weeks at ~300 °C (PNZ with D₂) | W/kg | — |
 
 **Testable predictions.** ⁴He is the main ash, with neutrons and tritium at very low levels. The original version predicts 23.8 MeV alphas. H and D gas both work, with different ash.
@@ -128,10 +120,9 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 | Collective-proton "patch" size | nm to ~µm (not fixed quantitatively); the ULMN wavelength is of order the patch size | m | Nanostructured surfaces, particles, cracks |
 | Local field | ≳10¹¹ V/m claimed; we calculate ≥3.6×10¹¹ V/m | V/m | Sharp features, plasmonic hot spots, very high H flux |
 | Surface roughness / nanoparticles | Features ~10–100 nm to concentrate SPP fields | nm | Roughened Pd/Ni, Au/Ag nanoparticle decoration |
-| Isotope | Works with H (Ni–H) as well as D | — | — |
 | Non-equilibrium drive | High H/D flux through the surface, current or laser excitation | — | Electrolysis, glow discharge, laser |
 
-**Testable predictions.** Neutron-rich transmutation products and isotope shifts; no free neutrons; no γ-rays (a claimed "heavy-electron γ shield"); β-active products such as ¹⁰⁹Pd (13.7 h half-life), which would be easy to detect.
+**Testable predictions.** Neutron-rich transmutations and isotope shifts; no free neutrons or γ ("heavy-electron γ shield"); easily detected β-emitters such as ¹⁰⁹Pd (13.7 h).
 
 **Strongest critique.**
 - Ciuchi, Maiani, Polosa, Riquer, Ruocco & Vignati (EPJC 72, 2193, 2012), with proper collective wavefunctions: "little room for such a remarkable effect". Maiani–Polosa–Riquer (EPJC 74, 2843, 2014): rates in plasmas are lower still.
@@ -150,7 +141,7 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 
 | Parameter | Predicted optimum or range | Units | Realization |
 |---|---|---|---|
-| Gap width | ~1 nm, upper bound <10 nm. Small enough to exclude ordinary H₂ (kinetic diameter 0.29 nm) and to stop "gaps larger than a few atomic diameters" forming molecules; large enough to hold single hydrons. Our reading: ~0.3–1 nm | nm | Loading/deloading cycles (stress-relief cracking), codeposition, dealloyed nanoporous metals, electromigrated break-junction arrays, ALD-spaced nanogaps |
+| Gap width | ~1 nm, <10 nm: narrow enough that H₂ (kinetic diameter 0.29 nm) cannot form ("gaps larger than a few atomic diameters" do), wide enough for single hydrons. Our reading: ~0.3–1 nm | nm | Loading/deloading cycles (stress-relief cracking), codeposition, dealloyed nanoporous metals, electromigrated break-junction arrays, ALD-spaced nanogaps |
 | Location | Near-surface layer (µm-scale), chemically independent of the host lattice | µm | Thin films; surface treatments |
 | Chain | Linear chain of H, D or T nuclei with reduced spacing; length unspecified | — | — |
 | Resonance frequency | Axial chain vibration; **not quantified**. Our guess: 10–100 THz range for H chains | THz | — |
@@ -158,7 +149,7 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 | Isotope → product | D chains → ⁴He; H chains → D (weak process); mixed H+D → T | — | — |
 | D/Pd loading | Not fundamental. High loading matters mainly because it produces cracks | — | — |
 
-**Testable predictions.** Heat and ash scale with crack density in the right width range, not with bulk loading. Low-energy photon emission (soft X-rays) comes from the active sites. Tritium appears when H and D are mixed.
+**Testable predictions.** Heat/ash scale with density of correctly sized cracks, not bulk loading; soft X-rays from active sites; tritium from H+D mixtures.
 
 **Strongest critique.**
 - No Hamiltonian or rate equation, so it cannot be falsified quantitatively.
@@ -317,20 +308,9 @@ Abbreviations: **Hag** = Hagelstein; **TSC** = Takahashi; **WL** = Widom–Larse
 | Drive / flux | current > threshold, D flux | desorption bursts | high H flux | loading cycles | n/a | sustained field (Chubb) | keV D⁺ + in-situ loading | ion acceleration | two lasers |
 | H vs D | H poisons D₂→⁴He | both (4H/TSC) | both | both, different products | D | D | d+d, p+d | — | D (H at 20 THz) |
 
-**Where theories agree (robust targets):**
-1. **Near-surface, ≤1 µm, defect/vacancy-rich Pd (or Pd–Ni, Zr)**: Hag, Sto, TSC, Scr and Let (thin overlayers).
-2. **High local loading, D/M ≳ 0.9**: Hag, TSC, Coh, Scr, and indirectly Sto.
-3. **Nanostructure with 2–10 nm features and ~0.3–1 nm gaps or voids**: TSC, Kim, Sto, and WL (loosely).
-4. **Non-equilibrium drive** (D flux, cycling, phonon or ion injection): every theory escaping Leggett–Baym.
-5. **8–15 THz lattice modes in PdD** as the stimulus band: Hag, Let, and implicitly TSC.
+**Agreement (robust targets):** (1) near-surface (≤1 µm), vacancy/defect-rich Pd, Pd–Ni or Zr (Hag, Sto, TSC, Scr, Let); (2) local D/M ≳ 0.9 (Hag, TSC, Coh, Scr; Sto indirectly); (3) 2–10 nm features with ~0.3–1 nm gaps/voids (TSC, Kim, Sto; WL loosely); (4) non-equilibrium drive (every theory escaping Leggett–Baym); (5) 8–15 THz PdD lattice modes as the stimulus band (Hag, Let; TSC implicitly).
 
-**Where they conflict:**
-- Perfect periodicity (Chubb) versus defects (everyone else).
-- Low temperature (Kim, Debye screening) versus 200–350 °C (Takahashi, Storms).
-- H as poison (Hagelstein) versus H as fuel (Widom–Larsen, Takahashi, Storms).
-- Oxide surface (Lipson: PdO helps) versus UHV-clean (Czerski: oxidation is a systematic error).
-
-These conflicts are *discriminating experiments*, not reasons to pick one theory.
+**Conflict (each is a discriminating experiment):** perfect periodicity (Chubb) vs defects (all others); low temperature (Kim, Debye) vs 200–350 °C (Takahashi, Storms); H as poison (Hagelstein) vs fuel (WL, TSC, Storms); PdO surface helps (Lipson) vs oxidation as systematic error (Czerski).
 
 ---
 
