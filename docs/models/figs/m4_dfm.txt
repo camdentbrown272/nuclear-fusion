@@ -1,0 +1,36 @@
+M4 DFM (C3) heat channel
+============================================================
+Conductances (W/K): mc=0.3142, mf=0.09023, mv=0.0001982, fc=0.3
+
+Captured fraction of heat released at the membrane front face vs thermal-break conductance f->v
+(electrolyte calibration heater: captured fraction = 1 by definition of the reference)
+  316L weld, short DN40 nipple                  G_fv=0.300  h_e=  300: membrane-heat captured 0.77201 (loss 22.799 %), flange-heat captured 0.5356, T_m rise 5.78 K/W
+  316L weld, short DN40 nipple                  G_fv=0.300  h_e= 1000: membrane-heat captured 0.89966 (loss 10.034 %), flange-heat captured 0.5522, T_m rise 2.55 K/W
+  316L weld, short DN40 nipple                  G_fv=0.300  h_e= 3000: membrane-heat captured 0.96140 (loss 3.860 %), flange-heat captured 0.5603, T_m rise 0.98 K/W
+  thin-wall 0.25 mm edge-welded bellows 50 mm   G_fv=0.030  h_e=  300: membrane-heat captured 0.95983 (loss 4.017 %), flange-heat captured 0.9200, T_m rise 6.05 K/W
+  thin-wall 0.25 mm edge-welded bellows 50 mm   G_fv=0.030  h_e= 1000: membrane-heat captured 0.98276 (loss 1.724 %), flange-heat captured 0.9249, T_m rise 2.60 K/W
+  thin-wall 0.25 mm edge-welded bellows 50 mm   G_fv=0.030  h_e= 3000: membrane-heat captured 0.99345 (loss 0.655 %), flange-heat captured 0.9272, T_m rise 0.99 K/W
+  ceramic (Al2O3) break + bellows               G_fv=0.010  h_e=  300: membrane-heat captured 0.98508 (loss 1.492 %), flange-heat captured 0.9716, T_m rise 6.09 K/W
+  ceramic (Al2O3) break + bellows               G_fv=0.010  h_e= 1000: membrane-heat captured 0.99362 (loss 0.638 %), flange-heat captured 0.9736, T_m rise 2.60 K/W
+  ceramic (Al2O3) break + bellows               G_fv=0.010  h_e= 3000: membrane-heat captured 0.99758 (loss 0.242 %), flange-heat captured 0.9745, T_m rise 0.99 K/W
+  PEEK/ceramic break + long bellows             G_fv=0.003  h_e=  300: membrane-heat captured 0.99459 (loss 0.541 %), flange-heat captured 0.9911, T_m rise 6.10 K/W
+  PEEK/ceramic break + long bellows             G_fv=0.003  h_e= 1000: membrane-heat captured 0.99769 (loss 0.231 %), flange-heat captured 0.9918, T_m rise 2.60 K/W
+  PEEK/ceramic break + long bellows             G_fv=0.003  h_e= 3000: membrane-heat captured 0.99912 (loss 0.088 %), flange-heat captured 0.9922, T_m rise 0.99 K/W
+
+The bypass is itself calibratable only if a heater sits AT the membrane (thin-film heater on the
+flange rim, or ohmic heating of the membrane by a 4-wire current); the residual uncertainty is
+the variation of h_e (stirring) which moves the membrane/flange split.
+  316L weld, short DN40 nipple                 : captured varies 0.77201-0.96140 over h_e 300-3000 -> +-9.469 % of membrane heat
+  thin-wall 0.25 mm edge-welded bellows 50 mm  : captured varies 0.95983-0.99345 over h_e 300-3000 -> +-1.681 % of membrane heat
+  ceramic (Al2O3) break + bellows              : captured varies 0.98508-0.99758 over h_e 300-3000 -> +-0.625 % of membrane heat
+  PEEK/ceramic break + long bellows            : captured varies 0.99459-0.99912 over h_e 300-3000 -> +-0.227 % of membrane heat
+
+Detection limit for membrane heat (P_in from loading current density):
+  j=0.05 A/cm2: I=0.157 A, P_in~0.59 W, sigma_P~0.83 mW, 5 sigma = 4.2 mW = 0.27 W/cm3 of Pd (membrane 15.7 mm3)
+  j=0.20 A/cm2: I=0.628 A, P_in~3.86 W, sigma_P~3.90 mW, 5 sigma = 19.5 mW = 1.24 W/cm3 of Pd (membrane 15.7 mm3)
+  j=0.50 A/cm2: I=1.571 A, P_in~17.05 W, sigma_P~17.06 mW, 5 sigma = 85.3 mW = 5.43 W/cm3 of Pd (membrane 15.7 mm3)
+
+Permeation enthalpy leak (D leaves to vacuum as D2; E_tn per electron):
+  J=1e-09 mol D/cm2/s: 0.463 mW (must be measured: vacuum-side D2 flow or cell O2 rise)
+  J=1e-08 mol D/cm2/s: 4.628 mW (must be measured: vacuum-side D2 flow or cell O2 rise)
+  J=1e-07 mol D/cm2/s: 46.276 mW (must be measured: vacuum-side D2 flow or cell O2 rise)
