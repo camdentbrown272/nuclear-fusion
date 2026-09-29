@@ -67,7 +67,7 @@ The iteration-1 platform is a **detector-facing permeation membrane (DFM)**:
 3. **Flux is the primary independent variable**, set by cell current and modulated on/off with a period matched to the foil diffusion time. D₂O ↔ H₂O swaps and Pd ↔ Au membranes serve as isotope and host controls.
 4. **Detection covers all three hypothesis classes:**
    - **H1 (enhanced conventional D+D).** Si telescopes (p, t, ³He) with depth tomography; a neutron bank; e⁺e⁻/511 keV coincidence and a 3–25 MeV γ window (for the Czerski channel).
-   - **H2 (heat + ⁴He).** Operate the exit chamber in a static, NEG-pumped mode. A non-evaporable getter pumps D₂ but not He, so any ⁴He leaving the exit face accumulates and can be counted by RGA/static mass spectrometry. Sensitivity is ~10⁸ atoms, compared with ~10¹⁵ atoms per mJ for calorimetry at 24 MeV/He. The entry-side cell sits in a calorimeter. Post-run, the membrane is melted for retained He.
+   - **H2 (heat + ⁴He).** Operate the exit chamber in a static, NEG-pumped mode. A non-evaporable getter pumps D₂ but not He, so any ⁴He leaving the exit face accumulates and can be counted by RGA/static mass spectrometry. Sensitivity is ~10⁸ atoms. For scale, 1 mJ at 24 MeV/He is 2.6×10⁸ atoms (corrected per M8), and calorimetry resolves only ~5 mJ/s (5 mW). The entry-side cell sits in a calorimeter. Post-run, the membrane is melted for retained He.
    - **H3 (transmutation).** Isotope-tagged target deposits (e.g. ⁸⁶Sr → claimed ⁹⁴Mo) on selected sectors, with blinded external SIMS/ICP-MS.
 
 ## Rejected as the primary platform

@@ -6,20 +6,17 @@ Tags: **[C]** computed in the script; **[BK]** literature value from memory (out
 
 ## Summary for lead
 
-- **Sensitivity is not the problem.** With the recommended chain (all-metal static volume, getter-cleaned aliquot, high-resolution MS), the 5σ floor is **0.39 nW (1 d), 0.16 nW (7 d) and 0.16 nW (30 d)** of 23.85 MeV/He power at full release. This is **about 3×10⁷ below the 5 mW calorimetric floor** (R5) and ~10⁸ below R6's 20–60 mW. The floor is set by background *stability* (σ_B ≈ 7×10⁵ atoms/day), not by the instrument. Rule of thumb: P_floor ≈ 2.2×10⁻¹⁶ W per (atom/day) of σ_B.
-- **The release fraction decides everything** (λ = trap-limited escape length, 3–300 nm):
-  - exit skin ≤ 10 nm: f_exit = 0.85 (0.29–0.98);
-  - exit skin 100 nm: 0.29 (0.03–0.85);
-  - uniform bulk: 1.2×10⁻³;
-  - **entry-face zone (the SRI regime; the one ADR-002 rev 2 now points the telescopes at): 0.** Its He goes to the electrolyte or stays in the Pd. The exit chamber is blind to it, so the M4 cell-headspace channel and a per-sector melt are mandatory.
-- **SRI's ~60 % pre-flush release** is only consistent with a source within ≈1.1 λ (3–340 nm) of the wetted surface.
-- **A unit-resolution RGA is unusable for ⁴He.** D₂⁺ at m/z 4 needs P_D₂ ≤ 10⁻¹⁴ mbar. Directly on the D₂-loaded chamber it floors at **1.3 mW (7 d)**, no better than calorimetry. HR-QMS (R ≥ 500) needs P_D₂ ≤ 5×10⁻¹⁰ mbar; a magnetic-sector MS needs ≤ 10⁻⁸ mbar. Both are reachable only in an isolated, getter-cleaned aliquot.
-- **The D₂ gas load dominates the hardware.**
-  - 1 mA/cm² over 3 cm² saturates ~9 g of NEG per week.
-  - 10 mA/cm² needs 87 g per week.
-  - For the rev-2 1 atm D₂ front, a hot Pd–Ag element must be the only D₂ path in or out: a He-tight pressure regulator. Cylinder D₂ at 1 ppm He would add a 7×10¹⁴-atom offset.
-- **Forbidden on the static volume:** glass (a single borosilicate CF40 viewport adds 9×10⁹ He/day), epoxy, ionising gauges (they pump away He in minutes), 2-valve He pipettes, and He leak testing after the final bake.
-- **ADR-002 slip:** "~10¹⁵ atoms per mJ" is wrong. 1 mJ = 2.6×10⁸ He; the calorimetric floor corresponds to ~10¹⁴–10¹⁵ He per day.
+- **Sensitivity is not the problem.** With the recommended chain (all-metal static volume, getter-cleaned aliquot, high-resolution MS), the 5σ floor is **0.39 nW (1 d) and 0.16 nW (7 d, 30 d)** of 23.85 MeV/He power at full release. That is ~3×10⁷ below the 5 mW calorimetric floor (R5). The floor is set by background stability (σ_B ≈ 7×10⁵ atoms/day), not by the instrument: P_floor ≈ 2.2×10⁻¹⁶ W per atom/day of σ_B.
+- **Release fraction decides everything** (trap-limited escape length λ = 3–300 nm):
+  - exit skin ≤ 10 nm: 0.85 (0.29–0.98);
+  - exit skin 100 nm: 0.29;
+  - bulk: 1.2×10⁻³;
+  - **entry face (SRI regime, now the rev-2 telescope target): 0.** Its He goes to the electrolyte or stays in the Pd, so the M4 cell-headspace channel and per-sector melts are mandatory.
+- SRI's ~60 % release requires a source within ≈1.1 λ of the wetted surface.
+- **A unit-resolution RGA cannot measure ⁴He.** D₂⁺ would have to be ≤ 10⁻¹⁴ mbar. On the loaded chamber the RGA floors at 1.3 mW (7 d), i.e. no better than calorimetry. An HR-QMS (R ≥ 500) needs D₂ ≤ 5×10⁻¹⁰ mbar and a sector MS ≤ 10⁻⁸; both are only reachable in an isolated, getter-cleaned aliquot.
+- **The D₂ gas load dominates the hardware.** 1 mA/cm² over 3 cm² fills ~9 g of NEG per week; 10 mA/cm² fills 87 g. In the rev-2 1 atm D₂ front, a hot Pd–Ag element must be the only D₂ path in or out, acting as a He-tight regulator. Cylinder D₂ at 1 ppm He would add 7×10¹⁴ atoms.
+- **Forbidden on the static volume:** glass (one borosilicate viewport adds 9×10⁹ He/day), epoxy, ionising gauges (they remove the He in minutes), 2-valve pipettes, and post-bake He leak testing.
+- **ADR-002 slip:** 1 mJ = 2.6×10⁸ He, not ~10¹⁵.
 
 ---
 
