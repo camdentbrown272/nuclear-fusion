@@ -3,6 +3,10 @@
 Branch: `claude/lucid-davinci-gel4vu-m1`. Read `_common.md` first. Read these literature digests in full:
 - `docs/research/R3-low-energy-nuclear-physics.md`: screening data, threshold resonance, Dubey 2025, ARPA-E, NASA LCF
 - `docs/research/R4-theories-geometric-predictions.md`
+- `docs/research/R7-state-of-art-2020-2026.md`, especially §4.1–4.3. Two findings are relevant to site physics:
+  - The sub-keV yield plateau (UC Davis/LBNL, Nat. Commun. 2026; Szczecin).
+  - The e⁺e⁻ threshold-resonance claim (Dubey/Czerski, PRX 2025).
+  Our device has no beam, but both bear on which site classes and which products matter at thermal energies. Treat the thermal-spike explanation of the plateau as **not available** to a beam-free device, and quantify that.
 
 M0 established the governing facts:
 - The rate is dominated by the rarest high-enhancement sites.
@@ -61,6 +65,12 @@ Produce expected detected events per day under three scenarios:
 - (iii) a hypothetical anomaly: an extra ×10ⁿ enhancement localised at site class k, for each k
 
 The key output is a matrix [configuration × site class] of **sensitivity to a localised anomaly**: the minimal enhancement factor at site class k that configuration C would detect at 5σ in 30 days. This matrix is the main quantitative input to the lead's decision.
+
+## Part D — Deuterium flux as a variable
+R7 identifies the D permeation flux through a foil as the one new variable that separates "diffusion-triggered" hypotheses (Iwamura, and the beam-free 511 keV claim of Czerski at ICCF-26) from static screening.
+- Model what flux changes at the site level: transient occupancy of high-energy sites, D–D encounter rates at interfaces and surfaces, and recombination events at the exit face (the D + D → D₂ surface recombination releases ~0.5–1 eV per molecule).
+- Estimate the encounter rate per cm² per second at the exit face as a function of flux.
+- This is the quantity our flux-modulation protocol (M7) will lock onto.
 
 ## Outputs
 Tables, figures, the matrix above, and design recommendations: which site classes to maximise, by what processing and geometry, and which drive protocol maximises non-thermal energies without violating "cold".
