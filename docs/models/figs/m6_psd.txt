@@ -1,0 +1,7 @@
+PdD face in D2O, 785 nm (C1 cathode): ring f0 = 1.779e+06 /m (period 562 nm), sigma_f = 8 %, rms = 30 nm; realised rms = 30.00 nm; Parseval rms from PSD = 30.00 nm
+PdD face in vacuum, 785 nm (C3): ring f0 = 1.314e+06 /m (period 761 nm), sigma_f = 5 %, rms = 36 nm; realised rms = 36.00 nm; Parseval rms from PSD = 36.00 nm
+Au 20 nm over PdD in D2O, 785 nm: ring f0 = 1.767e+06 /m (period 566 nm), sigma_f = 1 %, rms = 13 nm; realised rms = 13.00 nm; Parseval rms from PSD = 13.00 nm
+Generic etched surface (rms 50 nm): fraction of height variance within the 785-nm SPP ring (1.5-2.0e6 /m): 0.048
+  -> equivalent ring rms = 10.9 nm, i.e. ~1/3-1/2 of the ~30 nm needed for critical coupling.
+Rule of thumb (first-order perturbation, calibrated on the RCWA sinusoid): an isotropic ring PSD couples
+like a 1-D sinusoid of peak-to-valley h when its in-ring rms ~ h/2 (azimuthal average of cos^2 = 1/2).

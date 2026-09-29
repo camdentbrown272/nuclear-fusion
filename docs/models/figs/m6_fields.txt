@@ -1,0 +1,78 @@
+VERIFICATION
+  translation theorem l=1: +D -0.14351782 vs -0.14351782;  -D 0.08855649 vs 0.08855649
+  translation theorem l=3: +D -0.02059684 vs -0.02059684;  -D 0.00784213 vs 0.00784213
+  translation theorem l=1: +D -0.14090032 vs -0.14090032;  -D 0.08768764 vs 0.08768764
+  translation theorem l=3: +D -0.01939459 vs -0.01939459;  -D 0.00757911 vs 0.00757911
+  dimer, gap = 100 R: surface field 4.381 vs single sphere |3 eps/(eps+2)| = 4.381
+  spheroid aspect 1 -> sphere: 4.381 (same formula)
+  convergence Au dimer R=20 nm, g=1 nm, 633 nm: lmax=50: |E_gap|/E0 = 69.59
+  convergence Au dimer R=20 nm, g=1 nm, 633 nm: lmax=100: |E_gap|/E0 = 69.60
+  convergence Au dimer R=20 nm, g=1 nm, 633 nm: lmax=200: |E_gap|/E0 = 69.60
+  convergence Au dimer R=20 nm, g=1 nm, 633 nm: lmax=300: |E_gap|/E0 = 69.60
+
+TIP (prolate-spheroid asperity) enhancement |E_tip/E_0| (quasi-static; add the flat-surface factor
+|E_surf/E_inc| <= 2 for the incident field; retardation/radiation damping lower large-aspect Au values).
+  Pd /D2O   633 nm: a/b= 1:    3.4  a/b= 2:    7.4  a/b= 3:   13.0  a/b= 5:   18.4  a/b=10:   14.9  a/b=20:   13.1
+  Pd /D2O   785 nm: a/b= 1:    3.3  a/b= 2:    7.1  a/b= 3:   12.7  a/b= 5:   24.0  a/b=10:   21.7  a/b=20:   18.2
+  Pd /D2O  1064 nm: a/b= 1:    3.2  a/b= 2:    6.6  a/b= 3:   11.5  a/b= 5:   25.9  a/b=10:   36.8  a/b=20:   29.4
+  PdD/D2O   633 nm: a/b= 1:    3.5  a/b= 2:    7.9  a/b= 3:   12.6  a/b= 5:   13.4  a/b=10:   10.7  a/b=20:    9.7
+  PdD/D2O   785 nm: a/b= 1:    3.4  a/b= 2:    7.5  a/b= 3:   13.3  a/b= 5:   19.3  a/b=10:   15.4  a/b=20:   13.4
+  PdD/D2O  1064 nm: a/b= 1:    3.2  a/b= 2:    6.9  a/b= 3:   12.3  a/b= 5:   25.5  a/b=10:   25.9  a/b=20:   21.4
+  PdD/vac   633 nm: a/b= 1:    3.3  a/b= 2:    7.0  a/b= 3:   12.5  a/b= 5:   22.9  a/b=10:   20.6  a/b=20:   17.6
+  PdD/vac   785 nm: a/b= 1:    3.2  a/b= 2:    6.7  a/b= 3:   11.9  a/b= 5:   26.0  a/b=10:   30.3  a/b=20:   24.6
+  PdD/vac  1064 nm: a/b= 1:    3.1  a/b= 2:    6.4  a/b= 3:   11.0  a/b= 5:   24.8  a/b=10:   50.0  a/b=20:   40.0
+  Au /D2O   633 nm: a/b= 1:    4.3  a/b= 2:   18.9  a/b= 3:   36.7  a/b= 5:   11.7  a/b=10:    7.9  a/b=20:    7.1
+  Au /D2O   785 nm: a/b= 1:    3.5  a/b= 2:    9.1  a/b= 3:   24.5  a/b= 5:   59.0  a/b=10:   18.3  a/b=20:   14.4
+  Au /D2O  1064 nm: a/b= 1:    3.2  a/b= 2:    6.9  a/b= 3:   13.0  a/b= 5:   45.2  a/b=10:   66.5  a/b=20:   34.5
+  Au /vac   633 nm: a/b= 1:    3.6  a/b= 2:    9.6  a/b= 3:   28.8  a/b= 5:   39.9  a/b=10:   15.9  a/b=20:   12.9
+  Au /vac   785 nm: a/b= 1:    3.3  a/b= 2:    7.3  a/b= 3:   14.3  a/b= 5:   67.2  a/b=10:   44.3  a/b=20:   27.3
+  Au /vac  1064 nm: a/b= 1:    3.1  a/b= 2:    6.4  a/b= 3:   11.1  a/b= 5:   27.4  a/b=10:  664.5  a/b=20:   72.9
+
+NANOGAP (sphere dimer, R = 20 nm) |E_gap/E_0| at the gap centre, field along dimer axis:
+  PdD/D2O  633 nm: g= 0.5 nm:   83.9  g= 1.0 nm:   43.9  g= 2.0 nm:   21.8  g= 5.0 nm:    9.0  g=10.0 nm:    4.9  g=20.0 nm:    2.7
+  PdD/D2O  785 nm: g= 0.5 nm:   83.3  g= 1.0 nm:   40.2  g= 2.0 nm:   19.8  g= 5.0 nm:    8.4  g=10.0 nm:    4.6  g=20.0 nm:    2.6
+  PdD/vac  633 nm: g= 0.5 nm:   73.0  g= 1.0 nm:   35.6  g= 2.0 nm:   18.1  g= 5.0 nm:    7.9  g=10.0 nm:    4.4  g=20.0 nm:    2.6
+  PdD/vac  785 nm: g= 0.5 nm:   65.8  g= 1.0 nm:   32.6  g= 2.0 nm:   16.9  g= 5.0 nm:    7.6  g=10.0 nm:    4.3  g=20.0 nm:    2.5
+  Au /D2O  633 nm: g= 0.5 nm:  536.7  g= 1.0 nm:  362.6  g= 2.0 nm:   62.0  g= 5.0 nm:   15.2  g=10.0 nm:    6.8  g=20.0 nm:    3.4
+  Au /D2O  785 nm: g= 0.5 nm:  197.0  g= 1.0 nm:   61.4  g= 2.0 nm:   25.2  g= 5.0 nm:    9.5  g=10.0 nm:    5.0  g=20.0 nm:    2.8
+  Au /vac  633 nm: g= 0.5 nm:  249.9  g= 1.0 nm:   69.6  g= 2.0 nm:   27.2  g= 5.0 nm:   10.0  g=10.0 nm:    5.2  g=20.0 nm:    2.8
+  Au /vac  785 nm: g= 0.5 nm:   87.0  g= 1.0 nm:   38.4  g= 2.0 nm:   18.7  g= 5.0 nm:    8.0  g=10.0 nm:    4.5  g=20.0 nm:    2.6
+  Gaps < ~0.5 nm: electron tunnelling quenches the enhancement (Savage et al., Nature 491, 574 (2012);
+  Zhu et al., Nat. Commun. 7, 11495 (2016)) -> realistic ceiling |E/E0| ~ 100-200 for Au, ~10-30 for Pd/PdD.
+
+(a) RELEVANCE TO THE d-d COULOMB BARRIER
+  Coulomb field of a deuteron at 5 fm: 5.76e+19 V/m; at 0.5 A: 5.76e+11 V/m
+  CW 30 mW on 1 mm^2 (Letts-type): E0 = 4.75e+03 V/m, x10: E_loc = 4.75e+04 V/m = 8.3e-16 of the 5 fm field; eV across 0.74 A: 3.5e-06; relative (gradient) shift on a D2 pair at 10 nm tip: 2.6e-08 eV; ponderomotive U_p(D) = 4.7e-15 eV, U_p(e) = 1.7e-11 eV
+  CW 30 mW on 1 mm^2 (Letts-type): E0 = 4.75e+03 V/m, x100: E_loc = 4.75e+05 V/m = 8.3e-15 of the 5 fm field; eV across 0.74 A: 3.5e-05; relative (gradient) shift on a D2 pair at 10 nm tip: 2.6e-07 eV; ponderomotive U_p(D) = 4.7e-13 eV, U_p(e) = 1.7e-09 eV
+  CW 1 W on 0.1 mm^2 (upper CW, ~1e7 W/m^2): E0 = 8.68e+04 V/m, x10: E_loc = 8.68e+05 V/m = 1.5e-14 of the 5 fm field; eV across 0.74 A: 6.4e-05; relative (gradient) shift on a D2 pair at 10 nm tip: 4.8e-07 eV; ponderomotive U_p(D) = 1.6e-12 eV, U_p(e) = 5.8e-09 eV
+  CW 1 W on 0.1 mm^2 (upper CW, ~1e7 W/m^2): E0 = 8.68e+04 V/m, x100: E_loc = 8.68e+06 V/m = 1.5e-13 of the 5 fm field; eV across 0.74 A: 6.4e-04; relative (gradient) shift on a D2 pair at 10 nm tip: 4.8e-06 eV; ponderomotive U_p(D) = 1.6e-10 eV, U_p(e) = 5.8e-07 eV
+  ps pulse at Pd ablation threshold ~0.1 J/cm^2 / 1 ps (out of 'cold' scope): E0 = 8.68e+08 V/m, x10: E_loc = 8.68e+09 V/m = 1.5e-10 of the 5 fm field; eV across 0.74 A: 6.4e-01; relative (gradient) shift on a D2 pair at 10 nm tip: 4.8e-03 eV; ponderomotive U_p(D) = 1.6e-04 eV, U_p(e) = 5.8e-01 eV
+  ps pulse at Pd ablation threshold ~0.1 J/cm^2 / 1 ps (out of 'cold' scope): E0 = 8.68e+08 V/m, x100: E_loc = 8.68e+10 V/m = 1.5e-09 of the 5 fm field; eV across 0.74 A: 6.4e+00; relative (gradient) shift on a D2 pair at 10 nm tip: 4.8e-02 eV; ponderomotive U_p(D) = 1.6e-02 eV, U_p(e) = 5.8e+01 eV
+  Using M0's U_eff = 34 eV: adding dU = 1e-06 eV multiplies the rate by exp(2.50e-06)
+  Using M0's U_eff = 34 eV: adding dU = 0.001 eV multiplies the rate by exp(2.50e-03)
+  Using M0's U_eff = 34 eV: adding dU = 1 eV multiplies the rate by exp(2.50e+00)
+  Using M0's U_eff = 100 eV: adding dU = 1e-06 eV multiplies the rate by exp(4.96e-07)
+  Using M0's U_eff = 100 eV: adding dU = 0.001 eV multiplies the rate by exp(4.96e-04)
+  Using M0's U_eff = 100 eV: adding dU = 1 eV multiplies the rate by exp(4.96e-01)
+  => even the most extreme optical near-field (CW) shifts pair energies by <1e-4 eV; the rate changes
+     by a factor 1 + O(1e-5). Negligible, as expected (R4 sec. 2.8).
+
+(b) RELEVANCE TO SURFACE CHEMISTRY AND LOADING
+  30 mW over 0.01 cm^2: photon flux 1.19e+19 cm^-2 s^-1 vs electrolysis at 0.1 A/cm^2 = 6.24e+17 e cm^-2 s^-1
+  30 mW over 0.5 cm^2: photon flux 2.37e+17 cm^-2 s^-1 vs electrolysis at 0.1 A/cm^2 = 6.24e+17 e cm^-2 s^-1
+  300 mW over 0.5 cm^2: photon flux 2.37e+18 cm^-2 s^-1 vs electrolysis at 0.1 A/cm^2 = 6.24e+17 e cm^-2 s^-1
+  Hot-carrier (plasmon) quantum yield for H2 dissociation / desorption on Au/Pd: 1e-4 - 1e-2 [BK:
+  Mukherjee et al., Nano Lett. 13, 240 (2013); Zhou et al., Science 362, 69 (2018)].
+  30 mW / 0.5 cm^2, QY 0.0001: photo-driven D events 2.4e+13 cm^-2 s^-1 = 2.4e-03 of a 1e16 D cm^-2 s^-1 permeation flux
+  30 mW / 0.5 cm^2, QY 0.01: photo-driven D events 2.4e+15 cm^-2 s^-1 = 2.4e-01 of a 1e16 D cm^-2 s^-1 permeation flux
+  300 mW / 0.5 cm^2, QY 0.0001: photo-driven D events 2.4e+14 cm^-2 s^-1 = 2.4e-02 of a 1e16 D cm^-2 s^-1 permeation flux
+  300 mW / 0.5 cm^2, QY 0.01: photo-driven D events 2.4e+16 cm^-2 s^-1 = 2.4e+00 of a 1e16 D cm^-2 s^-1 permeation flux
+  photothermal: 30 mW, A=0.3, spot w=0.5 mm, kappa=72 W/m/K (semi-infinite): dT = 0.071 K
+  photothermal: 30 mW, A=0.3, spot w=0.5 mm, kappa=30 W/m/K (semi-infinite): dT = 0.169 K
+  photothermal: 300 mW, A=0.3, spot w=0.5 mm, kappa=72 W/m/K (semi-infinite): dT = 0.705 K
+  photothermal: 300 mW, A=0.3, spot w=0.5 mm, kappa=30 W/m/K (semi-infinite): dT = 1.693 K
+  photothermal: 300 mW, A=0.9, spot w=0.5 mm, kappa=72 W/m/K (semi-infinite): dT = 2.116 K
+  photothermal: 300 mW, A=0.9, spot w=0.5 mm, kappa=30 W/m/K (semi-infinite): dT = 5.078 K
+  Arrhenius sensitivity of recombination at 300 K: dln k_r/dT = Ea/kT^2 = 6.4 %/K (Ea=0.5 eV), 11.6 %/K (Ea=0.9 eV)
+  => a chopped 0.1-1 W laser is a usable, contact-free MODULATOR of exit-face recombination/flux
+     (few % to tens of %), acting thermally; plasmonic structuring raises A from ~0.3 to ~0.9 (x3).

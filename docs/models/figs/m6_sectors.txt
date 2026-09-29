@@ -1,0 +1,94 @@
+1. SECTOR FLUX PARTITION (2-D steady diffusion, h = 50 um, entry j_abs = 0.05 A/cm^2 absorbed, x_eq = 0.95)
+VERIFY uniform skin -> 1-D solution (analytic: J = J0(1 - x_in/x_eq) = D n (x_in - x_out)/h = 2 s Z1 f(x_out))
+  s = 0.1: 2-D x_out = 0.00011, x_in = 0.04177, J = 2.984e+17; 1-D x_out = 0.00011 (Newton iters 5, |res| 9.9e+07)
+  s = 1e-07: 2-D x_out = 0.64272, x_in = 0.65620, J = 9.651e+16; 1-D x_out = 0.64269 (Newton iters 6, |res| 2.8e+09)
+
+  Case: gaps bare Pd  (Newton iters 22, |res| 5.5e+09); sector (c) entry reduced x0.1 by back-face Au [assumption]
+  sector                 s  J_out mean x_out mean x_in mean      edge influence width (mm)
+  (a) bare Pd        1e-01    2.98e+17      0.000     0.042                  n/a (drained)
+  (b) PdO 10 nm      1e-06    9.32e+16      0.555     0.571                           0.33
+  (c) Au|Pd|PdO      1e-06    3.13e+16      0.011     0.015                  n/a (drained)
+  (d) Pd/CaO         1e-01    2.98e+17      0.000     0.042                  n/a (drained)
+  (e) Ni/Cu          1e-02    2.98e+17      0.000     0.042                  n/a (drained)
+  (f) Au 20 nm       1e-07    7.35e+16      0.598     0.612                           0.25
+  Share of total exit flux by sector: (a) 19.8%, (b) 6.2%, (c) 2.1%, (d) 19.8%, (e) 19.8%, (f) 4.9%, gaps 27.5%
+
+  Case: gaps Au-capped (s=1e-7)  (Newton iters 24, |res| 7.0e+09); sector (c) entry reduced x0.1 by back-face Au [assumption]
+  sector                 s  J_out mean x_out mean x_in mean      edge influence width (mm)
+  (a) bare Pd        1e-01    3.35e+17      0.000     0.044                  n/a (drained)
+  (b) PdO 10 nm      1e-06    1.11e+17      0.608     0.623                           0.00
+  (c) Au|Pd|PdO      1e-06    4.49e+16      0.075     0.080                  n/a (drained)
+  (d) Pd/CaO         1e-01    3.32e+17      0.000     0.044                  n/a (drained)
+  (e) Ni/Cu          1e-02    3.33e+17      0.000     0.044                  n/a (drained)
+  (f) Au 20 nm       1e-07    9.64e+16      0.643     0.656                           0.00
+  Share of total exit flux by sector: (a) 26.0%, (b) 8.6%, (c) 3.5%, (d) 25.7%, (e) 25.8%, (f) 7.5%, gaps 3.0%
+
+  => sectors do NOT share the same D flux or loading: high-s skins (bare Pd, Pd/CaO, Ni/Cu) drain their
+     footprint to x < 0.05 at the entry and ~1e-4 at the exit and carry 3-4x the flux of the low-s skins
+     (PdO, Au), which sit on the plateau/beta boundary (x ~ 0.55-0.65). Bare inter-sector gaps drain too.
+     Lateral coupling is confined to <~0.3 mm (a few membrane thicknesses) from each sector edge, so sectors of >= 2 mm
+     are independent -- but a sector comparison confounds skin chemistry with (x, J), which differ by orders
+     of magnitude. Equalise with a D2 backfill (m6_skins D) or accept and log per-sector (x_out, J) estimates.
+
+  Bare-Pd exit, 1-D: absorbed current needed to reach x_in at the entry face (h = 50 um):
+   x_in = 0.6: J = 4.08e+18 D cm^-2 s^-1 = 0.65 A/cm^2 absorbed (plus J0-saturation: j_abs >= that/(1-x_in/0.95))
+   x_in = 0.8: J = 5.44e+18 D cm^-2 s^-1 = 0.87 A/cm^2 absorbed (plus J0-saturation: j_abs >= that/(1-x_in/0.95))
+   x_in = 0.9: J = 6.12e+18 D cm^-2 s^-1 = 0.98 A/cm^2 absorbed (plus J0-saturation: j_abs >= that/(1-x_in/0.95))
+
+2. COLLIMATED Si DETECTOR PER SECTOR: acceptance, cross-talk, efficiency
+VERIFY on-axis disc solid angle: quadrature 0.005532 vs analytic 0.005532
+  Layout: circular sectors (patches) of radius r_s on a hexagonal pitch p = 2 r_s + g; each detector coaxial with
+  its patch; aperture radius = detector radius; cross-talk = counts from the 6 nearest patches / own-patch counts
+  for equal emission per unit area. Penumbra (geometric) radius r_p = r_ap + 2 r_ap z_ap/(D - z_ap).
+   D mm r_det  z_ap   gap  cross-talk (6 nb)  eff (Omega/4pi, own patch) penumbra r_p
+     10   2.0   0.5  0.50              0.00%                      0.956%         2.21
+     10   2.0   0.5  1.00              0.00%                      0.956%         2.21
+     10   2.0   2.0  0.50              4.12%                      0.956%         3.00
+     10   2.0   2.0  1.00              0.00%                      0.956%         3.00
+     10   3.0   0.5  0.50              0.00%                      2.009%         3.32
+     10   3.0   0.5  1.00              0.00%                      2.009%         3.32
+     10   3.0   2.0  0.50              8.39%                      2.009%         4.50
+     10   3.0   2.0  1.00              0.98%                      2.009%         4.50
+     10   4.0   0.5  0.50              0.00%                      3.291%         4.42
+     10   4.0   0.5  1.00              0.00%                      3.291%         4.42
+     10   4.0   2.0  0.50             10.27%                      3.291%         6.00
+     10   4.0   2.0  1.00              2.82%                      3.291%         6.00
+     20   2.0   0.5  0.50              0.00%                      0.249%         2.10
+     20   2.0   0.5  1.00              0.00%                      0.249%         2.10
+     20   2.0   2.0  0.50              0.00%                      0.249%         2.44
+     20   2.0   2.0  1.00              0.00%                      0.249%         2.44
+     20   3.0   0.5  0.50              0.00%                      0.549%         3.15
+     20   3.0   0.5  1.00              0.00%                      0.549%         3.15
+     20   3.0   2.0  0.50              0.15%                      0.549%         3.67
+     20   3.0   2.0  1.00              0.00%                      0.549%         3.67
+     20   4.0   0.5  0.50              0.00%                      0.950%         4.21
+     20   4.0   0.5  1.00              0.00%                      0.950%         4.21
+     20   4.0   2.0  0.50              0.81%                      0.950%         4.89
+     20   4.0   2.0  1.00              0.00%                      0.950%         4.89
+     30   2.0   0.5  0.50              0.00%                      0.112%         2.07
+     30   2.0   0.5  1.00              0.00%                      0.112%         2.07
+     30   2.0   2.0  0.50              0.00%                      0.112%         2.29
+     30   2.0   2.0  1.00              0.00%                      0.112%         2.29
+     30   3.0   0.5  0.50              0.00%                      0.248%         3.10
+     30   3.0   0.5  1.00              0.00%                      0.248%         3.10
+     30   3.0   2.0  0.50              0.00%                      0.248%         3.43
+     30   3.0   2.0  1.00              0.00%                      0.248%         3.43
+     30   4.0   0.5  0.50              0.00%                      0.436%         4.14
+     30   4.0   0.5  1.00              0.00%                      0.436%         4.14
+     30   4.0   2.0  0.50              0.00%                      0.436%         4.57
+     30   4.0   2.0  1.00              0.00%                      0.436%         4.57
+
+  Minimum gap for cross-talk <= 1 % (all 6 neighbours combined):
+   D =   10 mm, r_det = r_patch = 3.0 mm, aperture 0.5 mm above membrane: g_min = 0.25 mm; efficiency 2.01 %
+   D =   10 mm, r_det = r_patch = 3.0 mm, aperture 1.0 mm above membrane: g_min = 0.5 mm; efficiency 2.01 %
+   D =   10 mm, r_det = r_patch = 3.0 mm, aperture 2.0 mm above membrane: g_min = 1.0 mm; efficiency 2.01 %
+   D =   20 mm, r_det = r_patch = 3.0 mm, aperture 0.5 mm above membrane: g_min = 0.25 mm; efficiency 0.55 %
+   D =   20 mm, r_det = r_patch = 3.0 mm, aperture 1.0 mm above membrane: g_min = 0.25 mm; efficiency 0.55 %
+   D =   20 mm, r_det = r_patch = 3.0 mm, aperture 2.0 mm above membrane: g_min = 0.5 mm; efficiency 0.55 %
+   D =   30 mm, r_det = r_patch = 3.0 mm, aperture 0.5 mm above membrane: g_min = 0.25 mm; efficiency 0.25 %
+   D =   30 mm, r_det = r_patch = 3.0 mm, aperture 1.0 mm above membrane: g_min = 0.25 mm; efficiency 0.25 %
+   D =   30 mm, r_det = r_patch = 3.0 mm, aperture 2.0 mm above membrane: g_min = 0.25 mm; efficiency 0.25 %
+  Reference: one uncollimated Ø25 mm detector at 5 mm, on-axis source: Omega/4pi = 31.4 %
+  Reference: one uncollimated Ø25 mm detector at 10 mm, on-axis source: Omega/4pi = 18.8 %
+  Minimum sector area: a Ø6 mm patch (0.28 cm^2) with Ø6 mm (28 mm^2) detector at 10 mm gives ~2 % efficiency;
+  six such patches + 1 mm gaps fit a Ø22 mm active face (hex: 1 centre + 5, or 2x3 array).

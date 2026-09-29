@@ -1,0 +1,133 @@
+VERIFY 3-layer solver, Au 400 nm on PdD vs Au/D2O single interface at 785 nm: (1.377938+0.003554j) (1.377938+0.003554j)
+VERIFY film = substrate material (PdD/PdD) reproduces PdD/D2O: (1.362748+0.039717j) (1.362748+0.039717j)
+
+SPP properties at laser lines. n_eff = Re k_spp/k0; L = 1/(2 Im k_spp) propagation length;
+d_d = 1/Im kz in dielectric (field decay length); Lam_0 = grating period for 1st-order coupling at
+normal incidence = lambda/n_eff; f_0 = 1/Lam_0 (cycles/m); Q = Re k/(2 Im k).
+interface                    lam nm  E eV   n_eff    L um  d_d nm Lam_0 nm   f_0 1/m      Q
+Pd / vacuum                     405  3.06  1.0312    0.84     226      393 2.546e+06   13.5
+Pd / vacuum                     532  2.33  1.0208    1.82     371      521 1.919e+06   22.0
+Pd / vacuum                     633  1.96  1.0165    2.93     501      623 1.606e+06   29.6
+Pd / vacuum                     670  1.85  1.0154    3.41     551      660 1.515e+06   32.5
+Pd / vacuum                     785  1.58  1.0124    5.12     722      775 1.290e+06   41.5
+Pd / vacuum                     830  1.49  1.0115    5.88     795      821 1.219e+06   45.0
+Pd / vacuum                    1064  1.17  1.0081   10.81    1216     1055 9.475e+05   64.4
+Pd / vacuum                    1550  0.80  1.0050   30.15    2305     1542 6.484e+05  122.8
+PdD / vacuum                    405  3.06  1.0412    0.61     195      389 2.571e+06    9.9
+PdD / vacuum                    532  2.33  1.0276    1.34     320      518 1.932e+06   16.3
+PdD / vacuum                    633  1.96  1.0219    2.16     433      619 1.614e+06   21.9
+PdD / vacuum                    670  1.85  1.0205    2.52     476      657 1.523e+06   24.1
+PdD / vacuum                    785  1.58  1.0166    3.79     623      772 1.295e+06   30.9
+PdD / vacuum                    830  1.49  1.0153    4.36     687      817 1.223e+06   33.5
+PdD / vacuum                   1064  1.17  1.0108    8.04    1051     1053 9.500e+05   48.0
+PdD / vacuum                   1550  0.80  1.0067   22.50    1994     1540 6.495e+05   91.8
+Pd / D2O                        405  3.06  1.4060    0.33     126      288 3.472e+06    7.2
+Pd / D2O                        532  2.33  1.3785    0.74     208      386 2.591e+06   12.0
+Pd / D2O                        633  1.96  1.3654    1.21     283      464 2.157e+06   16.4
+Pd / D2O                        670  1.85  1.3621    1.41     311      492 2.033e+06   18.0
+Pd / D2O                        785  1.58  1.3531    2.14     409      580 1.724e+06   23.2
+Pd / D2O                        830  1.49  1.3503    2.47     451      615 1.627e+06   25.3
+Pd / D2O                       1064  1.17  1.3398    4.60     694      794 1.259e+06   36.4
+Pd / D2O                       1550  0.80  1.3284   13.04    1325     1167 8.571e+05   70.2
+PdD / D2O                       405  3.06  1.4273    0.23     109      284 3.524e+06    5.2
+PdD / D2O                       532  2.33  1.3941    0.53     179      382 2.620e+06    8.8
+PdD / D2O                       633  1.96  1.3780    0.88     244      459 2.177e+06   12.0
+PdD / D2O                       670  1.85  1.3739    1.03     268      488 2.051e+06   13.3
+PdD / D2O                       785  1.58  1.3627    1.57     353      576 1.736e+06   17.2
+PdD / D2O                       830  1.49  1.3591    1.82     389      611 1.637e+06   18.7
+PdD / D2O                      1064  1.17  1.3460    3.40     599      790 1.265e+06   27.1
+PdD / D2O                      1550  0.80  1.3323    9.70    1146     1163 8.595e+05   52.4
+Au / vacuum                     405  3.06  1.0137    0.38     207      400 2.503e+06    6.0
+Au / vacuum                     532  2.33  1.0921    0.74     186      487 2.053e+06    9.6
+Au / vacuum                     633  1.96  1.0449    9.80     332      606 1.651e+06  101.6
+Au / vacuum                     670  1.85  1.0365   19.01     391      646 1.547e+06  184.8
+Au / vacuum                     785  1.58  1.0225   43.02     585      768 1.303e+06  352.1
+Au / vacuum                     830  1.49  1.0193   53.11     669      814 1.228e+06  409.8
+Au / vacuum                    1064  1.17  1.0104  107.61    1169     1053 9.496e+05  642.1
+Au / vacuum                    1550  0.80  1.0043  289.39    2645     1543 6.480e+05 1178.2
+Au / D2O                        405  3.06  1.3458    0.16     124      301 3.323e+06    3.3
+Au / D2O                        532  2.33  1.5595    0.25      99      341 2.931e+06    4.6
+Au / D2O                        633  1.96  1.4376    3.76     182      440 2.271e+06   53.7
+Au / D2O                        670  1.85  1.4152    7.47     216      473 2.112e+06   99.1
+Au / D2O                        785  1.58  1.3779   17.58     328      570 1.755e+06  193.9
+Au / D2O                        830  1.49  1.3694   21.90     376      606 1.650e+06  227.1
+Au / D2O                       1064  1.17  1.3454   45.58     665      791 1.265e+06  362.1
+Au / D2O                       1550  0.80  1.3270  124.89    1520     1168 8.561e+05  671.8
+Ni / vacuum                     405  3.06  1.0177    0.66     245      398 2.513e+06   10.3
+Ni / vacuum                     532  2.33  1.0169    1.52     381      523 1.911e+06   18.2
+Ni / vacuum                     633  1.96  1.0146    2.56     509      624 1.603e+06   25.8
+Ni / vacuum                     670  1.85  1.0141    3.03     557      661 1.514e+06   28.8
+Ni / vacuum                     785  1.58  1.0116    4.53     724      776 1.289e+06   36.7
+Ni / vacuum                     830  1.49  1.0108    5.12     794      821 1.218e+06   39.2
+Ni / vacuum                    1064  1.17  1.0081    9.08    1182     1055 9.475e+05   54.1
+Ni / vacuum                    1550  0.80  1.0052   24.31    2202     1542 6.485e+05   99.1
+Au 10 nm on PdD / D2O           405  3.06  1.4025    0.17     108      289 3.463e+06    3.6
+Au 10 nm on PdD / D2O           532  2.33  1.4540    0.40     135      366 2.733e+06    6.9
+Au 10 nm on PdD / D2O           633  1.96  1.4091    1.23     207      449 2.226e+06   17.2
+Au 10 nm on PdD / D2O           670  1.85  1.3980    1.62     236      479 2.087e+06   21.2
+Au 10 nm on PdD / D2O           785  1.58  1.3740    2.96     334      571 1.750e+06   32.5
+Au 10 nm on PdD / D2O           830  1.49  1.3676    3.59     376      607 1.648e+06   37.2
+Au 10 nm on PdD / D2O          1064  1.17  1.3474    7.87     627      790 1.266e+06   62.6
+Au 10 nm on PdD / D2O          1550  0.80  1.3294   26.93    1342     1166 8.577e+05  145.1
+Au 20 nm on PdD / D2O           405  3.06  1.3751    0.15     113      295 3.395e+06    3.3
+Au 20 nm on PdD / D2O           532  2.33  1.4991    0.34     116      355 2.818e+06    5.9
+Au 20 nm on PdD / D2O           633  1.96  1.4240    1.80     193      445 2.250e+06   25.4
+Au 20 nm on PdD / D2O           670  1.85  1.4077    2.64     224      476 2.101e+06   34.9
+Au 20 nm on PdD / D2O           785  1.58  1.3767    5.39     330      570 1.754e+06   59.4
+Au 20 nm on PdD / D2O           830  1.49  1.3691    6.69     376      606 1.649e+06   69.4
+Au 20 nm on PdD / D2O          1064  1.17  1.3465   15.40     647      790 1.265e+06  122.5
+Au 20 nm on PdD / D2O          1550  0.80  1.3279   53.04    1444     1167 8.567e+05  285.5
+Au 50 nm on PdD / D2O           405  3.06  1.3465    0.15     123      301 3.325e+06    3.2
+Au 50 nm on PdD / D2O           532  2.33  1.5515    0.26     101      343 2.916e+06    4.9
+Au 50 nm on PdD / D2O           633  1.96  1.4360    3.36     183      441 2.269e+06   47.8
+Au 50 nm on PdD / D2O           670  1.85  1.4144    6.26     217      474 2.111e+06   83.0
+Au 50 nm on PdD / D2O           785  1.58  1.3778   14.56     328      570 1.755e+06  160.5
+Au 50 nm on PdD / D2O           830  1.49  1.3693   18.25     376      606 1.650e+06  189.2
+Au 50 nm on PdD / D2O          1064  1.17  1.3455   39.45     663      791 1.265e+06  313.4
+Au 50 nm on PdD / D2O          1550  0.80  1.3270  113.82    1515     1168 8.561e+05  612.3
+
+ENEA roughness-PSD band (R1 G4: 'micron to sub-micron', ~1e5-1e7 m^-1, band NOT verified).
+Two readings: (A) spatial frequency f = 1/Lambda in cycles/m -> q = 2 pi f; (B) q itself in rad/m.
+  A: f=1e5-1e7 /m      Pd / D2O      : normal-incidence 1st order couples E = 0.66-3.40 eV; some angle: 0.66-3.40 eV
+  A: f=1e5-1e7 /m      PdD / D2O     : normal-incidence 1st order couples E = 0.66-3.40 eV; some angle: 0.66-3.40 eV
+  A: f=1e5-1e7 /m      Au / D2O      : normal-incidence 1st order couples E = 0.66-3.40 eV; some angle: 0.66-3.40 eV
+  A: f=1e5-1e7 /m      PdD / vacuum  : normal-incidence 1st order couples E = 0.66-3.40 eV; some angle: 0.66-3.40 eV
+  B: q=1e5-1e7 rad/m   Pd / D2O      : normal-incidence 1st order couples E = 0.66-1.46 eV; some angle: 0.66-3.40 eV
+  B: q=1e5-1e7 rad/m   PdD / D2O     : normal-incidence 1st order couples E = 0.66-1.45 eV; some angle: 0.66-3.40 eV
+  B: q=1e5-1e7 rad/m   Au / D2O      : normal-incidence 1st order couples E = 0.66-1.44 eV; some angle: 0.66-3.40 eV
+  B: q=1e5-1e7 rad/m   PdD / vacuum  : normal-incidence 1st order couples E = 0.66-1.93 eV; some angle: 0.66-3.40 eV
+  Highest f that couples at normal incidence for E <= 3.4 eV (PdD/D2O): 3.95e+06 /m (Lambda = 253 nm).
+  => under reading A, f > ~3.5e6 /m (Lambda < ~285 nm) couples no visible/NIR photon in first order;
+     above ~5 eV Re eps(Pd) > -eps_d and no bound SPP exists. The top half-decade is not plasmonic.
+  Minimum f for 1st-order coupling at grazing incidence, PdD/D2O, E=1.17 eV: (n_eff-n_d)/lambda = 2.35e+04 /m; SPP linewidth in f: Im k/pi = 4.71e+04 /m
+  Minimum f for 1st-order coupling at grazing incidence, PdD/D2O, E=1.58 eV: (n_eff-n_d)/lambda = 4.91e+04 /m; SPP linewidth in f: Im k/pi = 1.01e+05 /m
+  Minimum f for 1st-order coupling at grazing incidence, PdD/D2O, E=1.96 eV: (n_eff-n_d)/lambda = 8.04e+04 /m; SPP linewidth in f: Im k/pi = 1.81e+05 /m
+  Minimum f for 1st-order coupling at grazing incidence, PdD/D2O, E=2.33 eV: (n_eff-n_d)/lambda = 1.20e+05 /m; SPP linewidth in f: Im k/pi = 2.97e+05 /m
+  => because Pd/PdD SPPs lie within ~4 % of the light line and have Q ~ 10-30, EVERY spatial frequency
+     from ~1e5 to ~3e6 /m couples some visible/NIR photon at some angle: the band is not selective.
+  f = 1e5 /m at normal incidence would need lambda ~ 13 um in D2O, where D2O absorbs (alpha ~ 1e3 cm^-1)
+  and the Pd 'SPP' is a Zenneck-like wave extending ~lambda into the medium (see mid-IR check below).
+  Pd/vacuum at 3.0 um: n_eff-1 = 2.17e-03, field decay into vacuum = 6.9 um, L = 0.15 mm
+  Pd/vacuum at 10.0 um: n_eff-1 = 2.55e-04, field decay into vacuum = 70.2 um, L = 19.55 mm
+
+Thermal (dark-cell) SPP occupation n_BE = 1/(exp(E/kT)-1) at 300 K:
+  E = 0.10 eV: n = 2.13e-02
+  E = 0.50 eV: n = 3.98e-09
+  E = 1.00 eV: n = 1.59e-17
+  E = 1.55 eV: n = 9.14e-27
+  E = 1.96 eV: n = 1.18e-33
+  E = 2.50 eV: n = 1.00e-42
+  => visible/NIR SPPs are not populated without external illumination (n < 1e-16 at 1 eV).
+  A PSD correlation in dark electrolytic cells cannot be a plasmon-coupling effect; if real it is
+  a proxy for metallurgy (etch pits, grain/texture, dislocation outcrops) that also sets the PSD.
+
+Dual-laser pairs for the Letts beat frequencies (Delta lambda = lambda^2 Delta f / c):
+  centre 670 nm, df =  8.3 THz: lambda1 = 670.0 nm, lambda2 = 682.7 nm (Delta = 12.7 nm)
+  centre 670 nm, df = 15.3 THz: lambda1 = 670.0 nm, lambda2 = 693.7 nm (Delta = 23.7 nm)
+  centre 670 nm, df = 20.4 THz: lambda1 = 670.0 nm, lambda2 = 702.0 nm (Delta = 32.0 nm)
+  centre 785 nm, df =  8.3 THz: lambda1 = 785.0 nm, lambda2 = 802.4 nm (Delta = 17.4 nm)
+  centre 785 nm, df = 15.3 THz: lambda1 = 785.0 nm, lambda2 = 817.8 nm (Delta = 32.8 nm)
+  centre 785 nm, df = 20.4 THz: lambda1 = 785.0 nm, lambda2 = 829.3 nm (Delta = 44.3 nm)
+  centre 830 nm, df =  8.3 THz: lambda1 = 830.0 nm, lambda2 = 849.5 nm (Delta = 19.5 nm)
+  centre 830 nm, df = 15.3 THz: lambda1 = 830.0 nm, lambda2 = 866.7 nm (Delta = 36.7 nm)
+  centre 830 nm, df = 20.4 THz: lambda1 = 830.0 nm, lambda2 = 879.7 nm (Delta = 49.7 nm)
