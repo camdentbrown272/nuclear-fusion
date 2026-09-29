@@ -38,7 +38,7 @@
 
 == Maximum useful active-layer thickness (PdD0.9), uniform reaction density per volume
    Signal per unit area ~ integral_0^t f(z) dz saturates at t = R_eff; 90 % of saturation at 0.68 R_eff.
-   p counting E>0.5 MeV (after 20 um DeltaE: >1.2 MeV)  R_eff =   25.07 um  (90 % at  17.15 um)
+   p counting E>1.41 MeV (telescope PID window, 25 um DeltaE) R_eff =   22.89 um  (90 % at  15.66 um)
    p counting E>0.3 MeV (single Si)                     R_eff =   31.88 um  (90 % at  21.80 um)
    t E>0.2 MeV                                          R_eff =    3.69 um  (90 % at   2.53 um)
    3He E>0.2 MeV                                        R_eff =    0.89 um  (90 % at   0.61 um)
@@ -46,8 +46,8 @@
    alpha 12 E>0.5                                       R_eff =   32.26 um  (90 % at  22.07 um)
    p 14.7 E>1                                           R_eff =  438.07 um  (90 % at 299.64 um)
    p in 2.6-3.1 MeV window: signal/area saturates at 1.777 um-equivalent; 90 % reached at t = 5.0 um
-   p with E>1.2 MeV (DeltaE-E PID window 1.2-3.1 MeV): saturates at 6.298 um-eq; 90 % at t = 17.6 um
-   => PID-window counting gains x3.5 over the 2.6-3.1 MeV peak window for bulk-distributed sites
+   p with E>1.41 MeV (DeltaE-E PID window 1.41-3.1 MeV): saturates at 5.763 um-eq; 90 % at t = 16.2 um
+   => PID-window counting gains x3.2 over the 2.6-3.1 MeV peak window for bulk-distributed sites
 
 == Escape fraction (of 4pi), uniform source 0-t um in PdD0.9 under overlayer (E>0.05 MeV; p also in 2.6-3.1 window)
    overlayer          t(um)    p 3.02    t 1.01  3He 0.82  p-window

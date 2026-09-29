@@ -167,7 +167,7 @@ def main():
     P("\n== Maximum useful active-layer thickness (PdD0.9), uniform reaction density per volume")
     P("   Signal per unit area ~ integral_0^t f(z) dz saturates at t = R_eff; 90 % of saturation at 0.68 R_eff.")
     rows = []
-    for part, E0, lab, Emin in [("p", 3.02, "p counting E>0.5 MeV (after 20 um DeltaE: >1.2 MeV)", 1.2),
+    for part, E0, lab, Emin in [("p", 3.02, "p counting E>1.41 MeV (telescope PID window, 25 um DeltaE)", 1.41),
                                 ("p", 3.02, "p counting E>0.3 MeV (single Si)", 0.3),
                                 ("t", 1.01, "t E>0.2 MeV", 0.2), ("h", 0.82, "3He E>0.2 MeV", 0.2),
                                 ("a", 5.3, "alpha 5.3 E>0.5", 0.5), ("a", 12.0, "alpha 12 E>0.5", 0.5),
@@ -181,7 +181,7 @@ def main():
     sig_cnt = []
     for t in ts:
         w = escape_fraction("p", 3.02, "uniform", t, OVERLAYERS["PdO 20 nm"], window=(2.6, 3.1), n=100000)
-        c = escape_fraction("p", 3.02, "uniform", t, OVERLAYERS["PdO 20 nm"], Emin=1.2, n=100000)
+        c = escape_fraction("p", 3.02, "uniform", t, OVERLAYERS["PdO 20 nm"], Emin=1.41, n=100000)
         sig_win.append(w * t)
         sig_cnt.append(c * t)
     sig_win = np.array(sig_win)
@@ -189,7 +189,7 @@ def main():
     t90w = np.interp(0.9 * sig_win.max(), sig_win, ts)
     t90c = np.interp(0.9 * sig_cnt.max(), sig_cnt, ts)
     P(f"   p in 2.6-3.1 MeV window: signal/area saturates at {sig_win.max():.3f} um-equivalent; 90 % reached at t = {t90w:.1f} um")
-    P(f"   p with E>1.2 MeV (DeltaE-E PID window 1.2-3.1 MeV): saturates at {sig_cnt.max():.3f} um-eq; 90 % at t = {t90c:.1f} um")
+    P(f"   p with E>1.41 MeV (DeltaE-E PID window 1.41-3.1 MeV): saturates at {sig_cnt.max():.3f} um-eq; 90 % at t = {t90c:.1f} um")
     P(f"   => PID-window counting gains x{sig_cnt.max() / sig_win.max():.1f} over the 2.6-3.1 MeV peak window for bulk-distributed sites")
 
     # ------------------------------------------------------------------ overlayers table
@@ -233,7 +233,7 @@ def main():
     axs[0].set_xlabel("emission depth in PdD$_{0.9}$ (µm), under 20 nm PdO")
     axs[0].set_ylabel("escape fraction of 4π")
     axs[0].legend()
-    axs[1].semilogx(ts, sig_cnt / sig_cnt.max(), "o-", label="p, E>1.2 MeV (ΔE–E PID)")
+    axs[1].semilogx(ts, sig_cnt / sig_cnt.max(), "o-", label="p, E>1.41 MeV (ΔE–E PID)")
     axs[1].semilogx(ts, sig_win / sig_cnt.max(), "s-", label="p, 2.6–3.1 MeV window")
     axs[1].axhline(0.9 * sig_win.max() / sig_cnt.max(), color="0.6", ls=":")
     axs[1].set_xlabel("active-layer thickness t (µm), uniform reaction density")

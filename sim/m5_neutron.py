@@ -424,6 +424,8 @@ def main():
     fig.savefig(os.path.join(FIGS, "m5_neutron_he3.png"), dpi=130)
     plt.close(fig)
 
+    P("   cavity-radius scan (t_front=4, t_back=6, 20 cm shield): " + ", ".join(
+        f"R_c={rc} cm: {he3_bank(R_c=rc, t_front=4, t_back=6, t_shield=20, n=6000):.3f}" for rc in [5, 8, 12, 16, 20]))
     samp, flux = cosmic_spectrum_sampler()
     P("   outer borated-HDPE shield scan (response per neutron entering the OUTER surface; rate scales with its area):")
     for tsh in [0, 10, 20, 30]:
