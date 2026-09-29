@@ -1,6 +1,6 @@
 # Red team 0: review of the plan before any design is committed
 
-**Scope.** `00-charter.md`, `01-master-plan.md`, `ADR-001`, `M0` (doc and `sim/m0_rate_budget.py`), R1–R7 and the model briefs, plus the emerging design direction: a cold dual-chamber thin Pd foil, loaded electrochemically from the back, with a vacuum front face facing Si telescopes, neutron and 511 keV detectors, and deuterium-flux modulation ("C3/DFM").
+**Scope.** `00-charter.md`, `01-master-plan.md`, `ADR-001`, `M0` (doc and `sim/m0_rate_budget.py`), R1–R7, the model briefs and `M2-electrochemistry.md` (merged during this review), plus the emerging design direction: a cold dual-chamber thin Pd foil, loaded electrochemically from the back, with a vacuum front face facing Si telescopes, neutron and 511 keV detectors, and deuterium-flux modulation ("C3/DFM").
 **Date:** 2026-09-29. **Stance:** adversarial. A finding is listed only if it would change a decision.
 
 **Method.** Every M0 number was recomputed independently with scripts kept outside the repo. The engineering checks (membrane stress, exit-face loading, gas load, capacitive coupling, radon plating, ⁴He sensitivity) are first-principles order-of-magnitude calculations; the Appendix gives the formulas so anyone can reproduce them.
@@ -18,9 +18,11 @@ Severity:
 ## 0. Summary: the five findings that matter most
 
 1. **CRITICAL: the detector-facing membrane cannot be highly loaded, carry a large flux and have a clean exit face all at once.**
-   - *Why the bulk follows the exit face.* A 10–50 µm Pd foil can carry 1–5 A cm⁻² of D per unit of loading difference Δx across it. The absorbed electrochemical flux is ≤ 50 mA cm⁻², so Δx ≤ 0.02 [calc]. The whole membrane therefore sits at whatever loading the exit face allows.
-   - *Clean exit face.* A clean exit face in vacuum (sticking coefficient 10⁻⁶–0.3) sits at x_exit ≈ 10⁻⁵–10⁻² by detailed balance, so the entire foil is α-phase Pd, including the electrolyte face.
-   - *What x_exit ≥ 0.9 would take.* The exit face would need to be 10¹⁰–10¹² times less active than clean Pd. That is a seal, and a seal removes the through-flux.
+   - *Why the bulk follows the exit face.* A 10–50 µm Pd foil can carry 1–5 A cm⁻² of D per unit of loading difference Δx across it [calc]. Loading therefore follows the exit face.
+   - *Clean exit face.* A clean exit face in vacuum sits at x_exit ≈ 10⁻⁵–10⁻² by detailed balance, whether its sticking coefficient is 10⁻⁶ or 0.3.
+   - *How thick the α-phase skin is.* An α-phase skin of thickness ≈ 0.015·D·n_Pd/J forms at the exit: ≥ 51 µm (the whole foil) for absorbed J ≤ 10¹⁷ D cm⁻² s⁻¹; still ~4 µm at M2's maximum drain of 1.3×10¹⁸.
+   - *Consequence.* The detector-visible layer is always α phase. No part of the foil reaches 0.85; even at maximum drain the entry side reaches only x ≈ 0.6–0.8.
+   - *What x_exit ≥ 0.85–0.9 would take.* An exit face 10⁸–10¹² times less active than clean Pd; M2 independently finds k_des ≤ 1–6×10⁻¹⁰ mol cm⁻² s⁻¹ atm⁻¹. That is a seal, and a seal removes the through-flux.
    - *Where the plan contradicts itself.* It assumes all three properties: C3 in the master plan, the segmented "same-flux" skins in the M6 brief, and the bake-out plus Ar⁺ sputter cleaning in R7/R3.
    - *What to do.* Pick two, explicitly, and build the apparatus for that regime (§3.1).
 2. **CRITICAL: as drafted, the DFM reproduces none of the better-graded claimed conditions at the face its detectors see.**
@@ -188,7 +190,18 @@ Suggested reweighting of the master-plan matrix:
 | 25 µm | 1.4×10¹⁹ | 2.2 A cm⁻² |
 | 50 µm | 6.8×10¹⁸ | 1.1 A cm⁻² |
 
-Even if all of 50 mA cm⁻² were absorbed, Δx across 25 µm would be 0.023. So **x_entry ≈ x_exit + ≤ 0.02**: the membrane's loading is set by the exit face alone.
+Δx = J·L/(D·n_Pd) is 0.023 for 50 mA cm⁻² absorbed through 25 µm. Within a single phase, then, the membrane follows its exit face.
+
+In the two-phase case (clean exit), the α-phase skin at the exit has thickness L_α ≈ 0.015·D·n_Pd/J:
+
+| Absorbed flux J (D cm⁻² s⁻¹) | α-phase skin | Result for a 25–50 µm foil |
+|---|---|---|
+| 10¹⁶ | 510 µm | All α |
+| 10¹⁷ | 51 µm | All α |
+| 3×10¹⁷ | 17 µm | β bulk at x_in ≈ 0.61–0.63 |
+| 1.3×10¹⁸ (M2 §5.7 maximum drain at 300 mA cm⁻²) | 4 µm | β bulk at x_in ≈ 0.68–0.78 |
+
+The layer whose protons reach the detector at full energy (the top ~7 µm) is α phase in every case. No part of the foil reaches 0.85 [calc]. This agrees with M2 §5.7: x_out = 0.50 even at k_des = 10⁻³, about 10³× slower than clean Pd.
 
 **The exit face collapses if it is clean (detailed balance).**
 - Desorption equals s · 2Z(P_eq), with Z(1 atm D₂) = 7.7×10²³ cm⁻² s⁻¹.
@@ -200,7 +213,7 @@ Even if all of 50 mA cm⁻² were absorbed, Δx across 25 µm would be 0.023. So
 | 10⁻⁴ | 6×10⁻⁴ | 3×10⁻³ |
 | 10⁻⁶ | 6×10⁻³ | reaches the plateau (β onset only) |
 
-- Holding x_exit = 0.9 (P_eq ≈ 3×10³ atm, R1) needs s_eff ≲ 2×10⁻¹² at J = 10¹⁶: **10¹¹ times less active than clean Pd.**
+- Holding x_exit = 0.9 (P_eq ≈ 3×10³ atm, R1) needs s_eff ≲ 2×10⁻¹² at J = 10¹⁶: **10¹¹ times less active than clean Pd.** This is 10¹⁰ at J = 7×10¹⁶, and M2 puts it at ~10⁸ at its higher fluxes. The two estimates converge on "a seal".
 - Empirically, contaminated, air-exposed surfaces *do* reach this: PdD₀.₉ foils deload at ~10¹⁵–10¹⁶ D cm⁻² s⁻¹ per face [calc from typical hour-scale deloading, BK]. But such surfaces are uncontrolled and drift as PdO is reduced and carbon builds up.
 
 **Consequences for documents already written:**
@@ -264,7 +277,7 @@ Even if all of 50 mA cm⁻² were absorbed, Δx across 25 µm would be 0.023. So
 **Capacitive injection** [calc]:
 - Membrane-to-detector capacitance is C ≈ ε₀A/d = 0.13–0.27 pF for 1–3 cm² at 5–20 mm.
 - That is 0.8–1.7×10⁶ e⁻ per volt, i.e. **3–6 MeV-equivalent per volt** of membrane potential swing.
-- A galvanostatic step of a few volts produces a fake MeV-scale pulse at every modulation edge.
+- If the membrane floats, a galvanostatic step swings it by up to the cell voltage: 3.2–11.7 V in M2's C3 options, i.e. 10–70 MeV-equivalent at every modulation edge.
 - 10 mV of bubble noise corresponds to 30–60 keV.
 - If the detector's facing electrode is biased (e.g. 50 V), 1 µm of membrane vibration at 1 cm injects ~30 keV (microphonics).
 
@@ -290,7 +303,8 @@ Even if all of 50 mA cm⁻² were absorbed, Δx across 25 µm would be 0.023. So
 
 - **D₂ gas load** over 3.1 cm² [calc] is benign for Si:
   - J = 10¹⁶ D cm⁻² s⁻¹ → 6.5×10⁻⁴ mbar L s⁻¹ → 2×10⁻⁶–10⁻⁵ mbar at 70–300 L s⁻¹;
-  - J = 3×10¹⁷ → 2×10⁻² mbar L s⁻¹ → ≤ 3×10⁻⁴ mbar.
+  - J = 3×10¹⁷ → 2×10⁻² mbar L s⁻¹ → ≤ 3×10⁻⁴ mbar;
+  - M2's unpassivated maximum of 1.3×10¹⁸ → 8×10⁻² mbar L s⁻¹ → 3×10⁻⁴–10⁻³ mbar. That is still far from the Paschen minimum at 1 cm gaps.
   - A static NEG-pumped mode (for ⁴He) must absorb 17–1700 mbar·L per 30 days at J = 10¹⁴–10¹⁶, which is feasible only at low flux. This is another reason to prefer the D₂-filled front.
 - **D₂ exposure of Si:** no known damage to PIPS at these pressures [BK].
 - **Light:** Pd is opaque. Once α/β cycling opens pinholes, cell light and D₂O vapour (~30 mbar) leak through, so use an opaque cell body; thin PTFE transmits light.
@@ -398,7 +412,7 @@ The H₂O twin at equal *current* does not have equal x or J: the Pd–H plateau
 
 | ID | Severity | Finding | Changes a decision? |
 |---|---|---|---|
-| F1 | CRITICAL | A clean exit face pins the whole membrane in α phase; high loading, high flux and a clean face are mutually exclusive (§3.1) | Yes: C3 split into L/F/G; M3 gating |
+| F1 | CRITICAL | A clean exit face keeps the detector-visible skin in α phase, and the whole foil for J ≤ 10¹⁷; no part reaches 0.85. High loading, high flux and a clean face are mutually exclusive (§3.1; corroborated by M2 §5.7) | Yes: C3 split into L/F/G; M3 gating |
 | F2 | CRITICAL | The DFM reproduces no B-grade claimed condition at the detector-visible face; its null would be dismissed (§3.3) | Yes: thin membrane, Au cap, co-deposition, gas-entry variants |
 | F3 | MAJOR | The ADR-001 objective overweights detector sensitivity (worth 2.5–7.5 % of probability) and ignores conditions and multiplicity (O(1)) (§2.1, §2.4) | Yes: ADR-002 and reweighted matrix |
 | F4 | MAJOR | ⁴He missing as H2's primary detector; the DFM is well suited to it (§2.2) | Yes: co-primary, foil extraction |
