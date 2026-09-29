@@ -1,6 +1,6 @@
 # ADR-001 — Objective function: sensitivity to a localised anomaly, not excess heat
 
-**Status:** accepted · **Date:** 2026-09-29 · **Basis:** M0, charter
+**Status:** SUPERSEDED by ADR-003 (red-team-0 §2) · **Date:** 2026-09-29 · **Basis:** M0, charter
 
 ## Context
 Most LENR experiments since 1989 were built around excess heat in bulk Pd cathodes. M0 shows that:

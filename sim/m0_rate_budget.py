@@ -10,7 +10,10 @@ Purpose: turn "make cold fusion measurable" into numbers.
 
 Everything here is textbook nuclear physics (Gamow tunnelling, astrophysical
 S-factor, bound-pair rate formula lambda = A*|psi(0)|^2). Constants in CGS/eV.
-Run:  python3 sim/m0_rate_budget.py   (writes docs/models/figs/m0_*.png)
+Run:  python3 sim/m0_rate_budget.py   (writes docs/models/figs/m0_*; set M0_OUT=<dir> to write elsewhere)
+
+Revision 2 (after red-team-0): D2 shell density, WKB from r=0, Bosch-Hale S(0),
+matched-control thresholds, 30-day runs, ln-rate gap bookkeeping, 4He channel.
 """
 import os
 import numpy as np
@@ -21,7 +24,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-OUT = os.path.join(os.path.dirname(__file__), "..", "docs", "models", "figs")
+OUT = os.environ.get("M0_OUT", os.path.join(os.path.dirname(__file__), "..", "docs", "models", "figs"))
 os.makedirs(OUT, exist_ok=True)
 
 # ---------------------------------------------------------------- constants
@@ -37,8 +40,8 @@ J_per_eV = 1.602176634e-19
 E_G = 2 * mu_c2 * (np.pi * alpha) ** 2          # eV  (~0.986 MeV)
 
 # Low-energy S-factors (keV b) for the two main D+D branches
-S_n = 55e3        # D(d,n)3He   eV*b  (~53-55 keV b at E->0)
-S_p = 57e3        # D(d,p)T     eV*b
+S_n = 53.7e3      # D(d,n)3He   eV*b  (Bosch-Hale 1992 S(0))
+S_p = 55.6e3      # D(d,p)T     eV*b  (Bosch-Hale 1992 S(0))
 S_tot_eV_cm2 = (S_n + S_p) * 1e-24               # eV cm^2
 Q_n, Q_p = 3.269e6, 4.033e6                      # eV
 E_mean_per_fusion = (S_n * Q_n + S_p * Q_p) / (S_n + S_p)   # eV, standard branching
@@ -55,19 +58,23 @@ def gamow_factor(E_eff):
 
 
 # -------------------------------------------------------- WKB cross-check
-def wkb_yukawa(Ue, E=0.025, Rn_A=1e-5):
+def wkb_yukawa(Ue, E=0.025):
     """
     Exact WKB exponent for a Yukawa-screened Coulomb potential
     V(r) = (e^2/r) exp(-r/lam),  lam = e^2/Ue (so V ~ e^2/r - Ue at r << lam).
-    Returns penetration factor exp(-2 * int kappa dr) from r=Rn to turning point.
+    Returns penetration factor exp(-2 * int_0^r_tp kappa dr).  The integral starts at
+    r = 0 to stay consistent with the point-Coulomb Gamow factor that defines S(E);
+    the substitution r = r_tp * s^2 removes both endpoint singularities.
     """
     lam = e2_eV_A / Ue
     V = lambda r: e2_eV_A / r * np.exp(-r / lam)
-    r_tp = brentq(lambda r: V(r) - E, Rn_A, 1e4 * lam)
-    k = lambda r: np.sqrt(max(2 * mu_c2 * (V(r) - E), 0.0)) / hbarc_eV_A
-    # split integral for accuracy near the 1/sqrt(r) singularity
-    pts = np.geomspace(Rn_A, r_tp, 60)
-    G = sum(quad(k, a, b, limit=200)[0] for a, b in zip(pts[:-1], pts[1:]))
+    r_tp = brentq(lambda r: V(r) - E, 1e-9, 1e4 * lam)
+    def integrand(s):
+        r = r_tp * s * s
+        if r <= 0:
+            return 2 * r_tp * np.sqrt(2 * mu_c2 * e2_eV_A / r_tp) / hbarc_eV_A
+        return np.sqrt(max(2 * mu_c2 * (V(r) - E), 0.0)) / hbarc_eV_A * 2 * r_tp * s
+    G = quad(integrand, 0, 1, limit=400, points=[1e-4, 1e-2, 0.1, 0.5, 0.9])[0]
     return np.exp(-2 * G), r_tp
 
 
@@ -110,7 +117,9 @@ def main():
     # ---- calibration: D2 molecule (Koonin & Nauenberg 1989: ~3e-64 /s)
     hw = 0.371          # D2 vibrational quantum, eV
     x0 = hbarc_eV_A / np.sqrt(mu_c2 * hw)
-    rho_D2 = (np.pi * x0 ** 2) ** -1.5 * 1e24      # cm^-3
+    R_e = 0.7414        # D2 bond length, Angstrom
+    # relative wavefunction is a radial shell at R_e with Gaussian width x0 (not centred at r=0)
+    rho_D2 = 1 / (np.sqrt(np.pi) * x0 * 4 * np.pi * R_e ** 2) * 1e24   # cm^-3
     Ue_D2 = Ue_required(3e-64, rho_D2)
     P(f"D2 calibration: x0={x0:.3f} A, rho0={rho_D2:.1e} cm^-3 -> Ue_eff(D2) = {Ue_D2:.1f} eV "
       "(reproduces 3e-64 /s)")
@@ -131,17 +140,25 @@ def main():
     # ---- detection thresholds (reactions / s needed)
     P("\nReactions/s needed for a 5-sigma detection:")
     def rate_needed(eff, bkg_cps, T_s, frac):
-        # S*eff*frac*T >= 5*sqrt(bkg*T)  (background-dominated Gaussian limit)
-        return 5 * np.sqrt(bkg_cps * T_s) / (eff * frac * T_s)
-    T = 14 * 86400
+        # Equal-time matched control (charter): S*eff*frac*T >= 5*sqrt(2*bkg*T).
+        # Systematic floor ignored here: for neutrons a 1-2 % background drift sets
+        # S >= 0.05-0.1 fusions/s regardless of T (R5 sec. 10.1).
+        return 5 * np.sqrt(2 * bkg_cps * T_s) / (eff * frac * T_s)
+    T = 30 * 86400
     r_n = rate_needed(0.10, 0.05, T, 0.5)    # 3He bank, 10% eff, 0.05 cps, n-branch 50%
     r_p = rate_needed(0.05 * 0.3, 2e-5, T, 0.5)  # Si in vacuum: 5% solid angle, 30% escape, 3 MeV p window
     heat_W = 0.010                           # 10 mW best-case calorimetric resolution
     r_h = heat_W / (E_mean_per_fusion * J_per_eV)
-    P(f"  neutrons (3He bank, eff 10%, bkg 0.05 cps, 14 d) : {r_n:.2e} fusions/s")
+    He_limit_atoms = 1e10                    # 4He extraction/static-MS limit (red-team-0 sec. 2.2)
+    r_he = He_limit_atoms / T                # reactions/s if every 4He is collected
+    r_h2 = heat_W / (23.85e6 * J_per_eV)     # 10 mW via D+D -> 4He (23.85 MeV each)
+    P(f"  neutrons (3He bank, eff 10%, bkg 0.05 cps, 30 d) : {r_n:.2e} fusions/s")
     P(f"  3 MeV protons (Si, 5% x 30% escape, bkg 2e-5 cps): {r_p:.2e} fusions/s")
     P(f"  heat (10 mW, standard D+D branching)             : {r_h:.2e} fusions/s")
     P(f"  -> heat is {r_h/r_n:.1e}x less sensitive than neutrons for standard D+D")
+    P(f"  H2 channel: 10 mW of D+D->4He                    : {r_h2:.2e} reactions/s")
+    P(f"  H2 channel: 4He, 1e10 atoms collected in 30 d    : {r_he:.2e} reactions/s "
+      f"(= {r_he*23.85e6*J_per_eV*1e9:.0f} nW; x{r_h2/r_he:.0e} better than the calorimeter)")
 
     # ---- neutron dose implied if watt-level heat came from standard D+D
     fus_per_W = 1 / (E_mean_per_fusion * J_per_eV)
@@ -165,20 +182,22 @@ def main():
         P(f"  Ue={Ue:4d} eV -> {rate_free_gas(Ue):.2e} /s per D")
     lim = 1e-25    # order of 1989-90 null limits (fusions per pair per s) - verify in R5
     Ue_lim = brentq(lambda U: rate_free_gas(U) - lim, 10, 1000)
+    Ue_acc_lim = brentq(lambda U: np.sqrt(E_G / Ue_lim) + np.log(wkb_yukawa(U)[0]), 150, 2000)
     P(f"  A null limit of {lim:.0e} /pair/s implies Ue_eff(thermal) < {Ue_lim:.0f} eV in bulk PdD "
-      "(free-gas picture) -> accelerator Ue~300-800 eV does NOT apply at thermal energies")
+      f"(free-gas picture, S/E convention)")
+    P(f"  -> equivalent Yukawa (accelerator-style) Ue < {Ue_acc_lim:.0f} eV: Tohoku's Pd ~310 eV is allowed,")
+    P("     Bochum-class 500-800 eV cannot act on thermal pairs in bulk PdD")
 
     # ---- exponent budget: what engineering can buy vs what physics must supply
-    G_D2 = np.sqrt(E_G / Ue_D2)
-    G_need_hi = np.sqrt(E_G / Ue_required(r_n / 1e21, 1e25))
-    G_need_lo = np.sqrt(E_G / Ue_required(r_n / 1e12, 1e25))
-    P("\nExponent budget (penetration = exp(-X)):")
-    P(f"  molecular D2 today        X = {G_D2:5.1f}")
-    P(f"  needed, N=1e21 pairs      X = {G_need_hi:5.1f}   gap = {G_D2-G_need_hi:5.1f} e-folds")
-    P(f"  needed, N=1e12 pairs      X = {G_need_lo:5.1f}   gap = {G_D2-G_need_lo:5.1f} e-folds")
-    P(f"  engineering levers: 1e9x more sites buys {np.log(1e9):.1f} e-folds; 100x better detection buys {np.log(100):.1f}")
-    P("  -> geometry/engineering cannot close the gap alone; the design must maximise sensitivity to a")
-    P("     real anomalous enhancement (if one exists) at the sites where theories/claims locate it.")
+    gap_hi = np.log((r_n / 1e21) / 3e-64)
+    gap_lo = np.log((r_n / 1e12) / 3e-64)
+    P("\nRate budget in e-folds (ln of required rate per pair / molecular-D2 rate 3e-64 /s):")
+    P(f"  molecular D2 exponent X(D2) = {np.sqrt(E_G / Ue_D2):5.1f}")
+    P(f"  gap if all 1e21 pairs of a 0.5 g cathode are active : {gap_hi:5.1f} e-folds")
+    P(f"  gap if only 1e12 special sites are active           : {gap_lo:5.1f} e-folds")
+    P(f"  with ALL 1e21 pairs active AND 100x better detection: {gap_hi-np.log(100):5.1f} e-folds remain")
+    P("  -> engineering cannot close the gap; a positive result needs a real anomaly. The design")
+    P("     must reproduce the conditions where anomalies are claimed and detect them credibly.")
 
     # ---- steepness
     P("\nLocal steepness d ln(rate)/d ln(Ue) = 0.5*sqrt(E_G/Ue):")

@@ -1,28 +1,30 @@
 Gamow energy E_G (D+D)              = 985.8 keV
-Bound-pair constant A               = 1.56e-16 cm^3/s
+Bound-pair constant A               = 1.52e-16 cm^3/s
 Mean energy per fusion (std branch) = 3.66 MeV
-D2 calibration: x0=0.106 A, rho0=1.5e+26 cm^-3 -> Ue_eff(D2) = 34.0 eV (reproduces 3e-64 /s)
+D2 calibration: x0=0.106 A, rho0=7.7e+23 cm^-3 -> Ue_eff(D2) = 36.3 eV (reproduces 3e-64 /s)
 
 WKB (Yukawa) vs constant-shift Gamow factor:
   Ue(eV)  lambda_s(pm)  r_tp(pm)  WKB-Yukawa   exp(-sqrt(EG/Ue))
-      30       48.00     259.3   4.29e-122     1.89e-79
-     100       14.40      92.6    6.64e-68     7.60e-44
-     300        4.80      35.5    1.35e-39     1.27e-25
-    1000        1.44      12.2    6.61e-22     2.31e-14
+      30       48.00     259.3   1.50e-122     1.89e-79
+     100       14.40      92.6    2.32e-68     7.60e-44
+     300        4.80      35.5    4.70e-40     1.27e-25
+    1000        1.44      12.2    2.30e-22     2.31e-14
 
 Yukawa Ue (accelerator-style) -> Ue_eff seen by a thermal pair (same penetration):
   Ue=  100 eV -> Ue_eff =     41 eV
-  Ue=  300 eV -> Ue_eff =    123 eV
-  Ue=  500 eV -> Ue_eff =    206 eV
-  Ue=  800 eV -> Ue_eff =    331 eV
-  Ue= 1000 eV -> Ue_eff =    414 eV
-  Ue= 2000 eV -> Ue_eff =    841 eV
+  Ue=  300 eV -> Ue_eff =    120 eV
+  Ue=  500 eV -> Ue_eff =    199 eV
+  Ue=  800 eV -> Ue_eff =    318 eV
+  Ue= 1000 eV -> Ue_eff =    397 eV
+  Ue= 2000 eV -> Ue_eff =    792 eV
 
 Reactions/s needed for a 5-sigma detection:
-  neutrons (3He bank, eff 10%, bkg 0.05 cps, 14 d) : 2.03e-02 fusions/s
-  3 MeV protons (Si, 5% x 30% escape, bkg 2e-5 cps): 2.71e-03 fusions/s
+  neutrons (3He bank, eff 10%, bkg 0.05 cps, 30 d) : 1.96e-02 fusions/s
+  3 MeV protons (Si, 5% x 30% escape, bkg 2e-5 cps): 2.62e-03 fusions/s
   heat (10 mW, standard D+D branching)             : 1.71e+10 fusions/s
-  -> heat is 8.4e+11x less sensitive than neutrons for standard D+D
+  -> heat is 8.7e+11x less sensitive than neutrons for standard D+D
+  H2 channel: 10 mW of D+D->4He                    : 2.62e+09 reactions/s
+  H2 channel: 4He, 1e10 atoms collected in 30 d    : 3.86e+03 reactions/s (= 15 nW; x7e+05 better than the calorimeter)
 
 1 W of standard D+D -> 8.38e+11 n/s; at 1 m: 6.67e+06 n/cm^2/s -> 9.6 Sv/h  (lethal; so W-level heat claims REQUIRE a non-standard channel)
 
@@ -35,22 +37,24 @@ Required Ue_eff (eV) for the neutron threshold, vs number of active pairs N and 
     1e+21        195        183        172
 
 Free-gas model rate per deuteron in PdD (upper-bound picture):
-  Ue=  25 eV -> 2.14e-76 /s per D
-  Ue=  50 eV -> 3.89e-51 /s per D
-  Ue= 100 eV -> 2.82e-33 /s per D
-  Ue= 150 eV -> 2.31e-25 /s per D
-  Ue= 200 eV -> 1.20e-20 /s per D
-  Ue= 300 eV -> 4.73e-15 /s per D
-  Ue= 800 eV -> 2.11e-05 /s per D
-  A null limit of 1e-25 /pair/s implies Ue_eff(thermal) < 147 eV in bulk PdD (free-gas picture) -> accelerator Ue~300-800 eV does NOT apply at thermal energies
+  Ue=  25 eV -> 2.09e-76 /s per D
+  Ue=  50 eV -> 3.79e-51 /s per D
+  Ue= 100 eV -> 2.75e-33 /s per D
+  Ue= 150 eV -> 2.25e-25 /s per D
+  Ue= 200 eV -> 1.17e-20 /s per D
+  Ue= 300 eV -> 4.61e-15 /s per D
+  Ue= 800 eV -> 2.06e-05 /s per D
+  A null limit of 1e-25 /pair/s implies Ue_eff(thermal) < 147 eV in bulk PdD (free-gas picture, S/E convention)
+  -> equivalent Yukawa (accelerator-style) Ue < 368 eV: Tohoku's Pd ~310 eV is allowed,
+     Bochum-class 500-800 eV cannot act on thermal pairs in bulk PdD
 
-Exponent budget (penetration = exp(-X)):
-  molecular D2 today        X = 170.2
-  needed, N=1e21 pairs      X =  73.4   gap =  96.7 e-folds
-  needed, N=1e12 pairs      X =  52.7   gap = 117.5 e-folds
-  engineering levers: 1e9x more sites buys 20.7 e-folds; 100x better detection buys 4.6
-  -> geometry/engineering cannot close the gap alone; the design must maximise sensitivity to a
-     real anomalous enhancement (if one exists) at the sites where theories/claims locate it.
+Rate budget in e-folds (ln of required rate per pair / molecular-D2 rate 3e-64 /s):
+  molecular D2 exponent X(D2) = 164.9
+  gap if all 1e21 pairs of a 0.5 g cathode are active :  94.0 e-folds
+  gap if only 1e12 special sites are active           : 114.7 e-folds
+  with ALL 1e21 pairs active AND 100x better detection:  89.4 e-folds remain
+  -> engineering cannot close the gap; a positive result needs a real anomaly. The design
+     must reproduce the conditions where anomalies are claimed and detect them credibly.
 
 Local steepness d ln(rate)/d ln(Ue) = 0.5*sqrt(E_G/Ue):
   Ue= 50 eV: exponent  70.2  (+10% Ue -> x805 rate)
