@@ -352,8 +352,29 @@ aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y
     buildList(); applyCut(); applyThin(); frame(which); select(null);
   }
 
-  function load(which, url) {
-    return new Promise((res, rej) => loader.load(url, g => { prepare(g, which); res(); }, undefined, rej));
+  // The model files are glTF JSON with the geometry embedded as base64. Fetching a data: URL is blocked by the
+  // page's content policy, so decode it here and hand the loader a binary glTF (GLB) instead.
+  async function load(which, url) {
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    const doc = await resp.json();
+    const uri = doc.buffers[0].uri;
+    const raw = atob(uri.slice(uri.indexOf(",") + 1));
+    const bin = new Uint8Array(raw.length);
+    for (let i = 0; i < raw.length; i++) bin[i] = raw.charCodeAt(i);
+    delete doc.buffers[0].uri;
+    doc.buffers[0].byteLength = bin.length;
+    let json = new TextEncoder().encode(JSON.stringify(doc));
+    const jsonLen = Math.ceil(json.length / 4) * 4, binLen = Math.ceil(bin.length / 4) * 4;
+    const total = 12 + 8 + jsonLen + 8 + binLen;
+    const glb = new ArrayBuffer(total), dv = new DataView(glb), u8 = new Uint8Array(glb);
+    dv.setUint32(0, 0x46546c67, true); dv.setUint32(4, 2, true); dv.setUint32(8, total, true);
+    dv.setUint32(12, jsonLen, true); dv.setUint32(16, 0x4e4f534a, true);
+    u8.fill(0x20, 20, 20 + jsonLen); u8.set(json, 20);
+    const o = 20 + jsonLen;
+    dv.setUint32(o, binLen, true); dv.setUint32(o + 4, 0x004e4942, true); u8.set(bin, o + 8);
+    const gltf = await new Promise((res, rej) => loader.parse(glb, "", res, rej));
+    prepare(gltf, which);
   }
 
   const ray = new THREE.Raycaster(); const ptr = new THREE.Vector2(); let down = null;
