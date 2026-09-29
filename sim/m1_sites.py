@@ -190,21 +190,45 @@ def site_models(s):
     return out
 
 
-def null_limit_per_pair(s, ref_pairs_per_D=None):
+def null_limit_per_pair(s, host="Pd"):
     """
-    Upper limit on the per-pair rate of class s implied by 1989-90 bulk Pd nulls
-    (<= 1e-25 fusions/D/s), if class s was present at its typical density in the
-    null samples (cold-worked electrolytic Pd, ~0.5 cm3, ~10 cm2 surface per cm3).
-    Returns None for classes not present in those samples.
+    Upper limit on the per-pair rate of class s implied by earlier null experiments, if
+    the class was present in their samples (the tightest applicable one).  None if untested.
+      Pd electrolytic nulls (1989-90): <= 1e-25 fusions/D/s in cold-worked cathodes (~0.5 cm3,
+        ~10 cm2 surface per cm3, cathodic near-surface vacancies 1e-3 in the top 1 um of a
+        ~0.25 mm-radius cathode -> 4e-6 average) [M0; BK Gai et al. Nature 340, 29 (1989)].
+      Pd/ZrO2 nanopowder gas loading (Arata/Kitamura lineage): no neutrons above background at
+        ~0.1 n/s sensitivity for ~3 g Pd as ~10 nm particles (1.5e6 cm2 of Pd surface)
+        [guess from BK; R2 table] - constrains NP cores, surfaces, subsurface and oxide contacts.
+      Ti-D nulls: <= 1e-23 fusions/D/s (the Jones-claim level) [BK]; host="Ti" applies it to
+        defect classes in TiD2 (same class densities as in Pd).
     """
-    present = {"bulkO", "bulkT", "disl", "gb", "surf", "subsurf", "void", "crack"}
-    if s["k"] not in present:
-        return None
-    nD = 6.1e22
-    dens = s["dens_typ"] * (10.0 if s.get("areal") else 1.0)   # 10 cm2 of surface per cm3
-    if s["k"] == "vacD6":
-        dens = 12 * 6.8e17    # thermal + cold-work vacancies ~1e-5
-    return NULL_PER_D * nD / dens
+    k = s["k"]
+    lims = []
+    if host == "Ti":
+        per_D, nD = 1e-23, 1.1e23
+    else:
+        per_D, nD = NULL_PER_D, 6.1e22
+    pd_null = {"bulkO": s["dens_typ"], "bulkT": s["dens_typ"], "disl": s["dens_typ"],
+               "gb": s["dens_typ"], "void": s["dens_typ"], "crack": s["dens_typ"],
+               "surf": s["dens_typ"] * 10, "subsurf": s["dens_typ"] * 10,
+               "vacD6": 12 * 6.8e22 * 4e-6, "vacD2": 6.8e22 * 4e-6}
+    if k in pd_null:
+        lims.append(per_D * nD / pd_null[k])
+    if host == "Pd":
+        A_pow = 6 / 1e-6 * 0.25                      # cm2 of Pd surface in 3 g of 10 nm powder
+        powder_pairs = {"NP": 6 * 3.4e22 * 0.5 * 0.25, "oxint": A_pow * 0.5 * 7.8e15,
+                        "surf": A_pow * 0.5 * s["dens_typ"], "subsurf": A_pow * s["dens_typ"]}
+        if k in powder_pairs:
+            lims.append(0.2 / powder_pairs[k])
+    if k == "TiD2":
+        lims.append(1e-23 / 3)
+    return min(lims) if lims else None
+
+
+NULL_SRC = {"NP": "Pd/ZrO2 powder nulls [guess]", "oxint": "Pd/ZrO2 powder nulls [guess]",
+            "surf": "min(Pd electrolytic, Pd/ZrO2 powder [guess])", "subsurf": "min(Pd electrolytic, Pd/ZrO2 powder [guess])",
+            "TiD2": "Ti-D nulls 1e-23/D/s [BK]"}
 
 
 def main():
@@ -234,10 +258,11 @@ def main():
         lim = null_limit_per_pair(s)
         if lim is not None:
             Uc = P.Ue_required(lim, r["rho0"])
-            flag = "EXCLUDED by bulk nulls" if r["lam_Ehi"] > lim else "allowed"
-            Pr(f"   bulk-null limit: lambda <= {lim:.1e} /pair/s  (U_eff <= {Uc:.0f} eV); Emp-hi is {flag}")
+            flag = "EXCLUDED by prior nulls" if r["lam_Ehi"] > lim else "allowed"
+            Pr(f"   prior-null limit ({NULL_SRC.get(s['k'], 'Pd electrolytic nulls')}): lambda <= {lim:.1e} /pair/s"
+               f"  (U_eff <= {Uc:.0f} eV); Emp-hi is {flag}")
         else:
-            Pr("   bulk-null limit: none (class absent or negligible in 1989-90 null samples)")
+            Pr("   prior-null limit: none (class untested by earlier null experiments)")
 
     Pr("\nRequired U_eff for a 5-sigma/30-day proton signal (C3-like: 2.7e-3 fusions/s from M0 scaled) "
        "vs number of pairs, rho0 = 5e24:")
@@ -248,7 +273,7 @@ def main():
        "(>1e4 x any metal): the static-linear-screening family is closed.")
 
     # -------- figure: U_eff by site and model
-    fig, ax = plt.subplots(figsize=(9, 5.2))
+    fig, ax = plt.subplots(figsize=(9, 6.0))
     names = [s["k"] for s, _ in rows]
     y = np.arange(len(rows))
     cols = {"TF": "#2a78d6", "Lind": "#1baf7a", "Elo": "#eda100", "Ehi": "#eb6834"}
@@ -258,19 +283,21 @@ def main():
         ax.scatter([r["U_" + m] for _, r in rows], y + (i - 1.5) * 0.15, s=36, color=cols[m],
                    label=lab[m], zorder=3, edgecolor="white", linewidth=0.8)
     ax.axvline(KN_UEFF, color="grey", lw=1, ls=":")
-    ax.text(KN_UEFF * 1.03, len(rows) - 0.4, "D$_2$ molecule (34 eV)", fontsize=7, color="grey")
-    ax.axvspan(147, 165, color="grey", alpha=0.12)
-    ax.text(150, -0.9, "bulk-null ceiling\n(147-165 eV)", fontsize=7, color="#52514e")
-    ax.axvspan(208, 355, color="#eb6834", alpha=0.07)
-    ax.text(212, len(rows) - 0.6, "needed for 5$\\sigma$/30 d\n(10$^{18}$-10$^{12}$ pairs)", fontsize=7,
-            color="#52514e")
+    top = len(rows) + 0.2
+    ax.text(KN_UEFF * 1.03, top, "D$_2$ molecule", fontsize=7, color="#52514e")
+    ax.axvspan(147, 165, color="grey", alpha=0.15)
+    ax.text(125, top, "bulk-null\nceiling", fontsize=7, color="#52514e", va="bottom")
+    ax.axvspan(208, 355, color="#eb6834", alpha=0.08)
+    ax.text(212, top, "needed, 5$\\sigma$/30 d\n(10$^{18}$-10$^{12}$ pairs)", fontsize=7, color="#52514e",
+            va="bottom")
+    ax.set_ylim(-0.7, len(rows) + 1.4)
     ax.set_xscale("log")
     ax.set_yticks(y, names, fontsize=8)
     ax.set_xlabel("U$_{e,eff}$ seen by a thermal pair (eV)")
     ax.set_title("M1-A: effective screening by site class and model", fontsize=10)
     ax.grid(axis="x", color="#e6e6e6", lw=0.6)
     ax.set_axisbelow(True)
-    ax.legend(fontsize=7, loc="lower right", frameon=False)
+    ax.legend(fontsize=7, loc="upper center", bbox_to_anchor=(0.5, -0.12), ncol=2, frameon=False)
     fig.tight_layout()
     fig.savefig(os.path.join(P.OUT, "m1_sites.png"), dpi=140)
     with open(os.path.join(P.OUT, "m1_sites.txt"), "w") as f:

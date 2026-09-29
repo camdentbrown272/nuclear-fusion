@@ -8,7 +8,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   11.9  Lind   11.4  Emp-lo  127.4  Emp-hi  330.9   rho0=4.8e+24
    log10 lambda/pair: TF  -116.0  Lind  -118.7  Elo   -29.3  Ehi   -14.8
    log10 rate per cm3 (hi density): TF   -92.4  Lind   -95.1  Elo    -5.7  Ehi     8.8
-   bulk-null limit: lambda <= 1.7e-26 /pair/s  (U_eff <= 155 eV); Emp-hi is EXCLUDED by bulk nulls
+   prior-null limit (Pd electrolytic nulls): lambda <= 1.7e-26 /pair/s  (U_eff <= 155 eV); Emp-hi is EXCLUDED by prior nulls
 
 [bulkT] Pd tetrahedral (T-site D next to O-site D)
    d_min=1.75 A  n_loc=0.025 a.u. (1.7e+23 cm^-3)  hw=70 meV  E_b: +0.1 to +0.2 above O-site (DFT)
@@ -17,7 +17,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   12.5  Lind   12.0  Emp-lo  142.9  Emp-hi  371.2   rho0=1.2e+25
    log10 lambda/pair: TF  -112.7  Lind  -115.3  Elo   -26.8  Ehi   -13.1
    log10 rate per cm3 (hi density): TF   -91.3  Lind   -93.9  Elo    -5.4  Ehi     8.3
-   bulk-null limit: lambda <= 2.5e-23 /pair/s  (U_eff <= 183 eV); Emp-hi is EXCLUDED by bulk nulls
+   prior-null limit (Pd electrolytic nulls): lambda <= 2.5e-23 /pair/s  (U_eff <= 183 eV); Emp-hi is EXCLUDED by prior nulls
 
 [vacD6] Vacancy-D_n cluster (SAV, VD6)
    d_min=2.55 A  n_loc=0.012 a.u. (8.1e+22 cm^-3)  hw=50 meV  E_b: 0.23 per D trap energy (H-vacancy, Pd)
@@ -26,7 +26,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   11.0  Lind   10.5  Emp-lo   98.8  Emp-hi  333.5   rho0=7.5e+24
    log10 lambda/pair: TF  -120.8  Lind  -124.3  Elo   -34.3  Ehi   -14.5
    log10 rate per cm3 (hi density): TF   -97.9  Lind  -101.4  Elo   -11.4  Ehi     8.4
-   bulk-null limit: none (class absent or negligible in 1989-90 null samples)
+   prior-null limit (Pd electrolytic nulls): lambda <= 1.9e-21 /pair/s  (U_eff <= 209 eV); Emp-hi is EXCLUDED by prior nulls
 
 [vacD2] D2 molecule inside monovacancy (Hagelstein conjecture; DFT-disfavoured)
    d_min=0.80 A  n_loc=0.004 a.u. (2.7e+22 cm^-3)  hw=371 meV  E_b: unbound vs 2 isolated trapped D in DFT
@@ -34,7 +34,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   34.0  Lind   34.0  Emp-lo   34.0  Emp-hi   34.0   rho0=1.5e+26
    log10 lambda/pair: TF   -63.6  Lind   -63.6  Elo   -63.6  Ehi   -63.6
    log10 rate per cm3 (hi density): TF   -41.7  Lind   -41.7  Elo   -41.7  Ehi   -41.7
-   bulk-null limit: none (class absent or negligible in 1989-90 null samples)
+   prior-null limit (Pd electrolytic nulls): lambda <= 2.2e-20 /pair/s  (U_eff <= 206 eV); Emp-hi is allowed
 
 [void] Divacancy/void holding D2 fluid (~1 GPa)
    d_min=0.74 A  n_loc=0.000 a.u. (0.0e+00 cm^-3)  hw=371 meV  E_b: D2 bond 4.56 eV; void pressure = D fugacity
@@ -42,7 +42,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   34.0  Lind   34.0  Emp-lo   34.0  Emp-hi   34.0   rho0=1.5e+26
    log10 lambda/pair: TF   -63.6  Lind   -63.6  Elo   -63.6  Ehi   -63.6
    log10 rate per cm3 (hi density): TF   -43.9  Lind   -43.9  Elo   -43.9  Ehi   -43.9
-   bulk-null limit: lambda <= 1.4e-20 /pair/s  (U_eff <= 204 eV); Emp-hi is allowed
+   prior-null limit (Pd electrolytic nulls): lambda <= 1.4e-20 /pair/s  (U_eff <= 204 eV); Emp-hi is allowed
 
 [disl] Dislocation core (edge, tensile side)
    d_min=2.80 A  n_loc=0.015 a.u. (1.0e+23 cm^-3)  hw=35 meV  E_b: 0.1-0.6 trap energy
@@ -51,7 +51,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   11.4  Lind   10.8  Emp-lo  110.3  Emp-hi  373.1   rho0=4.4e+24
    log10 lambda/pair: TF  -119.0  Lind  -122.2  Elo   -32.2  Ehi   -13.5
    log10 rate per cm3 (hi density): TF   -98.2  Lind  -101.3  Elo   -11.4  Ehi     7.3
-   bulk-null limit: lambda <= 9.2e-23 /pair/s  (U_eff <= 195 eV); Emp-hi is EXCLUDED by bulk nulls
+   prior-null limit (Pd electrolytic nulls): lambda <= 9.2e-23 /pair/s  (U_eff <= 195 eV); Emp-hi is EXCLUDED by prior nulls
 
 [gb] Grain boundary
    d_min=2.70 A  n_loc=0.013 a.u. (8.8e+22 cm^-3)  hw=35 meV  E_b: 0.1-0.3 segregation energy
@@ -60,7 +60,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   11.1  Lind   10.6  Emp-lo  102.7  Emp-hi  347.0   rho0=4.4e+24
    log10 lambda/pair: TF  -120.5  Lind  -123.8  Elo   -33.7  Ehi   -14.3
    log10 rate per cm3 (hi density): TF   -98.2  Lind  -101.6  Elo   -11.5  Ehi     7.9
-   bulk-null limit: lambda <= 3.4e-22 /pair/s  (U_eff <= 202 eV); Emp-hi is EXCLUDED by bulk nulls
+   prior-null limit (Pd electrolytic nulls): lambda <= 3.4e-22 /pair/s  (U_eff <= 202 eV); Emp-hi is EXCLUDED by prior nulls
 
 [surf] Free surface (fcc hollow, adsorbed D)
    d_min=2.75 A  n_loc=0.008 a.u. (5.4e+22 cm^-3)  hw=70 meV  E_b: 0.45-0.5 per D vs 1/2 D2 (chemisorption)
@@ -69,7 +69,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   10.4  Lind    9.8  Emp-lo   81.0  Emp-hi  208.9   rho0=1.2e+25
    log10 lambda/pair: TF  -124.4  Lind  -128.2  Elo   -38.6  Ehi   -20.5
    log10 rate per cm2 (hi density): TF  -108.8  Lind  -112.6  Elo   -23.0  Ehi    -4.9
-   bulk-null limit: lambda <= 1.4e-19 /pair/s  (U_eff <= 235 eV); Emp-hi is allowed
+   prior-null limit (min(Pd electrolytic, Pd/ZrO2 powder [guess])): lambda <= 5.9e-23 /pair/s  (U_eff <= 187 eV); Emp-hi is EXCLUDED by prior nulls
 
 [subsurf] Subsurface octahedral layer
    d_min=2.85 A  n_loc=0.018 a.u. (1.2e+23 cm^-3)  hw=40 meV  E_b: ~ -0.1 to -0.2
@@ -78,7 +78,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   11.7  Lind   11.2  Emp-lo  120.9  Emp-hi  313.8   rho0=5.4e+24
    log10 lambda/pair: TF  -116.9  Lind  -119.9  Elo   -30.3  Ehi   -15.4
    log10 rate per cm2 (hi density): TF  -101.0  Lind  -103.9  Elo   -14.3  Ehi     0.5
-   bulk-null limit: lambda <= 6.8e-20 /pair/s  (U_eff <= 236 eV); Emp-hi is EXCLUDED by bulk nulls
+   prior-null limit (min(Pd electrolytic, Pd/ZrO2 powder [guess])): lambda <= 1.5e-23 /pair/s  (U_eff <= 184 eV); Emp-hi is EXCLUDED by prior nulls
 
 [crack] Crack face / nanogap, w = 0.3-1 nm (Storms NAE)
    d_min=1.20 A  n_loc=0.005 a.u. (3.4e+22 cm^-3)  hw=70 meV  E_b: as surface
@@ -87,7 +87,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF    9.6  Lind    9.2  Emp-lo   64.1  Emp-hi  165.0   rho0=1.2e+25
    log10 lambda/pair: TF  -129.5  Lind  -133.2  Elo   -44.6  Ehi   -24.3
    log10 rate per cm3 (hi density): TF  -110.1  Lind  -113.7  Elo   -25.1  Ehi    -4.8
-   bulk-null limit: lambda <= 2.0e-18 /pair/s  (U_eff <= 255 eV); Emp-hi is allowed
+   prior-null limit (Pd electrolytic nulls): lambda <= 2.0e-18 /pair/s  (U_eff <= 255 eV); Emp-hi is allowed
 
 [PdO] PdO/Pd interface (D-rich Pd side)
    d_min=2.85 A  n_loc=0.010 a.u. (6.7e+22 cm^-3)  hw=40 meV  E_b: interface accumulation (Lipson)
@@ -96,7 +96,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   10.7  Lind   10.1  Emp-lo  247.5  Emp-hi  247.5   rho0=5.4e+24
    log10 lambda/pair: TF  -123.1  Lind  -126.8  Elo   -18.5  Ehi   -18.5
    log10 rate per cm2 (hi density): TF  -107.2  Lind  -110.9  Elo    -2.6  Ehi    -2.6
-   bulk-null limit: none (class absent or negligible in 1989-90 null samples)
+   prior-null limit: none (class untested by earlier null experiments)
 
 [oxint] CaO/Pd or ZrO2/Pd interface
    d_min=2.85 A  n_loc=0.010 a.u. (6.7e+22 cm^-3)  hw=40 meV  E_b: unknown
@@ -105,7 +105,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   10.7  Lind   10.1  Emp-lo  127.4  Emp-hi  247.5   rho0=5.4e+24
    log10 lambda/pair: TF  -123.1  Lind  -126.8  Elo   -29.3  Ehi   -18.5
    log10 rate per cm2 (hi density): TF  -107.2  Lind  -110.9  Elo   -13.4  Ehi    -2.6
-   bulk-null limit: none (class absent or negligible in 1989-90 null samples)
+   prior-null limit (Pd/ZrO2 powder nulls [guess]): lambda <= 3.4e-23 /pair/s  (U_eff <= 189 eV); Emp-hi is EXCLUDED by prior nulls
 
 [NP] Pd nanoparticle 2-10 nm (core)
    d_min=2.85 A  n_loc=0.018 a.u. (1.2e+23 cm^-3)  hw=38 meV  E_b: weaker than bulk; x=0.3-0.5 at 1 bar
@@ -114,7 +114,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   11.7  Lind   11.2  Emp-lo  120.9  Emp-hi  313.7   rho0=5.0e+24
    log10 lambda/pair: TF  -117.0  Lind  -119.9  Elo   -30.3  Ehi   -15.5
    log10 rate per cm3 (hi density): TF   -93.7  Lind   -96.6  Elo    -7.0  Ehi     7.9
-   bulk-null limit: none (class absent or negligible in 1989-90 null samples)
+   prior-null limit (Pd/ZrO2 powder nulls [guess]): lambda <= 7.8e-24 /pair/s  (U_eff <= 182 eV); Emp-hi is EXCLUDED by prior nulls
 
 [TiD2] TiD2 tetrahedral (fluorite)
    d_min=2.22 A  n_loc=0.030 a.u. (2.0e+23 cm^-3)  hw=100 meV  E_b: -0.6 per D (TiH2 formation)
@@ -123,7 +123,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   13.0  Lind   12.5  Emp-lo   13.0  Emp-hi  124.1   rho0=2.1e+25
    log10 lambda/pair: TF  -110.1  Lind  -112.5  Elo  -110.3  Ehi   -29.2
    log10 rate per cm3 (hi density): TF   -86.6  Lind   -89.0  Elo   -86.8  Ehi    -5.7
-   bulk-null limit: none (class absent or negligible in 1989-90 null samples)
+   prior-null limit (Ti-D nulls 1e-23/D/s [BK]): lambda <= 3.3e-24 /pair/s  (U_eff <= 171 eV); Emp-hi is allowed
 
 [ZrD2] ZrD2 tetrahedral
    d_min=2.40 A  n_loc=0.028 a.u. (1.9e+23 cm^-3)  hw=95 meV  E_b: -0.8 per D
@@ -132,7 +132,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   12.8  Lind   12.3  Emp-lo   43.8  Emp-hi  140.6   rho0=2.0e+25
    log10 lambda/pair: TF  -110.9  Lind  -113.4  Elo   -55.6  Ehi   -26.9
    log10 rate per cm3 (hi density): TF   -87.5  Lind   -90.0  Elo   -32.2  Ehi    -3.5
-   bulk-null limit: none (class absent or negligible in 1989-90 null samples)
+   prior-null limit: none (class untested by earlier null experiments)
 
 [NiD] Ni(D) octahedral / Ni-Cu interface trap
    d_min=2.64 A  n_loc=0.030 a.u. (2.0e+23 cm^-3)  hw=62 meV  E_b: +0.1 per D (endothermic solution)
@@ -141,7 +141,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF   12.8  Lind   12.3  Emp-lo   62.0  Emp-hi  156.6   rho0=1.0e+25
    log10 lambda/pair: TF  -111.2  Lind  -113.5  Elo   -45.6  Ehi   -25.2
    log10 rate per cm3 (hi density): TF   -90.4  Lind   -92.7  Elo   -24.8  Ehi    -4.5
-   bulk-null limit: none (class absent or negligible in 1989-90 null samples)
+   prior-null limit: none (class untested by earlier null experiments)
 
 [LiD] LiD (ionic insulator, D- anion)
    d_min=2.88 A  n_loc=0.001 a.u. (6.7e+21 cm^-3)  hw=60 meV  E_b: -0.95 per D (formation)
@@ -150,7 +150,7 @@ Columns: d_min (A) | n_loc (a.u.) | hw (meV) | pairs/cm3 typ..hi (per cm2 if are
    U_eff:  TF    7.4  Lind    7.1  Emp-lo   12.8  Emp-hi   25.1   rho0=9.9e+24
    log10 lambda/pair: TF  -149.0  Lind  -153.0  Elo  -111.4  Ehi   -76.9
    log10 rate per cm3 (hi density): TF  -125.5  Lind  -129.5  Elo   -87.9  Ehi   -53.4
-   bulk-null limit: none (class absent or negligible in 1989-90 null samples)
+   prior-null limit: none (class untested by earlier null experiments)
 
 Required U_eff for a 5-sigma/30-day proton signal (C3-like: 2.7e-3 fusions/s from M0 scaled) vs number of pairs, rho0 = 5e24:
    N=1e+15: U_eff >= 266 eV

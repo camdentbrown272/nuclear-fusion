@@ -276,6 +276,6 @@ def s_min_5sigma(b, rel_sys=0.0, Z=5.0):
     the conservative combination  s >= max(s_asimov, Z*rel_sys*b)  and require s >= 3.
     """
     def Zas(s):
-        return np.sqrt(2 * ((s + b) * np.log(1 + s / b) - s))
+        return np.sqrt(max(2 * ((s + b) * np.log1p(s / b) - s), 0.0))
     s_as = brentq(lambda s: Zas(s) - Z, 1e-9, 1e12) if b > 0 else 0.0
     return max(s_as, Z * rel_sys * b, 3.0)
