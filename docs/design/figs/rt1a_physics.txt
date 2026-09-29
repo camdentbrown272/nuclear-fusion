@@ -1,0 +1,76 @@
+== 1. Depth tomography (loaded thickness 15.58 um PdD0.9; gas = 4 mm x 0.5 bar D2)
+   iteration-1 table: exit 3.00 / mid 2.55 / entry 2.05 MeV (p); 214Po alpha 1.26 MeV
+  p 3.020 MeV  z= 0.00: 3.015  z= 7.79: 2.542  z=13.00: 2.192  z=15.00: 2.048  z=15.58: 2.005  z=17.66: 1.846
+  t 1.010 MeV  z= 0.00: 0.984  z= 7.79: 0.000  z=13.00: 0.000  z=15.00: 0.000  z=15.58: 0.000  z=17.66: 0.000
+  h 0.820 MeV  z= 0.00: 0.712  z= 7.79: 0.000  z=13.00: 0.000  z=15.00: 0.000  z=15.58: 0.000  z=17.66: 0.000
+  a 7.687 MeV  z= 0.00: 7.660  z= 7.79: 4.926  z=13.00: 2.457  z=15.00: 1.154  z=15.58: 0.720  z=17.66: 0.000
+  a 8.785 MeV  z= 0.00: 8.761  z= 7.79: 6.310  z=13.00: 4.289  z=15.00: 3.360  z=15.58: 3.066  z=17.66: 1.869
+  a 6.000 MeV  z= 0.00: 5.967  z= 7.79: 2.542  z=13.00: 0.000  z=15.00: 0.000  z=15.58: 0.000  z=17.66: 0.000
+  t 2.730 MeV  z= 0.00: 2.718  z= 7.79: 1.681  z=13.00: 0.761  z=15.00: 0.299  z=15.58: 0.159  z=17.66: 0.000
+  a 2.050 MeV  z= 0.00: 1.977  z= 7.79: 0.000  z=13.00: 0.000  z=15.00: 0.000  z=15.58: 0.000  z=17.66: 0.000
+  accepted direction cosines: median 0.68, 10th pct 0.37, 5th pct 0.31 (theta_90% = 68 deg)
+  p from exit : E_det median 3.013, 10-90% [3.007, 3.015] MeV, frac in peak(2.6-3.1) 1.00
+  p from z=4  : E_det median 2.663, 10-90% [2.338, 2.763] MeV, frac in peak(2.6-3.1) 0.64
+  p from mid  : E_det median 2.302, 10-90% [1.563, 2.509] MeV, frac in peak(2.6-3.1) 0.00
+  p from entry: E_det median 1.410, 10-90% [0.000, 1.927] MeV, frac in peak(2.6-3.1) 0.00
+  P(entry-face p has E above median mid-foil E) = 0.000; P(mid-foil p below median entry E) = 0.076
+  6LiF tritons (2.73 MeV) from entry face through 15.6 um: emerge 3 % of accepted, median 0.000 MeV (<0.10 MeV threshold for most); at 12 um nominal they would give 0.871 MeV
+
+== 1b. Telescope PID-window efficiency vs source depth, WITH the 4 mm / 0.5 bar D2 gap (M5 code)
+  delta source at z= 0.00 um: eff(PID, vacuum) 0.220, eff(PID, 0.5 bar D2) 0.220
+  delta source at z= 4.00 um: eff(PID, vacuum) 0.216, eff(PID, 0.5 bar D2) 0.215
+  delta source at z= 7.79 um: eff(PID, vacuum) 0.203, eff(PID, 0.5 bar D2) 0.203
+  delta source at z=13.00 um: eff(PID, vacuum) 0.156, eff(PID, 0.5 bar D2) 0.155
+  delta source at z=15.00 um: eff(PID, vacuum) 0.126, eff(PID, 0.5 bar D2) 0.124
+  delta source at z=15.58 um: eff(PID, vacuum) 0.118, eff(PID, 0.5 bar D2) 0.116
+  delta source at z=17.66 um: eff(PID, vacuum) 0.086, eff(PID, 0.5 bar D2) 0.084
+  Rn/Tn progeny alphas plated on the ENTRY face, through 15.6 um (+ -2 um tolerance), Delta-E-only:
+    214Po  L=13.50 um: P(dE-only) 0.091, P(t window 0.85-1.10) 0.0095, P(3He window 0.55-0.85) 0.0109 per decay
+    214Po  L=15.58 um: P(dE-only) 0.029, P(t window 0.85-1.10) 0.0000, P(3He window 0.55-0.85) 0.0065 per decay
+    212Po  L=13.50 um: P(dE-only) 0.163, P(t window 0.85-1.10) 0.0059, P(3He window 0.55-0.85) 0.0067 per decay
+    212Po  L=15.58 um: P(dE-only) 0.114, P(t window 0.85-1.10) 0.0070, P(3He window 0.55-0.85) 0.0083 per decay
+    218Po  L=13.50 um: P(dE-only) 0.000, P(t window 0.85-1.10) 0.0000, P(3He window 0.55-0.85) 0.0000 per decay
+    218Po  L=15.58 um: P(dE-only) 0.000, P(t window 0.85-1.10) 0.0000, P(3He window 0.55-0.85) 0.0000 per decay
+    212Bi  L=13.50 um: P(dE-only) 0.000, P(t window 0.85-1.10) 0.0000, P(3He window 0.55-0.85) 0.0000 per decay
+    212Bi  L=15.58 um: P(dE-only) 0.000, P(t window 0.85-1.10) 0.0000, P(3He window 0.55-0.85) 0.0000 per decay
+    210Po  L=13.50 um: P(dE-only) 0.000, P(t window 0.85-1.10) 0.0000, P(3He window 0.55-0.85) 0.0000 per decay
+    210Po  L=15.58 um: P(dE-only) 0.000, P(t window 0.85-1.10) 0.0000, P(3He window 0.55-0.85) 0.0000 per decay
+
+== 2. Quadrant regimes (M3 isotherm/Kirchhoff potential, PdD, 295 K)
+  equilibrium x(0.2 bar D2, 295 K) = 0.629
+  equilibrium x(0.5 bar D2, 295 K) = 0.652
+  equilibrium x(1.0 bar D2, 295 K) = 0.670
+  F quadrant, x_in=0.90, x_exit=0.652 clamped: J = 1.89e+23 D m-2 s-1 = 3026 mA cm-2 absorbed
+  F quadrant, x_in=0.95, x_exit=0.652 clamped: J = 2.05e+23 D m-2 s-1 = 3288 mA cm-2 absorbed
+  F quadrant charge-limited: i=300 mA/cm2, eta=0.5 -> J=9.4e+21, x_in over F = 0.662
+  F quadrant charge-limited: i=300 mA/cm2, eta=0.2 -> J=3.7e+21, x_in over F = 0.656
+  F quadrant charge-limited: i=100 mA/cm2, eta=0.5 -> J=3.1e+21, x_in over F = 0.655
+  F quadrant charge-limited: i=20 mA/cm2, eta=0.5 -> J=6.2e+20, x_in over F = 0.653
+  => over F/X/ED quadrants the whole foil (incl. the ENTRY face) sits at x ~ 0.64-0.66, not >= 0.9
+     lateral coupling length (first Dirichlet/Neumann eigenmode): L/pi = 5.0 um, 2L/pi = 9.9 um
+
+== 3. Cosmic fast-neutron recoils born in the ELECTROLYTE, crossing the foil (M5 PID + windows)
+  n-p, H2O twin (T-H)        PID window 0.036 /day, peak window 0.0129 /day (unshielded cosmic flux 6.1e-03 cm-2 s-1 >1 MeV)
+  n-p, D2O with H/D=0.5%     PID window 0.000181 /day, peak window 6e-05 /day (unshielded cosmic flux 6.1e-03 cm-2 s-1 >1 MeV)
+  n-d, D2O (misID d->p)      PID window 0.00615 /day, peak window 0.00278 /day (unshielded cosmic flux 6.1e-03 cm-2 s-1 >1 MeV)
+  D(n,np)n breakup p, D2O    PID window 0.0077 /day, peak window 0.00285 /day (unshielded cosmic flux 6.1e-03 cm-2 s-1 >1 MeV)
+  n-d, 0.5 bar D2 front gas  PID window 0.000201 /day
+  M5 total telescope PID background (vacuum front, no electrolyte): 0.028 /day
+  NOTE: shield factor for fast n inside 20 cm BPE + 5 cm Cu is ~0.3-1 (M5 uses 0.6); muon-spallation
+        neutrons from the 5 cm Cu inner shield are NOT in the model.
+
+== 4. He-4 / He-3 background inventory (order of magnitude)
+  floors: 0.16 nW = 43 He/s; 0.39 nW = 102 He/s
+  PCTFE wall 71 cm2 x 5 mm, He permeability    1 Barrer -> 1.5e+08 He/s = 1.5e+06 x the 0.39 nW floor
+  PCTFE wall 71 cm2 x 5 mm, He permeability   10 Barrer -> 1.5e+09 He/s = 1.5e+07 x the 0.39 nW floor
+  PCTFE wall 71 cm2 x 5 mm, He permeability   30 Barrer -> 4.5e+09 He/s = 4.4e+07 x the 0.39 nW floor
+  FFKM rim seal (Ø26), if air-exposed, scaled from M4 Viton 30 mm (2e8/s): 1.7e+08 He/s = 1.7e+06 x floor
+  He stored in 36 cm3 air-equilibrated polymer: 1.0e+14 atoms; outgassing over tau ~ 5 d -> ~2e+08 He/s
+  cell He inventory 1e+11 -> x_He=5.4e-10 in headspace; FFKM crossover to front ~9.0e+03 He/s (2.1e+02 x 43/s)
+  cell He inventory 1e+13 -> x_He=5.4e-08 in headspace; FFKM crossover to front ~9.0e+05 He/s (2.1e+04 x 43/s)
+  cell He inventory 1e+14 -> x_He=5.4e-07 in headspace; FFKM crossover to front ~9.0e+06 He/s (2.1e+05 x 43/s)
+  6Li(n,a)t in 12 mL 1 M LiOD at phi_th=1e-03: 5.2e-04 He-4/s (and same T/s)
+  6Li(n,a)t in 12 mL 1 M LiOD at phi_th=1e-02: 5.2e-03 He-4/s (and same T/s)
+  D2O tritium 1.5e+02 Bq/kg -> He-3 ingrowth 2.0e+00 /s = 1.7e+05 /day (M8 assumes T/D 1.4e-15 = 1.5e2 Bq/kg)
+  D2O tritium 1.0e+05 Bq/kg -> He-3 ingrowth 1.3e+03 /s = 1.1e+08 /day (M8 assumes T/D 1.4e-15 = 1.5e2 Bq/kg)
+  D2O tritium 1.0e+07 Bq/kg -> He-3 ingrowth 1.3e+05 /s = 1.1e+10 /day (M8 assumes T/D 1.4e-15 = 1.5e2 Bq/kg)
