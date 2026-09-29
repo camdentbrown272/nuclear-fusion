@@ -146,3 +146,18 @@ Czerski e+e- scenario (f_ee = 0.91): minimal per-pair rate, log10 (standard bran
    C4: vacD6: -21.5 -> -22.2, NP: -23.6 -> -24.2, surf: -23.1 -> -23.7
    C5: surf: -18.4 -> -17.4
    C6: TiD2: -26.5 -> -25.5, surf: -21.4 -> -20.4
+
+Sensitivities (log10 lam_min at the named class; U_req in eV):
+   C3 baseline                         : PdO -20.22 (U 219), vacD6 -22.18 (U 190), NP -20.93 (U 209)
+   C3 close geometry f_omega=0.31      : PdO -20.45 (U 215), vacD6 -22.40 (U 188), NP -21.17 (U 206)
+   C3 Si background x10                : PdO -19.45 (U 231), vacD6 -21.41 (U 200), NP -20.16 (U 220)
+   C3 Si background systematic 20%     : PdO -19.85 (U 225), vacD6 -21.81 (U 195), NP -20.56 (U 214)
+   C3 area 2 -> 10 cm2 (5 detectors)   : PdO -20.91 (U 209), vacD6 -22.88 (U 182), NP -21.63 (U 200)
+   C1 neutron background systematic 1.0%: s_min 6556, bulkO log10 lam_min -23.45
+   C1 neutron background systematic 0.1%: s_min 1809, bulkO log10 lam_min -24.01
+   C6 neutron background systematic 1.0%: s_min 6686, TiD2 log10 lam_min -26.50
+   C6 neutron background systematic 0.1%: s_min 1812, TiD2 log10 lam_min -27.07
+   rho0 x0.1: C3 PdO U_req 235 eV (baseline 219)
+   rho0 x10: C3 PdO U_req 205 eV (baseline 219)
+   PdO (ii-lo) Yukawa-mapped at 0.04 eV (baseline): U_eff 248 eV -> C3 events/day 1.3e+02
+   PdO (ii-lo) mapped at 1 eV relative energy: U_eff 266 eV -> C3 events/day 1.1e+03

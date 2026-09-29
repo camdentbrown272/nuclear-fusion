@@ -322,6 +322,34 @@ def main():
         Pr(f"   {cn}: " + ", ".join(f"{k}: {np.log10(lam_min(c, k)):.1f} -> {np.log10(lam_min(c, k, 0.91)):.1f}"
                                    for k in ks))
 
+    # ---------------- sensitivities
+    Pr("\nSensitivities (log10 lam_min at the named class; U_req in eV):")
+    c3 = C["C3"]
+    base = {k: lam_min(c3, k) for k in ("PdO", "vacD6", "NP")}
+    for lab, mod in (("C3 baseline", {}), ("C3 close geometry f_omega=0.31", {"f_omega": 0.31}),
+                     ("C3 Si background x10", {"cp_bkg": 6e-4}),
+                     ("C3 Si background systematic 20%", {"cp_sys": 0.20})):
+        cc = dict(c3, **mod)
+        Pr(f"   {lab:36s}: " + ", ".join(f"{k} {np.log10(lam_min(cc, k)):.2f} (U {P.Ue_required(lam_min(cc, k), rates[k]['rho0']):.0f})"
+                                         for k in base))
+    cc = dict(c3, inv={k: (v[0] * 5, v[1]) for k, v in c3["inv"].items()})
+    Pr(f"   {'C3 area 2 -> 10 cm2 (5 detectors)':36s}: " + ", ".join(
+        f"{k} {np.log10(lam_min(cc, k)):.2f} (U {P.Ue_required(lam_min(cc, k), rates[k]['rho0']):.0f})" for k in base))
+    for cn in ("C1", "C6"):
+        for sy in (0.01, 0.001):
+            cc = dict(C[cn], n_sys=sy)
+            k = "bulkO" if cn == "C1" else "TiD2"
+            Pr(f"   {cn} neutron background systematic {sy:.1%}: s_min {channel_thresholds(cc)['n']['smin']:.0f},"
+               f" {k} log10 lam_min {np.log10(lam_min(cc, k)):.2f}")
+    for f in (0.1, 10):
+        Pr(f"   rho0 x{f}: C3 PdO U_req {P.Ue_required(lam_min(c3, 'PdO'), rates['PdO']['rho0'] * f):.0f} eV"
+           f" (baseline {P.Ue_required(lam_min(c3, 'PdO'), rates['PdO']['rho0']):.0f})")
+    lam_pdo = rates["PdO"]["lam_Elo"]
+    for ER, lab in ((0.04, "Yukawa-mapped at 0.04 eV (baseline)"), (1.0, "mapped at 1 eV relative energy")):
+        U = P.Ueff_yukawa(600, ER)
+        Pr(f"   PdO (ii-lo) {lab}: U_eff {U:.0f} eV -> C3 events/day "
+           f"{eff_pairs(c3, 'PdO', 'cp') * P.rate_pair(U, rates['PdO']['rho0']) * P.DAY:.2g}")
+
     # ---------------- figures
     fig, ax = plt.subplots(figsize=(8.2, 6.2))
     cmap = LinearSegmentedColormap.from_list("seq", ["#dce9f8", "#2a78d6", "#0b2d5c"])
