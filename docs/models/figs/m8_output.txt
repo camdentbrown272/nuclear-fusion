@@ -288,7 +288,7 @@ m/z-4 species and resolving power needed vs 4He (4.002603 u):
   HT+                            m = 4.023874  dm = 0.02127  R =     188
   H2D+ (ion-molecule)            m = 4.029752  dm = 0.02715  R =     147
   3HeH+ (only with 3He spike)    m = 4.024190  dm = 0.02159  R =     185
-  12C3+                          m = 3.998353  dm = 0.00425  R =     942
+  12C3+                          m = 4.000000  dm = 0.00260  R =    1538
   12C3+ needs >=83.5 eV (sum of C ionisation energies 11.26+24.38+47.89) plus bond energy;
   O4+ needs >=181 eV -> both energetically closed at the standard 70 eV electron energy.
   HT: T/D in D2O at 10 dpm/mL = 1.4e-15 -> HT+/D2+ ~ 3e-15, negligible
@@ -399,8 +399,8 @@ exit skin 0-10 nm               8.50e-01      1.9e-10     1.7e-10-5.6e-10       
 exit skin 0-100 nm              2.89e-01      5.6e-10     1.9e-10-5.4e-09         0.711
 exit layer 0-1 um               3.00e-02      5.4e-09     5.6e-10-5.4e-08         0.970
 bulk (uniform)                  1.20e-03      1.4e-07     1.4e-08-1.3e-06         0.998
-entry skin 0-100 nm             0.00e+00          inf     7.5e+26-1.6e+290        0.711
-entry surface (0-1 nm)          0.00e+00          inf     7.6e+28-1.6e+290        0.016
+entry skin 0-100 nm             0.00e+00        blind       blind-blind           0.711
+entry surface (0-1 nm)          0.00e+00        blind       blind-blind           0.016
 
 Calorimetric floor: 5 mW (R5 target) / 20-60 mW (R6 Seebeck)
   U1 unit-res QMS on loaded exit chamber    : calorimetry(5 mW)/MD(7 d) = 3.8e+00

@@ -585,7 +585,7 @@ savefig(fig, "m8_neg_sizing.png")
 say("")
 say("m/z-4 species and resolving power needed vs 4He (4.002603 u):")
 SPEC = [("D2+", 4.028204), ("HT+", 4.023874), ("H2D+ (ion-molecule)", 4.029752),
-        ("3HeH+ (only with 3He spike)", 4.024190), ("12C3+", 4.000000 - 3 * 0.000549 / 1)]
+        ("3HeH+ (only with 3He spike)", 4.024190), ("12C3+", (12.000000 - 3 * 0.000549) / 3 + 0.000549)]
 for lab, m in SPEC:
     say(f"  {lab:30s} m = {m:.6f}  dm = {abs(m-M_HE):.5f}  R = {M_HE/abs(m-M_HE):7.0f}")
 say("  12C3+ needs >=83.5 eV (sum of C ionisation energies 11.26+24.38+47.89) plus bond energy;")
@@ -878,10 +878,11 @@ for sl, _ in SCEN:
     f30 = RES[(25.0, 30.0, "thermal", sl)]["exit_gas"]
     fs = [RES[(25.0, l, "thermal", sl)]["exit_gas"] for l in [3.0, 300.0]]
     ret = RES[(25.0, 30.0, "thermal", sl)]["retained"]
-    md30 = base7 / f30 if f30 > 1e-300 else np.inf
-    band = sorted(base7 / max(f, 1e-300) for f in fs)
+    md30 = base7 / f30 if f30 > 1e-30 else np.inf
+    band = sorted(base7 / f if f > 1e-30 else np.inf for f in fs)
     SCEN_MD[sl] = (f30, md30, band, ret)
-    say(f"{sl:26s} {f30:13.2e} {md30:12.1e} {band[0]:11.1e}-{band[1]:<11.1e} {ret:9.3f}")
+    fmt = lambda x: f"{x:.1e}" if np.isfinite(x) else "blind"
+    say(f"{sl:26s} {f30:13.2e} {fmt(md30):>12s} {fmt(band[0]):>11s}-{fmt(band[1]):<11s} {ret:9.3f}")
 CAL_R5, CAL_R6 = 5e-3, (20e-3, 60e-3)
 say("")
 say(f"Calorimetric floor: {CAL_R5*1e3:.0f} mW (R5 target) / {CAL_R6[0]*1e3:.0f}-{CAL_R6[1]*1e3:.0f} mW (R6 Seebeck)")
