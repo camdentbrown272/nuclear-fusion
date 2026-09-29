@@ -1,0 +1,63 @@
+== m7_common self-test (model vs [BK] reference) ==
+water T=  1.0 MeV  S_col 1.8523 (ESTAR 1.849)  S_rad 0.0141 (ESTAR 0.01293)  CSDA 0.4366 (ESTAR 0.4367) g/cm2
+water T= 10.0 MeV  S_col 1.9943 (ESTAR 1.968)  S_rad 0.1887 (ESTAR 0.1832)  CSDA 4.9103 (ESTAR 4.975) g/cm2
+X0 PD     Tsai   9.20  PDG   9.20 g/cm2  (+0.0 %)
+X0 H2O    Tsai  36.08  PDG  36.08 g/cm2  (+0.0 %)
+X0 PTFE   Tsai  34.84  PDG  34.84 g/cm2  (+0.0 %)
+X0 AL     Tsai  24.01  PDG  24.01 g/cm2  (+0.0 %)
+X0 CU     Tsai  12.86  PDG  12.86 g/cm2  (+0.0 %)
+X0 FE     Tsai  13.84  PDG  13.84 g/cm2  (-0.0 %)
+X0 PB     Tsai   6.37  PDG   6.37 g/cm2  (-0.0 %)
+X0 SI     Tsai  21.82  PDG  21.82 g/cm2  (+0.0 %)
+X0 NAI    Tsai   9.49  PDG   9.49 g/cm2  (+0.0 %)
+X0 BGO    Tsai   7.97  PDG   7.97 g/cm2  (+0.0 %)
+X0 GE     Tsai  12.25  PDG  12.25 g/cm2  (+0.0 %)
+X0 PVT    Tsai  43.91  PDG  43.90 g/cm2  (+0.0 %)
+X0 HDPE   Tsai  44.78  PDG  44.77 g/cm2  (+0.0 %)
+E_c H2O   model  78.05  PDG  78.33 MeV
+E_c PB    model   7.05  PDG   7.43 MeV
+E_c FE    model  21.24  PDG  21.68 MeV
+E_c CU    model  19.06  PDG  19.42 MeV
+E_c SI    model  39.50  PDG  40.19 MeV
+E_c NAI   model  13.04  PDG  13.37 MeV
+E_c BGO   model  10.19  PDG  10.19 MeV
+E_c AL    model  41.98  PDG  42.70 MeV
+mu/rho PB    0.51 MeV model 0.1467 (photo 0.0784 incoh 0.0683 pair 0.0000)  XCOM 0.1550  (-5.3 %)
+mu/rho PB    1.00 MeV model 0.0680 (photo 0.0177 incoh 0.0503 pair 0.0000)  XCOM 0.0710  (-4.2 %)
+mu/rho PB    2.00 MeV model 0.0429 (photo 0.0039 incoh 0.0349 pair 0.0041)  XCOM 0.0461  (-7.0 %)
+mu/rho PB    3.00 MeV model 0.0421 (photo 0.0016 incoh 0.0274 pair 0.0130)  XCOM 0.0423  (-0.6 %)
+mu/rho PB    5.00 MeV model 0.0426 (photo 0.0005 incoh 0.0197 pair 0.0223)  XCOM 0.0427  (-0.2 %)
+mu/rho PB   10.00 MeV model 0.0498 (photo 0.0001 incoh 0.0122 pair 0.0375)  XCOM 0.0497  (+0.1 %)
+mu/rho PB   20.00 MeV model 0.0617 (photo 0.0000 incoh 0.0072 pair 0.0545)  XCOM 0.0620  (-0.5 %)
+mu/rho FE    0.51 MeV model 0.0820 (photo 0.0017 incoh 0.0803 pair 0.0000)  XCOM 0.0829  (-1.1 %)
+mu/rho FE    1.00 MeV model 0.0596 (photo 0.0003 incoh 0.0592 pair 0.0000)  XCOM 0.0599  (-0.6 %)
+mu/rho FE    2.00 MeV model 0.0416 (photo 0.0001 incoh 0.0410 pair 0.0005)  XCOM 0.0426  (-2.3 %)
+mu/rho FE    3.00 MeV model 0.0356 (photo 0.0000 incoh 0.0323 pair 0.0033)  XCOM 0.0362  (-1.8 %)
+mu/rho FE    5.00 MeV model 0.0313 (photo 0.0000 incoh 0.0232 pair 0.0080)  XCOM 0.0314  (-0.4 %)
+mu/rho FE   10.00 MeV model 0.0300 (photo 0.0000 incoh 0.0143 pair 0.0157)  XCOM 0.0299  (+0.4 %)
+mu/rho FE   20.00 MeV model 0.0324 (photo 0.0000 incoh 0.0085 pair 0.0239)  XCOM 0.0317  (+2.2 %)
+mu/rho H2O   0.51 MeV model 0.0958 (photo 0.0000 incoh 0.0958 pair 0.0000)  XCOM 0.0957  (+0.1 %)
+mu/rho H2O   1.00 MeV model 0.0706 (photo 0.0000 incoh 0.0706 pair 0.0000)  XCOM 0.0707  (-0.1 %)
+mu/rho H2O   2.00 MeV model 0.0490 (photo 0.0000 incoh 0.0489 pair 0.0001)  XCOM 0.0494  (-0.7 %)
+mu/rho H2O   3.00 MeV model 0.0394 (photo 0.0000 incoh 0.0385 pair 0.0010)  XCOM 0.0397  (-0.6 %)
+mu/rho H2O   5.00 MeV model 0.0303 (photo 0.0000 incoh 0.0277 pair 0.0026)  XCOM 0.0303  (+0.1 %)
+mu/rho H2O  10.00 MeV model 0.0224 (photo 0.0000 incoh 0.0170 pair 0.0054)  XCOM 0.0222  (+1.1 %)
+mu/rho H2O  20.00 MeV model 0.0185 (photo 0.0000 incoh 0.0101 pair 0.0084)  XCOM 0.0181  (+2.1 %)
+
+[V1] 3"x3" NaI, 662 keV point source 10 cm from the face
+     interaction probability: MC 0.0203 vs analytic 0.0206; peak/total 0.577 (Heath NaI catalogue ~0.5-0.55 at 10 cm [BK])
+
+[V2] broad-beam electrons in water: R50 and Rp vs clinical relations (AAPM TG-25: E0 = 2.33 R50; Rp = 0.52 E0 - 0.3) [BK]
+     E0 = 10.0 MeV: R50 MC 4.12 cm vs 4.29; Rp MC 4.57 vs 4.90 cm; CSDA 4.93 cm
+     E0 = 20.0 MeV: R50 MC 8.38 cm vs 8.58; Rp MC 9.11 vs 10.10 cm; CSDA 9.23 cm
+
+[V3] 10 MeV e- through 300 um Pd: projected theta0
+     MC 239 mrad vs Highland 225 mrad (PDG accuracy +-11 %); mean exit energy 9.23 MeV
+
+[V4] energy conservation: IPC pairs at the centre of a 80 cm BGO cube
+     deposited+escaped 23.8465 MeV/event vs expected 23.8465 (T+ + T- + 2 m_e); ratio 1.00000
+     containment: <E_dep> = 23.847 MeV = 100.00 % (23.85 MeV line in a hermetic calorimeter)
+
+[V5] in-flight annihilation probability, e+ fully stopped in water
+     T0 =  1.0 MeV: MC 0.0345 vs CSDA integral 0.0353
+     T0 = 10.0 MeV: MC 0.1375 vs CSDA integral 0.1360
