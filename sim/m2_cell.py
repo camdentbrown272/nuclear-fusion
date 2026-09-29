@@ -144,7 +144,7 @@ def c3_section():
     log("=" * 78)
     rows = {}
     for c in [0.1, 0.5, 1.0]:
-        for anode, g in [("ring", 1.5), ("mesh", 0.5), ("mesh", 0.3)]:
+        for anode, g in [("ring", 1.5), ("mesh", 0.5), ("mesh", 0.4), ("mesh", 0.3)]:
             log(f"  LiOD {c} M, {anode} anode g={10*g:.0f} mm")
             for i in [0.01, 0.05, 0.1, 0.2, 0.3, 0.5]:
                 d = c3_cell(i, c, g=g, anode=anode)
