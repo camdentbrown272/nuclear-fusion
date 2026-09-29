@@ -80,14 +80,14 @@ def cell_section():
     ax.text(-18, y_de + 0.15, "ΔE 25 µm, 600 mm², 4 quadrants\n(4 ± 1 below exit face)", fontsize=7, ha="right", va="center")
     box(ax, -14, y_de - 1.8, 28, 0.5, "#1c4587", lw=0.4)
     ax.text(-18, y_de - 1.55, "E 500 µm", fontsize=7, ha="right", va="center")
-    box(ax, -R - wall - 3, -13.5, 2 * (R + wall + 3), 13.0, "none", ec="#444", lw=1.5, ls="--")
-    ax.text(0, -11.2, "FRONT VOLUME ~30 cm³, D$_2$ 0.50 bar abs\nP$_{cell}$ − P$_{front}$ = +30 ± 10 mbar\n"
+    box(ax, -R - wall - 3, -15.5, 2 * (R + wall + 3), 15.0, "none", ec="#444", lw=1.5, ls="--")
+    ax.text(0, -12.6, "FRONT VOLUME ~30 cm³, D$_2$ 0.50 bar abs\nP$_{cell}$ − P$_{front}$ = +30 ± 10 mbar\n"
             "metal seals with pumped interspaces; no glass/epoxy/ion gauge\nforward relief +150 mbar; reverse disk 20 ± 5 mbar\nPd–Ag exhaust → mass-flow → bellows pump → Pd–Ag → headspace (D₂ recycle)",
             ha="center", fontsize=8)
     for xp, lab in [(-10, "Pd–Ag element 350 °C\n(only D$_2$ path)"), (0, "all-metal valve →\nHe manifold / HR-QMS"),
                     (10, "capacitance gauge")]:
-        ax.plot([xp, xp], [-13.5, -16], color="k", lw=1)
-        ax.text(xp, -17.3, lab, ha="center", fontsize=7)
+        ax.plot([xp, xp], [-15.5, -18], color="k", lw=1)
+        ax.text(xp, -19.3, lab, ha="center", fontsize=7)
 
     # proton tracks: exit-face and entry-face origin
     ax.annotate("", xy=(-7, y_de + 0.3), xytext=(-5, 0.3), arrowprops=dict(arrowstyle="->", color="r", lw=1))
@@ -96,7 +96,7 @@ def cell_section():
     ax.text(8.0, -3.6, "exit-face p: 3.02 MeV", color="m", fontsize=7)
 
     ax.set_xlim(-34, 34)
-    ax.set_ylim(-19, 29)
+    ax.set_ylim(-21, 29)
     ax.set_aspect("equal")
     ax.axis("off")
     ax.set_title("Iteration 1 rev C — DFM cell cross-section (mm; thin layers exaggerated)", fontsize=11)
