@@ -1,0 +1,39 @@
+VERIFICATION
+  PdD/D2O 785 nm, P=575 nm, h=40 nm: N= 10 harmonics  A = 0.6680
+  PdD/D2O 785 nm, P=575 nm, h=40 nm: N= 20 harmonics  A = 0.6864
+  PdD/D2O 785 nm, P=575 nm, h=40 nm: N= 30 harmonics  A = 0.6961
+  PdD/D2O 785 nm, P=575 nm, h=40 nm: N= 40 harmonics  A = 0.7007
+  PdD/D2O 785 nm, P=575 nm, h=40 nm: N= 60 harmonics  A = 0.7006
+  slices=  8  A = 0.6941
+  slices= 16  A = 0.6961
+  slices= 32  A = 0.6912
+  Au(20nm)/PdD 785 nm, P=570 nm, h=30 nm: N= 20  A = 0.8314
+  Au(20nm)/PdD 785 nm, P=570 nm, h=30 nm: N= 30  A = 0.8415
+  Au(20nm)/PdD 785 nm, P=570 nm, h=30 nm: N= 40  A = 0.8334
+  Au(20nm)/PdD 785 nm, P=570 nm, h=30 nm: N= 60  A = 0.8605
+  flat PdD/D2O: Fresnel A = 0.32444; RCWA(h=1e-6) A = 0.32444
+
+OPTIMUM SINUSOIDAL GRATINGS (normal incidence, TM/p-polarised; grating vector in plane of incidence)
+surface                lam  A_flat  P_opt  h_opt  A_max  P tol(A>=half gain)   h range(A>=0.9Amax) |E|^2 crest/flat
+PdD/D2O                633   0.370    439   76.0  1.000      312-474     nm     53.2-110.3 nm      26.44 (abs 8.48)
+PdD/D2O                785   0.324    562   85.3  1.000      480-589     nm     59.7-123.7 nm      45.96 (abs 11.41)
+PdD/D2O               1064   0.276    779  106.0  1.000      715-800     nm     74.2-148.4 nm      92.39 (abs 15.69)
+Pd/D2O                 633   0.335    448   72.4  0.998      369-473     nm     50.7-101.4 nm      41.79 (abs 10.52)
+Pd/D2O                 785   0.292    569   80.8  1.000      514-589     nm     56.6-117.2 nm      72.99 (abs 14.11)
+Pd/D2O                1064   0.246    785  101.0  1.000      737-801     nm     70.7-141.3 nm     143.02 (abs 18.76)
+PdD/vac                633   0.303    608   87.1  0.999      542-631     nm     61.0-126.4 nm      67.59 (abs 13.38)
+PdD/vac                785   0.262    761  101.5  1.000      706-781     nm     71.0-142.1 nm     112.13 (abs 17.00)
+PdD/vac               1064   0.220   1045  124.8  0.995      997-1061    nm     87.4-174.7 nm     212.32 (abs 21.78)
+Au(20nm)/PdD, D2O      633   0.163    436   41.0  1.000      417-449     nm     32.8-51.2  nm      95.93 (abs 42.10)
+Au(20nm)/PdD, D2O      785   0.104    566   37.8  0.998      559-570     nm     30.3-49.2  nm     332.86 (abs 89.99)
+Au(20nm)/PdD, D2O     1064   0.076    789   57.0  1.000      784-795     nm     48.5-65.6  nm     572.77 (abs 81.32)
+Au(thick)/D2O          633   0.069    437   33.2  0.997      425-447     nm     24.9-43.2  nm     147.52 (abs 73.89)
+Au(thick)/D2O          785   0.032    568   27.4  0.995      568-568     nm     21.9-37.0  nm     660.87 (abs 185.21)
+Au(thick)/D2O         1064   0.027    788   37.4  0.947      788-788     nm     33.7-63.6  nm    1228.84 (abs 168.26)
+
+Notes: A = absorptance; |E|^2 normalised to incident |E|^2 in the superstrate, evaluated on the plane
+touching the crests (lower bound of the true local maximum, which sits at the crest surface).
+
+ANGLE TOLERANCE at the 785 nm optimum (A vs incidence angle):
+  PdD/D2O             : A(0) = 1.000; A >= half-gain for theta <= 4.0 deg
+  Au(20nm)/PdD, D2O   : A(0) = 0.998; A >= half-gain for theta <= 0.5 deg

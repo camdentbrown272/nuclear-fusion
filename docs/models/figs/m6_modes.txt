@@ -1,0 +1,109 @@
+1. ROCKSALT BvK FIT (central forces, N/m): Pd-Pd = 38.9, Pd-D = 4.1, D-D = 1.13; residuals (THz) [0. 0. 0.]
+  PdD optical band (model): 8.00 - 11.49 THz (33.1-47.5 meV)
+  PdD at G: acoustic [0. 0. 0.] THz; optical [8. 8. 8.] THz
+  PdD at X: acoustic [4.74 4.74 6.7 ] THz; optical [ 9.9  9.9 11.5] THz
+  PdD at L: acoustic [3.51 3.51 6.76] THz; optical [ 8.94  8.94 11.46] THz
+  PdD at W: acoustic [4.84 5.8  5.8 ] THz; optical [ 9.85 10.73 10.73] THz
+  PdH optical band (model, harmonic x 1.061 anharmonic factor): 11.95 - 17.20 THz
+  PdD two-optical-phonon (overtone/combination) band: 16.0 - 23.0 THz
+  Letts  8.3 THz (34.3 meV): in PdD 1-phonon band: True; in PdH band: False; in PdD 2-phonon band: False
+  Letts 15.3 THz (63.3 meV): in PdD 1-phonon band: False; in PdH band: True; in PdD 2-phonon band: False
+  Letts 20.4 THz (84.4 meV): in PdD 1-phonon band: False; in PdH band: False; in PdD 2-phonon band: True
+  sensitivity (optG-0.7, top-0.7 THz): PdD optical 7.32-10.77 THz
+  sensitivity (optG+0.7, top+0.7 THz): PdD optical 8.72-12.17 THz
+  sensitivity (optG+0.0, top+1.5 THz): PdD optical 8.03-12.97 THz
+  Loading dependence [BK]: PdH_x optical peak falls from ~68-69 meV (alpha, x~0.02) to ~56 meV (beta, x~0.6-0.7)
+  and is ~flat to x~1 (Ross 1998, high-pressure PdH_0.99). Same trend in PdD scaled by ~1/1.5. So raising x
+  from 0.63 to 0.95 does not move PdD optical modes to 15.3 THz: that would need ~+35 % hardening.
+
+2. SELECTION RULES FOR A TWO-LASER BEAT
+  Rocksalt (Fm-3m): zone-centre optical mode is T1u -> IR-active, first-order Raman-INACTIVE (as in NaCl).
+  A difference-frequency (stimulated-Raman / impulsive) drive therefore cannot couple to the bulk G-mode
+  at first order; coupling exists only where inversion symmetry is broken (surface layer, defects).
+  Beat wavevector (co-propagating 670/682.7 nm in D2O): 2.32e+05 m^-1; counter-propagating max ~2.47e+07 m^-1;
+  L-point wavevector |q_L| = 1.35e+10 m^-1 -> photons supply <1e-3 of the momentum. L-point (zone-boundary)
+  modes can be driven only through atomic-scale disorder; Hagelstein's L-point assignment is kinematically
+  disfavoured for any optical drive.
+
+3. COST OF A COHERENT OPTICAL-PHONON AMPLITUDE IN THE LASER-ACCESSIBLE SKIN
+  thermal occupation at 8.3 THz, 300 K: 0.36; rms D displacement per mode direction: 0.228 A
+     1 mm^2 x 20 nm skin (1.1e+15 D): coherent amplitude 0.01 A, Q=10: stored 5.0e-09 J, drive power 2.6e+04 W
+     1 mm^2 x 20 nm skin (1.1e+15 D): coherent amplitude 0.01 A, Q=50: stored 5.0e-09 J, drive power 5.2e+03 W
+     1 mm^2 x 20 nm skin (1.1e+15 D): coherent amplitude 0.10 A, Q=10: stored 5.0e-07 J, drive power 2.6e+06 W
+     1 mm^2 x 20 nm skin (1.1e+15 D): coherent amplitude 0.10 A, Q=50: stored 5.0e-07 J, drive power 5.2e+05 W
+    50 mm^2 x 20 nm skin (5.5e+16 D): coherent amplitude 0.01 A, Q=10: stored 2.5e-07 J, drive power 1.3e+06 W
+    50 mm^2 x 20 nm skin (5.5e+16 D): coherent amplitude 0.01 A, Q=50: stored 2.5e-07 J, drive power 2.6e+05 W
+    50 mm^2 x 20 nm skin (5.5e+16 D): coherent amplitude 0.10 A, Q=10: stored 2.5e-05 J, drive power 1.3e+08 W
+    50 mm^2 x 20 nm skin (5.5e+16 D): coherent amplitude 0.10 A, Q=50: stored 2.5e-05 J, drive power 2.6e+07 W
+  30 mW laser, A=0.3, beat-to-mode efficiency 0.001, Q=50: coherent phonons 1.6e+03 vs thermal 1.2e+15 in the skin
+  30 mW laser, A=0.3, beat-to-mode efficiency 1, Q=50: coherent phonons 1.6e+06 vs thermal 1.2e+15 in the skin
+  => a tens-of-mW beat cannot raise the coherent optical-phonon population above ~1e-9 of thermal.
+
+4. NANOPARTICLE BREATHING (LAMB l=0, free sphere) MODES
+  Pd         : c_L = 4481 m/s, c_T = 1903 m/s, xi = 2.873; f(d) = 1 nm: 4098 GHz, 2 nm: 2049 GHz, 5 nm: 820 GHz, 10 nm: 410 GHz, 20 nm: 205 GHz, 50 nm: 82 GHz
+      diameter needed for 8.3 THz: 0.49 nm (below continuum validity; ~atomic cluster)
+      diameter needed for 15.3 THz: 0.27 nm (below continuum validity; ~atomic cluster)
+  PdD(x~0.7) : c_L = 4432 m/s, c_T = 1882 m/s, xi = 2.873; f(d) = 1 nm: 4053 GHz, 2 nm: 2027 GHz, 5 nm: 811 GHz, 10 nm: 405 GHz, 20 nm: 203 GHz, 50 nm: 81 GHz
+      diameter needed for 8.3 THz: 0.49 nm (below continuum validity; ~atomic cluster)
+      diameter needed for 15.3 THz: 0.26 nm (below continuum validity; ~atomic cluster)
+  Ni         : c_L = 5579 m/s, c_T = 2927 m/s, xi = 2.692; f(d) = 1 nm: 4780 GHz, 2 nm: 2390 GHz, 5 nm: 956 GHz, 10 nm: 478 GHz, 20 nm: 239 GHz, 50 nm: 96 GHz
+      diameter needed for 8.3 THz: 0.58 nm (below continuum validity; ~atomic cluster)
+      diameter needed for 15.3 THz: 0.31 nm (below continuum validity; ~atomic cluster)
+  Au         : c_L = 3642 m/s, c_T = 1192 m/s, xi = 2.992; f(d) = 1 nm: 3469 GHz, 2 nm: 1735 GHz, 5 nm: 694 GHz, 10 nm: 347 GHz, 20 nm: 173 GHz, 50 nm: 69 GHz
+      diameter needed for 8.3 THz: 0.42 nm (below continuum validity; ~atomic cluster)
+      diameter needed for 15.3 THz: 0.23 nm (below continuum validity; ~atomic cluster)
+  => breathing modes of 2-50 nm particles lie at 0.07-1.8 THz: they cannot be tuned to the optical-phonon band.
+
+5. MEMBRANE (C3) AND WIRE (C1) MODES
+  Clamped circular plate, in vacuo and with D2O on one side (added-mass factor Gamma=0.6689, Kwak 1991):
+   a= 1.0 mm, h= 25 um: f01 =     39.99 kHz (vacuum),     20.86 kHz (one side D2O); thickness mode c_L/2h = 88.6 MHz
+   a= 1.0 mm, h= 50 um: f01 =     79.97 kHz (vacuum),     52.30 kHz (one side D2O); thickness mode c_L/2h = 44.3 MHz
+   a= 1.0 mm, h=100 um: f01 =    159.94 kHz (vacuum),    123.81 kHz (one side D2O); thickness mode c_L/2h = 22.2 MHz
+   a= 5.0 mm, h= 25 um: f01 =      1.60 kHz (vacuum),      0.42 kHz (one side D2O); thickness mode c_L/2h = 88.6 MHz
+   a= 5.0 mm, h= 50 um: f01 =      3.20 kHz (vacuum),      1.15 kHz (one side D2O); thickness mode c_L/2h = 44.3 MHz
+   a= 5.0 mm, h=100 um: f01 =      6.40 kHz (vacuum),      3.07 kHz (one side D2O); thickness mode c_L/2h = 22.2 MHz
+   a=10.0 mm, h= 25 um: f01 =      0.40 kHz (vacuum),      0.08 kHz (one side D2O); thickness mode c_L/2h = 88.6 MHz
+   a=10.0 mm, h= 50 um: f01 =      0.80 kHz (vacuum),      0.21 kHz (one side D2O); thickness mode c_L/2h = 44.3 MHz
+   a=10.0 mm, h=100 um: f01 =      1.60 kHz (vacuum),      0.58 kHz (one side D2O); thickness mode c_L/2h = 22.2 MHz
+  Pressure check, dp = 1 bar across an unsupported clamped membrane (large-deflection membrane formulae,
+  Timoshenko; w0 = 0.662 a (p a/E h)^(1/3), sigma = 0.423 (E p^2 a^2/h^2)^(1/3)):
+   a= 0.5 mm, h= 25 um: deflection     8.7 um, membrane stress   32.1 MPa
+   a= 0.5 mm, h= 50 um: deflection     6.9 um, membrane stress   20.2 MPa
+   a= 0.5 mm, h=100 um: deflection     5.5 um, membrane stress   12.7 MPa
+   a= 1.0 mm, h= 25 um: deflection    22.0 um, membrane stress   50.9 MPa
+   a= 1.0 mm, h= 50 um: deflection    17.5 um, membrane stress   32.1 MPa
+   a= 1.0 mm, h=100 um: deflection    13.9 um, membrane stress   20.2 MPa
+   a= 2.0 mm, h= 25 um: deflection    55.4 um, membrane stress   80.8 MPa
+   a= 2.0 mm, h= 50 um: deflection    44.0 um, membrane stress   50.9 MPa
+   a= 2.0 mm, h=100 um: deflection    34.9 um, membrane stress   32.1 MPa
+   a= 5.0 mm, h= 25 um: deflection   188.1 um, membrane stress  148.9 MPa
+   a= 5.0 mm, h= 50 um: deflection   149.3 um, membrane stress   93.8 MPa
+   a= 5.0 mm, h=100 um: deflection   118.5 um, membrane stress   59.1 MPa
+   a=10.0 mm, h= 25 um: deflection   474.0 um, membrane stress  236.3 MPa
+   a=10.0 mm, h= 50 um: deflection   376.2 um, membrane stress  148.9 MPa
+   a=10.0 mm, h=100 um: deflection   298.6 um, membrane stress   93.8 MPa
+   max unsupported span (diameter) for sigma <= 30 MPa (annealed-Pd yield ~50 MPa [BK]), h=25 um: 0.90 mm
+   max unsupported span (diameter) for sigma <= 30 MPa (annealed-Pd yield ~50 MPa [BK]), h=50 um: 1.81 mm
+   max unsupported span (diameter) for sigma <= 30 MPa (annealed-Pd yield ~50 MPa [BK]), h=100 um: 3.62 mm
+  Wire (C1) PdD, free-free / clamped: longitudinal f_n = n c_bar/(2L); flexural f1 = 4.730^2 (d/4) c_bar/(2 pi L^2);
+  radial breathing from x J0(x)/J1(x) = 2 (c_T/c_L)^2, x = w r/c_L:
+   d=0.25 mm, L=30 mm: longitudinal 52.3 kHz; flexural 776 Hz; radial 12.64 MHz
+   d=0.25 mm, L=100 mm: longitudinal 15.7 kHz; flexural 70 Hz; radial 12.64 MHz
+   d=0.5 mm, L=30 mm: longitudinal 52.3 kHz; flexural 1552 Hz; radial 6.32 MHz
+   d=0.5 mm, L=100 mm: longitudinal 15.7 kHz; flexural 140 Hz; radial 6.32 MHz
+   d=1.0 mm, L=30 mm: longitudinal 52.3 kHz; flexural 3104 Hz; radial 3.16 MHz
+   d=1.0 mm, L=100 mm: longitudinal 15.7 kHz; flexural 279 Hz; radial 3.16 MHz
+  Q [BK]: bulk PdH_x internal friction Q^-1 ~ 1e-3-1e-2 (hydrogen relaxations, hydride-twin and dislocation
+  damping) -> Q_int ~ 1e2-1e3; with electrolyte on one face, acoustic radiation into the liquid dominates:
+  thickness mode radiation-limited Q ~ (pi/2) Z_s/Z_l = 50 (Z_s=4.91e+07, Z_l=1.55e+06 Rayl); flexural modes in liquid Q ~ 10-50.
+
+6. ULTRASONIC / MEGASONIC DRIVE
+  travelling longitudinal wave, strain 1e-06: intensity 4.82e-02 W/cm^2, stress 0.11 MPa
+  travelling longitudinal wave, strain 1e-05: intensity 4.82e+00 W/cm^2, stress 1.09 MPa
+  travelling longitudinal wave, strain 1e-04: intensity 4.82e+02 W/cm^2, stress 10.90 MPa
+  Hagelstein/Metzler MHz proposal (~1-3 MHz, e.g. 2.2 MHz): quanta per 23.85 MeV = 2.6e+15; thermal occupation 2.8e+06 per mode (classical regime).
+  Standing-wave energy density in a 50 um PdD membrane resonator (thickness mode, 45 MHz) at Q=20, 1 W/cm^2 input:
+   1.44e+01 J/m^3 -> strain amplitude 1.6e-05; mean energy per D atom 1.6e-09 eV
+  Detector compatibility: Si surface-barrier/PIPS detectors and charge preamps are microphonic; MHz drive
+  couples as pickup. Use (i) drive on the electrolyte-side cell body, (ii) detectors on separate vacuum
+  flanges with elastomer isolation, (iii) gated acquisition (drive on/off blocks) to measure pickup.
