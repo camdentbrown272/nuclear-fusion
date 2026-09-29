@@ -4,7 +4,7 @@ Code: `sim/m7_*.py` (`python3 sim/m7_run_all.py` regenerates everything in ~1.5 
 
 ## Summary for lead
 
-- **Signal.** If Czerski's 0⁺ resonance exists, each thermal D–D event emits an e⁺e⁻ pair sharing 22.82 MeV (11.4 MeV mean each), with a broad opening angle (⟨cosθ⟩ = 1/3).
+- **Signal.** If Czerski's 0⁺ resonance exists, each thermal D–D event emits an e⁺e⁻ pair sharing 22.82 MeV (11.4 MeV mean each).
 - **Where it annihilates.** The Pd foil is transparent: only 0.2–3.8 % of positrons annihilate in it. The rest annihilate in steel, the cell, the detectors and the moderator; 14 % annihilate in flight. **The 511 keV source is a cloud about 15 cm across, not the foil.**
 - **Detector.** Use BGO: per volume it gives 4× NaI and 6× HPGe in 511-511 efficiency.
   - Two Ø102×102 mm BGO on ±x, 37 mm from the foil axis.
