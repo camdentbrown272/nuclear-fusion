@@ -1,0 +1,76 @@
+== Currie limits (counts), alpha=beta=5 %
+   B=      0: paired blank L_C=   0.00 L_D=   2.71 | known blank L_C=   0.00 L_D=   2.71
+   B=    0.1: paired blank L_C=   0.74 L_D=   4.18 | known blank L_C=   0.52 L_D=   3.75
+   B=      1: paired blank L_C=   2.33 L_D=   7.36 | known blank L_C=   1.64 L_D=   6.00
+   B=     10: paired blank L_C=   7.36 L_D=  17.42 | known blank L_C=   5.20 L_D=  13.11
+   B=    100: paired blank L_C=  23.26 L_D=  49.23 | known blank L_C=  16.45 L_D=  35.60
+   B=   1000: paired blank L_C=  73.56 L_D= 149.83 | known blank L_C=  52.01 L_D= 106.74
+   (Currie's Gaussian L_D fails for B<~10: use the Poisson rows below)
+
+== 5 sigma discovery (50 % / 90 % power): signal counts needed
+   B=     0: n_crit=  2  s(50%)=   1.68  s(90%)=   3.89  | on/off equal-time (Asimov) s=    nan
+   B=  0.01: n_crit=  3  s(50%)=   2.66  s(90%)=   5.31  | on/off equal-time (Asimov) s=  18.14
+   B=   0.1: n_crit=  5  s(50%)=   4.57  s(90%)=   7.89  | on/off equal-time (Asimov) s=  18.73
+   B=   0.3: n_crit=  7  s(50%)=   6.37  s(90%)=  10.23  | on/off equal-time (Asimov) s=  19.69
+   B=     1: n_crit= 10  s(50%)=   8.67  s(90%)=  13.21  | on/off equal-time (Asimov) s=  22.03
+   B=     3: n_crit= 16  s(50%)=  12.67  s(90%)=  18.29  | on/off equal-time (Asimov) s=  26.46
+   B=    10: n_crit= 30  s(50%)=  19.67  s(90%)=  27.20  | on/off equal-time (Asimov) s=  35.92
+   B=   100: n_crit=155  s(50%)=  54.67  s(90%)=  71.15  | on/off equal-time (Asimov) s=  83.57
+   B=  1000: n_crit=1163  s(50%)= 162.67  s(90%)= 206.91  | on/off equal-time (Asimov) s= 236.22
+
+== Feldman-Cousins 90 % CL intervals (signal counts) vs Bayesian flat-prior 90 % UL
+   b=0.0 n=0: FC [0.00, 2.44]   Bayes UL 2.30
+   b=0.0 n=1: FC [0.11, 4.36]   Bayes UL 3.89
+   b=0.0 n=3: FC [1.10, 7.42]   Bayes UL 6.68
+   b=0.0 n=5: FC [1.84, 9.98]   Bayes UL 9.27
+   b=0.5 n=0: FC [0.00, 1.94]   Bayes UL 2.30
+   b=0.5 n=1: FC [0.00, 3.85]   Bayes UL 3.51
+   b=0.5 n=3: FC [0.60, 6.92]   Bayes UL 6.18
+   b=0.5 n=5: FC [1.54, 9.48]   Bayes UL 8.77
+   b=3.0 n=0: FC [0.00, 0.95]   Bayes UL 2.30
+   b=3.0 n=1: FC [0.00, 1.88]   Bayes UL 2.84
+   b=3.0 n=3: FC [0.00, 4.42]   Bayes UL 4.36
+   b=3.0 n=5: FC [0.00, 6.99]   Bayes UL 6.44
+
+== Look-elsewhere: local significance required for global 5 sigma (Sidak)
+   N=    1 independent windows/channels -> local 5.00 sigma
+   N=    3 independent windows/channels -> local 5.21 sigma
+   N=   10 independent windows/channels -> local 5.43 sigma
+   N=   30 independent windows/channels -> local 5.62 sigma
+   N=  100 independent windows/channels -> local 5.82 sigma
+   N= 1000 independent windows/channels -> local 6.20 sigma
+   Pre-registered primary: N=1 (C3 proton PID window, D vs H, current on vs off). Secondary channels (t, 3He, n, alpha 5-20 MeV bins, 14.7 MeV p) count as N~10 -> 5.5 sigma local.
+
+== Modulation contrast c = 1 - (4 tau/T) tanh(T/(4 tau)) for a first-order lag tau
+   T_mod/tau =   0.5: c = 0.005
+   T_mod/tau =   1.0: c = 0.020
+   T_mod/tau =   2.0: c = 0.076
+   T_mod/tau =   5.0: c = 0.321
+   T_mod/tau =  10.0: c = 0.605
+   T_mod/tau =  20.0: c = 0.800
+   T_mod/tau =  50.0: c = 0.920
+   numeric check T/tau=6: closed form 0.3966 vs ODE 0.3965
+
+== Run time to 5 sigma (median, equal-duration H-control as background reference), per channel
+   rate(fus/s)     1e-04     3e-04     1e-03     3e-03     1e-02     3e-02     1e-01     3e-01     1e+00
+   C3 Si telescope, PID window (U 0-5 um)     eff/fusion=1.09e-01 bkg=3.22e-07/s
+      days:        22       6.4         2      0.61      0.19     0.061     0.019    0.0061    0.0019
+   C3 Si, single detector 2.6-3.1 (no PID)    eff/fusion=1.03e-01 bkg=4.23e-05/s
+      days:   2.6e+02        32       4.8      0.98      0.24     0.069     0.021    0.0065     0.002
+   3He bank (C1/C3), 2.45 MeV n               eff/fusion=1.13e-01 bkg=3.11e-01/s
+      days:   1.4e+06   1.4e+05   1.4e+04   1.4e+03   1.4e+02        14       1.4      0.15     0.017
+   EJ-309 pair, PSD, 2.45 MeV n               eff/fusion=5.56e-02 bkg=6.74e-01/s
+      days:   1.3e+07   1.3e+06   1.3e+05   1.3e+04   1.3e+03   1.3e+02        13       1.3      0.13
+   CR-39 behind 6 um Mylar (C1/C2)            eff/fusion=9.73e-03 bkg=4.63e-06/s
+      days:   3.1e+03   3.7e+02        55        11       2.6      0.74      0.22     0.069     0.022
+   C3 Si telescope, background characterised over 10x the live time (tau=10):
+      days:       7.4         2      0.59      0.18     0.056     0.018    0.0056    0.0018   0.00055
+   C3 Si, on/off modulation T_mod=1 h, tau=5 min (signal only while drive on):
+      days:   1.2e+02        35        11       3.5       1.1      0.35      0.11     0.035     0.011
+
+== Minimum rate reaching 5 sigma (median) in 1 / 14 / 30 days, equal-time control:
+   C3 Si telescope, PID window (U 0-5 um)      1.95e-03  1.52e-04  7.65e-05
+   C3 Si, single detector 2.6-3.1 (no PID)     3.11e-03  5.11e-04  3.26e-04
+   3He bank (C1/C3), 2.45 MeV n                1.21e-01  3.20e-02  2.18e-02
+   EJ-309 pair, PSD, 2.45 MeV n                3.58e-01  9.51e-02  6.49e-02
+   CR-39 behind 6 um Mylar (C1/C2)             2.39e-02  2.60e-03  1.51e-03

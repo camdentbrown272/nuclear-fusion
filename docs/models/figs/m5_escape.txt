@@ -89,15 +89,15 @@
    Mylar 6 um          100    0.0739    0.0022    0.0000    0.0102
 
 == Detected spectra: membrane a=10 mm radius, detector b=13.8 mm (600 mm2), d=5 mm; PdO 20 nm overlayer
-   p 3.02   surface δ   : detected/emitted = 0.2971; mean E = 3.017 MeV; FWHM-core check; frac in 2.6-3.1 = 1.000
-   p 3.02   U(0–1 µm)   : detected/emitted = 0.2969; mean E = 2.970 MeV; FWHM-core check; frac in 2.6-3.1 = 1.000
-   p 3.02   U(0–10 µm)  : detected/emitted = 0.2965; mean E = 2.508 MeV; FWHM-core check; frac in 2.6-3.1 = 0.476
-   p 3.02   U(0–100 µm) : detected/emitted = 0.0667; mean E = 1.840 MeV; FWHM-core check; frac in 2.6-3.1 = 0.211
-   t 1.01   surface δ   : detected/emitted = 0.2971; mean E = 0.998 MeV; FWHM-core check; frac in 2.6-3.1 = nan
-   t 1.01   U(0–1 µm)   : detected/emitted = 0.2970; mean E = 0.836 MeV; FWHM-core check; frac in 2.6-3.1 = nan
-   t 1.01   U(0–10 µm)  : detected/emitted = 0.0880; mean E = 0.540 MeV; FWHM-core check; frac in 2.6-3.1 = nan
-   t 1.01   U(0–100 µm) : detected/emitted = 0.0087; mean E = 0.541 MeV; FWHM-core check; frac in 2.6-3.1 = nan
-   3He 0.82 surface δ   : detected/emitted = 0.2966; mean E = 0.774 MeV; FWHM-core check; frac in 2.6-3.1 = nan
-   3He 0.82 U(0–1 µm)   : detected/emitted = 0.2237; mean E = 0.393 MeV; FWHM-core check; frac in 2.6-3.1 = nan
-   3He 0.82 U(0–10 µm)  : detected/emitted = 0.0228; mean E = 0.386 MeV; FWHM-core check; frac in 2.6-3.1 = nan
-   3He 0.82 U(0–100 µm) : detected/emitted = 0.0023; mean E = 0.390 MeV; FWHM-core check; frac in 2.6-3.1 = nan
+   p 3.02   surface δ   : detected/emitted = 0.2971; mean E = 3.017 MeV; frac in 2.6-3.1 = 1.000
+   p 3.02   U(0–1 µm)   : detected/emitted = 0.2969; mean E = 2.970 MeV; frac in 2.6-3.1 = 1.000
+   p 3.02   U(0–10 µm)  : detected/emitted = 0.2965; mean E = 2.508 MeV; frac in 2.6-3.1 = 0.476
+   p 3.02   U(0–100 µm) : detected/emitted = 0.0667; mean E = 1.840 MeV; frac in 2.6-3.1 = 0.211
+   t 1.01   surface δ   : detected/emitted = 0.2971; mean E = 0.998 MeV; frac in 2.6-3.1 = nan
+   t 1.01   U(0–1 µm)   : detected/emitted = 0.2970; mean E = 0.836 MeV; frac in 2.6-3.1 = nan
+   t 1.01   U(0–10 µm)  : detected/emitted = 0.0880; mean E = 0.540 MeV; frac in 2.6-3.1 = nan
+   t 1.01   U(0–100 µm) : detected/emitted = 0.0087; mean E = 0.541 MeV; frac in 2.6-3.1 = nan
+   3He 0.82 surface δ   : detected/emitted = 0.2966; mean E = 0.774 MeV; frac in 2.6-3.1 = nan
+   3He 0.82 U(0–1 µm)   : detected/emitted = 0.2237; mean E = 0.393 MeV; frac in 2.6-3.1 = nan
+   3He 0.82 U(0–10 µm)  : detected/emitted = 0.0228; mean E = 0.386 MeV; frac in 2.6-3.1 = nan
+   3He 0.82 U(0–100 µm) : detected/emitted = 0.0023; mean E = 0.390 MeV; frac in 2.6-3.1 = nan

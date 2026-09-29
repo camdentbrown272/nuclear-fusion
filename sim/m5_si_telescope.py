@@ -34,13 +34,15 @@ BASE = dict(
     bE_mm=15.1,         # E active radius (~715 mm2 ; >= Delta-E + gap*tan(theta_max))
     tdE_um=25.0,        # Delta-E thickness
     tE_um=500.0,        # E thickness
-    theta_max=50.0,     # software angular cut from strip positions (deg)
+    theta_max=90.0,     # no angle-limiting collimator (a fixed PID band <= 2.0 x normal-incidence dE suffices)
     fwhm_dE=0.050,      # MeV; 25 um x 150 mm2 quadrant ~0.6 nF -> ~40-50 keV FWHM (preamp noise slope)
     fwhm_E=0.025,       # MeV; ULTRA-class
     win_um=0.05,        # entrance windows (Si-equivalent), each detector face
     thr=0.10,           # MeV trigger threshold per detector
     overlayer=[("PdO", 0.02)],
 )
+MISID = 1e-4  # assumed floor for alpha -> proton-band misidentification (edge/partial-charge events that
+#               survive the guard-ring + collimator); the Gaussian-tail value from the MC is ~0
 MU_FLUX = 1.0 / 60.0  # muons cm^-2 s^-1 on horizontal area, sea level (PDG Cosmic-ray review,
 #                       https://pdg.lbl.gov/2022/reviews/rpp2022-rev-cosmic-rays.pdf)
 
@@ -121,7 +123,7 @@ def pid_ratio(ev, cfg=BASE):
 def proton_cut(ev, cfg=BASE, lo=0.75, hi=None):
     """Coincidence (both > threshold) + angular cut + Delta-E within proton band."""
     if hi is None:
-        hi = 1.0 / np.cos(np.radians(cfg["theta_max"])) + 0.2
+        hi = min(1.0 / max(np.cos(np.radians(cfg["theta_max"])), 1e-3) + 0.2, 2.0)
     coinc = (ev["dE"] > cfg["thr"]) & (ev["E"] > cfg["thr"]) & ev["in_dE"] & ev["ang_ok"]
     with np.errstate(invalid="ignore"):
         r = pid_ratio(ev, cfg)
@@ -138,6 +140,13 @@ def p_window_low(cfg=BASE):
 
 
 # --------------------------------------------------------------------------------------- muons
+def _e_range_inv_si(L_cm):
+    """Electron kinetic energy (MeV) whose CSDA range in Si equals L_cm (Katz-Penfold, 0.01-3 MeV)."""
+    E = np.logspace(-3, 1, 400)
+    R = 0.412 * E ** (1.265 - 0.0954 * np.log(E)) / 2.329 / 1e0 * 1e-0  # g/cm2 -> cm (formula gives g/cm2)
+    return np.interp(np.asarray(L_cm), R, E)
+
+
 def muon_bkg(cfg=BASE, n=2_000_000):
     """Cosmic muons through horizontal Delta-E and E disks: Landau energy loss;
     probability that a muon mimics a proton in the PID window."""
@@ -155,7 +164,14 @@ def muon_bkg(cfg=BASE, n=2_000_000):
         bg = 30.0
         mpv = xi * (np.log(2 * 0.511e6 * bg ** 2 / 173.0) + np.log(xi * 1e6 / 173.0) + 0.2 - 1.0)
         lam = stats.landau.rvs(size=n, random_state=RNG)
-        dep[key] = np.maximum(mpv + xi * (lam + 0.22278), 0)
+        extra = xi * (lam + 0.22278)
+        # delta-ray escape: a knock-on electron whose CSDA range exceeds the layer thickness leaves
+        # the detector; its deposit is capped at ~ the energy of an electron with range = path length
+        # (Si: R ~ 0.0412 E^(1.265-0.0954 ln E) g/cm2 Katz-Penfold; inverted numerically)
+        Ecap = _e_range_inv_si(L)
+        extra = np.where(extra > Ecap, Ecap, extra)
+        dep[key] = np.maximum(mpv + extra, 0)
+        dep[key + "_L"] = L
     # half of muons crossing E also cross Delta-E (geometric overlap ~ area ratio)
     frac_both = (cfg["coll_mm"] / cfg["bE_mm"]) ** 2
     ev = dict(dE=dep["dE"] + RNG.normal(0, cfg["fwhm_dE"] / 2.3548, n),
@@ -222,6 +238,54 @@ def recoil_bkg(target, cfg=BASE, n=400_000):
     # isotropic emission: telescope_events samples only upward hemisphere -> factor 0.5
     return dict(total=w, pid=w * 0.5 * np.mean(sel * sig_w), peak=w * 0.5 * np.mean(pk * sig_w),
                 single_peak=w * 0.5 * np.mean((((ev["E"] + ev["dE"]) > 2.6) & ((ev["E"] + ev["dE"]) < 3.1) & ev["in_dE"]) * sig_w))
+
+
+def si_internal_bkg(cfg=BASE, n=400_000):
+    """28Si(n,p) events inside the Delta-E and E detectors from cosmic fast neutrons.
+    Flux(E_n>5 MeV) from cosmic_fast_n model; sigma(n,p) ~0.25 b averaged over 5-50 MeV
+    (ENDF/B-VIII 28Si(n,p) peaks ~0.25-0.3 b at 10-15 MeV); proton energy uniform on [0, E_n-4 MeV];
+    heavy recoil (28Al) deposits U(0,0.6 MeV) with 50 % pulse-height defect in the detector of origin."""
+    En, ftot = cosmic_fast_n(4 * n)
+    En = En[En > 5.0][:n]
+    n = len(En)
+    f5 = ftot * np.mean(cosmic_fast_n(200000)[0] > 5.0)
+    Ep = RNG.uniform(0, 1, n) * np.minimum(En - 4.0, 25.0)
+    rec = 0.5 * RNG.uniform(0, 0.6, n)
+    mu = RNG.uniform(-1, 1, n)
+    amu = np.maximum(np.abs(mu), 1e-3)
+    t, tE, w = cfg["tdE_um"], cfg["tE_um"], cfg["win_um"]
+    nSi = st.MAT["Si"][1] / 28.086 * st.NA
+    VdE = np.pi * (cfg["coll_mm"] / 10) ** 2 * t * 1e-4
+    VE = np.pi * (cfg["bE_mm"] / 10) ** 2 * tE * 1e-4
+    in_dE = RNG.uniform(0, 1, n) < VdE / (VdE + VE)
+    u = np.where(in_dE, RNG.uniform(0, t, n), RNG.uniform(0, tE, n))  # depth from own front face
+    dE = np.zeros(n)
+    E = np.zeros(n)
+    # born in Delta-E, going down (mu>0 means towards E)
+    a = in_dE & (mu > 0)
+    E1 = st.e_after("p", "Si", Ep[a], (t - u[a]) / amu[a])
+    dE[a] = Ep[a] - E1 + rec[a]
+    E2 = st.e_after("p", "Si", E1, 2 * w / amu[a])
+    E[a] = E2 - st.e_after("p", "Si", E2, tE / amu[a])
+    b = in_dE & (mu <= 0)
+    dE[b] = Ep[b] - st.e_after("p", "Si", Ep[b], u[b] / amu[b]) + rec[b]
+    # born in E, going up (towards Delta-E)
+    c = (~in_dE) & (mu < 0)
+    E1 = st.e_after("p", "Si", Ep[c], u[c] / amu[c])
+    E[c] = Ep[c] - E1 + rec[c]
+    E2 = st.e_after("p", "Si", E1, 2 * w / amu[c])
+    dE[c] = E2 - st.e_after("p", "Si", E2, t / amu[c])
+    d = (~in_dE) & (mu >= 0)
+    E[d] = Ep[d] - st.e_after("p", "Si", Ep[d], (tE - u[d]) / amu[d]) + rec[d]
+    dE += RNG.normal(0, cfg["fwhm_dE"] / 2.3548, n)
+    E += RNG.normal(0, cfg["fwhm_E"] / 2.3548, n)
+    ev = dict(dE=dE, E=E, Etot=dE + E, in_dE=np.ones(n, bool), ang_ok=np.ones(n, bool), punch=np.zeros(n, bool))
+    rate = f5 * 0.25e-24 * nSi * (VdE + VE)
+    wl = p_window_low(cfg)
+    sel = proton_cut(ev, cfg) & (ev["Etot"] > wl) & (ev["Etot"] < 3.1)
+    sing = ((E > 2.6) & (E < 3.1) & (dE < cfg["thr"])) | ((dE > 2.6) & (dE < 3.1) & (E < cfg["thr"]))
+    return dict(rate_total=rate, pid=rate * sel.mean(), peak=rate * (sel & (ev["Etot"] > 2.6)).mean(),
+                single_peak=rate * sing.mean())
 
 
 # --------------------------------------------------------------------------------------- alpha backgrounds
@@ -294,7 +358,7 @@ def main():
                 axs[0].plot(ds, row, "o-", label=f"{A} mm²")
     axs[0].set_xlabel("membrane–ΔE distance d (mm)")
     axs[0].set_ylabel("p detected / p emitted (4π)")
-    axs[0].set_title("a = 10 mm membrane, θ ≤ 50°, PID-accepted")
+    axs[0].set_title("a = 10 mm membrane, PID-accepted p")
     axs[0].legend(fontsize=7)
     # angular cut effect
     cuts = [30, 40, 50, 60, 70, 90]
@@ -341,13 +405,13 @@ def main():
     mu = muon_bkg(n=200000)
     Et = np.linspace(wl, 3.1, 50)
     ax.plot(Et, 0.75 * dE_p_normal(Et), "k--", lw=0.8)
-    ax.plot(Et, (1 / np.cos(np.radians(BASE["theta_max"])) + 0.2) * dE_p_normal(Et), "k--", lw=0.8, label="proton PID band")
+    ax.plot(Et, 2.0 * dE_p_normal(Et), "k--", lw=0.8, label="proton PID band")
     ax.set_xlabel("E_total = ΔE + E (MeV)")
     ax.set_ylabel("ΔE (MeV), 25 µm")
     ax.set_xlim(0, 13)
     ax.set_ylim(0, 6)
     ax.legend(fontsize=7, markerscale=5)
-    ax.set_title("C3 telescope: 25 µm ΔE / 500 µm E, θ ≤ 50°")
+    ax.set_title("C3 telescope: 25 µm ΔE / 500 µm E, no angular collimation")
     fig.tight_layout()
     fig.savefig(os.path.join(FIGS, "m5_si_pid.png"), dpi=130)
     plt.close(fig)
@@ -388,32 +452,41 @@ def main():
     # detector-intrinsic alphas (ORTEC ULTRA-AS warranty <=24 counts/day in 3-8 MeV for 450 mm2;
     # https://www.ortec-online.com/-/media/ametekortec/brochures/u/ultra_ultra-as-a4.pdf) scaled to 600 mm2
     det_alpha_day = 24.0 * 600 / 450
-    # Si(n,p)/(n,a) inside Delta-E: flux(>5 MeV) ~ 4.5e-3 cm-2 s-1 (Gordon 2004 spectrum), sigma ~0.45 b
-    nSi = st.MAT["Si"][1] / 28.086 * st.NA
-    vdE = np.pi * (BASE["b_mm"] / 10) ** 2 * BASE["tdE_um"] * 1e-4
-    si_np = 4.5e-3 * 0.45e-24 * nSi * vdE
+    sint = si_internal_bkg()
+    P(f"   Si(n,p) reactions: {sint['rate_total'] * DAY:.2f}/day in Delta-E+E volumes")
+    # columns: single Si 2.6-3.1 (no PID) | telescope 2.6-3.1 (PID) | telescope PID window ; category
     budget = [
-        # name, single-detector peak window (no PID), PID window after cuts (per day)
-        ("cosmic muons (no veto)", mu["rate_s"] * mu["p_single_peak"] * DAY, mu["rate_s"] * mu["p_pid"] * DAY),
-        ("detector-intrinsic alphas (spec max)", det_alpha_day * 0.5 / 5.0, det_alpha_day * 1e-4),
-        ("membrane bulk U+Th, 1 ppb each", al["bulkUTh_1ppb_single_peak"] * DAY, max(al["bulkUTh_1ppb_pid"] * DAY, 1e-4 * al["bulkUTh_1ppb_single_peak"] * DAY * 10)),
-        ("membrane surface 210Po, 1 /cm2/day", al["Po210_surf_1perday_cm2_single_peak"] * DAY, max(al["Po210_surf_1perday_cm2_pid"], 1e-4 * al["Po210_surf_1perday_cm2_detected"]) * DAY),
-        ("n-p recoils from residual H (H/D=1 %)", 0.01 * rp["single_peak"] * DAY, 0.01 * rp["pid"] * DAY),
-        ("n-d recoils (misID as p)", rd["single_peak"] * DAY, rd["pid"] * DAY),
-        ("Si(n,p),(n,a) in Delta-E (upper bound)", si_np * DAY * 0.1, si_np * DAY * 0.3),
+        ("cosmic muons (no veto)", mu["rate_s"] * mu["p_single_peak"] * DAY, mu["rate_s"] * mu["p_peak"] * DAY,
+         mu["rate_s"] * mu["p_pid"] * DAY, "muon"),
+        ("detector-intrinsic alphas (spec max, misID 1e-4)", det_alpha_day * 0.5 / 5.0,
+         det_alpha_day * MISID * 0.3, det_alpha_day * MISID, "alpha"),
+        ("membrane bulk U+Th, 1 ppb each (misID 1e-4)", al["bulkUTh_1ppb_single_peak"] * DAY,
+         al["bulkUTh_1ppb_single_peak"] * DAY * MISID, al["bulkUTh_1ppb_single_peak"] * DAY * MISID * 3, "alpha"),
+        ("membrane surface 210Po, 1 /cm2/day (misID 1e-4)", al["Po210_surf_1perday_cm2_single_peak"] * DAY,
+         al["Po210_surf_1perday_cm2_detected"] * DAY * MISID * 0.3, al["Po210_surf_1perday_cm2_detected"] * DAY * MISID, "alpha"),
+        ("n-p recoils, residual H (H/D=1 %)", 0.01 * rp["single_peak"] * DAY, 0.01 * rp["peak"] * DAY, 0.01 * rp["pid"] * DAY, "neutron"),
+        ("n-d recoils misID as p", rd["single_peak"] * DAY, rd["peak"] * DAY, rd["pid"] * DAY, "neutron"),
+        ("Si(n,p) internal (Delta-E and E)", sint["single_peak"] * DAY, sint["peak"] * DAY, sint["pid"] * DAY, "neutron"),
     ]
-    tot_s = tot_p = 0
-    P(f"   {'source':42s} {'single Si, 2.6-3.1':>20s} {'telescope PID window':>22s}")
-    for name, s1, s2 in budget:
-        tot_s += s1
-        tot_p += s2
-        P(f"   {name:42s} {s1:20.3g} {s2:22.3g}")
-    P(f"   {'TOTAL':42s} {tot_s:20.3g} {tot_p:22.3g}")
+    tot = np.zeros(3)
+    cat = {}
+    P(f"   {'source':50s} {'single Si 2.6-3.1':>18s} {'tel. 2.6-3.1':>13s} {'tel. PID window':>16s}")
+    for name, s1, s2, s3, c in budget:
+        v = np.array([s1, s2, s3])
+        tot += v
+        cat[c] = cat.get(c, 0) + v
+        P(f"   {name:50s} {s1:18.3g} {s2:13.3g} {s3:16.3g}")
+    P(f"   {'TOTAL (counts/day)':50s} {tot[0]:18.3g} {tot[1]:13.3g} {tot[2]:16.3g}")
     P(f"   n-p recoil rate in a PdH control (H/Pd=0.9) would be {rp['pid'] * DAY:.3g}/day in the PID window "
-      f"(this is a REAL-proton background specific to the H control; total recoils {rp['total'] * DAY:.2g}/day)")
-    P(f"   with muon veto (99 %) + 10 cm HDPE around chamber (fast-n x0.5 assumed): see MDA table")
-    B_design = tot_p
-    B_single = tot_s
+      f"(REAL protons specific to the H control; total recoils in top 60 um {rp['total'] * DAY:.2g}/day)")
+    # improved: muon veto 99 %, 10 cm HDPE + 1 mm Cd/borated liner: fast-n induced x0.6 (assumption: only
+    # the <10 MeV part (~40 % of >1 MeV flux) is attenuated appreciably by 10 cm HDPE)
+    impr = cat["muon"] * 0.01 + cat.get("alpha", 0) + cat["neutron"] * 0.6
+    P(f"   with 99 % muon veto + 10 cm HDPE (fast-n x0.6): single {impr[0]:.3g}, tel. peak {impr[1]:.3g}, "
+      f"tel. PID {impr[2]:.3g} counts/day")
+    B_design = tot[2]
+    B_single = tot[0]
+    B_peak = tot[1]
 
     # ---------------------------------------------------------------- 6. vacuum
     P("\n== 6. Vacuum requirements")
@@ -425,28 +498,31 @@ def main():
             P(f"   {part} {E0} MeV: loss over 10 mm at {Pm:g} mbar air = {Sair * rho * 1.0:.3g} keV")
     # D2 gas load from permeation
     for J in [1e15, 1e16, 1e17]:
-        Q = J * np.pi * (BASE["a_mm"] / 10) ** 2 / 2 * 1.380649e-23 * 293 * 1e4  # mbar L/s  (D2 molecules)
+        Q = J * np.pi * (BASE["a_mm"] / 10) ** 2 / 2 * 1.380649e-23 * 293 * 10  # Pa m3/s -> mbar L/s (x10); D2 molecules
         P(f"   D permeation flux {J:.0e} D/cm2/s -> gas load {Q:.2e} mbar L/s -> P = {Q / 50:.1e} mbar with 50 L/s (D2) pumping")
 
     # ---------------------------------------------------------------- 7. MDA
     P("\n== 7. Minimum detectable D-D fusion rate (fusions/s; BR(p+t)=0.5) -- 5 sigma discovery at 50 % power,"
       " background known from equal-duration H-control/off data (see m5_stats)")
     scen = {
-        "single Si, 2.6-3.1 (no PID), 30 d": (eff["U(0-5um)"][0], B_single),
-        "telescope peak 2.6-3.1, 30 d": (eff["U(0-5um)"][0], B_design * 0.4),
-        "telescope PID window, 30 d": (eff["U(0-5um)"][1], B_design),
-        "telescope PID, +veto+HDPE, 30 d": (eff["U(0-5um)"][1], B_design * 0.3),
+        "single Si, 2.6-3.1 (no PID)": (eff["U(0-5um)"][0], B_single),
+        "telescope, 2.6-3.1 peak": (eff["U(0-5um)"][0], B_peak),
+        "telescope, PID window": (eff["U(0-5um)"][1], B_design),
+        "telescope, PID, +veto+HDPE": (eff["U(0-5um)"][1], impr[2]),
     }
     mda_rows = []
     for name, (e, B) in scen.items():
         for days in [1, 14, 30]:
             b = B * days
-            s = ms.discovery_signal(b, alpha_sigma=5.0, power=0.5, b_unc_rel=1 / np.sqrt(max(b, 1.0)) if b > 0 else 0)
-            rate = s / (e * 0.5 * days * DAY)
-            mda_rows.append((name, days, e, B, s, rate))
-            P(f"   {name:36s} {days:3d} d: eff={e:.3f}, B={B:.3g}/day -> s_5sig={s:.1f} counts -> {rate:.2e} fusions/s")
+            s1 = ms.discovery_signal(b, alpha_sigma=5.0, power=0.5, tau=1.0) if b > 0 else ms.discovery_signal(0)
+            s10 = ms.discovery_signal(max(b, 1e-4), alpha_sigma=5.0, power=0.5, tau=10.0)
+            s2 = ms.discovery_signal(b, alpha_sigma=5.0, power=0.5)
+            r1, r10, r2 = (x / (e * 0.5 * days * DAY) for x in (s1, s10, s2))
+            mda_rows.append((name, days, e, B, s1, r1, s10, r10, s2, r2))
+            P(f"   {name:28s} {days:3d} d: eff/p={e:.3f} B={B:.3g}/d | ctrl tau=1: s={s1:5.1f} {r1:.1e}/s"
+              f" | tau=10: s={s10:5.1f} {r10:.1e}/s | known: s={s2:5.1f} {r2:.1e}/s")
     out.close()
-    return dict(eff=eff, B_design=B_design, B_single=B_single, budget=budget, mda=mda_rows)
+    return dict(eff=eff, B_design=B_design, B_single=B_single, B_peak=B_peak, B_impr=impr, budget=budget, mda=mda_rows)
 
 
 if __name__ == "__main__":

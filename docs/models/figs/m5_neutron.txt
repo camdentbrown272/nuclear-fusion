@@ -1,0 +1,41 @@
+== Validation (infinite media)
+   thermal diffusion length: water 2.88 cm (Lamarsh 2.85 cm; calibration input D=0.16 cm), HDPE 2.33 cm (literature ~2.1-2.3 cm; prediction)
+   Fermi age 2.0 MeV -> 1.46 eV in water: 25.3 cm2 (Lamarsh fission-spectrum value 27 cm2)
+   Fermi age 2.45 MeV -> 1.46 eV in water: 29.9 cm2 (Lamarsh fission-spectrum value 27 cm2)
+   Fermi age 2.45 MeV -> 1.46 eV in HDPE: 19.9 cm2
+
+== 3He bank efficiency vs moderator thickness in front of tubes (2.45 MeV point source at cavity centre)
+   cavity radius 8 cm, tubes 1" x 40 cm active, 4 atm, pitch 4 cm on ring, 6 cm HDPE behind
+   t_front= 1.0 cm: eff = 0.142
+   t_front= 2.0 cm: eff = 0.153
+   t_front= 3.0 cm: eff = 0.195
+   t_front= 4.0 cm: eff = 0.220
+   t_front= 5.0 cm: eff = 0.237
+   t_front= 6.0 cm: eff = 0.227
+   t_front= 8.0 cm: eff = 0.208
+   t_front=10.0 cm: eff = 0.175
+   back-moderator scan (t_front=4): 2 cm: 0.109, 4 cm: 0.177, 6 cm: 0.216, 10 cm: 0.234
+   p=4.0 atm, pitch 4.0 cm: eff = 0.218
+   p=10.0 atm, pitch 4.0 cm: eff = 0.242
+   p=4.0 atm, pitch 3.0 cm: eff = 0.229
+   outer borated-HDPE shield scan (response per neutron entering the OUTER surface; rate scales with its area):
+     shield   0 cm: response 0.0985 -> cosmic bkg 1.857 cps
+     shield  10 cm: response 0.0234 -> cosmic bkg 0.685 cps
+     shield  20 cm: response 0.0088 -> cosmic bkg 0.348 cps
+     shield  30 cm: response 0.0030 -> cosmic bkg 0.151 cps
+
+== Baseline bank (t_front=4, t_back=6, cavity r=8 cm, 1 mm Cd + 20 cm borated HDPE shield)
+   tubes: 18; eff(2.45 MeV, centre) = 0.218
+   response to external cosmic spectrum (per entering neutron) = 0.008
+   background: cosmic 0.308 + muon-induced 0.031 + intrinsic 0.005 = 0.344 cps (unshielded bank: ~1.8 cps)
+   EJ-309 5x5 cell background in 0.1-0.8 MeVee n-band: cosmic n 0.188 + gamma leak 0.150 cps
+
+== EJ-309 5"x5" at 10 cm: geometric 0.078, intrinsic (>0.1 MeVee) 0.713, per cell 0.0556; 2 cells 0.1112
+   BD-PND at 3.0 cm: 1.10e-05 bubbles per emitted neutron
+   BD-PND at 5.0 cm: 3.97e-06 bubbles per emitted neutron
+   BD-PND background ~0.65 bubbles/day (cosmic neutron dose ~9 nSv/h)
+
+== Cosmic background systematics for the 3He bank
+     1 d: N_cosmic = 2.66e+04; statistical 1 sigma = 0.613 %; a 1 hPa pressure change shifts it by 0.72 % = 1.2 sigma
+    14 d: N_cosmic = 3.73e+05; statistical 1 sigma = 0.164 %; a 1 hPa pressure change shifts it by 0.72 % = 4.4 sigma
+    30 d: N_cosmic = 7.99e+05; statistical 1 sigma = 0.112 %; a 1 hPa pressure change shifts it by 0.72 % = 6.4 sigma

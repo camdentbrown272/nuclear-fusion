@@ -221,6 +221,11 @@ def main():
         P(f"   {name:42s} eff/fusion={e:.2e} bkg={b:.2e}/s")
         P("      days: " + " ".join(f"{T / DAY:9.2g}" for T in Ts))
         ax.loglog(rates, Ts / DAY, "o-", label=name)
+    e, b = chans["C3 Si telescope, PID window (U 0-5 um)"]
+    T10 = np.array([time_to_5sigma(r * e, b, tau_bkg=10.0) for r in rates])
+    ax.loglog(rates, T10 / DAY, "k:", label="C3 Si telescope, background known from 10× live time")
+    P("   C3 Si telescope, background characterised over 10x the live time (tau=10):")
+    P("      days: " + " ".join(f"{T / DAY:9.2g}" for T in T10))
     # modulation example on C3 Si
     e, b = chans["C3 Si telescope, PID window (U 0-5 um)"]
     Tm = np.array([modulation_time_to_5sigma(r * e, b, T_mod=3600, tau=300) for r in rates])
