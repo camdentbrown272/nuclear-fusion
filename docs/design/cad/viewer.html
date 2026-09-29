@@ -33,6 +33,7 @@ body { background: var(--bg); color: var(--ink); font-family: var(--body); font-
 .stage { position: relative; background: var(--stage); min-height: 0; }
 #view { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
 .stage-head { position: absolute; left: 16px; top: 14px; right: 16px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; pointer-events: none; }
+.stage-head h1, .stage-head .rev { background: var(--panel); border-radius: 4px; padding: 2px 8px; }
 .stage-head h1 { margin: 0; font-family: var(--display); font-stretch: 72%; font-weight: 750; font-size: 26px; letter-spacing: 0.01em; text-wrap: balance; }
 .stage-head .rev { font-family: var(--mono); font-size: 12px; color: var(--muted); }
 .status { position: absolute; left: 16px; bottom: 14px; font-family: var(--mono); font-size: 12px; color: var(--muted); }
@@ -46,7 +47,8 @@ aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y
 .seg input { position: absolute; opacity: 0; pointer-events: none; }
 .seg label { border-radius: 0; flex: 1; text-align: center; }
 .seg label:first-of-type { border-radius: 6px 0 0 6px; }
-.seg label:last-of-type { border-radius: 0 6px 6px 0; border-left: 0; }
+.seg label:last-of-type { border-radius: 0 6px 6px 0; }
+.seg label:not(:first-of-type) { border-left: 0; }
 .seg input:checked + label { background: var(--accent); border-color: var(--accent); color: var(--panel); }
 .controls { display: flex; flex-direction: column; gap: 10px; }
 .row { display: flex; align-items: center; gap: 10px; }
@@ -84,7 +86,7 @@ aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y
     <canvas id="view"></canvas>
     <div class="stage-head">
       <h1 id="title">DFM cell, half section</h1>
-      <span class="rev">iteration 1 rev B · dimensions in mm</span>
+      <span class="rev">iteration 1 rev C · dimensions in mm</span>
     </div>
     <div class="status" id="status">Loading model…</div>
     <div class="toolbar">
@@ -99,6 +101,7 @@ aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y
       <div class="seg" role="radiogroup" aria-label="Model">
         <input type="radio" name="model" id="m-cell" value="cell" checked><label for="m-cell">Single cell</label>
         <input type="radio" name="model" id="m-house" value="house"><label for="m-house">8-cell array</label>
+        <input type="radio" name="model" id="m-gamma" value="gamma"><label for="m-gamma">γ station</label>
       </div>
     </div>
 
@@ -144,11 +147,11 @@ aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y
     recombiner: ["Recombiner", "cell", "Hydrophobic Pt/Al₂O₃ that turns D₂ + O₂ back into D₂O. Sits ≥20 mm above the liquid behind a baffle and flame arrestor.", "R6 safety"],
     Pd_membrane_12um: ["Palladium membrane", "mem", "12 µm annealed Pd, 20 mm active. Loaded to D/Pd ≥ 0.9 from the electrolyte side. Thin enough that a 3 MeV fusion proton born anywhere in it reaches the detector.", "ADR-005 §2.2"],
     exit_finish_Au50nm: ["Exit finish (H-L shown)", "mem", "One finish per membrane sets the loading state of the whole foil: Au 50 nm (high loading, no flux), Ni 20 nm (high loading, small flux) or bare/CaO (maximum flux).", "ADR-005 §2.1"],
-    Pt_corrugated_annulus: ["Corrugated Pt annulus", "mem", "Diffusion-bonded to the membrane rim at 850 °C. Platinum does not absorb hydrogen, and the fold gives ≥1 mm radial travel so the swelling membrane is never clamped.", "ADR-005 §2.3"],
+    Pt_corrugated_annulus: ["Corrugated Pt annulus", "mem", "0.15 mm platinum with two folds, press-bonded to the membrane rim at 850 °C. Platinum does not absorb hydrogen, and the folds give ≥1 mm radial travel so the swelling membrane is never clamped. The loading gauge sits on a Pd-only rim inside the bond so the platinum cannot short it.", "ADR-007 §2.4"],
     Au_wire_seal_upper: ["Au-wire seal (cell side)", "mem", "Metal seal. No elastomer on any gas boundary.", "red-team-1A P1"],
     Au_wire_seal_lower: ["Au-wire seal (front side)", "mem", "Metal seal between the annulus and the front-volume flange.", "red-team-1A P1"],
-    Mo_catch_grid: ["Mo catch grid", "det", "0.10 mm photo-etched molybdenum, 1.0 mm hex holes, 80 % open. The membrane rests on it at +30 mbar; it only carries load if the front pressure is lost.", "M3 rec. 4"],
-    cross_septum: ["Cross septum", "det", "4.0 × 0.3 mm grounded cross that gives each quadrant of the membrane its own detector, for localisation and burst checks.", "rev B §3.2"],
+    Mo_catch_grid: ["Mo catch grid", "det", "0.30 mm stress-relieved molybdenum, 1.0 mm hex holes, carried by the septum. Rated to 1 bar and proof-tested at 1.5 bar. The membrane rests on it at +30 mbar. It passes 43 % of protons, the price of surviving a pressure fault.", "ADR-007 §2.2"],
+    cross_septum: ["Cross septum", "det", "4.0 × 0.3 mm grounded cross. Gives each quadrant of the membrane its own detector and doubles as the deep rib that carries the grid.", "rev C §3.2"],
     Si_dE_25um_quadrants: ["ΔE silicon, 25 µm", "det", "Four-quadrant 600 mm² transmission detector, 4 mm below the exit face. With the E detector it identifies protons (3.02 MeV) by energy loss.", "M5 rec. 1"],
     dE_alumina_board: ["ΔE mount", "det", "Epoxy-free alumina board, low-alpha materials.", "M5 · M8"],
     Si_E_500um: ["E silicon, 500 µm", "det", "Stopping detector 1.5 mm below ΔE. Together they give 0.22 detection efficiency for exit-face protons.", "M5"],
@@ -158,7 +161,28 @@ aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y
     PdAg_element_350C: ["Pd–Ag element", "he", "Heated to 350 °C. The only way D₂ enters or leaves the front volume; helium cannot pass, so it stays for counting.", "M8 rec. 4"],
     all_metal_valve_He_manifold: ["He manifold valve", "he", "Aliquots go to the getter and a high-resolution mass spectrometer that separates ⁴He from D₂. 5σ floor 0.16–0.39 nW equivalent.", "M8"],
     capacitance_gauge: ["Capacitance gauge", "he", "Front pressure for the ±40 mbar interlock. Ion gauges are banned because they pump and emit helium.", "M8"],
-    reverse_relief_line: ["Reverse-relief line", "he", "20 mbar burst foil to the cell headspace. Protects the membrane if the cell loses pressure (unsupported, 50 mbar would exceed yield).", "ADR-005 §2.3"],
+    reverse_relief_line: ["Reverse-relief line", "he", "Reverse-acting disk, 20 ± 5 mbar, to the cell headspace. Protects the membrane if the cell loses pressure (lifted off the grid, 50 mbar would exceed yield).", "ADR-007 §2.2"],
+    aux_Pt_cathode_ring: ["Auxiliary Pt cathode", "cell", "Platinum ring that takes the current during the lock-in \"off\" half-periods, so the cell's heat and electric field stay constant while the membrane current switches.", "ADR-006 §3"],
+    RTD_thermowell: ["Electrolyte thermometer", "cell", "PTFE-sheathed RTD. \"22 ± 1 °C\" refers to this reading; the servo uses I·V feed-forward.", "ADR-007 §2.5"],
+    water_jacket: ["Water jacket", "cell", "Removes up to ~11 W at 500 mA/cm². Without it the electrolyte would run 36–80 K hot.", "ADR-007 §2.5"],
+    forward_relief_valve: ["Forward relief valve", "he", "Opens from cell to front at +150 mbar, so neither membrane nor grid is ever the weakest boundary.", "ADR-007 §2.2"],
+    recycle_line: ["D₂ recycle line", "loop", "Carries deuterium that crossed the membrane away from the Pd–Ag exhaust.", "ADR-007 §2.1"],
+    mass_flow_meter_flux_regressor: ["Mass-flow meter", "loop", "Measures how much deuterium crosses the membrane. This is the flux signal the lock-in analysis correlates with counts.", "ADR-006 §3"],
+    metal_bellows_pump: ["Metal-bellows pump", "loop", "All-metal pump that returns permeated D₂ to the cell.", "ADR-007 §2.1"],
+    buffer_volume: ["Buffer volume", "loop", "Smooths the recycle flow for the pressure controller.", "ADR-007 §2.1"],
+    PdAg_return_element: ["Return Pd–Ag element", "loop", "Second helium-blocking filter before the gas re-enters the cell headspace.", "ADR-007 §2.1"],
+    recycle_return_line: ["Return line", "loop", "Into the cell headspace under pressure control. Without this loop the sealed cell would burn its own gas and build up oxygen (red-team-1B, finding B1).", "ADR-007 §2.1"],
+    chilled_water_loop: ["Chilled-water loop", "house", "Removes ~230 W of cell heat that 20 cm of polyethylene would otherwise trap (+64 K).", "ADR-007 §2.5"],
+    NaI_well_8x8in: ["NaI(Tl) well calorimeter", "gamma", "8 × 8 inch crystal with a well. Catches 68 % of the energy of electron–positron pairs (12–30 MeV) from a D+D resonance, the channel Czerski claims.", "ADR-006; M7"],
+    NaI_Al_can: ["Crystal housing", "gamma", "Aluminium can around the hygroscopic NaI.", "M7"],
+    PMT_3in: ["Photomultiplier", "gamma", "Reads out the crystal.", "M7"],
+    mini_permeation_cell: ["Mini permeation cell", "gamma", "Same 12 µm Pd, electrolyte and anode as the DFM cells, small enough to sit in the well. Heavy-water and light-water copies swap every 5 days.", "ADR-006 §1"],
+    mini_cell_electrolyte: ["Electrolyte (mini cell)", "gamma", "1.0 M LiOD in D₂O, or LiOH in H₂O for the control blocks.", "ADR-006"],
+    mini_cell_Pd_foil_12um: ["Pd foil (mini cell)", "gamma", "Exit face on a small vacuum volume; an RGA measures the deuterium flux.", "ADR-006"],
+    mini_cell_services_UHV_RGA: ["Mini-cell services", "gamma", "Vacuum line to the RGA, electrical leads, gas lines.", "ADR-006"],
+    borated_HDPE_5cm: ["Borated polyethylene 5 cm", "gamma", "Absorbs neutrons made in the lead.", "M7"],
+    Pb_shield_10cm: ["Lead shield 10 cm", "gamma", "Blocks room gamma rays. Kept ≥2 m from the ³He neutron house, where lead would fake neutron counts.", "ADR-006"],
+    veto_5cm_5faces: ["Muon veto", "gamma", "Plastic scintillator on five faces, 20 µs veto window.", "M7"],
     Cu_inner_shield_5cm: ["Copper inner shield", "house", "5 cm OFHC copper. Copper, not lead, so muon-induced neutrons do not fake signals in the neutron bank.", "M5"],
     HDPE_moderator_3He_bank: ["Moderator and ³He bank", "house", "Polyethylene slows fusion neutrons (2.45 MeV) for the 24 helium-3 counters. Bank efficiency about 0.12–0.18.", "M5"],
     borated_HDPE_20cm_plus_Cd: ["Borated shield", "house", "20 cm borated polyethylene plus 1 mm cadmium against room neutrons.", "M5"],
@@ -166,9 +190,7 @@ aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y
     muon_veto_top: ["Muon veto (top)", "house", "Plastic scintillator. Cosmic-muon coincidences are vetoed in the silicon data.", "rev B §4.2"],
     muon_veto_side_N: ["Muon veto (side)", "house", "Plastic scintillator panel.", "rev B §4.2"],
     muon_veto_side_S: ["Muon veto (side)", "house", "Plastic scintillator panel.", "rev B §4.2"],
-    LaBr3_E: ["LaBr₃ detector", "house", "One of a back-to-back pair looking for 511–511 keV coincidences (the electron–positron channel claimed by Czerski).", "M7 (pending)"],
-    LaBr3_W: ["LaBr₃ detector", "house", "One of a back-to-back pair for 511–511 keV coincidences.", "M7 (pending)"],
-    LaBr3_rail: ["LaBr₃ rail", "house", "Lets the pair be moved to any cell.", "rev B §4.2"],
+
   };
   const CELLROLE = {
     cell_A1: "Active cell A1 (stage 1: H-L, lot a)", cell_A2: "Active cell A2 (stage 1: H-L, lot b)",
@@ -178,12 +200,14 @@ aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y
     "cell_T-H(FX)": "T-H(FX) control: light water, FX membrane.",
     cell_B: "B: blank telescope under 100 µm Al. Internal, cosmic and electronic background.",
   };
-  const GROUPS = { cell: "Electrolytic cell", mem: "Membrane and mount", det: "Detector stack", he: "Front volume and helium", house: "House and shielding", cells: "Cells" };
+  const GROUPS = { cell: "Electrolytic cell", mem: "Membrane and mount", det: "Detector stack", he: "Front volume and helium", loop: "Deuterium recycle loop", house: "House and shielding", gamma: "γ station", cells: "Cells" };
   const FACTS = {
     cell: [["12 µm", "Pd membrane, 20 mm active diameter"], ["D/Pd ≥ 0.9", "target loading, electrolytic"], ["4.0 mm", "anode gap and membrane-to-ΔE distance"], ["0.5 bar", "D₂ on both sides (Δp +30 mbar)"], ["30 cm³", "sealed front volume for ⁴He"], ["3.02 MeV", "D+D proton the telescope looks for"]],
     house: [["8", "positions: 4 active, 3 controls, 1 blank"], ["90 mm", "cell pitch"], ["5 cm", "copper inner shield"], ["24", "³He neutron counters"], ["20 cm", "borated polyethylene + 1 mm Cd"], ["2 stages", "of 4 membranes, 2 Pd lots"]],
+    gamma: [["8 × 8 in", "NaI well calorimeter"], ["68 %", "efficiency for 12–30 MeV pairs"], ["10 cm", "lead, ≥2 m from the neutron house"], ["5 days", "D₂O / H₂O alternation"], ["5×10⁻³ /s", "pair-rate MDA at sea level"], ["3×10⁻⁴ /s", "MDA at ≥30 m water equivalent"]],
   };
   const THIN = ["Pd_membrane_12um", "exit_finish_Au50nm", "Si_dE_25um_quadrants"];
+  const CORE = ["cell_body_316L", "lid_316L", "front_volume_316L"];
 
   const canvas = document.getElementById("view");
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
@@ -234,7 +258,10 @@ aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y
       meshes.push(o);
     });
     const box = new THREE.Box3().setFromObject(g);
-    models[which] = { group: g, meshes, box };
+    // frame and cut on the cell body + front volume when present, so external plumbing does not shift the view
+    const core = new THREE.Box3();
+    meshes.forEach(o => { if (CORE.includes(o.userData.part) && !o.userData.cell) core.expandByObject(o); });
+    models[which] = { group: g, meshes, box: core.isEmpty() ? box : core };
   }
 
   function nameOf(o) { let p = o; while (p) { if (INFO[p.name]) return p.name; p = p.parent; } return o.name || "part"; }
@@ -277,10 +304,12 @@ aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y
     if (current === "house") {
       byGroup.cells = Object.keys(CELLROLE);
       Object.keys(INFO).forEach(k => { if (INFO[k][1] === "house" && m.meshes.some(o => o.userData.part === k)) (byGroup.house = byGroup.house || []).push(k); });
+    } else if (current === "gamma") {
+      Object.keys(INFO).forEach(k => { if (m.meshes.some(o => o.userData.part === k)) (byGroup.gamma = byGroup.gamma || []).push(k); });
     } else {
       Object.keys(INFO).forEach(k => { if (m.meshes.some(o => o.userData.part === k)) (byGroup[INFO[k][1]] = byGroup[INFO[k][1]] || []).push(k); });
     }
-    ["cells", "cell", "mem", "det", "he", "house"].forEach(gk => {
+    ["cells", "cell", "mem", "det", "he", "loop", "house", "gamma"].forEach(gk => {
       if (!byGroup[gk]) return;
       const g = document.createElement("div"); g.className = "group";
       g.innerHTML = `<h3>${GROUPS[gk]}</h3>`;
@@ -316,9 +345,9 @@ aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y
   function show(which) {
     if (root) scene.remove(root);
     current = which; root = models[which].group; scene.add(root);
-    document.getElementById("title").textContent = which === "cell" ? "DFM cell, half section" : "DFM-8 array in its shielded house";
+    document.getElementById("title").textContent = { cell: "DFM cell, half section", house: "DFM-8 array in its shielded house", gamma: "γ station: NaI well and mini cell" }[which];
     const cut = document.getElementById("cut");
-    cut.checked = true; document.getElementById("cutpos").value = which === "cell" ? 0.5 : 0.68;
+    cut.checked = true; document.getElementById("cutpos").value = which === "house" ? 0.68 : 0.5;
     document.getElementById("facts").innerHTML = FACTS[which].map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join("");
     buildList(); applyCut(); applyThin(); frame(which); select(null);
   }
@@ -345,8 +374,9 @@ aside { background: var(--panel); border-left: 1px solid var(--line); overflow-y
 
   document.querySelectorAll('input[name="model"]').forEach(r => r.addEventListener("change", async e => {
     const w = e.target.value;
-    if (!models[w]) { status.textContent = "Loading model…"; try { await load(w, w === "cell" ? "dfm_cell.gltf.json" : "dfm_house.gltf.json"); } catch (err) { status.textContent = "Could not load the model file. Reload the page to try again."; return; } }
-    status.textContent = w === "cell" ? "Drag to rotate · scroll or pinch to zoom · right-drag to pan" : "Top covers and the near wall are cut away so the cells are visible";
+    const FILES = { cell: "dfm_cell.gltf.json", house: "dfm_house.gltf.json", gamma: "gamma_station.gltf.json" };
+    if (!models[w]) { status.textContent = "Loading model…"; try { await load(w, FILES[w]); } catch (err) { status.textContent = "Could not load the model file. Reload the page to try again."; return; } }
+    status.textContent = w === "house" ? "Top covers and the near wall are cut away so the cells are visible" : "Drag to rotate · scroll or pinch to zoom · right-drag to pan";
     show(w);
   }));
   document.getElementById("cut").addEventListener("change", applyCut);

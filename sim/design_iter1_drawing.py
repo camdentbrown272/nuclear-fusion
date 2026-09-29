@@ -1,8 +1,8 @@
-"""Iteration-1 (rev B) drawings: DFM cell cross-section and membrane-type allocation.
+"""Iteration-1 (rev C) drawings: DFM cell cross-section and membrane-type allocation.
 
 Schematic, not a machining drawing. Vertical scale of thin layers is exaggerated
 (labelled). Outputs docs/design/figs/iter1_dfm_cell.png and iter1_skins.png.
-Geometry per docs/design/iteration-1.md rev B (ADR-005).
+Geometry per docs/design/iteration-1.md rev C (ADR-005/006/007).
 """
 import os
 import matplotlib
@@ -25,7 +25,7 @@ def cell_section():
     R = 10.0          # active radius (mm)
     wall = 4.0        # 316L wall incl. 1 mm PTFE liner
     # --- electrolyte cell (above membrane, y > 0) ---
-    box(ax, -R - wall, 0.3, wall - 1, 22, "#c9ced6", label="316L")
+    box(ax, -R - wall, 0.3, wall - 1, 22, "#c9ced6", label="316L\n+jacket")
     box(ax, R + 1, 0.3, wall - 1, 22, "#c9ced6", label="316L")
     box(ax, -R - 1, 0.3, 1, 22, "#f2efe6", lw=0.4)
     box(ax, R, 0.3, 1, 22, "#f2efe6", lw=0.4)
@@ -34,6 +34,8 @@ def cell_section():
     ax.text(0, 9.5, "1.0 M LiOD / D$_2$O, low-T, ≥99.9 % D  (~12 mL)", ha="center", fontsize=9)
     ax.plot([-R + 0.5, R - 0.5], [4.3, 4.3], color="#888", lw=3, ls=(0, (1, 0.6)))
     ax.text(R - 0.6, 5.0, "Pt mesh anode, g = 4.0 ± 0.2", ha="right", fontsize=8)
+    ax.plot([-8.5, 8.5], [2.3, 2.3], ls="none", marker="o", ms=3, color="#888")
+    ax.text(-R + 0.6, 2.9, "aux. Pt ring cathode (current steering)", fontsize=7)
     box(ax, -R, 14.3, 2 * R, 8, "#f4f4f4")
     ax.text(0, 16.4, "headspace ≤ 15 mL, D$_2$ 0.50 bar abs\n+1 % Kr tracer", ha="center", fontsize=8)
     box(ax, -4.5, 19.6, 9, 1.8, "#ffe0b3", label="recombiner (baffled)")
@@ -57,7 +59,7 @@ def cell_section():
     ax.annotate("Pd membrane 12 ± 1 µm (drawn ×25)\nactive Ø20.0; entry face = cathode (ground)",
                 xy=(R + 1.5, t / 2), xytext=(R + 4.5, 3.0), fontsize=8,
                 arrowprops=dict(arrowstyle="->", lw=0.7))
-    ax.text(R + 7.6, 0.9, "corrugated Pt annulus, diffusion-bonded;\nAu-wire seals (≥1 mm radial travel)", fontsize=7, va="center")
+    ax.text(R + 7.6, 0.9, "Pt annulus 0.15, two folds, press-bonded Ø23–25;\nPd-only gauge rim Ø20–23; Au-wire seals", fontsize=7, va="center")
     # exit-face skins (bottom surface), quadrants shown as two halves in section
     colors = {"L": "#d4a017", "M": "#6fa8dc", "F": "#b7b7b7", "X": "#93c47d"}
     box(ax, -R, -0.12, 2 * R, 0.12, colors["L"], lw=0.3)
@@ -69,7 +71,7 @@ def cell_section():
     for xg in [x * 1.1 for x in range(-9, 10)]:
         box(ax, xg - 0.05, y_grid, 0.1, 0.25, "#5b3a29", lw=0)
     box(ax, -0.25, y_grid - 0.1, 0.5, 0.45, "#5b3a29", lw=0)
-    ax.text(-18, y_grid + 0.1, "Mo catch grid 0.10, 1.0 hex, open 0.80", fontsize=7, ha="right")
+    ax.text(-18, y_grid + 0.1, "Mo catch grid 0.30 (proof 1.5 bar), 1.0 hex", fontsize=7, ha="right")
     box(ax, -0.15, -5.0, 0.3, 3.7, "#a0522d", lw=0.4)
     ax.text(0.5, -3.2, "cross septum\n4.0 × 0.3", fontsize=7)
     y_de = -5.3
@@ -79,8 +81,8 @@ def cell_section():
     box(ax, -14, y_de - 1.8, 28, 0.5, "#1c4587", lw=0.4)
     ax.text(-18, y_de - 1.55, "E 500 µm", fontsize=7, ha="right", va="center")
     box(ax, -R - wall - 3, -13.5, 2 * (R + wall + 3), 13.0, "none", ec="#444", lw=1.5, ls="--")
-    ax.text(0, -11.2, "FRONT VOLUME ~30 cm³, D$_2$ 0.50 bar abs\nP$_{cell}$ − P$_{front}$ = +30 ± 20 mbar\n"
-            "vacuum-fired 316L, ≤10 metal seals, no glass/epoxy/ion gauge\nreverse-relief foil 20 mbar → headspace (failure only)",
+    ax.text(0, -11.2, "FRONT VOLUME ~30 cm³, D$_2$ 0.50 bar abs\nP$_{cell}$ − P$_{front}$ = +30 ± 10 mbar\n"
+            "metal seals with pumped interspaces; no glass/epoxy/ion gauge\nforward relief +150 mbar; reverse disk 20 ± 5 mbar\nPd–Ag exhaust → mass-flow → bellows pump → Pd–Ag → headspace (D₂ recycle)",
             ha="center", fontsize=8)
     for xp, lab in [(-10, "Pd–Ag element 350 °C\n(only D$_2$ path)"), (0, "all-metal valve →\nHe manifold / HR-QMS"),
                     (10, "capacitance gauge")]:
@@ -97,7 +99,7 @@ def cell_section():
     ax.set_ylim(-19, 29)
     ax.set_aspect("equal")
     ax.axis("off")
-    ax.set_title("Iteration 1 rev B — DFM cell cross-section (mm; thin layers exaggerated)", fontsize=11)
+    ax.set_title("Iteration 1 rev C — DFM cell cross-section (mm; thin layers exaggerated)", fontsize=11)
     fig.tight_layout()
     fig.savefig(os.path.join(OUT, "iter1_dfm_cell.png"), dpi=160)
     plt.close(fig)

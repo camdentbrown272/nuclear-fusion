@@ -6,9 +6,9 @@
 |---|---|---|---|
 | 0. Charter + first-principles budget | `00-charter.md`, `models/M0-rate-budget.md` | lead | done |
 | 1. Literature base | `research/R1…R7` | 7 parallel research agents | done |
-| 2. Quantitative models | `models/M1…M8`, `sim/` | parallel cloud sessions (one per model) | done except M7 (γ/e±, finishing) |
+| 2. Quantitative models | `models/M1…M8`, `sim/` | parallel cloud sessions (one per model) | done |
 | 3. Synthesis | `decisions/ADR-*`, `design/iteration-1.md` | lead | done: iteration 1 = DFM-4 membrane array (C3) + C1/C3-G Tier-2 arms |
-| 4. Red team | `design/red-team-*.md`, revised iteration-1 | independent adversarial agents | red-team-0 (plan) done; red-team-1A–D (design) running as cloud sessions |
+| 4. Red team | `design/red-team-*.md`, revised iteration-1 | independent adversarial agents | done: red-team-0 (plan), red-team-1A–D (design) → iteration-1 rev C (ADR-005/006/007), pre-registration v1, 3D model |
 
 ## Research streams (Phase 1)
 

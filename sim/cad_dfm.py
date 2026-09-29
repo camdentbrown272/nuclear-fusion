@@ -1,11 +1,12 @@
-"""Parametric 3D model of iteration-1 rev B (DFM cell + DFM-8 house).
+"""Parametric 3D model of iteration-1 rev C (DFM cell, DFM-8 house, gamma station).
 
-Every dimension comes from docs/design/iteration-1.md (rev B). Units: mm. z = 0 is the
+Every dimension comes from docs/design/iteration-1.md (rev C; ADR-005/006/007). Units: mm. z = 0 is the
 membrane exit face; the electrolytic cell is above (+z), the front volume/telescope below.
 
 Outputs (docs/design/cad/):
   dfm_cell.step / .glb / .stl   detailed single cell (true 12 um membrane, hex catch grid)
   dfm_house.step / .glb         8-position array in its Cu / 3He / borated-HDPE house (simplified cells)
+  gamma_station.step / .glb     NaI well calorimeter with mini permeation cell in its Pb shield (ADR-006)
 
 Requires: pip install cadquery
 """
@@ -17,13 +18,13 @@ import cadquery as cq
 OUT = os.environ.get("CAD_OUT", os.path.join(os.path.dirname(__file__), "..", "docs", "design", "cad"))
 os.makedirs(OUT, exist_ok=True)
 
-# ---------------------------------------------------------------- design parameters (rev B §3.2)
+# ---------------------------------------------------------------- design parameters (rev C §3.2)
 P = dict(
     membrane_t=0.012,        # 12 um Pd
-    membrane_d=22.0,         # blank dia (bonded to Pt annulus over r 10.25..11)
+    membrane_d=25.0,         # blank dia: Pd-only gauge rim to 23, bond 23..25 (ADR-007 §2.4)
     active_d=20.0,           # wetted/active
-    annulus_id=20.5, annulus_od=34.0, annulus_t=0.10, corr_r=13.5, corr_h=0.6,
-    grid_d=20.4, grid_t=0.10, hex_af=1.0, hex_web=0.10, rib_w=0.5,
+    annulus_id=23.0, annulus_od=36.0, annulus_t=0.15, corr_r=(14.2, 16.2), corr_h=0.6,
+    grid_d=20.4, grid_t=0.30, hex_af=1.0, hex_web=0.15, rib_w=0.3,
     liner_t=1.0, bore_d=20.0, cell_wall=4.0, cell_h=30.0,
     anode_gap=4.0, anode_d=19.0, anode_t=0.10,
     electrolyte_h=14.0,
@@ -41,6 +42,7 @@ C = dict(  # RGBA colours
     cu=(0.78, 0.45, 0.25, 1.0), hdpe=(0.95, 0.95, 0.93, 0.25), bhdpe=(0.75, 0.88, 0.75, 0.18),
     he3=(0.80, 0.82, 0.85, 1.0), veto=(0.55, 0.35, 0.75, 0.22), labr=(0.95, 0.90, 0.35, 1.0),
     recomb=(1.0, 0.85, 0.6, 1.0), cd=(0.6, 0.6, 0.65, 1.0), pdag=(0.62, 0.62, 0.66, 1.0),
+    jacket=(0.55, 0.70, 0.85, 0.45), nai=(0.85, 0.92, 0.98, 0.9), pb=(0.35, 0.37, 0.42, 1.0),
 )
 
 
@@ -70,11 +72,16 @@ def exit_finish(kind="H-L"):
 
 
 def pt_annulus():
-    """0.10 mm Pt annulus with one convolution (radial compliance >= 1 mm), revolved profile."""
-    ri, ro, t, rc, hc = P["annulus_id"] / 2, P["annulus_od"] / 2, P["annulus_t"], P["corr_r"], P["corr_h"]
-    w = 1.2  # half-width of the convolution
-    pts = [(ri, -t), (rc - w, -t), (rc - w / 2, hc - t), (rc + w / 2, hc - t), (rc + w, -t), (ro, -t),
-           (ro, 0.0), (rc + w, 0.0), (rc + w / 2, hc), (rc - w / 2, hc), (rc - w, 0.0), (ri, 0.0)]
+    """0.15 mm Pt annulus with two convolutions (radial compliance >= 1 mm), revolved profile."""
+    ri, ro, t, hc = P["annulus_id"] / 2, P["annulus_od"] / 2, P["annulus_t"], P["corr_h"]
+    w = 0.8  # half-width of each convolution
+    lo, hi = [(ri, -t)], [(ri, 0.0)]
+    for rc in P["corr_r"]:
+        lo += [(rc - w, -t), (rc - w / 2, hc - t), (rc + w / 2, hc - t), (rc + w, -t)]
+        hi += [(rc - w, 0.0), (rc - w / 2, hc), (rc + w / 2, hc), (rc + w, 0.0)]
+    lo += [(ro, -t)]
+    hi += [(ro, 0.0)]
+    pts = lo + hi[::-1]
     return cq.Workplane("XZ").polyline(pts).close().revolve(360, (0, 0, 0), (0, 1, 0))
 
 
@@ -83,7 +90,7 @@ def au_wire(r, z):
 
 
 def catch_grid():
-    """Photo-etched Mo grid: 1.0 mm A/F hex holes, 0.10 webs, 0.5 mm ribs along the septum cross."""
+    """Photo-etched stress-relieved Mo grid 0.30 mm: 1.0 mm A/F hex holes, 0.15 webs; solid band on the septum rib."""
     g = disk(P["grid_d"], P["grid_t"], -P["grid_t"])
     pitch = P["hex_af"] + P["hex_web"]
     pts = []
@@ -155,7 +162,11 @@ def cell_internals():
     feed = cq.Workplane("XY").workplane(offset=z0 + P["anode_gap"]).center(-6.0, 0).circle(0.5).extrude(
         P["cell_h"] + 5.0 - z0 - P["anode_gap"])
     recomb = cq.Workplane("XY").workplane(offset=P["cell_h"] - 5.0).center(0, 0).rect(9.0, 5.0).extrude(2.0)
-    return electrolyte, anode, feed, recomb
+    aux = cq.Workplane("XY").workplane(offset=z0 + 2.0).center(8.5, 0).circle(0.25).revolve(360, (-8.5, 0, 0), (-8.5, 1, 0))
+    aux_lead = cq.Workplane("XY").workplane(offset=z0 + 2.0).center(0, 8.5).circle(0.3).extrude(P["cell_h"] + 5.0 - z0 - 2.0)
+    well = (cq.Workplane("XY").workplane(offset=8.0).center(4.0, -6.0).circle(1.5)
+            .extrude(P["cell_h"] + 5.0 + 6.0 - 8.0))
+    return electrolyte, anode, feed, recomb, aux.union(aux_lead), well
 
 
 def front_body():
@@ -186,18 +197,22 @@ def build_cell(detailed=True, finish="H-L"):
     a.add(body, name="cell_body_316L", color=cq.Color(*C["steel"]))
     a.add(liner, name="PTFE_liner", color=cq.Color(*C["ptfe"]))
     a.add(lid, name="lid_316L", color=cq.Color(*C["steel"]))
-    el, anode, feed, recomb = cell_internals()
+    el, anode, feed, recomb, aux, well = cell_internals()
     a.add(el, name="electrolyte_LiOD_D2O", color=cq.Color(*C["electrolyte"]))
     a.add(anode, name="Pt_mesh_anode", color=cq.Color(*C["pt"]))
     a.add(feed, name="anode_feedthrough", color=cq.Color(*C["cu"]))
     a.add(recomb, name="recombiner", color=cq.Color(*C["recomb"]))
+    a.add(aux, name="aux_Pt_cathode_ring", color=cq.Color(*C["pt"]))
+    a.add(well, name="RTD_thermowell", color=cq.Color(*C["ptfe"]))
+    a.add(ring(40.0, 31.0, 16.0, 8.0), name="water_jacket", color=cq.Color(*C["jacket"]))
+    a.add(fwd_relief(), name="forward_relief_valve", color=cq.Color(*C["steel"]))
     a.add(membrane(), name="Pd_membrane_12um", color=cq.Color(*C["pd"]))
     fin = exit_finish(finish)
     if fin is not None:
         a.add(fin, name="exit_finish_Au50nm", color=cq.Color(*C["au"]))
     a.add(pt_annulus(), name="Pt_corrugated_annulus", color=cq.Color(*C["pt"]))
-    a.add(au_wire(16.5, 0.35), name="Au_wire_seal_upper", color=cq.Color(*C["au"]))
-    a.add(au_wire(16.5, -0.35 - P["annulus_t"]), name="Au_wire_seal_lower", color=cq.Color(*C["au"]))
+    a.add(au_wire(17.3, 0.35), name="Au_wire_seal_upper", color=cq.Color(*C["au"]))
+    a.add(au_wire(17.3, -0.35 - P["annulus_t"]), name="Au_wire_seal_lower", color=cq.Color(*C["au"]))
     a.add(catch_grid() if detailed else disk(P["grid_d"], P["grid_t"], -P["grid_t"]),
           name="Mo_catch_grid", color=cq.Color(*C["mo"]))
     a.add(septum(), name="cross_septum", color=cq.Color(*C["cu"]))
@@ -214,7 +229,40 @@ def build_cell(detailed=True, finish="H-L"):
     a.add(valve, name="all_metal_valve_He_manifold", color=cq.Color(*C["steel"]))
     a.add(gauge, name="capacitance_gauge", color=cq.Color(*C["steel"]))
     a.add(relief, name="reverse_relief_line", color=cq.Color(*C["steel"]))
+    for nm, part, col in recycle_loop(zb):
+        a.add(part, name=nm, color=cq.Color(*C[col]))
     return a
+
+
+def fwd_relief():
+    """Forward differential relief cell -> front (+150 mbar), bridging the flanges on +y."""
+    y = P["flange_od"] / 2 + 5.0
+    body = cq.Workplane("XY").workplane(offset=-8.0).center(0, y).circle(4.0).extrude(16.0)
+    arms = (cq.Workplane("XZ").workplane(offset=-y).center(0, 5.0).circle(1.2).extrude(-6.0)
+            .union(cq.Workplane("XZ").workplane(offset=-y).center(0, -5.0).circle(1.2).extrude(-6.0)))
+    return body.union(arms)
+
+
+def recycle_loop(zb):
+    """Closed D2 recycle loop (ADR-007 §2.1): Pd-Ag exhaust -> MFM -> bellows pump -> buffer -> Pd-Ag -> headspace."""
+    x0, zl = -14.0, zb - 18.0 - 28.0
+    parts = []
+    down = cq.Workplane("XY").workplane(offset=zl - 12.0).center(x0, 0).circle(1.5).extrude(12.0)
+    run = cq.Workplane("YZ").workplane(offset=x0).center(0, zl - 12.0).circle(1.5).extrude(-30.0)
+    parts.append(("recycle_line", down.union(run), "steel"))
+    parts.append(("mass_flow_meter_flux_regressor",
+                  cq.Workplane("XY").box(10, 14, 10).translate((x0 - 12.0, 0, zl - 12.0)), "steel"))
+    parts.append(("metal_bellows_pump",
+                  cq.Workplane("XY").workplane(offset=zl - 20.0).center(x0 - 30.0, 0).circle(8.0).extrude(18.0), "pdag"))
+    riser = cq.Workplane("XY").workplane(offset=zl - 4.0).center(x0 - 30.0, 0).circle(1.5).extrude(
+        P["cell_h"] + 12.0 - (zl - 4.0))
+    top = cq.Workplane("YZ").workplane(offset=x0 - 30.0).center(0, P["cell_h"] + 12.0).circle(1.5).extrude(38.0)
+    parts.append(("recycle_return_line", riser.union(top), "steel"))
+    parts.append(("PdAg_return_element",
+                  cq.Workplane("XY").workplane(offset=0.0).center(x0 - 30.0, 0).circle(5.0).extrude(18.0), "pdag"))
+    parts.append(("buffer_volume",
+                  cq.Workplane("XY").workplane(offset=-30.0).center(x0 - 30.0, 0).circle(7.0).extrude(16.0), "steel"))
+    return parts
 
 
 # ---------------------------------------------------------------- house (rev B §4.2)
@@ -269,12 +317,14 @@ def build_house():
             x = (c - 1.5) * H["pitch"]
             y = (0.5 - r) * H["pitch"]
             a.add(simple, name=f"cell_{lab}", loc=cq.Location(cq.Vector(x, y, -20.0)))
-    # LaBr3 pair (2" x 2") back-to-back across the array, on a rail
-    for s in (-1, 1):
-        a.add(cq.Workplane("YZ").workplane(offset=s * 210).center(0, -20).circle(25.4).extrude(50.8 * s),
-              name=f"LaBr3_{'E' if s > 0 else 'W'}", color=cq.Color(*C["labr"]))
-    a.add(cq.Workplane("XY").workplane(offset=-cz / 2).rect(cx - 10, 20).extrude(10), name="LaBr3_rail",
-          color=cq.Color(*C["steel"]))
+    # chilled-water loop along the Cu floor (removes ~230 W of cell heat; ADR-007 §2.5)
+    loop = None
+    for yy in (-120.0, 120.0):
+        seg = cq.Workplane("YZ").workplane(offset=-200.0).center(yy, -cz / 2 + 12).circle(5.0).extrude(400.0)
+        loop = seg if loop is None else loop.union(seg)
+    for xx in (-200.0, 200.0):
+        loop = loop.union(cq.Workplane("XZ").workplane(offset=120.0).center(xx, -cz / 2 + 12).circle(5.0).extrude(-240.0))
+    a.add(loop, name="chilled_water_loop", color=cq.Color(*C["jacket"]))
     return a
 
 
@@ -294,6 +344,36 @@ def glb_to_json(stem):
         json.dump(doc, f, separators=(",", ":"))
 
 
+def build_gamma_station():
+    """8x8 inch NaI well calorimeter around a mini permeation cell; 5 cm BHDPE, 10 cm Pb, 5 cm veto (ADR-006)."""
+    a = cq.Assembly(name="gamma_station")
+    D, Hn, wd, wdep = 203.2, 203.2, 60.0, 140.0          # crystal and well
+    nai = disk(D, Hn, -Hn / 2).cut(disk(wd, wdep + 1, Hn / 2 - wdep))
+    a.add(nai, name="NaI_well_8x8in", color=cq.Color(*C["nai"]))
+    a.add(ring(D + 6, D, Hn + 3, -Hn / 2 - 3).union(disk(D + 6, 3, -Hn / 2 - 3)), name="NaI_Al_can",
+          color=cq.Color(*C["he3"]))
+    a.add(disk(76.0, 180.0, -Hn / 2 - 3 - 180.0), name="PMT_3in", color=cq.Color(*C["steel"]))
+    # mini permeation cell in the well: Pd foil at the bottom of a small cell, UHV exit below to an RGA line
+    zc = Hn / 2 - wdep + 20.0
+    mini = ring(40.0, 30.0, 70.0, zc).union(disk(40.0, 4.0, zc - 4.0))
+    a.add(mini, name="mini_permeation_cell", color=cq.Color(*C["steel"]))
+    a.add(disk(30.0 - 0.1, 30.0, zc + 0.5), name="mini_cell_electrolyte", color=cq.Color(*C["electrolyte"]))
+    a.add(disk(20.0, 0.012, zc), name="mini_cell_Pd_foil_12um", color=cq.Color(*C["pd"]))
+    a.add(cq.Workplane("XY").workplane(offset=zc + 70).center(14, 0).circle(3.0).extrude(260.0),
+          name="mini_cell_services_UHV_RGA", color=cq.Color(*C["steel"]))
+    ox, oz = D + 6 + 40.0, 0.0
+    inner = (ox, ox, Hn + 190.0)
+    bh = (inner[0] + 100, inner[1] + 100, inner[2] + 100)
+    a.add(box_shell(bh, inner).translate((0, 0, -60.0)), name="borated_HDPE_5cm", color=cq.Color(*C["bhdpe"]))
+    pb = (bh[0] + 200, bh[1] + 200, bh[2] + 200)
+    a.add(box_shell(pb, (bh[0] + 1, bh[1] + 1, bh[2] + 1)).translate((0, 0, -60.0)), name="Pb_shield_10cm",
+          color=cq.Color(*C["pb"]))
+    vx = pb[0] + 100
+    a.add(box_shell((vx, vx, pb[2] + 100), (pb[0] + 1, pb[1] + 1, pb[2] + 1)).translate((0, 0, -60.0)),
+          name="veto_5cm_5faces", color=cq.Color(*C["veto"]))
+    return a
+
+
 def export(assy, stem, stl=False, tol=0.02):
     assy.export(os.path.join(OUT, stem + ".step"))
     assy.export(os.path.join(OUT, stem + ".glb"), tolerance=tol, angularTolerance=0.2)
@@ -306,5 +386,6 @@ if __name__ == "__main__":
     cell = build_cell(detailed=True)
     export(cell, "dfm_cell", stl=True)
     export(build_house(), "dfm_house", tol=0.3)
+    export(build_gamma_station(), "gamma_station", tol=0.3)
     for f in sorted(os.listdir(OUT)):
         print(f, round(os.path.getsize(os.path.join(OUT, f)) / 1e6, 2), "MB")
