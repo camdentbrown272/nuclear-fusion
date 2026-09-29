@@ -217,7 +217,7 @@ The layer whose protons reach the detector at full energy (the top ~7 µm) is α
 - Empirically, contaminated, air-exposed surfaces *do* reach this: PdD₀.₉ foils deload at ~10¹⁵–10¹⁶ D cm⁻² s⁻¹ per face [calc from typical hour-scale deloading, BK]. But such surfaces are uncontrolled and drift as PdO is reduced and carbon builds up.
 
 **Consequences for documents already written:**
-- R7 §7.1 and R3 §9 recommend bake-out and in-situ Ar⁺ sputter cleaning. In a beam experiment implantation replenishes the surface D. In the cold DFM, cleaning *maximises* exit desorption and drives the whole foil into α phase. Consistent with this, Thunderbird's electrochemistry raised the rate by only 15 % [BK interpretation].
+- R7 §7.1 and R3 §9 recommend bake-out and in-situ Ar⁺ sputter cleaning. In a beam experiment implantation replenishes the surface D. In the cold DFM, cleaning *maximises* exit desorption and drives the exit skin into α phase; for J ≤ 10¹⁷ it drives the whole foil there. Consistent with this, Thunderbird's electrochemistry raised the rate by only 15 % [BK interpretation].
 - **The M6 brief item 6 premise is false.** Sectors with different skins do *not* "share the same deuterium flux". Sectors are mm-scale against a 25 µm thickness, so the flux is locally 1-D, and each skin sets its own x_exit and J. Sector comparisons then conflate chemistry with loading and flux.
 - **The M6 brief's "Au overlayer as the non-hydriding null" is inverted.** Au is a strong permeation barrier (it was used for exactly that in NTT 1990), so the Pd under a 20–50 nm Au sector is the *most* highly loaded region. 3 MeV protons from beneath it escape with a few keV of loss.
 
