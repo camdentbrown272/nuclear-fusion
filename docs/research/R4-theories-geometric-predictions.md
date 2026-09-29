@@ -95,7 +95,7 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 **Testable predictions.** ⁴He is the main ash, with neutrons and tritium at very low levels. The original version predicts 23.8 MeV alphas. H and D gas both work, with different ash.
 
 **Strongest critique.**
-- Localizing four electrons within 20 fm costs ≈9.4 MeV *each* (≈37 MeV; Section 4.6), which chemistry cannot supply. The "quadruplet electron" state is unproven, and the quantum many-body problem is treated semi-classically.
+- Localizing four electrons within 20 fm costs ≈9.4 MeV *each* (≈37 MeV; Section 4 (other checks)), which chemistry cannot supply. The "quadruplet electron" state is unproven, and the quantum many-body problem is treated semi-classically.
 - A symmetric four-body collapse is what Leggett–Baym-type bounds exclude in equilibrium.
 - 23.8 MeV alphas would cause copious secondary radiation and are not seen; the ≲20 keV alpha bound rules out the original version. BOLEP is ad hoc (no known process damps 47.6 MeV by a "black-body" cascade).
 - The gas-loading heat has no correlated nuclear ash.
@@ -173,7 +173,7 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 | Temperature | Lower is better for the BEC, but D mobility needs finite temperature. Kim proposed low-temperature tests † | K | Cryogenic gas loading |
 | D density | High | m⁻³ | High loading |
 
-**Strongest critique (our calculations, Section 4.8).**
+**Strongest critique (our calculations, Section 4 (other checks)).**
 - *Free* deuterons at PdD density: T_c ≈ 13 K; at 300 K nλ³ = 0.024 versus the 2.61 needed.
 - D in Pd is localized (band mass ≥10²–10⁴ m_D), so T_c ≈ 0.1–0.001 K.
 - A BEC of charged bosons keeps its short-range Coulomb hole; fusion depends on g(r → fm), which condensation does not change (Leggett–Baym again).
@@ -237,7 +237,7 @@ The loss term Γ(E) (decay channels open at high energy) destroys the destructiv
 
 ### 2.8 Heavy-electron and high-field ideas: nanotips and plasmonic hot spots
 
-Claim: intense fields at tips, cracks or plasmonic hot spots modify the barrier. Quantitatively (Section 4.4):
+Claim: intense fields at tips, cracks or plasmonic hot spots modify the barrier. Quantitatively (Section 4 (other checks)):
 
 1. **Scale.** The deuteron's Coulomb field is 5.8×10¹⁹ V/m at 5 fm and 5.8×10¹¹ V/m at 0.5 Å. The best tip field (~10¹⁰ V/m, near field evaporation) is **10⁻¹⁰** of the nuclear-scale field and ~2 % of the field at atomic spacing.
 2. **No relative force.** For identical q/m, a uniform field moves only the centre of mass; tunnelling sees only the *gradient*. At a 10 nm tip (~10¹⁸ V/m²) that is 7×10⁷ V/m across 0.74 Å, a ~5 meV shift.
@@ -263,7 +263,7 @@ Claim: intense fields at tips, cracks or plasmonic hot spots modify the barrier.
 
 **Predictions for hardware.** Excite at 8.3 ± 0.35 THz and 15.3 ± 0.22 THz for PdD (and ≈20.4 THz for PdH). Use p-polarized light on a thin Au overlayer (tens of nm) on highly loaded PdD. This can be combined with the Hagelstein vacancy recipe.
 
-**Strongest critique.** The only replication found no excess heat (of the ~100 mW scale Letts reported) in 231 triggered trials. Tens of mW cannot coherently drive a macroscopic THz mode (Section 4.7). The 15.3 THz (63 meV) assignment lies above most PdD optical-band estimates †.
+**Strongest critique.** The only replication found no excess heat (of the ~100 mW scale Letts reported) in 231 triggered trials. Tens of mW cannot coherently drive a macroscopic THz mode (Section 4 (other checks)). The 15.3 THz (63 meV) assignment lies above most PdD optical-band estimates †.
 
 **Credence: 2 %.**
 
