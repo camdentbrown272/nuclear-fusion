@@ -113,6 +113,10 @@ def main():
         ok = (XE >= 0.9) & (JJ >= J_target)
         if ok.any():
             ax.contour(Lg * 1e6, kg, ok.astype(float), levels=[0.5], colors="r", linewidths=2)
+        for nm, G, c in (("Ni 2 nm", G_overlayer("Ni", 2e-9, T0), "cyan"), ("Ni 20 nm", G_overlayer("Ni", 20e-9, T0), "cyan")):
+            keq = J_barrier(0.9, T0, G) / ce9 ** 2     # k_r giving the same flux at x_exit = 0.90
+            ax.axhline(keq, color=c, ls=":", lw=1)
+            ax.text(60, keq * 1.8, f"≈ {nm} overlayer", color=c, fontsize=7)
         ax.axhline(kr_Pd_lit(T0), color="orange", ls="--", lw=1)
         ax.text(5.5, kr_Pd_lit(T0) * 1.8, "bare Pd, lit. k_r (no cap)", color="orange", fontsize=7)
         ax.set_xscale("log")

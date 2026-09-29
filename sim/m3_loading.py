@@ -190,6 +190,9 @@ def main():
     for N, t in zip(Ns, tv):
         log(f"  N={N:4d}: tau90 = {t * Da / 1e-12:.4f}")
     ax[1].semilogx(Ns, np.array(tv) * Da / 1e-12, "o-")
+    ax[1].set_xticks(Ns)
+    ax[1].set_xticklabels([str(n) for n in Ns])
+    ax[1].minorticks_off()
     ax[1].set_xlabel("cells")
     ax[1].set_ylabel("tau90 = D_a t90 / l^2")
     ax[1].set_title("V3 mesh convergence (slab, x_s=0.9)", fontsize=9)

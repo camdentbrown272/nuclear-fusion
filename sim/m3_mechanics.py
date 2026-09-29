@@ -204,7 +204,7 @@ def main():
     ax[0].set_ylabel("membrane max stress at 1 atm (MPa)")
     ax[0].axhline(40, ls=":", color="grey")
     ax[0].legend(fontsize=7)
-    ax[0].set_title("Open fraction vs membrane stress", fontsize=9)
+    ax[0].set_title("Open fraction vs membrane stress (stress depends only on b/h, so h=25/web 0.1 = h=50/web 0.2)", fontsize=8)
     th = np.linspace(0, 80, 200)
     for ar in (0.25, 0.5, 1.0):
         q = np.clip(ar * np.tan(np.radians(th)), 0, 1)
