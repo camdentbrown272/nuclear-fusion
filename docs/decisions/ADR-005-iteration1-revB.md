@@ -118,7 +118,7 @@ Computed with `m5_si_telescope` over the real acceptance, 4 mm of 0.5 bar D₂:
 | P2 = **42 d fixed** (not data-dependent). In-regime hours reported | 1D-D8 with 1C-S11 |
 | P4 warm phase: fill raised to 1.0 bar (cell and front, balanced), **60 °C, 14 d** | 1D-D12 |
 | **P6a desorption window**: current off, front pumped through the HR-QMS line, telescopes on, dynamic He logged | 1D-D13 |
-| Al additive and SuperWave waveform as descriptive variants, one cell each per stage | 1D-D5, D10 |
+| Al additive as a descriptive variant on one C1 cell and one stage-2 H-L DFM; SuperWave-type waveform on one C1 cell | 1D-D5, D10 |
 | Certified low-tritium D₂O (≥ 99.9 % D), LSC assay per lot, ³He ingrowth correction, weekly H/D in headspace aliquots | 1A-P9, 1C-S10, 1D-D15 |
 | ¹⁰B markers removed from active membranes (kept on B and on the calibration membrane). One ⁶LiF calibration membrane per lot at 12 µm | 1A-P4, P8 |
 | ²²⁸Th/²²⁶Ra assay of LiOD and D₂O | 1A-P8 |
@@ -139,7 +139,7 @@ Computed with `m5_si_telescope` over the real acceptance, 4 mm of 0.5 bar D₂:
 ## 4. Consequences
 
 - **Cost.** Tier 1 grows to ≈ $0.55M (iteration-1 §12).
-- **Cheaper subset.** The minimum claim-weighted subset, in ADR-003 score per dollar, is **C3-G ×5 + C1 ×2 + H₂O twin + one DFM stage with 2 membranes** (≈ $0.2M).
+- **Cheaper subset.** The minimum claim-weighted subset, in ADR-003 score per dollar, is **C3-G ×5 + C1 ×2 + H₂O twin + one DFM stage with 2 membranes** (≈ $0.28M).
 - **Schedule.** Each DFM stage takes ≈ 16 weeks: commissioning, 42 d P2, P3, P4, P6. Two stages take ≈ 8 months.
 - **Honest prior.** Unchanged (≲ 3 % for any claim-rule positive). An all-null outcome yields magnitude limits conditional on the regime being reached, with a Bayes factor of order 1.4–1.6 against existence (1C-S7). It is **not** a refutation, and the write-up must say so.
 
