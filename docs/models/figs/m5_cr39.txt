@@ -1,0 +1,59 @@
+== Registration: LET at CR-39 surface (keV/um) for bare incidence; threshold 12.0
+   p 3.02 (DD)           : LET =    15.2 keV/um  registered=True
+   t 1.01 (DD)           : LET =    66.9 keV/um  registered=True
+   3He 0.82 (DD)         : LET =   265.1 keV/um  registered=True
+   222Rn alpha 5.49      : LET =   107.5 keV/um  registered=True
+   218Po alpha 6.00      : LET =   101.2 keV/um  registered=True
+   214Po alpha 7.69      : LET =    85.2 keV/um  registered=True
+   212Po alpha 8.78      : LET =    77.5 keV/um  registered=True
+   alpha 12 (Lipson)     : LET =    61.5 keV/um  registered=True
+   alpha 16              : LET =    49.3 keV/um  registered=True
+   p 14.7 (D-3He)        : LET =     4.3 keV/um  registered=False
+   p 1.7 (Lipson)        : LET =    23.0 keV/um  registered=True
+   (p above ~4-5 MeV are below threshold for a 6 h etch: 14.7 MeV p needs a 16-24 h etch or Si)
+
+== Stack response (normal incidence / 45 deg): residual energy (MeV) at CR-39; pre-layers [('Mylar', 6.0)]
+   species                              A              B              C              D
+   p 3.02 (DD)             2.92/2.88*   2.64/2.47*   1.35/0.00*   0.00/0.00 
+   t 1.01 (DD)             0.54/0.30*   0.00/0.00    0.00/0.00    0.00/0.00 
+   3He 0.82 (DD)           0.00/0.00    0.00/0.00    0.00/0.00    0.00/0.00 
+   222Rn alpha 5.49        4.80/4.49*   2.40/0.40*   0.00/0.00    0.00/0.00 
+   218Po alpha 6.00        5.35/5.07*   3.17/1.50*   0.00/0.00    0.00/0.00 
+   214Po alpha 7.69        7.15/6.92*   5.44/4.32*   0.00/0.00    0.00/0.00 
+   212Po alpha 8.78        8.29/8.08*   6.78/5.82*   0.00/0.00    0.00/0.00 
+   alpha 12 (Lipson)      11.61/11.45*  10.46/9.77*   5.16/0.00*   0.00/0.00 
+   alpha 16               15.69/15.56*  14.78/14.25*  11.08/8.51*   5.83/0.00*
+   p 14.7 (D-3He)         14.67/14.66   14.59/14.55   14.30/14.13   13.99/13.69 
+   p 1.7 (Lipson)          1.55/1.49*   1.08/0.75*   0.00/0.00    0.00/0.00 
+   (* = registered at normal incidence)
+
+== Species signature (which channels record it) -> identification logic
+   p 3.02 (DD)           : ABC-
+   t 1.01 (DD)           : A---
+   3He 0.82 (DD)         : ----
+   222Rn alpha 5.49      : AB--
+   218Po alpha 6.00      : AB--
+   214Po alpha 7.69      : AB--
+   212Po alpha 8.78      : AB--
+   alpha 12 (Lipson)     : ABC-
+   alpha 16              : ABCD
+   p 14.7 (D-3He)        : ----
+   p 1.7 (Lipson)        : AB--
+   3.02 MeV p  = A B C - ; t/3He = A - - - (t and 3He separated by pit diameter/depth; 3He LET 3x t);
+   natural alphas (Rn, U/Th, 210Po) = A B - - or A - - - : channel C is alpha-free by construction;
+   energetic alphas >14 MeV or p >3.4 MeV (registered) = A B C D. Channel D is the 'blind' control for C.
+
+== Filter tolerance: R(8.785 MeV alpha, Al) = 50.1 um ; R(3.02 p, Al) = 81.9 um
+   Al  50 um: p residual 1.53 (0 deg) / 0.48 (45 deg) MeV; 8.78 alpha residual 0.00 MeV
+   Al  55 um: p residual 1.35 (0 deg) / 0.00 (45 deg) MeV; 8.78 alpha residual 0.00 MeV
+   Al  60 um: p residual 1.14 (0 deg) / 0.00 (45 deg) MeV; 8.78 alpha residual 0.00 MeV
+   Al  65 um: p residual 0.91 (0 deg) / 0.00 (45 deg) MeV; 8.78 alpha residual 0.00 MeV
+   Al  70 um: p residual 0.64 (0 deg) / 0.00 (45 deg) MeV; 8.78 alpha residual 0.00 MeV
+   Al  75 um: p residual 0.28 (0 deg) / 0.00 (45 deg) MeV; 8.78 alpha residual 0.00 MeV
+   all-Mylar equivalent of 6 um Mylar + 55 um Al (same p residual): 84 um Mylar; it stops alphas up to 9.96 MeV
+
+== Detection efficiency of channel C (55 um Al) per emitted 3.02 MeV p (4pi), source U(0-5 um) PdD
+   electrolyte film   0.0 um: eff = 0.0972 (x CR-39 area fraction facing the cathode)
+   electrolyte film  10.0 um: eff = 0.0649 (x CR-39 area fraction facing the cathode)
+   electrolyte film  30.0 um: eff = 0.0100 (x CR-39 area fraction facing the cathode)
+   electrolyte film 100.0 um: eff = 0.0000 (x CR-39 area fraction facing the cathode)
