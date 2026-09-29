@@ -410,7 +410,6 @@ Calorimetric floor: 5 mW (R5 target) / 20-60 mW (R6 Seebeck)
   N1 HR-QMS, naive build                    : calorimetry(5 mW)/MD(7 d) = 4.5e+03
 
 ADR-002 arithmetic check: ADR says '~1e15 atoms per mJ'. Correct: 1 mJ = 2.62e+08 He; the calorimetric floor 5-60 mW x 1 day = 1.1e+14-1.4e+15 He.
-  [figure] docs/models/figs/m8_mdp_vs_time.png
 
 ==============================================================================
 9. GEOMETRY NUMBERS
@@ -432,3 +431,30 @@ NEG mass for a static window with 2x margin (A = 3 cm2):
   j =  100.0 mA/cm2: 1 d      247 g | 7 d 1.73e+03 g | 30 d 7.41e+03 g
 Recommended: ~50-100 g St 707/St 172 (CapaciTorr D400-D2000 class) supports 7-day windows
   at <=1-2 mA/cm2; higher flux needs dynamic pumping, shorter windows or a Pd-Ag permeator.
+
+==============================================================================
+10. ADR-002 REV 2 VARIANT: PRESSURE-BALANCED FRONT (~1 atm D2), PER-CELL SEALED
+==============================================================================
+Front volume 30 cm3 at 1013 mbar D2: inventory 7.46e+20 molecules (30.4 mbar L); aliquot pipette 1 cm3 -> fraction 0.033
+Permeation-driven pressure rise if nothing removes D2 (A = 3 cm2):
+  J = 1e+14 D/cm2/s (0.02 mA/cm2): +     17.6 mbar/day =     0.53 mbar L/day to remove
+  J = 1e+15 D/cm2/s (0.16 mA/cm2): +    175.9 mbar/day =     5.28 mbar L/day to remove
+  J = 1e+16 D/cm2/s (1.60 mA/cm2): +   1759.5 mbar/day =    52.78 mbar L/day to remove
+  J = 1e+17 D/cm2/s (16.02 mA/cm2): +  17595.0 mbar/day =   527.85 mbar L/day to remove
+Pd-Ag (100 um, ~350 C) at 1 atm upstream, vacuum downstream: 1.9e+18 D2/cm2/s -> 7.8e-03 cm2 removes J = 1e16 -> a ~1 cm2 element with a downstream valve is a He-tight pressure regulator
+He-tight fill/make-up: D2 carrying x_He of helium adds per 100 mbar step in the front:
+  cylinder D2, 1 ppm He               :  7.37e+13 He per step =  2.8e+02 J-equivalent
+  1 ppb                               :  7.37e+10 He per step =  2.8e-01 J-equivalent
+  Pd-Ag purified (seal-leak limited)  :  7.37e+04 He per step =  2.8e-07 J-equivalent
+  initial 1 atm fill with 1 ppm He: 7.5e+14 He offset (= 1 mW for 33 d); 2 % aliquot precision on it -> sigma 1.5e+13 atoms
+  20 keV recoil He range in 1 atm D2: 1.0 mm -> ballistic recoils thermalise in the gas (become measurable) if the screen/detectors are farther than this
+  76 keV recoil He range in 1 atm D2: 3.2 mm -> ballistic recoils thermalise in the gas (become measurable) if the screen/detectors are farther than this
+Getter per aliquot: 1.01 mbar L D2 = 0.038 g at the embrittlement limit; residual D2 after cleanup ~1.3e-10 mbar (HR-QMS limit 4.6e-10)
+Background (recommended build, no NEG in front): 1.86e+06 /day, sigma 7.02e+05 /day
+mode                                          sig_inst |          MD power (W), f = 1
+                                               (atoms) |       1 d       7 d      30 d
+H1f HR-QMS, 1 cm3 aliquot of 1 atm front       1.1e+07 |   2.5e-09   3.8e-10   1.8e-10
+S1f external sector MS, 1 cm3 aliquot          3.1e+07 |   6.9e-09   1.0e-09   2.8e-10
+  1e-06 W for 7 d -> He/D2 in front = 2.1e-10 (0.21 ppb)
+  0.001 W for 7 d -> He/D2 in front = 2.1e-07 (2.1e+02 ppb)
+  [figure] docs/models/figs/m8_mdp_vs_time.png

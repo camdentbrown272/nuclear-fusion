@@ -462,17 +462,25 @@ ax[0].set_xlabel("birth depth below the EXIT face (nm)")
 ax[0].set_ylabel("fraction reaching exit chamber as free gas")
 ax[0].set_title("(a) He reaching the static exit chamber, L = 25 µm")
 ax[0].set_ylim(-0.02, 1.02)
-ax[0].legend(loc="upper right")
-z = np.linspace(0, L_NM, 1500)
-pe, pi = p_thermal(z, L_NM, 30.0)
-ax[1].plot(z / 1e3, pe, color=SERIES[0], label="to exit face (vacuum)")
-ax[1].plot(z / 1e3, pi, color=SERIES[1], label="to entry face (electrolyte)")
-ax[1].plot(z / 1e3, 1 - pe - pi, color=SERIES[2], label="retained in Pd (melt)")
-ax[1].set_xlabel("birth depth below the exit face (µm)")
-ax[1].set_ylabel("fraction")
-ax[1].set_title("(b) Fate of thermal-birth He, λ = 30 nm")
-ax[1].legend(loc="center right")
-ax[1].set_ylim(-0.02, 1.02)
+ax[0].legend(loc="upper center", bbox_to_anchor=(0.5, -0.16), ncol=2, fontsize=8)
+labs_b = [s_ for s_, _ in SCEN]
+yb = np.arange(len(labs_b))
+left = np.zeros(len(labs_b))
+for k, (key, col, nm) in enumerate([("exit_gas", SERIES[0], "to exit chamber (gas)"),
+                                    ("entry", SERIES[1], "to entry face → electrolyte / cell headspace"),
+                                    ("retained", SERIES[2], "retained in Pd → post-run melt")]):
+    w = np.array([RES[(25.0, 30.0, "thermal", s_)][key] for s_ in labs_b])
+    ax[1].barh(yb, w, left=left, color=col, height=0.62, edgecolor=SURF, linewidth=1.5, label=nm)
+    left += w
+ax[1].set_yticks(yb)
+ax[1].set_yticklabels(labs_b)
+ax[1].invert_yaxis()
+ax[1].set_xlim(0, 1)
+ax[1].set_xlabel("fraction of produced ⁴He")
+ax[1].set_title("(b) Fate by reaction zone, thermal birth, λ = 30 nm")
+ax[1].grid(axis="y", visible=False)
+ax[1].legend(loc="upper center", bbox_to_anchor=(0.5, -0.16), ncol=1, fontsize=8)
+fig.tight_layout()
 savefig(fig, "m8_release_vs_depth.png")
 
 # --- Figure 2: scenario summary (thermal lambda band + 76 keV)
@@ -488,7 +496,11 @@ cl = lambda a: np.clip(a, FLOOR, None)
 ax.barh(yy + 0.2, cl(th), height=0.36, color=SERIES[0], label="thermal birth, λ = 30 nm (whisker: λ = 3–300 nm)")
 ax.errorbar(cl(th), yy + 0.2, xerr=[cl(th) - cl(lo_), cl(hi_) - cl(th)], fmt="none",
             ecolor=INK2, elinewidth=1, capsize=2)
-ax.barh(yy - 0.2, cl(r76), height=0.36, color=SERIES[5], label="76 keV recoil (4He+γ), λ = 30 nm")
+ax.barh(yy - 0.2, cl(r76), height=0.36, color=SERIES[1], label="76 keV recoil (4He+γ), λ = 30 nm")
+for i_, v_ in enumerate(th):
+    if v_ < FLOOR:
+        ax.text(FLOOR * 2, yy[i_], "blind (< 1e-7): He goes to the electrolyte or stays in Pd",
+                va="center", fontsize=8, color=INK2)
 ax.set_xscale("log")
 ax.set_xlim(FLOOR, 1.5)
 ax.set_yticks(yy)
@@ -496,7 +508,7 @@ ax.set_yticklabels(labs)
 ax.invert_yaxis()
 ax.set_xlabel(f"fraction of produced 4He reaching the exit chamber as gas (floor {FLOOR:.0e})")
 ax.set_title("Release to the static exit chamber by reaction-zone location (L = 25 µm)")
-ax.legend(loc="lower right")
+ax.legend(loc="upper center", bbox_to_anchor=(0.45, -0.14), ncol=2)
 savefig(fig, "m8_release_scenarios.png")
 
 # ======================================================== 5. skin accumulation
@@ -893,25 +905,6 @@ say("ADR-002 arithmetic check: ADR says '~1e15 atoms per mJ'. Correct: 1 mJ = "
     f"{HE_PER_J*1e-3:.2e} He; the calorimetric floor 5-60 mW x 1 day = "
     f"{5e-3*DAY*HE_PER_J:.1e}-{60e-3*DAY*HE_PER_J:.1e} He.")
 
-# --- Figure 6: MD vs time
-fig, ax = plt.subplots(figsize=(8.6, 4.8))
-tt = np.logspace(np.log10(0.1), np.log10(30), 120)
-for i, mode in enumerate(MODES):
-    p = [md_atoms(mode, t * DAY) / (t * DAY) / HE_PER_J for t in tt]
-    ax.plot(tt, p, color=SERIES[i], label=mode)
-pmelt = 5 * melt_sig / (tt * DAY) / HE_PER_J
-ax.plot(tt, pmelt, color=SERIES[5], lw=1.6, label="post-run melt (retained He)")
-ax.axhspan(CAL_R6[0], CAL_R6[1], color=SERIES[7], alpha=0.10, lw=0)
-ax.axhline(CAL_R5, color=SERIES[7], lw=1)
-ax.text(0.11, 7e-3, "calorimetry: 5 mW (R5), 20–60 mW band (R6)", color=INK2, fontsize=8)
-ax.set_xscale("log"); ax.set_yscale("log")
-ax.set_xlabel("static accumulation time (days)")
-ax.set_ylabel("5σ minimum detectable power at 23.85 MeV/He (W)")
-ax.set_title("⁴He-equivalent detection floor, f_release = 1 (divide by f for real skins)")
-ax.set_ylim(1e-11, 1e-1)
-ax.legend(loc="upper right", fontsize=7.8)
-savefig(fig, "m8_mdp_vs_time.png")
-
 # ====================================================== 9. geometry numbers
 hdr("9. GEOMETRY NUMBERS")
 say("Instrument floor vs exit-chamber volume (H1 chain; background term unchanged):")
@@ -934,6 +927,98 @@ for j in JLIST:
         f"30 d {2*NEG_MASS[j][2]:8.3g} g")
 say("Recommended: ~50-100 g St 707/St 172 (CapaciTorr D400-D2000 class) supports 7-day windows")
 say("  at <=1-2 mA/cm2; higher flux needs dynamic pumping, shorter windows or a Pd-Ag permeator.")
+
+# ============================================ 10. ADR-002 rev 2: 1 atm D2 front
+hdr("10. ADR-002 REV 2 VARIANT: PRESSURE-BALANCED FRONT (~1 atm D2), PER-CELL SEALED")
+V_F = 0.030          # L, sealed front volume per cell (range 0.01-0.1)
+P_F = 1013.0         # mbar D2
+V_AL = 1.0e-3        # L, aliquot pipette on the front
+F_AL = V_AL / V_F
+n_front = P_F * V_F * ATOMS_PER_MBAR_L
+say(f"Front volume {V_F*1e3:.0f} cm3 at {P_F:.0f} mbar D2: inventory {n_front:.2e} molecules "
+    f"({P_F*V_F:.1f} mbar L); aliquot pipette {V_AL*1e3:.0f} cm3 -> fraction {F_AL:.3f}")
+say("Permeation-driven pressure rise if nothing removes D2 (A = 3 cm2):")
+for J in [1e14, 1e15, 1e16, 1e17]:
+    nd2 = J * A_MEM / 2
+    dp = nd2 * DAY / (V_F * ATOMS_PER_MBAR_L)
+    say(f"  J = {J:.0e} D/cm2/s ({J*e_C*1e3:.2f} mA/cm2): +{dp:9.1f} mbar/day"
+        f" = {nd2*DAY/ATOMS_PER_MBAR_L:8.2f} mbar L/day to remove")
+PERM_PDAG = 2e-8     # mol/(m s Pa^0.5), Pd-23Ag near 350 C [BK]
+Jpd = PERM_PDAG / 100e-6 * np.sqrt(101325.0) * NA / 2 / 1e4   # D2 / cm2 / s
+say(f"Pd-Ag (100 um, ~350 C) at 1 atm upstream, vacuum downstream: {Jpd:.1e} D2/cm2/s ->"
+    f" {1e16*A_MEM/2/Jpd:.1e} cm2 removes J = 1e16 -> a ~1 cm2 element with a downstream valve"
+    " is a He-tight pressure regulator")
+say("He-tight fill/make-up: D2 carrying x_He of helium adds per 100 mbar step in the front:")
+for xhe, lab in [(1e-6, "cylinder D2, 1 ppm He"), (1e-9, "1 ppb"), (1e-15, "Pd-Ag purified (seal-leak limited)")]:
+    n = 100 * V_F * ATOMS_PER_MBAR_L * xhe
+    say(f"  {lab:36s}: {n:9.2e} He per step = {n/HE_PER_J:8.1e} J-equivalent")
+n0 = n_front * 1e-6
+say(f"  initial 1 atm fill with 1 ppm He: {n0:.1e} He offset (= 1 mW for {n0/(1e-3*HE_PER_J)/DAY:.0f} d);"
+    f" 2 % aliquot precision on it -> sigma {0.02*n0:.1e} atoms")
+R_GAS = {"20 keV": 1.04, "76 keV": 3.23}   # mm, CATIMA (H target, per atom) in 1 atm D2 at 295 K
+if HAVE_CATIMA:
+    _h = catima.get_material(1)
+    nD = 2 * 101325 / (kB * T_ROOM) * 1e-6
+    for lab, E in [("20 keV", 0.020), ("76 keV", E_R_GAMMA / 1e3)]:
+        pr = catima.Projectile(4.001506, 2)
+        pr.T(E / 4.001506)
+        R_GAS[lab] = catima.range(pr, _h) / 1.008 * NA / nD * 10
+for lab, r in R_GAS.items():
+    say(f"  {lab} recoil He range in 1 atm D2: {r:.1f} mm -> ballistic recoils thermalise in the gas"
+        " (become measurable) if the screen/detectors are farther than this")
+P_RES_F = 3 * P_RES   # walls see mbar-level D2 from aliquots
+MODES_F = {
+    "H1f HR-QMS, 1 cm3 aliquot of 1 atm front": dict(
+        inst=MDPP_TYP * V_A * ATOMS_PER_MBAR_L / F_AL,
+        intf=0.3 * R_S * peak_transmission(500, 1e-3) * P_RES_F * V_A * ATOMS_PER_MBAR_L / F_AL),
+    "S1f external sector MS, 1 cm3 aliquot": dict(
+        inst=np.hypot(3e5, 1e6) / F_AL, intf=0.0),
+}
+say(f"Getter per aliquot: {P_F*V_AL:.2f} mbar L D2 = {P_F*V_AL/Q_MAX:.3f} g at the embrittlement limit;"
+    f" residual D2 after cleanup ~{P_RES_F:.1e} mbar (HR-QMS limit {REQ[ANALYZERS[1][0]][1]:.1e})")
+bud_f = [x for x in BUD["recommended"][0] if not x[0].startswith("NEG")]
+sigB_f = np.sqrt(sum(x[2] ** 2 for x in bud_f))
+say(f"Background (recommended build, no NEG in front): {sum(x[1] for x in bud_f):.2e} /day, sigma {sigB_f:.2e} /day")
+MD_F = {}
+say(f"{'mode':44s} {'sig_inst':>9s} | {'MD power (W), f = 1':>28s}")
+say(f"{'':44s} {'(atoms)':>9s} | {'1 d':>9s} {'7 d':>9s} {'30 d':>9s}")
+for mode, m in MODES_F.items():
+    f = lambda t: 5 * np.sqrt(m["inst"] ** 2 + m["intf"] ** 2 + (sigB_f / DAY * t) ** 2)
+    m["fun"] = f
+    ps = [f(t * DAY) / (t * DAY) / HE_PER_J for t in [1, 7, 30]]
+    MD_F[mode] = ps
+    say(f"{mode:44s} {m['inst']:9.1e} | " + " ".join(f"{p:9.1e}" for p in ps))
+for P in [1e-6, 1e-3]:
+    c = P * HE_PER_J * 7 * DAY / n_front
+    say(f"  {P:g} W for 7 d -> He/D2 in front = {c:.1e} ({c*1e9:.2g} ppb)")
+
+# --- Figure 6: MD vs time (UHV/NEG variant and rev-2 front)
+fig, axs = plt.subplots(1, 2, figsize=(12.5, 4.8), sharey=True)
+tt = np.logspace(np.log10(0.1), np.log10(30), 120)
+ax = axs[0]
+for i, mode in enumerate(MODES):
+    p = [md_atoms(mode, t * DAY) / (t * DAY) / HE_PER_J for t in tt]
+    ax.plot(tt, p, color=SERIES[i], label=mode)
+pmelt = 5 * melt_sig / (tt * DAY) / HE_PER_J
+ax.plot(tt, pmelt, color=SERIES[5], lw=1.6, label="post-run melt (retained He)")
+ax.set_title("(a) UHV exit chamber, NEG static mode (task brief)")
+ax2 = axs[1]
+for i, (mode, m) in enumerate(MODES_F.items()):
+    p = [m["fun"](t * DAY) / (t * DAY) / HE_PER_J for t in tt]
+    ax2.plot(tt, p, color=SERIES[2 + i], label=mode)
+ax2.plot(tt, pmelt, color=SERIES[5], lw=1.6, label="post-run melt (retained He)")
+ax2.set_title("(b) ADR-002 rev 2: sealed 30 cm³ front at 1 atm D₂")
+for a in axs:
+    a.axhspan(CAL_R6[0], CAL_R6[1], color=SERIES[7], alpha=0.10, lw=0)
+    a.axhline(CAL_R5, color=SERIES[7], lw=1)
+    a.text(1.2, 3.0e-2, "calorimetry floor: 5 mW (R5) / 20–60 mW (R6)", color=INK2, fontsize=8)
+    a.set_xscale("log"); a.set_yscale("log")
+    a.set_xlabel("static accumulation time (days)")
+    a.set_ylim(1e-11, 1e-1)
+    a.legend(loc="upper center", bbox_to_anchor=(0.5, -0.14), ncol=2, fontsize=7.8)
+axs[0].set_ylabel("5σ min. detectable power (W), f = 1")
+fig.tight_layout()
+savefig(fig, "m8_mdp_vs_time.png")
 
 with open(os.path.join(OUT, "m8_output.txt"), "w") as fh:
     fh.write("\n".join(LOG) + "\n")
