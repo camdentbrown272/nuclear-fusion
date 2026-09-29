@@ -1,0 +1,100 @@
+== 1. Geometry: detected fraction of 4pi (3.02 MeV p, source U(0-5 um) under 20 nm PdO), telescope accept.
+  membrane radius a = 5.0 mm (0.79 cm2):  rows=Delta-E area (mm2), cols=d (mm) [2, 3, 4, 6, 8, 12, 20]
+      150: 0.208 0.187 0.166 0.119 0.084 0.048 0.020
+      300: 0.226 0.226 0.219 0.187 0.150 0.091 0.040
+      450: 0.226 0.227 0.228 0.216 0.187 0.125 0.059
+      600: 0.227 0.228 0.224 0.223 0.211 0.152 0.078
+      900: 0.227 0.226 0.227 0.227 0.227 0.191 0.106
+     1200: 0.227 0.229 0.227 0.227 0.225 0.215 0.132
+  membrane radius a = 10.0 mm (3.14 cm2):  rows=Delta-E area (mm2), cols=d (mm) [2, 3, 4, 6, 8, 12, 20]
+      150: 0.079 0.080 0.078 0.071 0.060 0.037 0.017
+      300: 0.168 0.161 0.152 0.133 0.111 0.076 0.037
+      450: 0.219 0.208 0.194 0.172 0.152 0.109 0.055
+      600: 0.227 0.225 0.216 0.200 0.177 0.133 0.071
+      900: 0.228 0.228 0.226 0.222 0.208 0.172 0.099
+     1200: 0.226 0.225 0.226 0.225 0.224 0.195 0.125
+  membrane radius a = 15.0 mm (7.07 cm2):  rows=Delta-E area (mm2), cols=d (mm) [2, 3, 4, 6, 8, 12, 20]
+      150: 0.036 0.036 0.035 0.034 0.034 0.028 0.015
+      300: 0.077 0.078 0.077 0.075 0.072 0.057 0.033
+      450: 0.121 0.122 0.119 0.113 0.104 0.084 0.047
+      600: 0.165 0.162 0.157 0.145 0.132 0.107 0.063
+      900: 0.222 0.212 0.205 0.191 0.176 0.145 0.091
+     1200: 0.226 0.226 0.226 0.214 0.199 0.171 0.114
+  theta_max scan (baseline): 30deg:0.067, 40deg:0.117, 50deg:0.174, 60deg:0.232, 70deg:0.269, 90deg:0.281
+
+== 2. Delta-E thickness vs lowest identifiable proton energy and alpha stopping
+   Delta-E  10 um: p window low edge = 0.83 MeV; max alpha stopped in Delta-E = 2.62 MeV; t stopped up to 1.00 MeV; dE(3.02 p) = 206 keV
+   Delta-E  15 um: p window low edge = 1.05 MeV; max alpha stopped in Delta-E = 3.58 MeV; t stopped up to 1.35 MeV; dE(3.02 p) = 312 keV
+   Delta-E  20 um: p window low edge = 1.24 MeV; max alpha stopped in Delta-E = 4.42 MeV; t stopped up to 1.66 MeV; dE(3.02 p) = 422 keV
+   Delta-E  25 um: p window low edge = 1.41 MeV; max alpha stopped in Delta-E = 5.17 MeV; t stopped up to 1.95 MeV; dE(3.02 p) = 535 keV
+   Delta-E  40 um: p window low edge = 1.87 MeV; max alpha stopped in Delta-E = 7.09 MeV; t stopped up to 2.68 MeV; dE(3.02 p) = 898 keV
+   Delta-E  65 um: p window low edge = 2.50 MeV; max alpha stopped in Delta-E = 9.70 MeV; t stopped up to 3.68 MeV; dE(3.02 p) = 1624 keV
+   baseline (25.0 um): PID proton window = 1.41-3.10 MeV
+
+== 3. PID performance (fractions of detected-in-Delta-E events passing the proton cut in the PID window)
+   p 3.02, U(0–20 µm)    : passes p-cut 5.98e-01  (13329 of 22271)
+   d (recoil-like) 3 MeV : passes p-cut 1.45e-01  (2635 of 18150)
+   t 1.01                : passes p-cut 0.00e+00  (0 of 20582)
+   ³He 0.82              : passes p-cut 0.00e+00  (0 of 16719)
+   ²¹⁰Po α surface       : passes p-cut 0.00e+00  (0 of 25115)
+   α 8.78 bulk           : passes p-cut 0.00e+00  (0 of 11416)
+   α 12 MeV              : passes p-cut 0.00e+00  (0 of 22366)
+   t 4.75                : passes p-cut 4.33e-05  (1 of 23090)
+   ³He 4.75              : passes p-cut 0.00e+00  (0 of 23105)
+
+== 4. Signal efficiency (detected in window / emitted p, 4pi), baseline telescope
+   surface         : peak(2.6-3.1) 0.2202   PID window(1.41-3.1) 0.2202
+   U(0-1um)        : peak(2.6-3.1) 0.2210   PID window(1.41-3.1) 0.2210
+   U(0-5um)        : peak(2.6-3.1) 0.2058   PID window(1.41-3.1) 0.2175
+   U(0-10um)       : peak(2.6-3.1) 0.1166   PID window(1.41-3.1) 0.2098
+   U(0-20um)       : peak(2.6-3.1) 0.0586   PID window(1.41-3.1) 0.1680
+   U(0-33um)=R_p   : peak(2.6-3.1) 0.0351   PID window(1.41-3.1) 0.1028
+   U(0-100um)      : peak(2.6-3.1) 0.0115   PID window(1.41-3.1) 0.0339
+   triton surface (Delta-E only, 0.8-1.05 MeV): 0.3091
+   3He surface (Delta-E only, 0.6-0.85 MeV)  : 0.3128
+
+== 5. Background budget per telescope (counts/day), baseline, sea level, no neutron shield
+   muon rate through E: 0.119/s; MPV in E = 220 keV
+   Si(n,p) reactions: 1.74/day in Delta-E+E volumes
+   source                                              single Si 2.6-3.1  tel. 2.6-3.1  tel. PID window
+   cosmic muons (no veto)                                          0.361             0                0
+   detector-intrinsic alphas (spec max, misID 1e-4)                  3.2       0.00096           0.0032
+   membrane bulk U+Th, 1 ppb each (misID 1e-4)                   0.00711      7.11e-07         2.13e-06
+   membrane surface 210Po, 1 /cm2/day (misID 1e-4)                     0      2.94e-05         9.79e-05
+   n-p recoils, residual H (H/D=1 %)                            3.35e-05      1.88e-05         6.32e-05
+   n-d recoils misID as p                                        0.00205       0.00052          0.00122
+   Si(n,p) internal (Delta-E and E)                               0.0858       0.00879           0.0232
+   TOTAL (counts/day)                                               3.66        0.0103           0.0278
+   n-p recoil rate in a PdH control (H/Pd=0.9) would be 0.00632/day in the PID window (REAL protons specific to the H control; total recoils in top 60 um 0.61/day)
+   with 99 % muon veto + 10 cm HDPE (fast-n x0.6): single 3.26, tel. peak 0.00659, tel. PID 0.018 counts/day
+
+== 6. Vacuum requirements
+   p 3.02 MeV: loss over 10 mm at 1000 mbar air = 122 keV
+   p 3.02 MeV: loss over 10 mm at 10 mbar air = 1.22 keV
+   p 3.02 MeV: loss over 10 mm at 1 mbar air = 0.122 keV
+   p 3.02 MeV: loss over 10 mm at 0.01 mbar air = 0.00122 keV
+   t 1.01 MeV: loss over 10 mm at 1000 mbar air = 533 keV
+   t 1.01 MeV: loss over 10 mm at 10 mbar air = 5.33 keV
+   t 1.01 MeV: loss over 10 mm at 1 mbar air = 0.533 keV
+   t 1.01 MeV: loss over 10 mm at 0.01 mbar air = 0.00533 keV
+   h 0.82 MeV: loss over 10 mm at 1000 mbar air = 2.09e+03 keV
+   h 0.82 MeV: loss over 10 mm at 10 mbar air = 20.9 keV
+   h 0.82 MeV: loss over 10 mm at 1 mbar air = 2.09 keV
+   h 0.82 MeV: loss over 10 mm at 0.01 mbar air = 0.0209 keV
+   D permeation flux 1e+15 D/cm2/s -> gas load 6.35e-05 mbar L/s -> P = 1.3e-06 mbar with 50 L/s (D2) pumping
+   D permeation flux 1e+16 D/cm2/s -> gas load 6.35e-04 mbar L/s -> P = 1.3e-05 mbar with 50 L/s (D2) pumping
+   D permeation flux 1e+17 D/cm2/s -> gas load 6.35e-03 mbar L/s -> P = 1.3e-04 mbar with 50 L/s (D2) pumping
+
+== 7. Minimum detectable D-D fusion rate (fusions/s; BR(p+t)=0.5) -- 5 sigma discovery at 50 % power, background known from equal-duration H-control/off data (see m5_stats)
+   single Si, 2.6-3.1 (no PID)    1 d: eff/p=0.206 B=3.66/d | ctrl tau=1: s= 27.6 3.1e-03/s | tau=10: s= 14.7 1.7e-03/s | known: s= 14.0 1.6e-03/s
+   single Si, 2.6-3.1 (no PID)   14 d: eff/p=0.206 B=3.66/d | ctrl tau=1: s= 63.6 5.1e-04/s | tau=10: s= 42.4 3.4e-04/s | known: s= 40.5 3.3e-04/s
+   single Si, 2.6-3.1 (no PID)   30 d: eff/p=0.206 B=3.66/d | ctrl tau=1: s= 86.9 3.3e-04/s | tau=10: s= 59.8 2.2e-04/s | known: s= 57.0 2.1e-04/s
+   telescope, 2.6-3.1 peak        1 d: eff/p=0.206 B=0.0103/d | ctrl tau=1: s= 18.1 2.0e-03/s | tau=10: s=  5.4 6.1e-04/s | known: s=  2.7 3.0e-04/s
+   telescope, 2.6-3.1 peak       14 d: eff/p=0.206 B=0.0103/d | ctrl tau=1: s= 19.0 1.5e-04/s | tau=10: s=  6.6 5.3e-05/s | known: s=  5.5 4.4e-05/s
+   telescope, 2.6-3.1 peak       30 d: eff/p=0.206 B=0.0103/d | ctrl tau=1: s= 19.7 7.4e-05/s | tau=10: s=  7.5 2.8e-05/s | known: s=  6.4 2.4e-05/s
+   telescope, PID window          1 d: eff/p=0.217 B=0.0278/d | ctrl tau=1: s= 18.3 1.9e-03/s | tau=10: s=  5.6 6.0e-04/s | known: s=  3.6 3.9e-04/s
+   telescope, PID window         14 d: eff/p=0.217 B=0.0278/d | ctrl tau=1: s= 20.0 1.5e-04/s | tau=10: s=  7.8 6.0e-05/s | known: s=  6.3 4.8e-05/s
+   telescope, PID window         30 d: eff/p=0.217 B=0.0278/d | ctrl tau=1: s= 21.6 7.6e-05/s | tau=10: s=  9.4 3.3e-05/s | known: s=  7.8 2.8e-05/s
+   telescope, PID, +veto+HDPE     1 d: eff/p=0.217 B=0.018/d | ctrl tau=1: s= 18.2 1.9e-03/s | tau=10: s=  5.5 5.9e-04/s | known: s=  3.7 3.9e-04/s
+   telescope, PID, +veto+HDPE    14 d: eff/p=0.217 B=0.018/d | ctrl tau=1: s= 19.5 1.5e-04/s | tau=10: s=  7.2 5.5e-05/s | known: s=  6.4 4.9e-05/s
+   telescope, PID, +veto+HDPE    30 d: eff/p=0.217 B=0.018/d | ctrl tau=1: s= 20.6 7.3e-05/s | tau=10: s=  8.4 3.0e-05/s | known: s=  7.1 2.5e-05/s
