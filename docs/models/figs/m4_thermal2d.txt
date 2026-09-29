@@ -1,0 +1,76 @@
+M4 thermal 2D (axisymmetric FV) results
+============================================================
+
+Verification
+  line-source test h=2.0 mm: T(r=9.3 mm) rel.err=+2.66e-15, energy balance err=+2.0e-15 W
+  line-source test h=1.0 mm: T(r=9.8 mm) rel.err=+9.55e-15, energy balance err=+7.3e-15 W
+  line-source test h=0.5 mm: T(r=10.2 mm) rel.err=+9.33e-15, energy balance err=+8.0e-15 W
+
+Grid convergence: recombiner-vs-cathode-heater calibration offset (%)
+  ISO    h=2,1,0.5 mm: -27.3607, -26.8694, -26.6337
+  FLOW   h=2,1,0.5 mm: -1.5761, -1.5218, -1.5002
+  SEEB1  h=2,1,0.5 mm: -0.0585, -0.0585, -0.0579
+
+Baseline calibration constants (k_el=10 W/mK, k_head=0.5 W/mK)
+  units: ISO K/W (probe), FLOW captured fraction, SEEB V/W
+  design      cathode       anode       joule     surface      recomb heater_cath  heater_rec   Tel(K/W)  Tmax(K/W)
+  ISO          10.344      10.212      10.344      9.8151      7.5677      10.348      7.5677   10.3   11.9
+  FLOW        0.99987     0.99988     0.99987     0.99972     0.98465     0.99987     0.98465   0.878   2.45
+  SEEB0      0.089629    0.089633    0.089629     0.08932     0.08669    0.089629     0.08669   11.8   13.3
+  SEEB2      0.098781    0.098781    0.098781     0.09877    0.098597    0.098781    0.098597   1.53   3.09
+  SEEB1      0.098796    0.098796    0.098796    0.098786    0.098738    0.098796    0.098738   1.53   3.09
+
+Position dependence relative to the cathode-position calibration heater (%)
+  design      cathode       anode       joule     surface      recomb heater_cath  heater_rec
+  ISO         -0.0364     -1.3204     -0.0405     -5.1519    -26.8694     +0.0000    -26.8694
+  FLOW        -0.0001     +0.0015     +0.0002     -0.0147     -1.5218     +0.0000     -1.5218
+  SEEB0       -0.0002     +0.0040     +0.0004     -0.3443     -3.2793     +0.0000     -3.2793
+  SEEB2       -0.0000     +0.0000     +0.0000     -0.0106     -0.1855     +0.0000     -0.1855
+  SEEB1       +0.0000     -0.0001     -0.0000     -0.0093     -0.0585     +0.0000     -0.0585
+
+Sweep: electrolyte effective conductivity (stirring) k_el -> recomb/cathode offset (%) and cathode-cal-constant change vs k_el=10 (%)
+  ISO    k=  1: -42.939/+25.779  k=  3: -32.489/+7.326  k= 10: -26.869/+0.000  k= 30: -24.632/-2.434  k=100: -23.694/-3.370
+  FLOW   k=  1: -1.527/-0.014  k=  3: -1.524/-0.004  k= 10: -1.522/+0.000  k= 30: -1.521/+0.002  k=100: -1.520/+0.002
+  SEEB0  k=  1: -3.767/+0.095  k=  3: -3.515/+0.054  k= 10: -3.279/+0.000  k= 30: -3.145/-0.033  k=100: -3.079/-0.049
+  SEEB2  k=  1: -0.187/-0.002  k=  3: -0.186/-0.001  k= 10: -0.186/+0.000  k= 30: -0.185/+0.001  k=100: -0.185/+0.001
+  SEEB1  k=  1: -0.060/-0.001  k=  3: -0.059/-0.001  k= 10: -0.059/+0.000  k= 30: -0.058/+0.001  k=100: -0.058/+0.001
+
+Sweep: headspace effective conductivity k_head (condensation heat-pipe) -> recomb offset (%)
+  ISO    kh=0.1: -30.970  kh=0.5: -26.869  kh=2: -21.616  kh=10: -14.609
+  FLOW   kh=0.1: -1.845  kh=0.5: -1.522  kh=2: -1.365  kh=10: -1.062
+  SEEB0  kh=0.1: -3.944  kh=0.5: -3.279  kh=2: -2.481  kh=10: -1.424
+  SEEB2  kh=0.1: -0.219  kh=0.5: -0.186  kh=2: -0.177  kh=10: -0.163
+  SEEB1  kh=0.1: -0.064  kh=0.5: -0.059  kh=2: -0.055  kh=10: -0.049
+
+SEEB1 design sweeps (recomb and joule offsets vs cathode heater, %)
+  baseline Cu 6 mm, f_top 0.60           S=  98.80 mV/W  recomb -0.0585  joule -0.0000  surface -0.0093  Tel 1.53 K/W
+  Al 6 mm shell                          S=  98.86 mV/W  recomb -0.1239  joule -0.0000  surface -0.0193  Tel 1.56 K/W
+  Cu 3 mm shell                          S=  98.73 mV/W  recomb -0.1122  joule -0.0000  surface -0.0172  Tel 1.65 K/W
+  Cu 10 mm shell                         S=  98.89 mV/W  recomb -0.0350  joule -0.0000  surface -0.0058  Tel 1.41 K/W
+  uniform coverage f=0.85 all faces      S=  98.89 mV/W  recomb -0.0517  joule -0.0000  surface -0.0082  Tel 1.52 K/W
+  top coverage f=0.40                    S=  98.67 mV/W  recomb -0.0682  joule -0.0000  surface -0.0109  Tel 1.53 K/W
+  uniform coverage + Cu 10 mm            S=  98.99 mV/W  recomb -0.0300  joule -0.0000  surface -0.0050  Tel 1.41 K/W
+  pad k=1 W/mK                           S=  98.80 mV/W  recomb -0.0578  joule -0.0000  surface -0.0091  Tel 1.56 K/W
+  leads 5x (G=0.06 W/K)                  S=  96.13 mV/W  recomb -0.2651  joule -0.0000  surface -0.0423  Tel 1.51 K/W
+  low-K modules (0.25 W/K)               S= 196.32 mV/W  recomb -0.0634  joule -0.0000  surface -0.0101  Tel 1.65 K/W
+  low-K modules + uniform + Cu10         S= 196.92 mV/W  recomb -0.0302  joule -0.0000  surface -0.0050  Tel 1.50 K/W
+
+SEEB2 (leads not anchored) sweep of lead conductance
+  G_leads=0.003 W/K: recomb -0.0515 %  joule -0.0000 %
+  G_leads=0.012 W/K: recomb -0.1855 %  joule +0.0000 %
+  G_leads=0.030 W/K: recomb -0.4502 %  joule +0.0000 %
+  G_leads=0.060 W/K: recomb -0.8810 %  joule +0.0000 %
+
+Step-response time constants (s): t63, t99, t99.9 of final signal
+  ISO    heater_cath  t63=   4300  t99=  20200  t99.9=  30400
+  ISO    recomb       t63=   4900  t99=  20800  t99.9=  31000
+  ISO    total heat capacity inside sink = 508 J/K
+  FLOW   heater_cath  t63=    210  t99=    870  t99.9=   1290
+  FLOW   recomb       t63=    180  t99=    870  t99.9=   1320
+  FLOW   total heat capacity inside sink = 596 J/K
+  SEEB1  heater_cath  t63=    870  t99=   3780  t99.9=   5640
+  SEEB1  recomb       t63=    750  t99=   3660  t99.9=   5520
+  SEEB1  total heat capacity inside sink = 1229 J/K
+  SEEB0  heater_cath  t63=   5500  t99=  24400  t99.9=  36600
+  SEEB0  recomb       t63=   5100  t99=  24000  t99.9=  36200
+  SEEB0  total heat capacity inside sink = 737 J/K
