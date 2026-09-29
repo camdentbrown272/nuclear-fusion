@@ -1,0 +1,163 @@
+M1 Part C - yield ladder and sensitivity matrix (5 sigma, 30 days)
+Useful ranges in PdD0.9 (um): p: 18.8, t: 4.0, he3: 0.8
+
+[C1] Pd wire 1 mm x 5 cm (0.039 cm3, 1.6 cm2), x=0.9, annealed 20 um grains, 50 mL D2O
+   drives: galvanostatic loading; ~1 alpha/beta cycle per week; no exit face (no net flux)
+   channel n: s_min(30 d) = 6556 counts, efficiency factor 0.05
+   D-specific non-fusion neutrons 2.6e-03 n/s; cosmic knock-on fusions 2.4e-06 /s
+   class      pairs      eps_cp     log10 lam_min  log10 n(TF)  U_req(eV)
+   bulkO      1.44e+22   0.00e+00       -23.5         92.5       178
+   bulkT      9.42e+18   0.00e+00       -20.3         92.4       213
+   vacD6      1.28e+17   0.00e+00       -18.4        102.4       246
+   vacD2      1.07e+16   0.00e+00       -17.3         46.3       242
+   void       1.69e+16   0.00e+00       -17.5         46.1       239
+   disl       2.59e+18   0.00e+00       -19.7         99.3       228
+   gb         7.07e+17   0.00e+00       -19.1        101.3       237
+   surf       7.07e+15   0.00e+00       -17.1        107.3       266
+   subsurf    1.41e+16   0.00e+00       -17.4         99.5       267
+   crack      1.18e+14   0.00e+00       -15.4        114.2       306
+
+[C2] Pd/D codeposit 5 um on 2 cm2 mesh facing CR-39 through ~20 um electrolyte; 20 nm grains
+   drives: continuous deposition at high D fugacity; no controlled cycling
+   channel cp: s_min(30 d) = 90 counts, efficiency factor 1
+   channel n: s_min(30 d) = 6480 counts, efficiency factor 0.005
+   D-specific non-fusion neutrons 1.5e-03 n/s; cosmic knock-on fusions 1.5e-06 /s
+   class      pairs      eps_cp     log10 lam_min  log10 n(TF)  U_req(eV)
+   bulkO      1.83e+20   2.09e-01       -24.0         91.9       172
+   bulkT      1.20e+17   2.09e-01       -20.9         91.9       205
+   vacD6      4.08e+18   2.09e-01       -22.4         98.4       188
+   vacD2      3.40e+17   2.09e-01       -21.3         42.3       185
+   void       2.15e+16   2.09e-01       -20.1         43.5       200
+   disl       3.30e+17   2.09e-01       -21.3         97.7       205
+   gb         9.00e+18   2.09e-01       -22.7         97.7       187
+   surf       1.80e+17   2.09e-01       -21.0        103.4       202
+   subsurf    3.60e+17   2.09e-01       -21.3         95.6       203
+   crack      1.50e+15   2.09e-01       -19.0        110.6       233
+
+[C3] Pd membrane 25 um x 2 cm2, back-loaded (20 mL D2O), front: 1 um nanocrystalline codeposit + PdO 5 nm (or CaO/Pd x5) + 5 nm Pd NP decoration, Si in vacuum
+   drives: current modulation: permeation flux up to J_max (Part D), 24 alpha/beta cycles/day
+   channel cp: s_min(30 d) = 66 counts, efficiency factor 1
+   channel n: s_min(30 d) = 6508 counts, efficiency factor 0.075
+   D-specific non-fusion neutrons 1.0e-03 n/s; cosmic knock-on fusions 9.7e-07 /s
+   class      pairs      eps_cp     log10 lam_min  log10 n(TF)  U_req(eV)
+   bulkO      1.83e+21   7.07e-02       -24.7         91.3       165
+   bulkT      1.20e+18   7.07e-02       -21.5         91.2       196
+   vacD6      1.63e+18   2.36e-01       -22.2         98.6       190
+   vacD2      1.36e+17   2.36e-01       -21.1         42.5       188
+   void       2.15e+17   7.07e-02       -20.8         42.8       192
+   disl       3.30e+18   7.07e-02       -22.0         97.0       196
+   gb         3.60e+18   2.36e-01       -22.5         97.9       189
+   surf       9.00e+16   2.70e-01       -21.0        103.4       203
+   subsurf    1.80e+17   2.70e-01       -21.3         95.7       204
+   crack      7.50e+14   7.07e-02       -18.3        111.2       244
+   PdO        1.56e+16   2.70e-01       -20.2        102.8       219
+   oxint      7.80e+16   2.70e-01       -20.9        102.1       209
+   NP         8.10e+16   2.70e-01       -20.9         96.1       209
+
+[C4] 100 g Pd/ZrO2 composite (10 g Pd, 5 nm particles), D2 gas 250 C, calorimeter + outside n bank
+   drives: temperature cycling 200-300 C, absorption/desorption bursts
+   channel n: s_min(30 d) = 12960 counts, efficiency factor 0.025
+   D-specific non-fusion neutrons 2.2e-05 n/s; cosmic knock-on fusions 4.1e-09 /s
+   class      pairs      eps_cp     log10 lam_min  log10 n(TF)  U_req(eV)
+   NP         7.43e+22   0.00e+00       -23.6         93.4       176
+   bulkT      2.00e+21   0.00e+00       -22.0         90.7       190
+   surf       2.25e+22   0.00e+00       -23.1        101.4       178
+   subsurf    9.00e+22   0.00e+00       -23.7         93.3       175
+   oxint      3.90e+22   0.00e+00       -23.3         99.8       179
+   vacD6      6.80e+20   0.00e+00       -21.5         99.3       199
+   crack      2.50e+19   0.00e+00       -20.1        109.5       215
+
+[C5] 25x25x0.1 mm Ni with 6x(2 nm Cu/14 nm Ni) on both faces, D2-loaded then heated; Si at one face
+   drives: heating ramps to 500-900 C: desorption flux 1e14-1e15 D/cm2/s through interfaces
+   channel cp: s_min(30 d) = 85 counts, efficiency factor 1
+   channel n: s_min(30 d) = 12960 counts, efficiency factor 0.025
+   D-specific non-fusion neutrons 3.8e-09 n/s; cosmic knock-on fusions 0.0e+00 /s
+   class      pairs      eps_cp     log10 lam_min  log10 n(TF)  U_req(eV)
+   NiD        1.17e+17   1.50e-02       -19.7         91.4       222
+   surf       5.62e+15   1.50e-02       -18.4        106.0       242
+
+[C6] 100 g Ti chips (22 cm3) as TiD1.5, 12 LN2<->RT cycles/day, 3He well counter eps 0.3
+   drives: thermal cycling; fracto events in metallic TiD2 are energetically dead (B1)
+   channel n: s_min(30 d) = 6686 counts, efficiency factor 0.15
+   D-specific non-fusion neutrons 1.4e-03 n/s; cosmic knock-on fusions 2.7e-07 /s
+   class      pairs      eps_cp     log10 lam_min  log10 n(TF)  U_req(eV)
+   TiD2       5.50e+24   0.00e+00       -26.5         83.6       143
+   surf       4.50e+19   0.00e+00       -21.4        103.0       197
+   crack      6.67e+18   0.00e+00       -20.6        109.0       208
+   disl       1.47e+21   0.00e+00       -22.9         96.0       184
+   gb         8.00e+20   0.00e+00       -22.7         97.8       187
+
+Yield ladder: detected events per day [best channel]  (threshold events/day for 5 sigma in 30 d)
+   config | (i) standard (TF) + cosmic floor | (ii-lo) accel. low | (ii-hi) accel. high | threshold
+   C1     |  1.05e-02 (n)               |  1.08e-02 (n)   |  9.53e+10 (n)    | 2.2e+02
+   C2     |  6.28e-04 (n)               |  1.91e-05 (cp)   |  6.24e+09 (cp)    | 3
+   C3     |  6.28e-03 (n)               |  1.19e+02 (cp)   |  1.82e+10 (cp)    | 2.2
+   C4     |  8.83e-06 (n)               |  7.80e-03 (n)   |  4.85e+11 (n)    | 4.3e+02
+   C5     |  1.02e-91 (cp)               |  1.69e-20 (cp)   |  2.08e-02 (cp)    | 2.8
+   C6     |  3.47e-03 (n)               |  3.47e-03 (n)   |  6.70e+11 (n)    | 2.2e+02
+   (ii-hi) is already EXCLUDED by prior nulls for most classes (m1_sites); rerun with every class capped at its prior-null limit (the most optimistic rate still allowed by data):
+   C1: n: 5.19e+00/d (thr 2.2e+02)   dominant classes: ['bulkT', 'vacD6']
+   C2: cp: 1.93e+02/d (thr 3), n: 4.63e+00/d (thr 2.2e+02)   dominant classes: ['vacD6', 'gb']
+   C3: cp: 2.08e+02/d (thr 2.2), n: 6.31e+01/d (thr 2.2e+02)   dominant classes: ['PdO', 'vacD6']
+   C4: n: 1.28e+04/d (thr 4.3e+02)   dominant classes: ['oxint', 'surf']
+   C5: cp: 4.41e-04/d (thr 2.8), n: 7.34e-04/d (thr 4.3e+02)   dominant classes: ['surf', 'NiD']
+   C6: n: 9.52e+05/d (thr 2.2e+02)   dominant classes: ['gb', 'disl']
+
+SENSITIVITY MATRIX (standard D-D branching). Entry = log10 of the minimal enhancement over the Thomas-Fermi standard rate | required U_eff (eV) | '*' = required rate already excluded by prior nulls
+   class                  C1              C2              C3              C4              C5              C6
+   bulkO        93 |  178*       92 |  172*       91 |  165*                 -               -               -
+   bulkT        92 |  213*       92 |  205*       91 |  196*       91 |  190*                 -               -
+   vacD6       102 |  246*       98 |  188        99 |  190        99 |  199                  -               -
+   vacD2        46 |  242*       42 |  185        42 |  188                  -               -               -
+   void         46 |  239*       43 |  200        43 |  192                  -               -               -
+   disl         99 |  228*       98 |  205*       97 |  196*                 -               -     96 |  184   
+   gb          101 |  237*       98 |  187        98 |  189                  -               -     98 |  187   
+   surf        107 |  266*      103 |  202*      103 |  203*      101 |  178       106 |  242*      103 |  197   
+   subsurf      99 |  267*       96 |  203*       96 |  204*       93 |  175                  -               -
+   crack       114 |  306*      111 |  233       111 |  244       109 |  215                  -    109 |  208   
+   PdO                    -               -    103 |  219                  -               -               -
+   oxint                  -               -    102 |  209*      100 |  179                  -               -
+   NP                     -               -     96 |  209*       93 |  176                  -               -
+   TiD2                   -               -               -               -               -     84 |  143   
+   NiD                    -               -               -               -     91 |  222                  -
+
+Same matrix, entry = log10 of minimal enhancement over the (ii-lo) 'Tohoku-static' rate (negative = (ii-lo) would already be detected):
+   class                  C1              C2              C3              C4              C5              C6
+   bulkO                5.9             5.3             4.6               -               -               -
+   bulkT                6.5             5.9             5.3             4.8               -               -
+   vacD6               15.9            11.9            12.1            12.8               -               -
+   vacD2               46.3            42.3            42.5               -               -               -
+   void                46.1            43.5            42.8               -               -               -
+   disl                12.5            10.9            10.3               -               -             9.3
+   gb                  14.6            11.0            11.2               -               -            11.0
+   surf                21.5            17.6            17.7            15.6            20.2            17.2
+   subsurf             12.8             9.0             9.0             6.6               -               -
+   crack               29.2            25.6            26.2            24.5               -            24.0
+   PdO                    -               -            -1.7               -               -               -
+   oxint                  -               -             8.4             6.0               -               -
+   NP                     -               -             9.4             6.8               -               -
+   TiD2                   -               -               -               -               -            83.8
+   NiD                    -               -               -               -            25.8               -
+
+Czerski e+e- scenario (f_ee = 0.91): minimal per-pair rate, log10 (standard branching -> e+e-):
+   C1: vacD6: -18.4 -> -18.8, surf: -17.1 -> -17.5
+   C2: vacD6: -22.4 -> -21.3, surf: -21.0 -> -20.0
+   C3: vacD6: -22.2 -> -21.1, PdO: -20.2 -> -19.2, NP: -20.9 -> -19.9
+   C4: vacD6: -21.5 -> -22.2, NP: -23.6 -> -24.2, surf: -23.1 -> -23.7
+   C5: surf: -18.4 -> -17.4
+   C6: TiD2: -26.5 -> -25.5, surf: -21.4 -> -20.4
+
+Sensitivities (log10 lam_min at the named class; U_req in eV):
+   C3 baseline                         : PdO -20.22 (U 219), vacD6 -22.18 (U 190), NP -20.93 (U 209)
+   C3 close geometry f_omega=0.31      : PdO -20.45 (U 215), vacD6 -22.40 (U 188), NP -21.17 (U 206)
+   C3 Si background x10                : PdO -19.45 (U 231), vacD6 -21.41 (U 200), NP -20.16 (U 220)
+   C3 Si background systematic 20%     : PdO -19.85 (U 225), vacD6 -21.81 (U 195), NP -20.56 (U 214)
+   C3 area 2 -> 10 cm2 (5 detectors)   : PdO -20.91 (U 209), vacD6 -22.88 (U 182), NP -21.63 (U 200)
+   C1 neutron background systematic 1.0%: s_min 6556, bulkO log10 lam_min -23.45
+   C1 neutron background systematic 0.1%: s_min 1809, bulkO log10 lam_min -24.01
+   C6 neutron background systematic 1.0%: s_min 6686, TiD2 log10 lam_min -26.50
+   C6 neutron background systematic 0.1%: s_min 1812, TiD2 log10 lam_min -27.07
+   rho0 x0.1: C3 PdO U_req 235 eV (baseline 219)
+   rho0 x10: C3 PdO U_req 205 eV (baseline 219)
+   PdO (ii-lo) Yukawa-mapped at 0.04 eV (baseline): U_eff 248 eV -> C3 events/day 1.3e+02
+   PdO (ii-lo) mapped at 1 eV relative energy: U_eff 266 eV -> C3 events/day 1.1e+03
